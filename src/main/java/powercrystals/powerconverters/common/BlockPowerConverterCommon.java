@@ -82,9 +82,7 @@ public class BlockPowerConverterCommon extends BlockContainer {
 	@Override
 	public TileEntity createNewTileEntity(World world, int md) {
 		if (md == 0)
-			return new TileEntityEnergyBridge(false);
-		if (md == 1)
-			return new TileEntityEnergyBridge(true);
+			return new TileEntityEnergyBridge();
 		if (md == 2)
 			return new TileEntityCharger();
 		return null;

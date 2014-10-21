@@ -24,7 +24,6 @@ public class TileEntityEnergyBridge extends TileEntity implements INeighboorUpda
 
 	private double _energyStoredLast;
 	private boolean _isInputLimited;
-	private boolean _isBridgeInfinate;
 
 	private Map<ForgeDirection, TileEntityEnergyProducer<?>> _producerTiles;
 	private Map<ForgeDirection, BridgeSideData> _clientSideData;
@@ -32,8 +31,7 @@ public class TileEntityEnergyBridge extends TileEntity implements INeighboorUpda
 
 	private boolean _initialized;
 
-	public TileEntityEnergyBridge(boolean infinate) {
-		_isBridgeInfinate = infinate;
+	public TileEntityEnergyBridge() {
 		_producerTiles = new HashMap<ForgeDirection, TileEntityEnergyProducer<?>>();
 		_clientSideData = new HashMap<ForgeDirection, BridgeSideData>();
 		_producerOutputRates = new HashMap<ForgeDirection, Double>();
