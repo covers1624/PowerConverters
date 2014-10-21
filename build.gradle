@@ -42,7 +42,7 @@ repositories {
 
 dependencies {
 	//Add Waila To Dev Environment
-	compile "mcp.mobius.waila:Waila:1.5.2a"
+	compile "mcp.mobius.waila:Waila:1.5.6_dev1_1.7.10"
 	
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..

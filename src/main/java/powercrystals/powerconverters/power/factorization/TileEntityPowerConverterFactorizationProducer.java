@@ -13,7 +13,7 @@ import powercrystals.powerconverters.power.TileEntityEnergyProducer;
 
 public class TileEntityPowerConverterFactorizationProducer extends TileEntityEnergyProducer<IChargeConductor> implements IChargeConductor {
 	private Charge _charge = new Charge(this);
-	private static final double _maxCG = 1000;
+	private static final double _maxCG = 2000;
 
 	public TileEntityPowerConverterFactorizationProducer() {
 		super(PowerSystems.powerSystemFactorization, 0, IChargeConductor.class);
