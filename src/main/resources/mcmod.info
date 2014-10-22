@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "PowerConverters",
+  "name": "Power Converters",
+  "description": "Converting Power Between mods.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["powercrystals", "covers1624", "podge"],
+  "credits": "All The Mod Developers For Doing Awsome Things! Seriously You Guys Rock!",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

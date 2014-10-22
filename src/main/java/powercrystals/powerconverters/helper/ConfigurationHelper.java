@@ -2,13 +2,15 @@ package powercrystals.powerconverters.helper;
 
 import java.io.File;
 
+import cpw.mods.fml.client.event.ConfigChangedEvent;
 import powercrystals.powerconverters.power.PowerSystem;
+import powercrystals.powerconverters.reference.Reference;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
 public class ConfigurationHelper {
 
-	private static Configuration configuration;
+	public static Configuration configuration;
 
 	public static Property bridgeBufferSize;
 
@@ -29,9 +31,9 @@ public class ConfigurationHelper {
 	}
 
 	public static void loadConfiguration() {
-		bridgeBufferSize = configuration.get(Configuration.CATEGORY_GENERAL, "BridgeBufferSize", 160000000);
+		bridgeBufferSize = configuration.get(Reference.BASIC_CATEGORY, "BridgeBufferSize", 160000000);
 
-		altRecipes = configuration.get(Configuration.CATEGORY_GENERAL, "Alternate Recipes", false, "ThermalExpansion Recipes");
+		altRecipes = configuration.get(Reference.BASIC_CATEGORY, "AlternateRecipes", false, "ThermalExpansion Recipes");
 
 		throttleSteamConsumer = configuration.get("Throttles", "Steam.Consumer", 1000);
 		throttleSteamConsumer.comment = "mB/t";
@@ -50,4 +52,6 @@ public class ConfigurationHelper {
 
 		configuration.save();
 	}
+	
+
 }

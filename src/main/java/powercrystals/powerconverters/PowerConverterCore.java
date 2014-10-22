@@ -24,7 +24,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
-@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = "after:BuildCraft|Energy;after:factorization;after:IC2;after:Railcraft;after:ThermalExpansion")
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = "after:BuildCraft|Energy;after:factorization;after:IC2;after:Railcraft;after:ThermalExpansion", guiFactory = Reference.GUI_FACTORY)
 public class PowerConverterCore{
 
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY, serverSide = Reference.SERVER_PROXY)
@@ -40,15 +40,15 @@ public class PowerConverterCore{
 		instance = this;
 		// Init Configuration
 		ConfigurationHelper.init(evt.getSuggestedConfigurationFile());
-		// Register GuiHandler
-		NetworkRegistry.INSTANCE.registerGuiHandler(this, new PCGUIHandler());
-		FMLCommonHandler.instance().bus().register(new EventsHandler());
+
 		PowerSystems.init();
 
 	}
 
 	@EventHandler
-	public static void init(FMLInitializationEvent evt) {
+	public void init(FMLInitializationEvent evt) {
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, new PCGUIHandler());
+		FMLCommonHandler.instance().bus().register(new EventsHandler());
 		ModBlocks.init();
 
 		if (ConfigurationHelper.altRecipes.getBoolean()) {

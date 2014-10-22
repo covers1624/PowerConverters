@@ -17,5 +17,6 @@ public class Reference {
 	// Other
 	public static final String CLIENT_PROXY = "powercrystals.powerconverters.net.ProxyClient";
 	public static final String SERVER_PROXY = "powercrystals.powerconverters.net.ProxyServer";
-
+	public static final String GUI_FACTORY  = "powercrystals.powerconverters.gui.PCGuiFactory";
+	public static final String BASIC_CATEGORY = "basic";
 }
