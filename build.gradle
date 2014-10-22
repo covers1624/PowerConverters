@@ -18,9 +18,9 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.0"
-group= "com.yourname.modid" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "modid"
+version = "1.7.10-2.0"
+group= "powercrystals.powerconverters" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "PowerConverters"
 
 minecraft {
     version = "1.7.10-10.13.2.1230"
@@ -41,6 +41,12 @@ repositories {
 }
 
 dependencies {
+	compile files("D:/Projects/Minecraft/1.7/1.7 mods Dev Versions/buildcraft-6.0.17-dev.jar")
+	compile files("D:/Projects/Minecraft/1.7/1.7 mods Dev Versions/industrialcraft-2-2.2.515-experimental-dev.jar")
+	compile files("D:/Projects/Minecraft/1.7/1.7 mods Dev Versions/ThermalExpansion-[1.7.10]4.0.0B5-dev-13.jar")
+	compile files("D:/Projects/Minecraft/1.7/1.7 mods Dev Versions/ThermalFoundation-[1.7.10]1.0.0B3-dev-8.jar")
+	compile files("D:/Projects/Minecraft/1.7/1.7 mods Dev Versions/CoFHCore-[1.7.10]3.0.0B6-dev-32.jar")
+	compile files("D:/Projects/Minecraft/1.7/1.7 mods Dev Versions/Factorization-1.7.10-0.8.88.2-dev.jar")
 	//Add Waila To Dev Environment
 	compile "mcp.mobius.waila:Waila:1.5.6_dev1_1.7.10"
 	

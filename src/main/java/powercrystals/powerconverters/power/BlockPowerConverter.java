@@ -62,10 +62,11 @@ public class BlockPowerConverter extends BlockContainer {
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-		if (player.getHeldItem().getItem() != null) {
+		try {
 			if (player.getHeldItem().getItem() instanceof DebugItem) {
 				return false;
 			}
+		} catch (Exception e) {
 		}
 		TileEntity te = world.getTileEntity(x, y, z);
 		if (te != null && te instanceof TileEntityBridgeComponent<?>) {

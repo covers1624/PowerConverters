@@ -1,0 +1,10 @@
+This is the the RoadMap for this mod.
+Thing in here are NOT Listed in order, this is mainly notes to keep me on track...
+If you have any suggestions / questions please don't hesitate to submit it as a question on the issue tracker
+
+Unified Energy Conduits
+Way to extend Energy Bridge
+Add Pneumatic Craft Support
+Bring Back Universal Electricity Support
+Some Form of Teleportation Mechanic For Energy Bridge
+Revamp Energy Bridge GUI
