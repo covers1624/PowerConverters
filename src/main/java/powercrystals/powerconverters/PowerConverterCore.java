@@ -8,6 +8,7 @@ import powercrystals.powerconverters.gui.PCGUIHandler;
 import powercrystals.powerconverters.handler.EventsHandler;
 import powercrystals.powerconverters.helper.ConfigurationHelper;
 import powercrystals.powerconverters.init.ModBlocks;
+import powercrystals.powerconverters.init.ModItems;
 import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.init.Recipes;
 import powercrystals.powerconverters.net.IPCProxy;
@@ -50,6 +51,7 @@ public class PowerConverterCore{
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new PCGUIHandler());
 		FMLCommonHandler.instance().bus().register(new EventsHandler());
 		ModBlocks.init();
+		ModItems.init();
 
 		if (ConfigurationHelper.altRecipes.getBoolean()) {
 

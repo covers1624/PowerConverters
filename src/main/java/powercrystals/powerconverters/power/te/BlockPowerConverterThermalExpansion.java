@@ -31,10 +31,10 @@ public class BlockPowerConverterThermalExpansion extends BlockPowerConverter {
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister ir) {
 
-		_icons[0] = ir.registerIcon(Reference.MOD_PREFIX + "powerconverters.bc" + ".consumer.off");
-		_icons[1] = ir.registerIcon(Reference.MOD_PREFIX + "powerconverters.bc" + ".consumer.on");
-		_icons[2] = ir.registerIcon(Reference.MOD_PREFIX + "powerconverters.bc" + ".producer.off");
-		_icons[3] = ir.registerIcon(Reference.MOD_PREFIX + "powerconverters.bc" + ".producer.on");
+		_icons[0] = ir.registerIcon(Reference.MOD_PREFIX + "tile.powerconverters.bc.consumer.off");
+		_icons[1] = ir.registerIcon(Reference.MOD_PREFIX + "tile.powerconverters.bc.consumer.on");
+		_icons[2] = ir.registerIcon(Reference.MOD_PREFIX + "tile.powerconverters.bc.producer.off");
+		_icons[3] = ir.registerIcon(Reference.MOD_PREFIX + "tile.powerconverters.bc.producer.on");
 	}
 
 }

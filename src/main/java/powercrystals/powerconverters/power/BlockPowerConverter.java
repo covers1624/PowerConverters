@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import powercrystals.powerconverters.temp.INeighboorUpdateTile;
 import powercrystals.powerconverters.PowerConverterCore;
 import powercrystals.powerconverters.common.TileEntityEnergyBridge;
+import powercrystals.powerconverters.item.DebugItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -61,6 +62,11 @@ public class BlockPowerConverter extends BlockContainer {
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
+		if (player.getHeldItem().getItem() != null) {
+			if (player.getHeldItem().getItem() instanceof DebugItem) {
+				return false;
+			}
+		}
 		TileEntity te = world.getTileEntity(x, y, z);
 		if (te != null && te instanceof TileEntityBridgeComponent<?>) {
 			TileEntityEnergyBridge bridge = ((TileEntityBridgeComponent<?>) te).getFirstBridge();
