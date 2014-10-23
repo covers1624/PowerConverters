@@ -9,6 +9,8 @@ Bring Back Universal Electricity Support / Jetpack Refiller
 Some Form of Teleportation Mechanic For Energy Bridge
 Revamp Energy Bridge GUI
 Add Items / World gen to make crafing recipes more complex
+Balence Energy Systems, if is to unbalenced with other mods, tweek other mods arround us
+Computer Craft Support
 
 
 
