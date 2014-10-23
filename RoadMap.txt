@@ -5,6 +5,19 @@ If you have any suggestions / questions please don't hesitate to submit it as a 
 Unified Energy Conduits
 Way to extend Energy Bridge
 Add Pneumatic Craft Support
-Bring Back Universal Electricity Support
+Bring Back Universal Electricity Support / Jetpack Refiller
 Some Form of Teleportation Mechanic For Energy Bridge
 Revamp Energy Bridge GUI
+Add Items / World gen to make crafing recipes more complex
+
+
+
+
+The Order I Wish to tacle them
+  1.Add Items / World gen to make crafting recipes more complex
+  2.Unified Energy Conduits
+  3.Bring Back Universal Electricity Support / Jetpack Refiller
+  4.Wat to extend Energy Bridge
+  5.Some Form of Teleportation Mechanic For Energy Bridge
+  6.Add Pneumetic Craft Support
+  7.Revamp Energy Bridge GUI
