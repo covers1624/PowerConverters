@@ -1,4 +1,4 @@
-package powercrystals.powerconverters.temp;
+package powercrystals.powerconverters.inventory;
 
 import buildcraft.api.transport.IPipeTile;
 import cofh.api.transport.IItemDuct;
@@ -19,9 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import powercrystals.powerconverters.temp.IInventoryManager;
-import powercrystals.powerconverters.temp.InventoryManager;
-import powercrystals.powerconverters.temp.BlockPosition;
+import powercrystals.powerconverters.util.BlockPosition;
 
 public abstract class UtilInventory {
 	/**

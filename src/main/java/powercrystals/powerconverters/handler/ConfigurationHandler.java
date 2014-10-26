@@ -1,4 +1,4 @@
-package powercrystals.powerconverters.helper;
+package powercrystals.powerconverters.handler;
 
 import java.io.File;
 
@@ -8,7 +8,7 @@ import powercrystals.powerconverters.reference.Reference;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
-public class ConfigurationHelper {
+public class ConfigurationHandler {
 
 	public static Configuration configuration;
 

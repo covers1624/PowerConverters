@@ -5,8 +5,8 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fluids.FluidRegistry;
 import powercrystals.powerconverters.gui.PCGUIHandler;
+import powercrystals.powerconverters.handler.ConfigurationHandler;
 import powercrystals.powerconverters.handler.EventsHandler;
-import powercrystals.powerconverters.helper.ConfigurationHelper;
 import powercrystals.powerconverters.init.ModBlocks;
 import powercrystals.powerconverters.init.ModItems;
 import powercrystals.powerconverters.init.PowerSystems;
@@ -40,7 +40,7 @@ public class PowerConverterCore{
 	public void preInit(FMLPreInitializationEvent evt) {
 		instance = this;
 		// Init Configuration
-		ConfigurationHelper.init(evt.getSuggestedConfigurationFile());
+		ConfigurationHandler.init(evt.getSuggestedConfigurationFile());
 
 		PowerSystems.init();
 
@@ -53,7 +53,7 @@ public class PowerConverterCore{
 		ModBlocks.init();
 		ModItems.init();
 
-		if (ConfigurationHelper.altRecipes.getBoolean()) {
+		if (ConfigurationHandler.altRecipes.getBoolean()) {
 
 		} else {
 			Recipes.initDefaults();

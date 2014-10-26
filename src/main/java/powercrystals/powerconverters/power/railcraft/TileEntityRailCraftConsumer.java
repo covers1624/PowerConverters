@@ -1,5 +1,8 @@
 package powercrystals.powerconverters.power.railcraft;
 
+import java.util.List;
+
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -8,13 +11,15 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import powercrystals.powerconverters.PowerConverterCore;
-import powercrystals.powerconverters.helper.ConfigurationHelper;
+import powercrystals.powerconverters.common.TileEntityEnergyBridge;
+import powercrystals.powerconverters.handler.ConfigurationHandler;
 import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.power.TileEntityEnergyConsumer;
+import powercrystals.powerconverters.util.BlockPosition;
 
 public class TileEntityRailCraftConsumer extends TileEntityEnergyConsumer<IFluidHandler> implements IFluidHandler {
 	private FluidTank _steamTank;
-	private double _mBLastTick;
+	private int _mBLastTick;
 
 	public TileEntityRailCraftConsumer() {
 		super(PowerSystems.powerSystemSteam, 0, IFluidHandler.class);
@@ -26,11 +31,11 @@ public class TileEntityRailCraftConsumer extends TileEntityEnergyConsumer<IFluid
 		super.updateEntity();
 
 		if (_steamTank != null && _steamTank.getFluid() != null) {
-			double amount = Math.min(_steamTank.getFluid().amount, ConfigurationHelper.throttleSteamConsumer.getInt());
+			int amount = Math.min(_steamTank.getFluid().amount, ConfigurationHandler.throttleSteamConsumer.getInt());
 			double energy = amount * PowerSystems.powerSystemSteam.getInternalEnergyPerInput();
 			energy = storeEnergy(energy);
-			double toDrain = amount - (energy / PowerSystems.powerSystemSteam.getInternalEnergyPerInput());
-			_steamTank.drain((int)toDrain, true);
+			int toDrain = amount - (int) (energy / PowerSystems.powerSystemSteam.getInternalEnergyPerInput());
+			_steamTank.drain(toDrain, true);
 			_mBLastTick = toDrain;
 		} else {
 			_mBLastTick = 0;

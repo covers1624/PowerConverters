@@ -8,7 +8,7 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import powercrystals.powerconverters.PowerConverterCore;
-import powercrystals.powerconverters.helper.ConfigurationHelper;
+import powercrystals.powerconverters.handler.ConfigurationHandler;
 import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.power.TileEntityEnergyProducer;
 
@@ -22,7 +22,7 @@ public class TileEntityRailCraftProducer extends TileEntityEnergyProducer<IFluid
 
 	@Override
 	public double produceEnergy(double energy) {
-		double steam = Math.min(energy / PowerSystems.powerSystemSteam.getInternalEnergyPerOutput(), ConfigurationHelper.throttleSteamProducer.getInt());
+		double steam = Math.min(energy / PowerSystems.powerSystemSteam.getInternalEnergyPerOutput(), ConfigurationHandler.throttleSteamProducer.getInt());
 		/*
 		 * for(int i = 0; i < 6; i++) { BlockPosition bp = new
 		 * BlockPosition(this); bp.orientation =

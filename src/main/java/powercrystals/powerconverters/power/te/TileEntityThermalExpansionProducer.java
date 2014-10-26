@@ -9,7 +9,7 @@ import powercrystals.powerconverters.PowerConverterCore;
 import powercrystals.powerconverters.common.TileEntityEnergyBridge;
 import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.power.TileEntityEnergyProducer;
-import powercrystals.powerconverters.temp.BlockPosition;
+import powercrystals.powerconverters.util.BlockPosition;
 
 public class TileEntityThermalExpansionProducer extends TileEntityEnergyProducer<IEnergyHandler> implements IEnergyHandler {
 

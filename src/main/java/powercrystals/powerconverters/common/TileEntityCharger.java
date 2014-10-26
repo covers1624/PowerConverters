@@ -8,10 +8,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
-import powercrystals.powerconverters.temp.IInventoryManager;
-import powercrystals.powerconverters.temp.InventoryManager;
 import powercrystals.powerconverters.PowerConverterCore;
 import powercrystals.powerconverters.init.PowerSystems;
+import powercrystals.powerconverters.inventory.IInventoryManager;
+import powercrystals.powerconverters.inventory.InventoryManager;
 import powercrystals.powerconverters.power.PowerSystem;
 import powercrystals.powerconverters.power.TileEntityEnergyProducer;
 

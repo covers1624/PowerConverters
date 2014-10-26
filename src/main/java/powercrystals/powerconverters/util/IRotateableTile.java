@@ -1,4 +1,4 @@
-package powercrystals.powerconverters.temp;
+package powercrystals.powerconverters.util;
 
 import net.minecraftforge.common.util.ForgeDirection;
 

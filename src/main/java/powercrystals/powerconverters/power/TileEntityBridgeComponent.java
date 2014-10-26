@@ -6,8 +6,8 @@ import java.util.Map;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
-import powercrystals.powerconverters.temp.BlockPosition;
-import powercrystals.powerconverters.temp.INeighboorUpdateTile;
+import powercrystals.powerconverters.util.BlockPosition;
+import powercrystals.powerconverters.util.INeighboorUpdateTile;
 import powercrystals.powerconverters.common.TileEntityEnergyBridge;
 
 public class TileEntityBridgeComponent<T> extends TileEntity implements INeighboorUpdateTile {

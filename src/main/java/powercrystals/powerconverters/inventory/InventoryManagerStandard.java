@@ -1,9 +1,7 @@
-package powercrystals.powerconverters.temp;
+package powercrystals.powerconverters.inventory;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import powercrystals.powerconverters.temp.UtilInventory;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;

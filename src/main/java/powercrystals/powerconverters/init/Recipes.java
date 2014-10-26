@@ -113,7 +113,7 @@ public class Recipes {
 						Character.valueOf('E'), new ItemStack((Block)(Class.forName("mods.railcraft.common.blocks.RailcraftBlocks").getMethod("getBlockMachineBeta").invoke(null)), 1, 8));
 			}
 			if (Loader.isModLoaded("factorization")) {
-				Object fzRegistry = Class.forName("factorization.common.Core").getField("registry").get(null);
+				Object fzRegistry = Class.forName("factorization.shared.Core").getField("registry").get(null);
 				GameRegistry.addRecipe(new ItemStack(ModBlocks.converterBlockSteam, 1, 0),
 						"G G", " E ", "G G",
 						Character.valueOf('G'), Items.gold_ingot,

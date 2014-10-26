@@ -1,4 +1,4 @@
-package powercrystals.powerconverters.temp;
+package powercrystals.powerconverters.inventory;
 
 import java.util.Map;
 

@@ -1,4 +1,4 @@
-package powercrystals.powerconverters.temp;
+package powercrystals.powerconverters.inventory;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;

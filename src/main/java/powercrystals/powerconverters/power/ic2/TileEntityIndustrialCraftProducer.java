@@ -9,7 +9,7 @@ import ic2.api.energy.event.EnergyTileUnloadEvent;
 import ic2.api.energy.tile.IEnergyAcceptor;
 import ic2.api.energy.tile.IEnergySource;
 import powercrystals.powerconverters.PowerConverterCore;
-import powercrystals.powerconverters.helper.ConfigurationHelper;
+import powercrystals.powerconverters.handler.ConfigurationHandler;
 import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.power.TileEntityEnergyProducer;
 
@@ -28,13 +28,13 @@ public class TileEntityIndustrialCraftProducer extends TileEntityEnergyProducer<
 	public TileEntityIndustrialCraftProducer(int voltageIndex) {
 		super(PowerSystems.powerSystemIndustrialCraft, voltageIndex, IEnergyAcceptor.class);
 		if (voltageIndex == 0) {
-			_packetCount = ConfigurationHelper.throttleIC2LVProducer.getInt();
+			_packetCount = ConfigurationHandler.throttleIC2LVProducer.getInt();
 		} else if (voltageIndex == 1) {
-			_packetCount = ConfigurationHelper.throttleIC2MVProducer.getInt();
+			_packetCount = ConfigurationHandler.throttleIC2MVProducer.getInt();
 		} else if (voltageIndex == 2) {
-			_packetCount = ConfigurationHelper.throttleIC2HVProducer.getInt();
+			_packetCount = ConfigurationHandler.throttleIC2HVProducer.getInt();
 		} else if (voltageIndex == 3) {
-			_packetCount = ConfigurationHelper.throttleIC2EVProducer.getInt();
+			_packetCount = ConfigurationHandler.throttleIC2EVProducer.getInt();
 		}
 	}
 
