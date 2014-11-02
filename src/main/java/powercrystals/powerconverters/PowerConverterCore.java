@@ -11,6 +11,7 @@ import powercrystals.powerconverters.init.ModBlocks;
 import powercrystals.powerconverters.init.ModItems;
 import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.init.Recipes;
+import powercrystals.powerconverters.init.WorldGenerators;
 import powercrystals.powerconverters.net.IPCProxy;
 import powercrystals.powerconverters.power.PowerSystem;
 import powercrystals.powerconverters.reference.Config;
@@ -43,6 +44,7 @@ public class PowerConverterCore{
 		ConfigurationHandler.init(evt.getSuggestedConfigurationFile());
 
 		PowerSystems.init();
+		PowerSystems.initChargeHandlers();
 
 	}
 
@@ -52,6 +54,7 @@ public class PowerConverterCore{
 		FMLCommonHandler.instance().bus().register(new EventsHandler());
 		ModBlocks.init();
 		ModItems.init();
+		WorldGenerators.init();
 
 		if (ConfigurationHandler.altRecipes.getBoolean()) {
 

@@ -8,6 +8,9 @@ import powercrystals.powerconverters.power.buildcraft.BlockPowerConverterBuildCr
 import powercrystals.powerconverters.power.buildcraft.ItemBlockPowerConverterBuildCraft;
 import powercrystals.powerconverters.power.buildcraft.TileEntityBuildCraftConsumer;
 import powercrystals.powerconverters.power.buildcraft.TileEntityBuildCraftProducer;
+import powercrystals.powerconverters.power.conduit.BasicEnergyConduit;
+import powercrystals.powerconverters.power.conduit.BlockEnergyConduit;
+import powercrystals.powerconverters.power.conduit.ItemBlockEnergyConduit;
 import powercrystals.powerconverters.power.factorization.BlockPowerConverterFactorization;
 import powercrystals.powerconverters.power.factorization.ItemBlockPowerConverterFactorization;
 import powercrystals.powerconverters.power.factorization.TileEntityPowerConverterFactorizationConsumer;
@@ -30,6 +33,8 @@ import net.minecraft.block.Block;
 
 public class ModBlocks {
 
+	public static Block conduitBlock;
+	
 	public static Block converterBlockCommon;
 	public static Block converterBlockBuildCraft;
 	public static Block converterBlockIndustrialCraft;
@@ -38,7 +43,11 @@ public class ModBlocks {
 	public static Block converterBlockThermalExpansion;
 
 	public static void init() {
-
+		
+		conduitBlock = new BlockEnergyConduit();
+		GameRegistry.registerBlock(conduitBlock, ItemBlockEnergyConduit.class, conduitBlock.getUnlocalizedName());
+		GameRegistry.registerTileEntity(BasicEnergyConduit.class, "basicConduit");
+		
 		converterBlockCommon = new BlockPowerConverterCommon();
 		GameRegistry.registerBlock(converterBlockCommon, ItemBlockPowerConverterCommon.class, converterBlockCommon.getUnlocalizedName());
 		GameRegistry.registerTileEntity(TileEntityEnergyBridge.class, "powerConverterEnergyBridge");

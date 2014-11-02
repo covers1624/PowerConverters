@@ -7,7 +7,7 @@ import powercrystals.powerconverters.PowerConverterCore;
 import powercrystals.powerconverters.common.IChargeHandler;
 import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.power.PowerSystem;
-
+@Deprecated
 public class ChargeHandlerThermalExpansion implements IChargeHandler {
 	@Override
 	public PowerSystem getPowerSystem() {

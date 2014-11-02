@@ -4,6 +4,7 @@ import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import powercrystals.powerconverters.PowerConverterCore;
 import powercrystals.powerconverters.reference.Reference;
+import net.minecraftforge.event.world.ChunkEvent;
 import net.minecraftforge.fluids.FluidRegistry.FluidRegisterEvent;
 
 public class EventsHandler {
@@ -24,5 +25,4 @@ public class EventsHandler {
 			ConfigurationHandler.loadConfiguration();
 		}
 	}
-
 }

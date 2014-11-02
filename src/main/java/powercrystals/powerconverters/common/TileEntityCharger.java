@@ -14,6 +14,7 @@ import powercrystals.powerconverters.inventory.IInventoryManager;
 import powercrystals.powerconverters.inventory.InventoryManager;
 import powercrystals.powerconverters.power.PowerSystem;
 import powercrystals.powerconverters.power.TileEntityEnergyProducer;
+import powercrystals.powerconverters.util.LogHelper;
 
 public class TileEntityCharger extends TileEntityEnergyProducer<IInventory> {
 	private static List<IChargeHandler> _chargeHandlers = new ArrayList<IChargeHandler>();
@@ -93,6 +94,7 @@ public class TileEntityCharger extends TileEntityEnergyProducer<IInventory> {
 
 	@Override
 	public boolean isSideConnected(int side) {
+		LogHelper.info(side);
 		if (side == 1 && _player != null)
 			return true;
 		return super.isSideConnected(side);

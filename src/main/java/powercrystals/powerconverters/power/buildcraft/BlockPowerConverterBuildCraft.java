@@ -8,7 +8,7 @@ import powercrystals.powerconverters.reference.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
+@Deprecated
 public class BlockPowerConverterBuildCraft extends BlockPowerConverter {
 	public BlockPowerConverterBuildCraft() {
 		super(2);

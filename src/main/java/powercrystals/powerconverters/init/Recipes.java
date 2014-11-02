@@ -69,7 +69,6 @@ public class Recipes {
 		}
 	    GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.converterBlockThermalExpansion, 1, 1), new ItemStack(ModBlocks.converterBlockThermalExpansion, 1, 0));
 	    GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.converterBlockThermalExpansion, 1, 0), new ItemStack(ModBlocks.converterBlockThermalExpansion, 1, 1));	
-	    //TODO TileEntityCharger.registerChargeHandler(new ChargeHandlerThermalExpansion());
 	}
 	
 	public static void IndustrialCraft2Recipes(){
@@ -101,7 +100,6 @@ public class Recipes {
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 4), new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 5));
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 7), new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 6));
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 6), new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 7));
-		//TODO TileEntityCharger.registerChargeHandler(new ChargeHandlerIndustrialCraft());
 	}
 	
 	public static void RailcraftRecipes(){

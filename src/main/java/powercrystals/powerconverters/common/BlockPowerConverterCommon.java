@@ -3,6 +3,7 @@ package powercrystals.powerconverters.common;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import powercrystals.powerconverters.util.INeighboorUpdateTile;
+import powercrystals.powerconverters.util.LogHelper;
 import powercrystals.powerconverters.PowerConverterCore;
 import powercrystals.powerconverters.gui.PCCreativeTab;
 import powercrystals.powerconverters.item.DebugItem;

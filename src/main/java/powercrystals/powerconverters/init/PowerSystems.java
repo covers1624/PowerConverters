@@ -1,6 +1,9 @@
 package powercrystals.powerconverters.init;
 
+import powercrystals.powerconverters.common.TileEntityCharger;
 import powercrystals.powerconverters.power.PowerSystem;
+import powercrystals.powerconverters.power.ic2.ChargeHandlerIndustrialCraft;
+import powercrystals.powerconverters.power.te.ChargeHandlerThermalExpansion;
 
 public class PowerSystems {
 
@@ -21,6 +24,11 @@ public class PowerSystems {
 		PowerSystem.registerPowerSystem(powerSystemSteam);
 		PowerSystem.registerPowerSystem(powerSystemFactorization);
 		PowerSystem.registerPowerSystem(powerSystemThermalExpansion);
+	}
+	
+	public static void initChargeHandlers(){
+		TileEntityCharger.registerChargeHandler(new ChargeHandlerThermalExpansion());
+		TileEntityCharger.registerChargeHandler(new ChargeHandlerIndustrialCraft());
 	}
 
 }

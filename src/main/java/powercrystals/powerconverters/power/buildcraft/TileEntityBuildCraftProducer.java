@@ -11,7 +11,7 @@ import powercrystals.powerconverters.util.BlockPosition;
 import powercrystals.powerconverters.PowerConverterCore;
 import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.power.TileEntityEnergyProducer;
-
+@Deprecated
 public class TileEntityBuildCraftProducer extends TileEntityEnergyProducer<IPowerReceptor> implements IPowerEmitter {
 
 	public TileEntityBuildCraftProducer() {
