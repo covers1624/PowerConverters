@@ -10,8 +10,13 @@ Some Form of Teleportation Mechanic For Energy Bridge
 Revamp Energy Bridge GUI
 Add Items / World gen to make crafing recipes more complex
 Balence Energy Systems, if is to unbalenced with other mods, tweek other mods arround us
+  Example.
+  
 Computer Craft Support
-
+  Reed values of consuming and producing
+Redstone signals stop operation
+  Singal Applied to consumer / producer stops that one consumer / producer
+  Signal to bridge stops all.
 
 
 
