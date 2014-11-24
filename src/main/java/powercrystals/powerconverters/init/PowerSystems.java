@@ -6,7 +6,8 @@ import powercrystals.powerconverters.power.ic2.ChargeHandlerIndustrialCraft;
 import powercrystals.powerconverters.power.te.ChargeHandlerThermalExpansion;
 
 public class PowerSystems {
-
+	
+	@Deprecated
 	public static PowerSystem powerSystemBuildCraft;
 	public static PowerSystem powerSystemIndustrialCraft;
 	public static PowerSystem powerSystemSteam;
