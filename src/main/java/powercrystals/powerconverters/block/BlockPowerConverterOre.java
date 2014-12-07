@@ -6,7 +6,7 @@ import net.minecraft.block.material.Material;
 
 public class BlockPowerConverterOre extends Block{
 
-	protected BlockPowerConverterOre() {
+	public BlockPowerConverterOre() {
 		super(Material.rock);
 		setHardness(3.0F);
 		setResistance(5.0F);

@@ -19,7 +19,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityEnergyBridge extends TileEntity implements INeighboorUpdateTile {
 	private double _energyStored;
-	private double _energyStoredMax = ConfigurationHandler.bridgeBufferSize.getInt();
+	private double _energyStoredMax = ConfigurationHandler.bridgeBufferSize;
 	private double _energyScaledClient;
 
 	private double _energyStoredLast;

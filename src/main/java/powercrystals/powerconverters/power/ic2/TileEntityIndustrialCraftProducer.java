@@ -28,13 +28,13 @@ public class TileEntityIndustrialCraftProducer extends TileEntityEnergyProducer<
 	public TileEntityIndustrialCraftProducer(int voltageIndex) {
 		super(PowerSystems.powerSystemIndustrialCraft, voltageIndex, IEnergyAcceptor.class);
 		if (voltageIndex == 0) {
-			_packetCount = ConfigurationHandler.throttleIC2LVProducer.getInt();
+			_packetCount = ConfigurationHandler.throttleIC2LVProducer;
 		} else if (voltageIndex == 1) {
-			_packetCount = ConfigurationHandler.throttleIC2MVProducer.getInt();
+			_packetCount = ConfigurationHandler.throttleIC2MVProducer;
 		} else if (voltageIndex == 2) {
-			_packetCount = ConfigurationHandler.throttleIC2HVProducer.getInt();
+			_packetCount = ConfigurationHandler.throttleIC2HVProducer;
 		} else if (voltageIndex == 3) {
-			_packetCount = ConfigurationHandler.throttleIC2EVProducer.getInt();
+			_packetCount = ConfigurationHandler.throttleIC2EVProducer;
 		}
 	}
 

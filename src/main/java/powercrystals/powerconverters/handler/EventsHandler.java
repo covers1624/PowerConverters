@@ -1,11 +1,10 @@
 package powercrystals.powerconverters.handler;
 
-import cpw.mods.fml.client.event.ConfigChangedEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fluids.FluidRegistry.FluidRegisterEvent;
 import powercrystals.powerconverters.PowerConverterCore;
 import powercrystals.powerconverters.reference.Reference;
-import net.minecraftforge.event.world.ChunkEvent;
-import net.minecraftforge.fluids.FluidRegistry.FluidRegisterEvent;
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class EventsHandler {
 

@@ -22,7 +22,7 @@ public class TileEntityRailCraftProducer extends TileEntityEnergyProducer<IFluid
 
 	@Override
 	public double produceEnergy(double energy) {
-		double steam = Math.min(energy / PowerSystems.powerSystemSteam.getInternalEnergyPerOutput(), ConfigurationHandler.throttleSteamProducer.getInt());
+		double steam = Math.min(energy / PowerSystems.powerSystemSteam.getInternalEnergyPerOutput(), ConfigurationHandler.throttleSteamProducer);
 		/*
 		 * for(int i = 0; i < 6; i++) { BlockPosition bp = new
 		 * BlockPosition(this); bp.orientation =
