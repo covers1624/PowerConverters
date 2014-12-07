@@ -8,175 +8,30 @@
 :compileApiJava UP-TO-DATE
 :processApiResources UP-TO-DATE
 :apiClasses UP-TO-DATE
-:sourceMainJava
+:sourceMainJava UP-TO-DATE
 :compileJavawarning: [options] bootstrap class path not set in conjunction with -source 1.6
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\inventory\UtilInventory.java:3: error: package buildcraft.api.transport does not exist
-import buildcraft.api.transport.IPipeTile;
-                               ^
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\inventory\UtilInventory.java:64: error: cannot find symbol
-	public static Map<ForgeDirection, IPipeTile> findPipes(World world, int x, int y, int z) {
-	                                  ^
-  symbol:   class IPipeTile
-  location: class UtilInventory
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\inventory\UtilInventory.java:75: error: cannot find symbol
-	public static Map<ForgeDirection, IPipeTile> findPipes(World world, int x, int y, int z, ForgeDirection[] directionstocheck) {
-	                                  ^
-  symbol:   class IPipeTile
-  location: class UtilInventory
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftConsumer.java:11: error: package buildcraft.api.power does not exist
-import buildcraft.api.power.IPowerReceptor;
-                           ^
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftConsumer.java:12: error: package buildcraft.api.power does not exist
-import buildcraft.api.power.PowerHandler;
-                           ^
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftConsumer.java:13: error: package buildcraft.api.power.PowerHandler does not exist
-import buildcraft.api.power.PowerHandler.PowerReceiver;
-                                        ^
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftConsumer.java:14: error: package buildcraft.api.power.PowerHandler does not exist
-import buildcraft.api.power.PowerHandler.Type;
-                                        ^
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftConsumer.java:16: error: cannot find symbol
-public class TileEntityBuildCraftConsumer extends TileEntityEnergyConsumer<IPowerReceptor> implements IPowerReceptor {
-                                                                           ^
-  symbol: class IPowerReceptor
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftConsumer.java:16: error: cannot find symbol
-public class TileEntityBuildCraftConsumer extends TileEntityEnergyConsumer<IPowerReceptor> implements IPowerReceptor {
-                                                                                                      ^
-  symbol: class IPowerReceptor
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftConsumer.java:17: error: cannot find symbol
-	private PowerHandler _powerHandler;
-	        ^
-  symbol:   class PowerHandler
-  location: class TileEntityBuildCraftConsumer
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftConsumer.java:56: error: cannot find symbol
-	public PowerReceiver getPowerReceiver(ForgeDirection side) {
-	       ^
-  symbol:   class PowerReceiver
-  location: class TileEntityBuildCraftConsumer
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftConsumer.java:62: error: cannot find symbol
-	public void doWork(PowerHandler workProvider) {
-	                   ^
-  symbol:   class PowerHandler
-  location: class TileEntityBuildCraftConsumer
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftProducer.java:6: error: package buildcraft.api.power does not exist
-import buildcraft.api.power.IPowerEmitter;
-                           ^
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftProducer.java:7: error: package buildcraft.api.power does not exist
-import buildcraft.api.power.IPowerReceptor;
-                           ^
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftProducer.java:8: error: package buildcraft.api.power.PowerHandler does not exist
-import buildcraft.api.power.PowerHandler.PowerReceiver;
-                                        ^
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftProducer.java:9: error: package buildcraft.api.power.PowerHandler does not exist
-import buildcraft.api.power.PowerHandler.Type;
-                                        ^
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftProducer.java:15: error: cannot find symbol
-public class TileEntityBuildCraftProducer extends TileEntityEnergyProducer<IPowerReceptor> implements IPowerEmitter {
-                                                                           ^
-  symbol: class IPowerReceptor
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftProducer.java:15: error: cannot find symbol
-public class TileEntityBuildCraftProducer extends TileEntityEnergyProducer<IPowerReceptor> implements IPowerEmitter {
-                                                                                                      ^
-  symbol: class IPowerEmitter
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\inventory\UtilInventory.java:76: error: cannot find symbol
-		Map<ForgeDirection, IPipeTile> pipes = new LinkedHashMap<ForgeDirection, IPipeTile>();
-		                    ^
-  symbol:   class IPipeTile
-  location: class UtilInventory
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\inventory\UtilInventory.java:76: error: cannot find symbol
-		Map<ForgeDirection, IPipeTile> pipes = new LinkedHashMap<ForgeDirection, IPipeTile>();
-		                                                                         ^
-  symbol:   class IPipeTile
-  location: class UtilInventory
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\inventory\UtilInventory.java:82: error: cannot find symbol
-			if (te instanceof IPipeTile) {
-			                  ^
-  symbol:   class IPipeTile
-  location: class UtilInventory
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\inventory\UtilInventory.java:83: error: cannot find symbol
-				pipes.put(direction, (IPipeTile) te);
-				                      ^
-  symbol:   class IPipeTile
-  location: class UtilInventory
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\inventory\UtilInventory.java:235: error: cannot find symbol
-		for (Entry<ForgeDirection, IPipeTile> pipe : findPipes(world, bp.x, bp.y, bp.z, dropdirections).entrySet()) {
-		                           ^
-  symbol:   class IPipeTile
-  location: class UtilInventory
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftConsumer.java:22: error: cannot find symbol
-		super(PowerSystems.powerSystemBuildCraft, 0, IPowerReceptor.class);
-		                                             ^
-  symbol:   class IPowerReceptor
-  location: class TileEntityBuildCraftConsumer
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftConsumer.java:23: error: cannot find symbol
-		_powerHandler = new PowerHandler(this, Type.MACHINE);
-		                    ^
-  symbol:   class PowerHandler
-  location: class TileEntityBuildCraftConsumer
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftConsumer.java:23: error: cannot find symbol
-		_powerHandler = new PowerHandler(this, Type.MACHINE);
-		                                       ^
-  symbol:   variable Type
-  location: class TileEntityBuildCraftConsumer
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftConsumer.java:55: error: method does not override or implement a method from a supertype
-	@Override
-	^
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftConsumer.java:61: error: method does not override or implement a method from a supertype
-	@Override
-	^
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftConsumer.java:66: error: method does not override or implement a method from a supertype
-	@Override
-	^
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftProducer.java:19: error: cannot find symbol
-		super(PowerSystems.powerSystemBuildCraft, 0, IPowerReceptor.class);
-		                                             ^
-  symbol:   class IPowerReceptor
-  location: class TileEntityBuildCraftProducer
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftProducer.java:29: error: cannot find symbol
-			IPowerReceptor receptor;
-			^
-  symbol:   class IPowerReceptor
-  location: class TileEntityBuildCraftProducer
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftProducer.java:32: error: cannot find symbol
-			if (tile instanceof IPowerReceptor) {
-			                    ^
-  symbol:   class IPowerReceptor
-  location: class TileEntityBuildCraftProducer
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftProducer.java:33: error: cannot find symbol
-				receptor = (IPowerReceptor) tile;
-				            ^
-  symbol:   class IPowerReceptor
-  location: class TileEntityBuildCraftProducer
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftProducer.java:36: error: cannot find symbol
-			PowerReceiver receiver = receptor.getPowerReceiver(dir.getOpposite());
-			^
-  symbol:   class PowerReceiver
-  location: class TileEntityBuildCraftProducer
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftProducer.java:40: error: cannot find symbol
-				receiver.receiveEnergy(Type.ENGINE, usedMJ, dir.getOpposite());
-				                       ^
-  symbol:   variable Type
-  location: class TileEntityBuildCraftProducer
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\power\buildcraft\TileEntityBuildCraftProducer.java:46: error: method does not override or implement a method from a supertype
-	@Override
-	^
 Note: Some input files use or override a deprecated API.
 Note: Recompile with -Xlint:deprecation for details.
 Note: Some input files use unchecked or unsafe operations.
 Note: Recompile with -Xlint:unchecked for details.
-36 errors
 1 warning
- FAILED
 
-FAILURE: Build failed with an exception.
+:processResources
+:classes
+:jar
+:compileTestJava UP-TO-DATE
+:processTestResources UP-TO-DATE
+:testClasses UP-TO-DATE
+:test UP-TO-DATE
+:extractMcpData UP-TO-DATE
+:getVersionJson
+:extractUserDev UP-TO-DATE
+:genSrgs SKIPPED
+:reobf
+:assemble
+:check UP-TO-DATE
+:build
 
-* What went wrong:
-Execution failed for task ':compileJava'.
-> Compilation failed; see the compiler error output for details.
+BUILD SUCCESSFUL
 
-* Try:
-Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
-
-BUILD FAILED
-
-Total time: 2 mins 39.698 secs
+Total time: 25.985 secs
