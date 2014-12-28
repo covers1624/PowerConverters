@@ -1,4 +1,4 @@
-package powercrystals.powerconverters.power.te;
+package powercrystals.powerconverters.power.redstoneflux;
 
 import net.minecraftforge.common.util.ForgeDirection;
 import powercrystals.powerconverters.PowerConverterCore;
@@ -7,12 +7,12 @@ import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.power.TileEntityEnergyConsumer;
 import cofh.api.energy.IEnergyHandler;
 
-public class TileEntityThermalExpansionConsumer extends TileEntityEnergyConsumer<IEnergyHandler> implements IEnergyHandler {
+public class TileEntityRedstoneFluxConsumer extends TileEntityEnergyConsumer<IEnergyHandler> implements IEnergyHandler {
 
 	private double lastReceivedRF;
 
-	public TileEntityThermalExpansionConsumer() {
-		super(PowerSystems.powerSystemThermalExpansion, 0, IEnergyHandler.class);
+	public TileEntityRedstoneFluxConsumer() {
+		super(PowerSystems.powerSystemRedstoneFlux, 0, IEnergyHandler.class);
 	}
 
 	@Override

@@ -1,17 +1,10 @@
 package powercrystals.powerconverters.power.buildcraft;
 
-import java.util.ArrayList;
-
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
-import powercrystals.powerconverters.PowerConverterCore;
 import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.power.TileEntityEnergyConsumer;
-import buildcraft.api.power.IPowerReceptor;
-import buildcraft.api.power.PowerHandler;
-import buildcraft.api.power.PowerHandler.PowerReceiver;
-import buildcraft.api.power.PowerHandler.Type;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
+
 @Deprecated
 public class TileEntityBuildCraftConsumer extends TileEntityEnergyConsumer<IPowerReceptor> implements IPowerReceptor {
 	private PowerHandler _powerHandler;

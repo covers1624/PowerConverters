@@ -10,6 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
+@Deprecated
 public class ItemBlockPowerConverterBuildCraft extends ItemBlock {
 	public ItemBlockPowerConverterBuildCraft(Block block) {
 		super(block);

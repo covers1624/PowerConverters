@@ -4,10 +4,6 @@ import powercrystals.powerconverters.common.BlockPowerConverterCommon;
 import powercrystals.powerconverters.common.ItemBlockPowerConverterCommon;
 import powercrystals.powerconverters.common.TileEntityCharger;
 import powercrystals.powerconverters.common.TileEntityEnergyBridge;
-import powercrystals.powerconverters.power.buildcraft.BlockPowerConverterBuildCraft;
-import powercrystals.powerconverters.power.buildcraft.ItemBlockPowerConverterBuildCraft;
-import powercrystals.powerconverters.power.buildcraft.TileEntityBuildCraftConsumer;
-import powercrystals.powerconverters.power.buildcraft.TileEntityBuildCraftProducer;
 import powercrystals.powerconverters.power.conduit.BasicEnergyConduit;
 import powercrystals.powerconverters.power.conduit.BlockEnergyConduit;
 import powercrystals.powerconverters.power.conduit.ItemBlockEnergyConduit;
@@ -23,10 +19,11 @@ import powercrystals.powerconverters.power.railcraft.BlockPowerConverterRailCraf
 import powercrystals.powerconverters.power.railcraft.ItemBlockPowerConverterRailCraft;
 import powercrystals.powerconverters.power.railcraft.TileEntityRailCraftConsumer;
 import powercrystals.powerconverters.power.railcraft.TileEntityRailCraftProducer;
-import powercrystals.powerconverters.power.te.BlockPowerConverterThermalExpansion;
-import powercrystals.powerconverters.power.te.ItemBlockPowerConverterThermalExpansion;
-import powercrystals.powerconverters.power.te.TileEntityThermalExpansionConsumer;
-import powercrystals.powerconverters.power.te.TileEntityThermalExpansionProducer;
+import powercrystals.powerconverters.power.redstoneflux.BlockPowerConverterRedstoneFlux;
+import powercrystals.powerconverters.power.redstoneflux.ItemBlockPowerConverterRedstoneFlux;
+import powercrystals.powerconverters.power.redstoneflux.TileEntityRedstoneFluxConsumer;
+import powercrystals.powerconverters.power.redstoneflux.TileEntityRedstoneFluxProducer;
+import powercrystals.powerconverters.util.RFHelper;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -34,37 +31,45 @@ import net.minecraft.block.Block;
 public class ModBlocks {
 
 	public static Block conduitBlock;
-	
+
 	public static Block converterBlockCommon;
-	public static Block converterBlockBuildCraft;
+	//public static Block converterBlockBuildCraft;
 	public static Block converterBlockIndustrialCraft;
 	public static Block converterBlockSteam;
 	public static Block converterBlockFactorization;
-	public static Block converterBlockThermalExpansion;
+	public static Block converterBlockRedstoneFlux;
 
 	public static void init() {
-		
+
 		conduitBlock = new BlockEnergyConduit();
 		GameRegistry.registerBlock(conduitBlock, ItemBlockEnergyConduit.class, conduitBlock.getUnlocalizedName());
 		GameRegistry.registerTileEntity(BasicEnergyConduit.class, "basicConduit");
-		
+
 		converterBlockCommon = new BlockPowerConverterCommon();
 		GameRegistry.registerBlock(converterBlockCommon, ItemBlockPowerConverterCommon.class, converterBlockCommon.getUnlocalizedName());
 		GameRegistry.registerTileEntity(TileEntityEnergyBridge.class, "powerConverterEnergyBridge");
 		GameRegistry.registerTileEntity(TileEntityCharger.class, "powerConverterUniversalCharger");
+		
 		// MJ
-		if (Loader.isModLoaded("BuildCraft|Energy")) {
-			converterBlockBuildCraft = new BlockPowerConverterBuildCraft();
-			GameRegistry.registerBlock(converterBlockBuildCraft, ItemBlockPowerConverterBuildCraft.class, converterBlockBuildCraft.getUnlocalizedName());
-			GameRegistry.registerTileEntity(TileEntityBuildCraftConsumer.class, "powerConverterBCConsumer");
-			GameRegistry.registerTileEntity(TileEntityBuildCraftProducer.class, "powerConverterBCProducer");
-		}
+		//This is dead.
+		/*
+		 * if (Loader.isModLoaded("BuildCraft|Energy")) {
+		 * converterBlockBuildCraft = new BlockPowerConverterBuildCraft();
+		 * GameRegistry.registerBlock(converterBlockBuildCraft,
+		 * ItemBlockPowerConverterBuildCraft.class,
+		 * converterBlockBuildCraft.getUnlocalizedName());
+		 * GameRegistry.registerTileEntity(TileEntityBuildCraftConsumer.class,
+		 * "powerConverterBCConsumer");
+		 * GameRegistry.registerTileEntity(TileEntityBuildCraftProducer.class,
+		 * "powerConverterBCProducer"); }
+		 */
+		
 		// RF
-		if (Loader.isModLoaded("ThermalExpansion")) {
-			converterBlockThermalExpansion = new BlockPowerConverterThermalExpansion();
-			GameRegistry.registerBlock(converterBlockThermalExpansion, ItemBlockPowerConverterThermalExpansion.class, converterBlockThermalExpansion.getUnlocalizedName());
-			GameRegistry.registerTileEntity(TileEntityThermalExpansionConsumer.class, "powerConverterTEConsumer");
-			GameRegistry.registerTileEntity(TileEntityThermalExpansionProducer.class, "powerConverterTEProducer");
+		if (Loader.isModLoaded("ThermalExpansion") || Loader.isModLoaded("BuildCraft") || RFHelper.getiEnergyHandlerResults()) {
+			converterBlockRedstoneFlux = new BlockPowerConverterRedstoneFlux();
+			GameRegistry.registerBlock(converterBlockRedstoneFlux, ItemBlockPowerConverterRedstoneFlux.class, converterBlockRedstoneFlux.getUnlocalizedName());
+			GameRegistry.registerTileEntity(TileEntityRedstoneFluxConsumer.class, "powerConverterRFConsumer");
+			GameRegistry.registerTileEntity(TileEntityRedstoneFluxProducer.class, "powerConverterRFProducer");
 		}
 		// EU
 		if (Loader.isModLoaded("IC2")) {

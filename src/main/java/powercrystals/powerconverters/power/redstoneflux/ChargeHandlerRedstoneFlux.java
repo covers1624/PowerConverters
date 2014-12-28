@@ -1,4 +1,4 @@
-package powercrystals.powerconverters.power.te;
+package powercrystals.powerconverters.power.redstoneflux;
 
 import cofh.api.energy.IEnergyContainerItem;
 import cofh.api.energy.ItemEnergyContainer;
@@ -8,11 +8,11 @@ import powercrystals.powerconverters.common.IChargeHandler;
 import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.power.PowerSystem;
 
-public class ChargeHandlerThermalExpansion implements IChargeHandler {
+public class ChargeHandlerRedstoneFlux implements IChargeHandler {
 
 	@Override
 	public PowerSystem getPowerSystem() {
-		return PowerSystems.powerSystemThermalExpansion;
+		return PowerSystems.powerSystemRedstoneFlux;
 	}
 
 	@Override

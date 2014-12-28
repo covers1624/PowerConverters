@@ -1,4 +1,4 @@
-package powercrystals.powerconverters.power.te;
+package powercrystals.powerconverters.power.redstoneflux;
 
 import java.util.List;
 
@@ -11,10 +11,10 @@ import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.power.TileEntityEnergyProducer;
 import powercrystals.powerconverters.util.BlockPosition;
 
-public class TileEntityThermalExpansionProducer extends TileEntityEnergyProducer<IEnergyHandler> implements IEnergyHandler {
+public class TileEntityRedstoneFluxProducer extends TileEntityEnergyProducer<IEnergyHandler> implements IEnergyHandler {
 
-	public TileEntityThermalExpansionProducer() {
-		super(PowerSystems.powerSystemThermalExpansion, 0, IEnergyHandler.class);
+	public TileEntityRedstoneFluxProducer() {
+		super(PowerSystems.powerSystemRedstoneFlux, 0, IEnergyHandler.class);
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class TileEntityThermalExpansionProducer extends TileEntityEnergyProducer
 			List<BlockPosition> pos = new BlockPosition(xCoord, yCoord, zCoord).getAdjacent(true);
 			for (BlockPosition p : pos) {
 				TileEntity te = worldObj.getTileEntity(p.x, p.y, p.z);
-				if ((te instanceof IEnergyHandler) && !((te instanceof TileEntityThermalExpansionConsumer) || (te instanceof TileEntityEnergyBridge))) {
+				if ((te instanceof IEnergyHandler) && !((te instanceof TileEntityRedstoneFluxConsumer) || (te instanceof TileEntityEnergyBridge))) {
 					IEnergyHandler handler = (IEnergyHandler) te;
 					final double RF = handler.receiveEnergy(p.orientation, (int) (toUseRF), false);
 					energy -= RF * getPowerSystem().getInternalEnergyPerOutput();

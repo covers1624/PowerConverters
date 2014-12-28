@@ -1,4 +1,4 @@
-package powercrystals.powerconverters.power.te;
+package powercrystals.powerconverters.power.redstoneflux;
 
 import java.util.List;
 
@@ -10,9 +10,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockPowerConverterThermalExpansion extends ItemBlock {
+public class ItemBlockPowerConverterRedstoneFlux extends ItemBlock {
 
-	public ItemBlockPowerConverterThermalExpansion(Block block) {
+	public ItemBlockPowerConverterRedstoneFlux(Block block) {
 		super(block);
 		setHasSubtypes(true);
 		setMaxDamage(0);
@@ -27,9 +27,9 @@ public class ItemBlockPowerConverterThermalExpansion extends ItemBlock {
 	public String getUnlocalizedName(ItemStack itemstack) {
 		int md = itemstack.getItemDamage();
 		if (md == 0)
-			return "powerconverters.te.consumer";
+			return "powerconverters.rf.consumer";
 		if (md == 1)
-			return "powerconverters.te.producer";
+			return "powerconverters.rf.producer";
 		return "unknown";
 	}
 
@@ -38,9 +38,9 @@ public class ItemBlockPowerConverterThermalExpansion extends ItemBlock {
 	public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean par4) {
 		int md = itemstack.getItemDamage();
 		if (md == 0)
-			list.add("Consumes ThermalExpansion RF");
+			list.add("Consumes RedstoneFlux");
 		else if (md == 1)
-			list.add("Produces ThermalExpansion RF");
+			list.add("Produces RedstoneFlux");
 		else
 			list.add(Reference.TOOLTIP_ERROR);
 	}

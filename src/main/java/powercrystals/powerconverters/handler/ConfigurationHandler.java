@@ -11,7 +11,7 @@ import net.minecraftforge.common.config.Property;
 public class ConfigurationHandler {
 
 	public static Configuration configuration;
-	
+
 	public static boolean stopRain;
 
 	public static int bridgeBufferSize;
@@ -22,6 +22,7 @@ public class ConfigurationHandler {
 	public static int throttleIC2MVProducer;
 	public static int throttleIC2HVProducer;
 	public static int throttleIC2EVProducer;
+
 
 	public static boolean altRecipes;
 
@@ -34,7 +35,7 @@ public class ConfigurationHandler {
 
 	public static void loadConfiguration() {
 		bridgeBufferSize = configuration.get(Reference.BASIC_CATEGORY, "BridgeBufferSize", 160000000).getInt();
-		
+
 		stopRain = configuration.get("RAIN", "Stop Rain Server Side", false, "THIS IS INTERNAL USE ONLY").getBoolean();
 
 		altRecipes = configuration.get(Reference.BASIC_CATEGORY, "AlternateRecipes", false, "ThermalExpansion Recipes").getBoolean();
@@ -50,6 +51,5 @@ public class ConfigurationHandler {
 
 		configuration.save();
 	}
-	
 
 }

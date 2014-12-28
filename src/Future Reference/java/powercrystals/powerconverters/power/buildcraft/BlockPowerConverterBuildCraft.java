@@ -24,7 +24,7 @@ public class BlockPowerConverterBuildCraft extends BlockPowerConverter {
 			return new TileEntityBuildCraftProducer();
 
 		return null;
-	}
+	} 
 
 	@Override
 	@SideOnly(Side.CLIENT)

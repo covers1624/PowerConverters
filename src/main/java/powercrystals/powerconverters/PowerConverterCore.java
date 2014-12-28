@@ -1,5 +1,6 @@
 package powercrystals.powerconverters;
 
+
 import net.minecraft.command.ICommand;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -19,13 +20,18 @@ import powercrystals.powerconverters.net.IPCProxy;
 import powercrystals.powerconverters.power.PowerSystem;
 import powercrystals.powerconverters.reference.Config;
 import powercrystals.powerconverters.reference.Reference;
+import powercrystals.powerconverters.updatechecker.UpdateCheckThread;
+import powercrystals.powerconverters.updatechecker.UpdateManager;
 import powercrystals.powerconverters.util.LogHelper;
+import powercrystals.powerconverters.util.RFHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
@@ -47,6 +53,10 @@ public class PowerConverterCore {
 		instance = this;
 		LogHelper.info("Power Converters PreInitialization Started.");
 		
+		LogHelper.trace("Registering Updae Manager");
+		UpdateManager updateManager = new UpdateManager();
+		FMLCommonHandler.instance().bus().register(updateManager);
+		
 		//First thing we do so we can catch fluid register Events.
 		LogHelper.trace("Registering Event Handlers.");
 		FMLCommonHandler.instance().bus().register(new EventsHandler());
@@ -57,8 +67,8 @@ public class PowerConverterCore {
 		LogHelper.trace("Initalizing PowerSystems");
 		PowerSystems.init();
 		
-		LogHelper.trace("Initalizing ChargeHandlers");
-		PowerSystems.initChargeHandlers();
+		//LogHelper.trace("Initalizing ChargeHandlers");
+		//PowerSystems.initChargeHandlers();
 		
 		LogHelper.info("Power Converters PreInitialization Finished.");
 	}
@@ -66,6 +76,9 @@ public class PowerConverterCore {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		LogHelper.info("Power Converters Core Initialization Started.");
+		
+		LogHelper.trace("Checking For RF API...");
+		RFHelper.init();
 
 		LogHelper.trace("Registering Gui Handler.");
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new PCGUIHandler());
@@ -84,6 +97,10 @@ public class PowerConverterCore {
 		} else {
 			LogHelper.trace("Registering Default Recipes.");
 			Recipes.initDefaults();
+		}
+		
+		if (Loader.isModLoaded("Waila")) {
+			FMLInterModComms.sendMessage("Waila", "register", "powercrystals.powerconverters.waila.WailaProvider.callBackRegister");
 		}
 	}
 

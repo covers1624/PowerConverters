@@ -13,8 +13,8 @@ powerconverters.ic2.hv.producer.name=IC2 HV Producer
 powerconverters.ic2.ev.consumer.name=IC2 EV Consumer
 powerconverters.ic2.ev.producer.name=IC2 EV Producer
 
-powerconverters.te.consumer.name=TE Consumer
-powerconverters.te.producer.name=TE Producer
+powerconverters.rf.consumer.name=RF Consumer
+powerconverters.rf.producer.name=RF Producer
 
 powerconverters.steam.consumer.name=Steam Consumer
 powerconverters.steam.producer.name=Steam Producer
