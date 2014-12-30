@@ -16,7 +16,7 @@ public class GuiEnergyBridge extends GuiContainer {
 
 	protected TileEntityEnergyBridge _bridge;
 
-	public static final ResourceLocation BridgeGui = new ResourceLocation(Reference.guiFolder + "energybridge.png");
+	public static final ResourceLocation BridgeGui = new ResourceLocation(Reference.GUI_FOLDER + "energybridge.png");
 
 	public GuiEnergyBridge(ContainerEnergyBridge container, TileEntityEnergyBridge te) {
 		super(container);
