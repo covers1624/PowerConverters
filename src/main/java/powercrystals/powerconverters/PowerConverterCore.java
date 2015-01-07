@@ -109,6 +109,8 @@ public class PowerConverterCore {
 		if (FluidRegistry.isFluidRegistered("Steam")) {
 			steamId = FluidRegistry.getFluidID("Steam");
 		}
+		LogHelper.info(steamId);
+		
 	}
 	@EventHandler
 	public void serverStarting(FMLServerStartingEvent event){
