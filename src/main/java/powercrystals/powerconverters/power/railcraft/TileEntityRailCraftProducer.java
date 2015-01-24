@@ -13,6 +13,7 @@ import powercrystals.powerconverters.handler.ConfigurationHandler;
 import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.power.TileEntityEnergyProducer;
 import powercrystals.powerconverters.util.BlockPosition;
+import powercrystals.powerconverters.util.LogHelper;
 
 public class TileEntityRailCraftProducer extends TileEntityEnergyProducer<IFluidHandler> implements IFluidHandler {
 	private FluidTank _tank;
@@ -24,8 +25,7 @@ public class TileEntityRailCraftProducer extends TileEntityEnergyProducer<IFluid
 
 	@Override
 	public double produceEnergy(double energy) {
-		double steam = Math.min(energy / PowerSystems.powerSystemSteam.getInternalEnergyPerOutput(), ConfigurationHandler.throttleSteamProducer);
-
+		energy = energy / PowerSystems.powerSystemSteam.getInternalEnergyPerOutput();
 		for (int i = 0; i < 6; i++) {
 			BlockPosition bp = new BlockPosition(this);
 			bp.orientation = ForgeDirection.getOrientation(i);
@@ -33,9 +33,9 @@ public class TileEntityRailCraftProducer extends TileEntityEnergyProducer<IFluid
 			TileEntity te = worldObj.getTileEntity(bp.x, bp.y, bp.z);
 
 			if (te != null && te instanceof IFluidHandler) {
-				steam -= ((IFluidHandler) te).fill(bp.orientation.getOpposite(), new FluidStack(PowerConverterCore.steamId, (int) steam), true);
+				energy -= ((IFluidHandler) te).fill(bp.orientation.getOpposite(), new FluidStack(PowerConverterCore.steamId, (int) energy), true);
 			}
-			if (steam <= 0) {
+			if (energy <= 0) {
 				return 0;
 			}
 		}

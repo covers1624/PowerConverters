@@ -3,6 +3,7 @@ package powercrystals.powerconverters.handler;
 import net.minecraftforge.fluids.FluidRegistry.FluidRegisterEvent;
 import powercrystals.powerconverters.PowerConverterCore;
 import powercrystals.powerconverters.reference.Reference;
+import powercrystals.powerconverters.util.LogHelper;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -10,6 +11,7 @@ public class EventsHandler {
 
 	@SubscribeEvent
 	public void onFluidRegisterEvent(FluidRegisterEvent event) {
+		LogHelper.info(event.fluidName);
 		if (event.fluidName.equals("Steam")) {
 			PowerConverterCore.steamId = event.fluidID;
 		} else if (event.fluidName.equals("steam") && PowerConverterCore.steamId <= 0) {

@@ -19,8 +19,7 @@ public class RainHandler {
 				return;
 			}
 			
-			if (MinecraftServer.getServer().worldServers[0].isRaining() && ConfigurationHandler.stopRain && !rainStopped) {
-				rainStopped = true;
+			if (MinecraftServer.getServer().worldServers[0].isRaining() && ConfigurationHandler.stopRain) {
 				lastPoll = 400;
 				LogHelper.info("Automated Rain Stopage");
 				MinecraftServer.getServer().worldServers[0].getWorldInfo().setRaining(false);

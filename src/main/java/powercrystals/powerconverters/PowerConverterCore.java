@@ -1,6 +1,15 @@
 package powercrystals.powerconverters;
 
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+
+
+
 import net.minecraft.command.ICommand;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -102,12 +111,22 @@ public class PowerConverterCore {
 		if (Loader.isModLoaded("Waila")) {
 			FMLInterModComms.sendMessage("Waila", "register", "powercrystals.powerconverters.waila.WailaProvider.callBackRegister");
 		}
+		
+		
+		Map map = FluidRegistry.getRegisteredFluidIDs();
+		Set set = map.entrySet();
+		Iterator iterator = set.iterator();
+		
+		while(iterator.hasNext()){
+			Entry entry = (Entry)iterator.next();
+			LogHelper.info(entry.getKey() + " " + entry.getValue());
+		}
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		if (FluidRegistry.isFluidRegistered("Steam")) {
-			steamId = FluidRegistry.getFluidID("Steam");
+		if (FluidRegistry.isFluidRegistered("steam")) {
+			steamId = FluidRegistry.getFluidID("steam");
 		}
 		LogHelper.info(steamId);
 		
