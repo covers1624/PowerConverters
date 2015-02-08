@@ -5,3 +5,6 @@ jdk:
 install: ./gradlew setupCIWorkspace -S
 script: ./gradlew build
 
+env:
+  global:
+    TERM=dumb
