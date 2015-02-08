@@ -17,17 +17,12 @@ public class BlockEnergyConduit extends BlockContainer {
 		super(Material.clay);
 		setBlockName("powerconverters.conduit");
 		setCreativeTab(PCCreativeTab.tab);
+		setBlockBounds(0.3F, 0.3F, 0.3F, 0.7F, 0.7F, 0.7F);
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return null;
-	}
-	@Override
-	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axis, List list, Entity entity){
-		setBlockBounds(0.3F, 0.3F, 0.3F, 0.7F, 0.7F, 0.7F);
-		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
-		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 	}
 
 }
