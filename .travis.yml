@@ -3,7 +3,7 @@ jdk:
   - oraclejdk7
 
 before_script:
- - chmod +x grailsw
+ - chmod +x gradlew
 
 script: ./gradlew setupCIWorkspace build -S
 
