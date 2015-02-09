@@ -3,9 +3,9 @@ jdk:
   - oraclejdk7
 
 before_script:
- - chmod +x gradlew
+ - chmod +x grailsw
 
-script: ./gradlew setupCIWorkspace build -S
+script: ./gradlew setupCIWorkspace && ./gradlew build
 
 env:
   global:
