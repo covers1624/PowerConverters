@@ -49,8 +49,8 @@ dependencies {
 	compile 'com.mod-buildcraft:buildcraft:6.2.6:dev'  // adds buildcraft to the dev env
 	compile 'net.industrial-craft:industrialcraft-2:2.2.504-experimental:api'
 	//compile files("D:/Projects/Minecraft/1.7/1.7 mods Dev Versions/industrialcraft-2-2.2.515-experimental-dev.jar")
-	compile files("D:/Projects/Minecraft/1.7/1.7 mods Dev Versions/ThermalExpansion-[1.7.10]4.0.0B5-dev-13.jar")
-	compile files("D:/Projects/Minecraft/1.7/1.7 mods Dev Versions/ThermalFoundation-[1.7.10]1.0.0B3-dev-8.jar")
+	//compile files("D:/Projects/Minecraft/1.7/1.7 mods Dev Versions/ThermalExpansion-[1.7.10]4.0.0B5-dev-13.jar")
+	//compile files("D:/Projects/Minecraft/1.7/1.7 mods Dev Versions/ThermalFoundation-[1.7.10]1.0.0B3-dev-8.jar")
 	compile files("D:/Projects/Minecraft/1.7/1.7 mods Dev Versions/CoFHCore-[1.7.10]3.0.0B6-dev-32.jar")
 	compile files("D:/Projects/Minecraft/1.7/1.7 mods Dev Versions/Factorization-1.7.10-0.8.88.2-dev.jar")
 	//Add Waila To Dev Environment
