@@ -8,67 +8,30 @@
 :compileApiJava UP-TO-DATE
 :processApiResources UP-TO-DATE
 :apiClasses UP-TO-DATE
-:sourceMainJava
-:compileJava
-Download http://files.minecraftforge.net/maven/com/mod-buildcraft/buildcraft/6.2.6/buildcraft-6.2.6.pom
-Download http://files.minecraftforge.net/maven/com/mod-buildcraft/buildcraft/6.2.6/buildcraft-6.2.6-dev.jar
-Download http://maven.ic2.player.to/net/industrial-craft/industrialcraft-2/2.2.504-experimental/industrialcraft-2-2.2.504-experimental-api.jar
-warning: [options] bootstrap class path not set in conjunction with -source 1.6
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\inventory\UtilInventory.java:4: error: package cofh.api.transport does not exist
-import cofh.api.transport.IItemDuct;
-                         ^
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\inventory\UtilInventory.java:32: error: cannot find symbol
-	public static Map<ForgeDirection, IItemDuct> findConduits(World world, int x, int y, int z) {
-	                                  ^
-  symbol:   class IItemDuct
-  location: class UtilInventory
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\inventory\UtilInventory.java:43: error: cannot find symbol
-	public static Map<ForgeDirection, IItemDuct> findConduits(World world, int x, int y, int z, ForgeDirection[] directionstocheck) {
-	                                  ^
-  symbol:   class IItemDuct
-  location: class UtilInventory
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\inventory\UtilInventory.java:44: error: cannot find symbol
-		Map<ForgeDirection, IItemDuct> pipes = new LinkedHashMap<ForgeDirection, IItemDuct>();
-		                    ^
-  symbol:   class IItemDuct
-  location: class UtilInventory
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\inventory\UtilInventory.java:44: error: cannot find symbol
-		Map<ForgeDirection, IItemDuct> pipes = new LinkedHashMap<ForgeDirection, IItemDuct>();
-		                                                                         ^
-  symbol:   class IItemDuct
-  location: class UtilInventory
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\inventory\UtilInventory.java:50: error: cannot find symbol
-			if (te instanceof IItemDuct) {
-			                  ^
-  symbol:   class IItemDuct
-  location: class UtilInventory
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\inventory\UtilInventory.java:51: error: cannot find symbol
-				pipes.put(direction, (IItemDuct) te);
-				                      ^
-  symbol:   class IItemDuct
-  location: class UtilInventory
-D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\inventory\UtilInventory.java:227: error: cannot find symbol
-		for (Entry<ForgeDirection, IItemDuct> pipe : findConduits(world, bp.x, bp.y, bp.z, dropdirections).entrySet()) {
-		                           ^
-  symbol:   class IItemDuct
-  location: class UtilInventory
+:sourceMainJava UP-TO-DATE
+:compileJavawarning: [options] bootstrap class path not set in conjunction with -source 1.6
 Note: D:\Projects\Minecraft\1.7\PowerConverters\build\sources\java\powercrystals\powerconverters\inventory\UtilInventory.java uses or overrides a deprecated API.
 Note: Recompile with -Xlint:deprecation for details.
 Note: Some input files use unchecked or unsafe operations.
 Note: Recompile with -Xlint:unchecked for details.
-8 errors
 1 warning
-:compileJava FAILED
 
-FAILURE: Build failed with an exception.
+:processResources UP-TO-DATE
+:classes
+:jar
+:compileTestJava UP-TO-DATE
+:processTestResources UP-TO-DATE
+:testClasses UP-TO-DATE
+:test UP-TO-DATE
+:extractMcpData UP-TO-DATE
+:getVersionJson
+:extractUserDev UP-TO-DATE
+:genSrgs SKIPPED
+:reobf
+:assemble
+:check UP-TO-DATE
+:build
 
-* What went wrong:
-Execution failed for task ':compileJava'.
-> Compilation failed; see the compiler error output for details.
+BUILD SUCCESSFUL
 
-* Try:
-Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
-
-BUILD FAILED
-
-Total time: 2 mins 54.856 secs
+Total time: 27.938 secs

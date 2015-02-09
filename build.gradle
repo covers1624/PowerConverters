@@ -51,22 +51,12 @@ dependencies {
 	//compile files("D:/Projects/Minecraft/1.7/1.7 mods Dev Versions/industrialcraft-2-2.2.515-experimental-dev.jar")
 	//compile files("D:/Projects/Minecraft/1.7/1.7 mods Dev Versions/ThermalExpansion-[1.7.10]4.0.0B5-dev-13.jar")
 	//compile files("D:/Projects/Minecraft/1.7/1.7 mods Dev Versions/ThermalFoundation-[1.7.10]1.0.0B3-dev-8.jar")
-	compile files("./CoFHCore-[1.7.10]3.0.0B6-dev-32.jar")
-	compile files("./Factorization-1.7.10-0.8.88.2-dev.jar")
+	//compile files("./CoFHCore-[1.7.10]3.0.0B6-dev-32.jar")
+	//compile files("./Factorization-1.7.10-0.8.88.2-dev.jar")
 	//Add Waila To Dev Environment
 	compile "mcp.mobius.waila:Waila:1.5.6_dev1_1.7.10"
 	
-    // you may put jars on which you depend on in ./libs
-    // or you may define them like so..
-    //compile "some.group:artifact:version:classifier"
-    //compile "some.group:artifact:version"
-      
-    // real examples
-    //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
-
-    // for more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
+	runtime fileTree(dir: 'libs', include: '*.jar')
 
 }
 
