@@ -1,8 +1,8 @@
 language: java
 jdk:
   - oraclejdk7
-  
-install: - chmod +X gradlew
+
+install: chmod +X gradlew
 script: ./gradlew setupCIWorkspace build -S
 
 env:
