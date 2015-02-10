@@ -3,7 +3,7 @@ jdk:
   - oraclejdk7
 
 install: chmod +x gradlew
-script: ./gradlew setupCIWorkspace build -S -Xlint:deprecation
+script: ./gradlew setupCIWorkspace build -S
 
 env:
   global:
