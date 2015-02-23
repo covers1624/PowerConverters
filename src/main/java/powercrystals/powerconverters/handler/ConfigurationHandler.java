@@ -25,6 +25,8 @@ public class ConfigurationHandler {
 
 
 	public static boolean altRecipes;
+	
+	public static boolean doFlatBedrock;
 
 	public static void init(File config) {
 		if (configuration == null) {
@@ -38,6 +40,8 @@ public class ConfigurationHandler {
 
 		stopRain = configuration.get("RAIN", "Stop Rain Server Side", false, "THIS IS INTERNAL USE ONLY").getBoolean();
 
+		doFlatBedrock = configuration.get(Configuration.CATEGORY_GENERAL, "Do Flat Bedrock, false", "Set this to false for normal Bedrock.").getBoolean();
+		
 		altRecipes = configuration.get(Reference.BASIC_CATEGORY, "AlternateRecipes", false, "ThermalExpansion Recipes").getBoolean();
 
 		throttleSteamConsumer = configuration.get("Throttles", "Steam.Consumer", 1000, "mB/t").getInt();

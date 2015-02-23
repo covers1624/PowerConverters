@@ -1,12 +1,10 @@
 package powercrystals.powerconverters.init;
 
+import net.minecraft.block.Block;
 import powercrystals.powerconverters.common.BlockPowerConverterCommon;
 import powercrystals.powerconverters.common.ItemBlockPowerConverterCommon;
 import powercrystals.powerconverters.common.TileEntityCharger;
 import powercrystals.powerconverters.common.TileEntityEnergyBridge;
-import powercrystals.powerconverters.power.conduit.BasicEnergyConduit;
-import powercrystals.powerconverters.power.conduit.BlockEnergyConduit;
-import powercrystals.powerconverters.power.conduit.ItemBlockEnergyConduit;
 import powercrystals.powerconverters.power.factorization.BlockPowerConverterFactorization;
 import powercrystals.powerconverters.power.factorization.ItemBlockPowerConverterFactorization;
 import powercrystals.powerconverters.power.factorization.TileEntityPowerConverterFactorizationConsumer;
@@ -26,7 +24,6 @@ import powercrystals.powerconverters.power.redstoneflux.TileEntityRedstoneFluxPr
 import powercrystals.powerconverters.util.RFHelper;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
 
 public class ModBlocks {
 
@@ -41,9 +38,9 @@ public class ModBlocks {
 
 	public static void init() {
 
-		conduitBlock = new BlockEnergyConduit();
-		GameRegistry.registerBlock(conduitBlock, ItemBlockEnergyConduit.class, conduitBlock.getUnlocalizedName());
-		GameRegistry.registerTileEntity(BasicEnergyConduit.class, "basicConduit");
+		//conduitBlock = new BlockEnergyConduit();
+		//GameRegistry.registerBlock(conduitBlock, ItemBlockEnergyConduit.class, conduitBlock.getUnlocalizedName());
+		//GameRegistry.registerTileEntity(BasicEnergyConduit.class, "basicConduit");
 
 		converterBlockCommon = new BlockPowerConverterCommon();
 		GameRegistry.registerBlock(converterBlockCommon, ItemBlockPowerConverterCommon.class, converterBlockCommon.getUnlocalizedName());
