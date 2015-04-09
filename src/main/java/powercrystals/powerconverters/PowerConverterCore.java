@@ -10,6 +10,8 @@ import java.util.Set;
 
 
 
+
+
 import net.minecraft.command.ICommand;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -17,6 +19,7 @@ import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fluids.FluidRegistry;
 import powercrystals.powerconverters.command.EnumCommands;
 import powercrystals.powerconverters.gui.PCGUIHandler;
+import powercrystals.powerconverters.handler.CloakHandler;
 import powercrystals.powerconverters.handler.ConfigurationHandler;
 import powercrystals.powerconverters.handler.EventsHandler;
 import powercrystals.powerconverters.handler.RainHandler;
@@ -45,6 +48,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = "after:BuildCraft|Energy;after:factorization;after:IC2;after:Railcraft;after:ThermalExpansion", guiFactory = Reference.GUI_FACTORY)
 public class PowerConverterCore {
@@ -110,6 +114,10 @@ public class PowerConverterCore {
 		
 		if (Loader.isModLoaded("Waila")) {
 			FMLInterModComms.sendMessage("Waila", "register", "powercrystals.powerconverters.waila.WailaProvider.callBackRegister");
+		}
+		
+		if (event.getSide() == Side.CLIENT) {
+			MinecraftForge.EVENT_BUS.register(new CloakHandler());
 		}
 		
 		
