@@ -4,12 +4,11 @@ import java.util.List;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
-import cofh.api.energy.IEnergyHandler;
-import powercrystals.powerconverters.PowerConverterCore;
 import powercrystals.powerconverters.common.TileEntityEnergyBridge;
 import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.power.TileEntityEnergyProducer;
 import powercrystals.powerconverters.util.BlockPosition;
+import cofh.api.energy.IEnergyHandler;
 
 public class TileEntityRedstoneFluxProducer extends TileEntityEnergyProducer<IEnergyHandler> implements IEnergyHandler {
 
@@ -58,7 +57,7 @@ public class TileEntityRedstoneFluxProducer extends TileEntityEnergyProducer<IEn
 				TileEntity te = worldObj.getTileEntity(p.x, p.y, p.z);
 				if ((te instanceof IEnergyHandler) && !((te instanceof TileEntityRedstoneFluxConsumer) || (te instanceof TileEntityEnergyBridge))) {
 					IEnergyHandler handler = (IEnergyHandler) te;
-					final double RF = handler.receiveEnergy(p.orientation, (int) (toUseRF), false);
+					final double RF = handler.receiveEnergy(p.orientation.getOpposite(), (int) (toUseRF), false);
 					energy -= RF * getPowerSystem().getInternalEnergyPerOutput();
 					if (energy <= 0)
 						break;

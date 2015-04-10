@@ -6,10 +6,14 @@
  MCP Data version : unknown
 ****************************
 :eclipseClasspath
+Download http://mobiusstrip.eu/maven/mcp/mobius/waila/Waila/1.5.10_1.7.10/Waila-1.5.10_1.7.10.pom
+Download http://mobiusstrip.eu/maven/mcp/mobius/waila/Waila/1.5.10_1.7.10/Waila-1.5.10_1.7.10.jar
+Download http://chickenbones.net/maven/codechicken/NotEnoughItems/1.7.10-1.0.4.95/NotEnoughItems-1.7.10-1.0.4.95-dev.jar
+Download http://mobiusstrip.eu/maven/mcp/mobius/waila/Waila/1.5.10_1.7.10/Waila-1.5.10_1.7.10-sources.jar
 :eclipseJdt
 :eclipseProject
 :eclipse
 
 BUILD SUCCESSFUL
 
-Total time: 2 mins 50.332 secs
+Total time: 1 mins 18.421 secs
