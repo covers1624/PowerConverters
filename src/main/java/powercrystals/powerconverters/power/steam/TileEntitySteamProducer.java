@@ -1,4 +1,4 @@
-package powercrystals.powerconverters.power.railcraft;
+package powercrystals.powerconverters.power.steam;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -9,22 +9,23 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import powercrystals.powerconverters.PowerConverterCore;
-import powercrystals.powerconverters.handler.ConfigurationHandler;
 import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.power.TileEntityEnergyProducer;
 import powercrystals.powerconverters.util.BlockPosition;
-import powercrystals.powerconverters.util.LogHelper;
 
-public class TileEntityRailCraftProducer extends TileEntityEnergyProducer<IFluidHandler> implements IFluidHandler {
+public class TileEntitySteamProducer extends TileEntityEnergyProducer<IFluidHandler> implements IFluidHandler {
 	private FluidTank _tank;
 
-	public TileEntityRailCraftProducer() {
+	public TileEntitySteamProducer() {
 		super(PowerSystems.powerSystemSteam, 0, IFluidHandler.class);
 		_tank = new FluidTank(1 * FluidContainerRegistry.BUCKET_VOLUME);
 	}
 
 	@Override
 	public double produceEnergy(double energy) {
+		if (PowerConverterCore.steamId == -1) {
+			return energy;
+		}
 		energy = energy / PowerSystems.powerSystemSteam.getInternalEnergyPerOutput();
 		for (int i = 0; i < 6; i++) {
 			BlockPosition bp = new BlockPosition(this);
@@ -39,7 +40,7 @@ public class TileEntityRailCraftProducer extends TileEntityEnergyProducer<IFluid
 				return 0;
 			}
 		}
-		
+
 		return energy * PowerSystems.powerSystemSteam.getInternalEnergyPerOutput();
 
 	}

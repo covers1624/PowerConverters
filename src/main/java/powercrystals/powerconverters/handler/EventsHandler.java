@@ -14,7 +14,7 @@ public class EventsHandler {
 		LogHelper.info(event.fluidName);
 		if (event.fluidName.equals("Steam")) {
 			PowerConverterCore.steamId = event.fluidID;
-		} else if (event.fluidName.equals("steam") && PowerConverterCore.steamId <= 0) {
+		} else if (event.fluidName.equals("steam") && PowerConverterCore.steamId == -1) {
 			PowerConverterCore.steamId = event.fluidID;
 		}
 	}
@@ -23,7 +23,7 @@ public class EventsHandler {
 	public void onConfigChanged(ConfigChangedEvent event) {
 		System.out.println("Detected A Config Change");
 		if (event.modID.equalsIgnoreCase(Reference.MOD_ID)) {
-			ConfigurationHandler.loadConfiguration();
+			ConfigurationHandler.saveConfig();
 		}
 	}
 }

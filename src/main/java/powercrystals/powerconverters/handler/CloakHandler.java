@@ -19,7 +19,7 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class CloakHandler {
-	private boolean hasInit = false;
+	private boolean reBuilding = false;
 
 	private final String server = "https://raw.githubusercontent.com/covers1624/PowerConverters/master/capes.info";
 
@@ -32,7 +32,7 @@ public class CloakHandler {
 
 	@SubscribeEvent
 	public void onPreRenderSpecials(Pre event) {
-		if (Loader.isModLoaded("shadersmod") || Loader.isModLoaded("optifine")) {
+		if (Loader.isModLoaded("shadersmod") || Loader.isModLoaded("optifine") || reBuilding) {
 			return;
 		}
 		if (event.entityPlayer instanceof AbstractClientPlayer) {
@@ -74,5 +74,10 @@ public class CloakHandler {
 
 	public void capePlayer(AbstractClientPlayer player, CapeType cape) {
 		player.func_152121_a(MinecraftProfileTexture.Type.CAPE, cape.getCapeLocation());
+	}
+
+	public void reBuild() {
+		cloaks.clear();
+		buildCloakURLDatabase();
 	}
 }

@@ -13,14 +13,14 @@ import powercrystals.powerconverters.power.ic2.BlockPowerConverterIndustrialCraf
 import powercrystals.powerconverters.power.ic2.ItemBlockPowerConverterIndustrialCraft;
 import powercrystals.powerconverters.power.ic2.TileEntityIndustrialCraftConsumer;
 import powercrystals.powerconverters.power.ic2.TileEntityIndustrialCraftProducer;
-import powercrystals.powerconverters.power.railcraft.BlockPowerConverterRailCraft;
-import powercrystals.powerconverters.power.railcraft.ItemBlockPowerConverterRailCraft;
-import powercrystals.powerconverters.power.railcraft.TileEntityRailCraftConsumer;
-import powercrystals.powerconverters.power.railcraft.TileEntityRailCraftProducer;
 import powercrystals.powerconverters.power.redstoneflux.BlockPowerConverterRedstoneFlux;
 import powercrystals.powerconverters.power.redstoneflux.ItemBlockPowerConverterRedstoneFlux;
 import powercrystals.powerconverters.power.redstoneflux.TileEntityRedstoneFluxConsumer;
 import powercrystals.powerconverters.power.redstoneflux.TileEntityRedstoneFluxProducer;
+import powercrystals.powerconverters.power.steam.BlockPowerConverterSteam;
+import powercrystals.powerconverters.power.steam.ItemBlockPowerConverterSteam;
+import powercrystals.powerconverters.power.steam.TileEntitySteamConsumer;
+import powercrystals.powerconverters.power.steam.TileEntitySteamProducer;
 import powercrystals.powerconverters.util.RFHelper;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -30,7 +30,7 @@ public class ModBlocks {
 	public static Block conduitBlock;
 
 	public static Block converterBlockCommon;
-	//public static Block converterBlockBuildCraft;
+	// public static Block converterBlockBuildCraft;
 	public static Block converterBlockIndustrialCraft;
 	public static Block converterBlockSteam;
 	public static Block converterBlockFactorization;
@@ -38,29 +38,11 @@ public class ModBlocks {
 
 	public static void init() {
 
-		//conduitBlock = new BlockEnergyConduit();
-		//GameRegistry.registerBlock(conduitBlock, ItemBlockEnergyConduit.class, conduitBlock.getUnlocalizedName());
-		//GameRegistry.registerTileEntity(BasicEnergyConduit.class, "basicConduit");
-
 		converterBlockCommon = new BlockPowerConverterCommon();
 		GameRegistry.registerBlock(converterBlockCommon, ItemBlockPowerConverterCommon.class, converterBlockCommon.getUnlocalizedName());
 		GameRegistry.registerTileEntity(TileEntityEnergyBridge.class, "powerConverterEnergyBridge");
 		GameRegistry.registerTileEntity(TileEntityCharger.class, "powerConverterUniversalCharger");
-		
-		// MJ
-		//This is dead.
-		/*
-		 * if (Loader.isModLoaded("BuildCraft|Energy")) {
-		 * converterBlockBuildCraft = new BlockPowerConverterBuildCraft();
-		 * GameRegistry.registerBlock(converterBlockBuildCraft,
-		 * ItemBlockPowerConverterBuildCraft.class,
-		 * converterBlockBuildCraft.getUnlocalizedName());
-		 * GameRegistry.registerTileEntity(TileEntityBuildCraftConsumer.class,
-		 * "powerConverterBCConsumer");
-		 * GameRegistry.registerTileEntity(TileEntityBuildCraftProducer.class,
-		 * "powerConverterBCProducer"); }
-		 */
-		
+
 		// RF
 		if (Loader.isModLoaded("ThermalExpansion") || Loader.isModLoaded("BuildCraft") || RFHelper.getiEnergyHandlerResults()) {
 			converterBlockRedstoneFlux = new BlockPowerConverterRedstoneFlux();
@@ -76,12 +58,13 @@ public class ModBlocks {
 			GameRegistry.registerTileEntity(TileEntityIndustrialCraftProducer.class, "powerConverterIC2Producer");
 		}
 		// Steam
-		if (Loader.isModLoaded("Railcraft") || Loader.isModLoaded("factorization")) {
-			converterBlockSteam = new BlockPowerConverterRailCraft();
-			GameRegistry.registerBlock(converterBlockSteam, ItemBlockPowerConverterRailCraft.class, converterBlockSteam.getUnlocalizedName());
-			GameRegistry.registerTileEntity(TileEntityRailCraftConsumer.class, "powerConverterSteamConsumer");
-			GameRegistry.registerTileEntity(TileEntityRailCraftProducer.class, "powerConverterSteamProducer");
-		}
+		// THIS IT A TEMP CHANGE
+		// if (PowerConverterCore.steamId != -1) {
+		converterBlockSteam = new BlockPowerConverterSteam();
+		GameRegistry.registerBlock(converterBlockSteam, ItemBlockPowerConverterSteam.class, converterBlockSteam.getUnlocalizedName());
+		GameRegistry.registerTileEntity(TileEntitySteamConsumer.class, "powerConverterSteamConsumer");
+		GameRegistry.registerTileEntity(TileEntitySteamProducer.class, "powerConverterSteamProducer");
+		// }
 		// GC
 		if (Loader.isModLoaded("factorization")) {
 			converterBlockFactorization = new BlockPowerConverterFactorization();

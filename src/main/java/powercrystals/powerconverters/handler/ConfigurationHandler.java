@@ -2,11 +2,9 @@ package powercrystals.powerconverters.handler;
 
 import java.io.File;
 
-import cpw.mods.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.common.config.Configuration;
 import powercrystals.powerconverters.power.PowerSystem;
 import powercrystals.powerconverters.reference.Reference;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
 
 public class ConfigurationHandler {
 
@@ -52,6 +50,10 @@ public class ConfigurationHandler {
 
 		PowerSystem.loadConfig(configuration);
 
+		configuration.save();
+	}
+
+	public static void saveConfig() {
 		configuration.save();
 	}
 

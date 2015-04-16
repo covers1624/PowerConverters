@@ -1,4 +1,4 @@
-package powercrystals.powerconverters.power.railcraft;
+package powercrystals.powerconverters.power.steam;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockPowerConverterRailCraft extends ItemBlock {
-	public ItemBlockPowerConverterRailCraft(Block block) {
+public class ItemBlockPowerConverterSteam extends ItemBlock {
+	public ItemBlockPowerConverterSteam(Block block) {
 		super(block);
 		setHasSubtypes(true);
 		setMaxDamage(0);

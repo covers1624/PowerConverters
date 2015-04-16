@@ -1,10 +1,5 @@
 package powercrystals.powerconverters;
 
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
 import powercrystals.powerconverters.command.EnumCommands;
@@ -46,7 +41,7 @@ public class PowerConverterCore {
 	@Instance("Power Converters")
 	public static PowerConverterCore instance;
 
-	public static int steamId;
+	public static int steamId = -1;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -77,6 +72,10 @@ public class PowerConverterCore {
 	public void init(FMLInitializationEvent event) {
 		LogHelper.info("Power Converters Core Initialization Started.");
 
+		if (FluidRegistry.isFluidRegistered("steam")) {
+			LogHelper.info("Detected Steam at Init Stage");
+		}
+
 		LogHelper.trace("Checking For RF API...");
 		RFHelper.init();
 
@@ -106,15 +105,6 @@ public class PowerConverterCore {
 		if (event.getSide() == Side.CLIENT) {
 			MinecraftForge.EVENT_BUS.register(new CloakHandler());
 		}
-
-		Map map = FluidRegistry.getRegisteredFluidIDs();
-		Set set = map.entrySet();
-		Iterator iterator = set.iterator();
-
-		while (iterator.hasNext()) {
-			Entry entry = (Entry) iterator.next();
-			LogHelper.info(entry.getKey() + " " + entry.getValue());
-		}
 	}
 
 	@EventHandler
@@ -122,8 +112,6 @@ public class PowerConverterCore {
 		if (FluidRegistry.isFluidRegistered("steam")) {
 			steamId = FluidRegistry.getFluidID("steam");
 		}
-		LogHelper.info(steamId);
-
 	}
 
 	@EventHandler

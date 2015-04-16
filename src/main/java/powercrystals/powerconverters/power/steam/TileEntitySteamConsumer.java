@@ -1,4 +1,4 @@
-package powercrystals.powerconverters.power.railcraft;
+package powercrystals.powerconverters.power.steam;
 
 import java.util.List;
 
@@ -17,11 +17,11 @@ import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.power.TileEntityEnergyConsumer;
 import powercrystals.powerconverters.util.BlockPosition;
 
-public class TileEntityRailCraftConsumer extends TileEntityEnergyConsumer<IFluidHandler> implements IFluidHandler {
+public class TileEntitySteamConsumer extends TileEntityEnergyConsumer<IFluidHandler> implements IFluidHandler {
 	private FluidTank _steamTank;
 	private int _mBLastTick;
 
-	public TileEntityRailCraftConsumer() {
+	public TileEntitySteamConsumer() {
 		super(PowerSystems.powerSystemSteam, 0, IFluidHandler.class);
 		_steamTank = new FluidTank(1 * FluidContainerRegistry.BUCKET_VOLUME);
 	}
@@ -54,7 +54,7 @@ public class TileEntityRailCraftConsumer extends TileEntityEnergyConsumer<IFluid
 
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-		if (resource == null || resource.fluidID != PowerConverterCore.steamId)
+		if (resource == null || resource.fluidID != PowerConverterCore.steamId || PowerConverterCore.steamId == -1)
 			return 0;
 		return _steamTank.fill(resource, doFill);
 

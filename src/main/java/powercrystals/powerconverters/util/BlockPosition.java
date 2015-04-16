@@ -50,12 +50,6 @@ public class BlockPosition {
 		orientation = ForgeDirection.UNKNOWN;
 	}
 
-	public static BlockPosition fromFactoryTile(IRotateableTile te) {
-		BlockPosition bp = new BlockPosition((TileEntity) te);
-		bp.orientation = te.getDirectionFacing();
-		return bp;
-	}
-
 	public BlockPosition copy() {
 		return new BlockPosition(x, y, z, orientation);
 	}
