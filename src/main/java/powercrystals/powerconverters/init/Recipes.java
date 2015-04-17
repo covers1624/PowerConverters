@@ -1,25 +1,20 @@
 package powercrystals.powerconverters.init;
 
-import org.apache.logging.log4j.Level;
-
-import powercrystals.powerconverters.common.TileEntityCharger;
-import powercrystals.powerconverters.power.ic2.ChargeHandlerIndustrialCraft;
-import powercrystals.powerconverters.power.redstoneflux.ChargeHandlerRedstoneFlux;
-import powercrystals.powerconverters.util.FMLLogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import cpw.mods.fml.common.FMLLog;
+
+import org.apache.logging.log4j.Level;
+
+import powercrystals.powerconverters.util.FMLLogHelper;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class Recipes {
 
 	public static void initDefaults() {
 		ModRecipes();
-		// BuildCraftRecipes();
 		RedstoneFluxRecipes();
 		IndustrialCraft2Recipes();
 		RailcraftRecipes();
@@ -31,25 +26,6 @@ public class Recipes {
 
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.converterBlockCommon, 1, 2), "GRG", "ICI", "GRG", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('R'), Items.redstone, Character.valueOf('I'), Items.iron_ingot, Character.valueOf('C'), Blocks.chest);
 	}
-
-	/*
-	 * public static void BuildCraftRecipes(){ try{ GameRegistry.addRecipe(new
-	 * ItemStack(ModBlocks.converterBlockBuildCraft, 1, 0), "G G", " E ", "G G",
-	 * Character.valueOf('G'), Items.gold_ingot, Character.valueOf('E'), new
-	 * ItemStack
-	 * ((Block)(Class.forName("buildcraft.BuildCraftEnergy").getField("engineBlock"
-	 * ).get(null)), 1, 1)); }catch(Exception e){
-	 * FMLLogHelper.logException(Level.FATAL,
-	 * "Found Buildcraft But Failed To Load Recipes, Mabey They Changed Their Item / Block Names?"
-	 * , e); } GameRegistry.addShapelessRecipe(new
-	 * ItemStack(ModBlocks.converterBlockBuildCraft, 1, 1), new
-	 * ItemStack(ModBlocks.converterBlockBuildCraft, 1, 0));
-	 * GameRegistry.addShapelessRecipe(new
-	 * ItemStack(ModBlocks.converterBlockBuildCraft, 1, 0), new
-	 * ItemStack(ModBlocks.converterBlockBuildCraft, 1, 1));
-	 * 
-	 * }
-	 */
 
 	public static void RedstoneFluxRecipes() {
 		try {
@@ -67,10 +43,10 @@ public class Recipes {
 
 	public static void IndustrialCraft2Recipes() {
 		try {
-			GameRegistry.addRecipe(new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 0), "G G", " T ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('T'), (ItemStack) (Class.forName("ic2.core.Ic2Items").getField("lvTransformer").get(null)));
-			GameRegistry.addRecipe(new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 2), "G G", " T ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('T'), (ItemStack) (Class.forName("ic2.core.Ic2Items").getField("mvTransformer").get(null)));
-			GameRegistry.addRecipe(new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 4), "G G", " T ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('T'), (ItemStack) (Class.forName("ic2.core.Ic2Items").getField("hvTransformer").get(null)));
-			GameRegistry.addRecipe(new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 6), "G G", " T ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('T'), (ItemStack) (Class.forName("ic2.core.Ic2Items").getField("mfsUnit").get(null)));
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 0), "G G", " T ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('T'), (Class.forName("ic2.core.Ic2Items").getField("lvTransformer").get(null)));
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 2), "G G", " T ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('T'), (Class.forName("ic2.core.Ic2Items").getField("mvTransformer").get(null)));
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 4), "G G", " T ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('T'), (Class.forName("ic2.core.Ic2Items").getField("hvTransformer").get(null)));
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 6), "G G", " T ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('T'), (Class.forName("ic2.core.Ic2Items").getField("mfsUnit").get(null)));
 		} catch (Exception e) {
 			FMLLogHelper.logException(Level.FATAL, "Found IC2 But Failed To Load Recipes, Mabey They Changed Their Item / Block Names?", e);
 		}
@@ -91,7 +67,7 @@ public class Recipes {
 			}
 			if (Loader.isModLoaded("factorization")) {
 				Object fzRegistry = Class.forName("factorization.shared.Core").getField("registry").get(null);
-				GameRegistry.addRecipe(new ItemStack(ModBlocks.converterBlockSteam, 1, 0), "G G", " E ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('E'), (ItemStack) (Class.forName("factorization.common.Registry").getField("steamturbine_item").get(fzRegistry)));
+				GameRegistry.addRecipe(new ItemStack(ModBlocks.converterBlockSteam, 1, 0), "G G", " E ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('E'), (Class.forName("factorization.common.Registry").getField("steamturbine_item").get(fzRegistry)));
 			}
 		} catch (Exception e) {
 			FMLLogHelper.logException(Level.FATAL, "Found Railcraft / Factorization But Failed To Load Recipes, Mabey They Changed Ther Item / Block Names?", e);
@@ -103,7 +79,7 @@ public class Recipes {
 	public static void FactorizationRecipes() {
 		try {
 			Object fzRegistry = Class.forName("factorization.shared.Core").getField("registry").get(null);
-			GameRegistry.addRecipe(new ItemStack(ModBlocks.converterBlockFactorization, 1, 0), "I I", " B ", "I I", Character.valueOf('I'), Items.gold_ingot, Character.valueOf('B'), (ItemStack) (Class.forName("factorization.common.Registry").getField("solarboiler_item").get(fzRegistry)));
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.converterBlockFactorization, 1, 0), "I I", " B ", "I I", Character.valueOf('I'), Items.gold_ingot, Character.valueOf('B'), (Class.forName("factorization.common.Registry").getField("solarboiler_item").get(fzRegistry)));
 		} catch (Exception e) {
 			FMLLogHelper.logException(Level.FATAL, "Found Factorization But Failed To Load Recipes, Mabey They Changed Their Item / Block Names?", e);
 		}
