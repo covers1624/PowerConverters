@@ -1,8 +1,5 @@
 package powercrystals.powerconverters.power.steam;
 
-import java.util.List;
-
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -11,11 +8,8 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import powercrystals.powerconverters.PowerConverterCore;
-import powercrystals.powerconverters.common.TileEntityEnergyBridge;
-import powercrystals.powerconverters.handler.ConfigurationHandler;
 import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.power.TileEntityEnergyConsumer;
-import powercrystals.powerconverters.util.BlockPosition;
 
 public class TileEntitySteamConsumer extends TileEntityEnergyConsumer<IFluidHandler> implements IFluidHandler {
 	private FluidTank _steamTank;

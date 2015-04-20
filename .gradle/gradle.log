@@ -5,6 +5,13 @@
  R4wk, ZeuX, IngisKahn, bspkrs
  MCP Data version : unknown
 ****************************
+Found AccessTransformer in main resources: CoFH_at.cfg
+Found AccessTransformer in main resources: nei_at.cfg
+:clean
+:cleanEclipseClasspath
+:cleanEclipseJdt
+:cleanEclipseProject
+:cleanEclipse
 :extractMcpData UP-TO-DATE
 :getVersionJson
 :extractUserDev UP-TO-DATE
@@ -19,20 +26,28 @@
 :downloadClient SKIPPED
 :downloadServer SKIPPED
 :mergeJars SKIPPED
-:deobfuscateJar SKIPPED
-:decompile SKIPPED
-:processSources SKIPPED
-:remapJar SKIPPED
-:extractMinecraftSrc SKIPPED
-:recompMinecraft SKIPPED
-:repackMinecraft SKIPPED
+:deobfuscateJar
+Applying SpecialSource...
+Applying Exceptor...
+:decompile
+:processSources
+Injecting fml files
+Applying fml patches
+Applying forge patches
+:remapJar
+:extractMinecraftSrc
+:recompMinecraftNote: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+:repackMinecraft
 :setupDecompWorkspace
 :eclipseClasspath
-Download http://maven.ic2.player.to/net/industrial-craft/industrialcraft-2/2.2.504-experimental/industrialcraft-2-2.2.504-experimental-dev.jar
 :eclipseJdt
 :eclipseProject
 :eclipse
 
 BUILD SUCCESSFUL
 
-Total time: 1 mins 32.072 secs
+Total time: 2 mins 17.949 secs

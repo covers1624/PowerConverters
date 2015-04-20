@@ -3,6 +3,7 @@ package powercrystals.powerconverters.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -13,6 +14,8 @@ public class BlockPosition {
 	public int y;
 	public int z;
 	public ForgeDirection orientation;
+
+	public static final int[][] SIDE_COORD_MOD = { { 0, -1, 0 }, { 0, 1, 0 }, { 0, 0, -1 }, { 0, 0, 1 }, { -1, 0, 0 }, { 1, 0, 0 } };
 
 	public BlockPosition(int x, int y, int z) {
 		this.x = x;
@@ -52,6 +55,31 @@ public class BlockPosition {
 
 	public BlockPosition copy() {
 		return new BlockPosition(x, y, z, orientation);
+	}
+
+	public BlockPosition step(int dir, int dist) {
+
+		int[] d = SIDE_COORD_MOD[dir];
+		x += d[0] * dist;
+		y += d[1] * dist;
+		z += d[2] * dist;
+		return this;
+	}
+
+	public BlockPosition step(ForgeDirection dir) {
+
+		x += dir.offsetX;
+		y += dir.offsetY;
+		z += dir.offsetZ;
+		return this;
+	}
+
+	public BlockPosition step(ForgeDirection dir, int dist) {
+
+		x += dir.offsetX * dist;
+		y += dir.offsetY * dist;
+		z += dir.offsetZ * dist;
+		return this;
 	}
 
 	public void moveRight(int step) {
@@ -176,6 +204,47 @@ public class BlockPosition {
 		return world.getTileEntity(x, y, z);
 	}
 
+	public Block getBlock(World world) {
+
+		return world.getBlock(x, y, z);
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T> T getTileEntity(World world, Class<T> targetClass) {
+
+		TileEntity te = world.getTileEntity(x, y, z);
+		if (targetClass.isInstance(te)) {
+			return (T) te;
+		} else {
+			return null;
+		}
+	}
+
+	public static TileEntity getTileEntityRaw(World world, int x, int y, int z) {
+
+		if (!world.blockExists(x, y, z)) {
+			return null;
+		}
+		return world.getChunkFromBlockCoords(x, z).getTileEntityUnsafe(x & 15, y, z & 15);
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <T> T getTileEntityRaw(World world, int x, int y, int z, Class<T> targetClass) {
+
+		TileEntity te = getTileEntityRaw(world, x, y, z);
+		if (targetClass.isInstance(te)) {
+			return (T) te;
+		} else {
+			return null;
+		}
+	}
+
+	public static boolean blockExists(TileEntity start, ForgeDirection dir) {
+
+		final int x = start.xCoord + dir.offsetX, y = start.yCoord + dir.offsetY, z = start.zCoord + dir.offsetZ;
+		return start.getWorldObj().blockExists(x, y, z);
+	}
+
 	public static TileEntity getAdjacentTileEntity(TileEntity start, ForgeDirection direction) {
 		BlockPosition p = new BlockPosition(start);
 		p.orientation = direction;
@@ -183,10 +252,10 @@ public class BlockPosition {
 		return start.getWorldObj().getTileEntity(p.x, p.y, p.z);
 	}
 
-	public static TileEntity getAdjacentTileEntity(TileEntity start, ForgeDirection direction, Class<? extends TileEntity> targetClass) {
+	public static <T> T getAdjacentTileEntity(TileEntity start, ForgeDirection direction, Class<T> targetClass) {
 		TileEntity te = getAdjacentTileEntity(start, direction);
-		if (targetClass.isAssignableFrom(te.getClass())) {
-			return te;
+		if (targetClass.isInstance(te)) {
+			return (T) te;
 		} else {
 			return null;
 		}

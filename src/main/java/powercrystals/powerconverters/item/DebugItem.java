@@ -1,19 +1,22 @@
 package powercrystals.powerconverters.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import powercrystals.powerconverters.common.TileEntityEnergyBridge;
-import powercrystals.powerconverters.power.TileEntityBridgeComponent;
-import powercrystals.powerconverters.reference.Reference;
-import scala.reflect.internal.Trees.If;
+import java.util.ArrayList;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+import powercrystals.powerconverters.common.TileEntityEnergyBridge;
+import powercrystals.powerconverters.power.TileEntityBridgeComponent;
+import powercrystals.powerconverters.reference.Reference;
+import powercrystals.powerconverters.util.IAdvancedLogTile;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class DebugItem extends Item {
 
@@ -22,16 +25,15 @@ public class DebugItem extends Item {
 		setUnlocalizedName("pcdebugitem");
 		setMaxStackSize(1);
 	}
+
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void registerIcons(IIconRegister ir){
+	public void registerIcons(IIconRegister ir) {
 		itemIcon = ir.registerIcon(Reference.MOD_PREFIX + getUnlocalizedName());
 	}
-	
-	
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitx, float hity, float hitz) {
+	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitx, float hity, float hitz) {
 		if (world.isRemote) {
 			return false;
 		}
@@ -44,10 +46,28 @@ public class DebugItem extends Item {
 				teb = (TileEntityEnergyBridge) te;
 			double energyamount = 100 * (teb.getEnergyStored() / teb.getEnergyStoredMax());
 			String energy = String.valueOf((int) energyamount);
+			if (world.isRemote) {
+				player.addChatMessage(new ChatComponentText("-Client-"));
+			} else {
+				player.addChatMessage(new ChatComponentText("-Server-"));
+			}
 			player.addChatMessage(new ChatComponentText("Energy Bridge Is " + energy + "% Full"));
 			return true;
-		} else
+		} else if (te instanceof IAdvancedLogTile) {
+			ArrayList<IChatComponent> info = new ArrayList<IChatComponent>();
+			if (world.isRemote) {
+				info.add(new ChatComponentText("-Client-"));
+			} else {
+				info.add(new ChatComponentText("-Server-"));
+			}
+			((IAdvancedLogTile) te).getTileInfo(info, ForgeDirection.VALID_DIRECTIONS[side], player, player.isSneaking());
+			for (int i = 0; i < info.size(); i++) {
+				player.addChatMessage(info.get(i));
+			}
+			return true;
+		} else {
 			return false;
+		}
 	}
 
 }

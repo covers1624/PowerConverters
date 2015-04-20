@@ -14,6 +14,7 @@ import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.init.Recipes;
 import powercrystals.powerconverters.init.WorldGenerators;
 import powercrystals.powerconverters.net.IPCProxy;
+import powercrystals.powerconverters.power.conduit.grid.GridTickHandler;
 import powercrystals.powerconverters.reference.Reference;
 import powercrystals.powerconverters.updatechecker.UpdateManager;
 import powercrystals.powerconverters.util.LogHelper;
@@ -75,7 +76,7 @@ public class PowerConverterCore {
 		if (FluidRegistry.isFluidRegistered("steam")) {
 			LogHelper.info("Detected Steam at Init Stage");
 		}
-
+		MinecraftForge.EVENT_BUS.register(GridTickHandler.energy);
 		LogHelper.trace("Checking For RF API...");
 		RFHelper.init();
 

@@ -1,11 +1,5 @@
 package powercrystals.powerconverters.power;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import powercrystals.powerconverters.util.INeighboorUpdateTile;
-import powercrystals.powerconverters.PowerConverterCore;
-import powercrystals.powerconverters.common.TileEntityEnergyBridge;
-import powercrystals.powerconverters.item.DebugItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -14,6 +8,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import powercrystals.powerconverters.PowerConverterCore;
+import powercrystals.powerconverters.common.TileEntityEnergyBridge;
+import powercrystals.powerconverters.item.DebugItem;
+import powercrystals.powerconverters.util.INeighboorUpdateTile;
+import powercrystals.powerconverters.util.IUpdateTileWithCords;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockPowerConverter extends BlockContainer {
 	protected IIcon[] _icons;
@@ -56,6 +57,10 @@ public class BlockPowerConverter extends BlockContainer {
 		TileEntity te = world.getTileEntity(x, y, z);
 		if (te != null && te instanceof INeighboorUpdateTile) {
 			((INeighboorUpdateTile) te).onNeighboorChanged();
+			world.markBlockForUpdate(x, y, z);
+		}
+		if (te != null && te instanceof IUpdateTileWithCords) {
+			((IUpdateTileWithCords) te).onNeighboorChanged(x, y, z);
 			world.markBlockForUpdate(x, y, z);
 		}
 	}
