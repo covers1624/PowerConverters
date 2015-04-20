@@ -6,7 +6,7 @@ import powercrystals.powerconverters.command.EnumCommands;
 import powercrystals.powerconverters.gui.PCGUIHandler;
 import powercrystals.powerconverters.handler.CloakHandler;
 import powercrystals.powerconverters.handler.ConfigurationHandler;
-import powercrystals.powerconverters.handler.EventsHandler;
+import powercrystals.powerconverters.handler.PCEventHandler;
 import powercrystals.powerconverters.handler.RainHandler;
 import powercrystals.powerconverters.init.ModBlocks;
 import powercrystals.powerconverters.init.ModItems;
@@ -55,7 +55,7 @@ public class PowerConverterCore {
 
 		// First thing we do so we can catch fluid register Events.
 		LogHelper.trace("Registering Event Handlers.");
-		FMLCommonHandler.instance().bus().register(new EventsHandler());
+		FMLCommonHandler.instance().bus().register(new PCEventHandler());
 
 		LogHelper.trace("Initalizing Configuration File");
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
