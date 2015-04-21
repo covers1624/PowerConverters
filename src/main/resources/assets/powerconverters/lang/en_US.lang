@@ -21,3 +21,10 @@ powerconverters.steam.producer.name=Steam Producer
 
 powerconverters.fz.consumer.name=Factorization Consumer
 powerconverters.fz.producer.name=Factorization Producer
+
+item.pcdebugitem.name=Power Converters Debug Probe
+
+
+item.pcdebugitem.name.documentation=Test
+
+powerconverters.common.bridge.name.documentation=This is the Common Block for PowerConverters

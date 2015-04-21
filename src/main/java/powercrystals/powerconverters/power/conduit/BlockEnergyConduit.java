@@ -1,15 +1,19 @@
 package powercrystals.powerconverters.power.conduit;
 
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import powercrystals.powerconverters.power.BlockPowerConverter;
+import powercrystals.powerconverters.gui.PCCreativeTab;
 import powercrystals.powerconverters.util.IUpdateTileWithCords;
 
-public class BlockEnergyConduit extends BlockPowerConverter {
+public class BlockEnergyConduit extends BlockContainer {
 
-	public BlockEnergyConduit(int metaCount) {
-		super(metaCount);
+	public BlockEnergyConduit() {
+		super(Material.rock);
+		setBlockName("powerconverters.conduit");
+		setCreativeTab(PCCreativeTab.tab);
 	}
 
 	@Override
@@ -18,6 +22,11 @@ public class BlockEnergyConduit extends BlockPowerConverter {
 		if (te instanceof IUpdateTileWithCords) {
 			((IUpdateTileWithCords) te).onNeighboorChanged(tileX, tileY, tileZ);
 		}
+	}
+
+	@Override
+	public boolean hasTileEntity(int metadata) {
+		return true;
 	}
 
 	@Override

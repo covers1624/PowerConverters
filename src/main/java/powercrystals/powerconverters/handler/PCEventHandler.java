@@ -1,13 +1,11 @@
 package powercrystals.powerconverters.handler;
 
-import java.util.List;
-
 import net.minecraft.client.gui.GuiOptions;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.fluids.FluidRegistry.FluidRegisterEvent;
 import powercrystals.powerconverters.PowerConverterCore;
+import powercrystals.powerconverters.gui.PCGuiButton;
 import powercrystals.powerconverters.reference.Reference;
 import powercrystals.powerconverters.util.LogHelper;
 import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
@@ -38,9 +36,9 @@ public class PCEventHandler {
 		LogHelper.info("Gui Opened");
 		GuiScreen screen = event.gui;
 		if (screen instanceof GuiOptions) {
-			boolean deobf = (boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
+			LogHelper.info("Adding Button");
 			GuiOptions optionsGui = (GuiOptions) screen;
-			List buttonList = optionsGui.buttonList;
+			event.gui.buttonList.add(new PCGuiButton(500, optionsGui.width / 2, optionsGui.height / 2, 150, 20, "Power Converters"));
 		}
 	}
 }

@@ -30,6 +30,12 @@ public class TileEnergyConduit extends TileEntity implements INode, IEnergyHandl
 	int energyForGrid = 0;
 	EnergyNetwork grid;
 
+	public TileEnergyConduit() {
+		if (grid == null) {
+			validate();
+		}
+	}
+
 	@Override
 	public boolean isNotValid() {
 		return this.tileEntityInvalid;

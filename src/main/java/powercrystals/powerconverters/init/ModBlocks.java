@@ -38,6 +38,10 @@ public class ModBlocks {
 
 	public static void init() {
 
+		// conduitBlock = new BlockEnergyConduit();
+		// GameRegistry.registerBlock(conduitBlock, conduitBlock.getUnlocalizedName());
+		// GameRegistry.registerTileEntity(TileEnergyConduit.class, "powerConverterConduit");
+
 		converterBlockCommon = new BlockPowerConverterCommon();
 		GameRegistry.registerBlock(converterBlockCommon, ItemBlockPowerConverterCommon.class, converterBlockCommon.getUnlocalizedName());
 		GameRegistry.registerTileEntity(TileEntityEnergyBridge.class, "powerConverterEnergyBridge");
