@@ -8,7 +8,6 @@ import cpw.mods.fml.relauncher.Side;
 
 public class RainHandler {
 
-	private boolean rainStopped = false;
 	private int lastPoll = 400;
 
 	@SubscribeEvent
@@ -18,7 +17,7 @@ public class RainHandler {
 				--lastPoll;
 				return;
 			}
-			
+
 			if (MinecraftServer.getServer().worldServers[0].isRaining() && ConfigurationHandler.stopRain) {
 				lastPoll = 400;
 				LogHelper.info("Automated Rain Stopage");

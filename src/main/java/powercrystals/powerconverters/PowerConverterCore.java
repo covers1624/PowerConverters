@@ -55,7 +55,9 @@ public class PowerConverterCore {
 
 		// First thing we do so we can catch fluid register Events.
 		LogHelper.trace("Registering Event Handlers.");
-		FMLCommonHandler.instance().bus().register(new PCEventHandler());
+		PCEventHandler eventHandler = new PCEventHandler();
+		MinecraftForge.EVENT_BUS.register(eventHandler);
+		FMLCommonHandler.instance().bus().register(eventHandler);
 
 		LogHelper.trace("Initalizing Configuration File");
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
@@ -120,7 +122,7 @@ public class PowerConverterCore {
 		LogHelper.trace("Server Starting Started");
 
 		LogHelper.trace("Registering Rain Handler");
-		FMLCommonHandler.instance().bus().register(new RainHandler());
+		MinecraftForge.EVENT_BUS.register(new RainHandler());
 
 		LogHelper.trace("Registering Commands");
 		for (EnumCommands command : EnumCommands.values()) {

@@ -1,13 +1,18 @@
 package powercrystals.powerconverters.handler;
 
+import java.util.List;
+
+import net.minecraft.client.gui.GuiOptions;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.launchwrapper.Launch;
+import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.fluids.FluidRegistry.FluidRegisterEvent;
 import powercrystals.powerconverters.PowerConverterCore;
 import powercrystals.powerconverters.reference.Reference;
 import powercrystals.powerconverters.util.LogHelper;
-import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
- 
+
 public class PCEventHandler {
 
 	@SubscribeEvent
@@ -23,8 +28,19 @@ public class PCEventHandler {
 	@SubscribeEvent
 	public void onConfigChanged(OnConfigChangedEvent event) {
 		LogHelper.info("Detected A Config Change");
-		if (event.modID.equalsIgnoreCase(Reference.MOD_ID) && ConfigurationHandler.configuration.hasChanged()) {
+		if (event.modID.equalsIgnoreCase(Reference.MOD_ID)) {
 			ConfigurationHandler.loadConfiguration();
+		}
+	}
+
+	@SubscribeEvent
+	public void onGuiOpen(GuiOpenEvent event) {
+		LogHelper.info("Gui Opened");
+		GuiScreen screen = event.gui;
+		if (screen instanceof GuiOptions) {
+			boolean deobf = (boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
+			GuiOptions optionsGui = (GuiOptions) screen;
+			List buttonList = optionsGui.buttonList;
 		}
 	}
 }
