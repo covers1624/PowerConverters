@@ -1,9 +1,12 @@
+#Common Blocks
 powerconverters.common.bridge.name=Energy Bridge
 powerconverters.common.charger.name=Universal Charger
 
-powerconverters.bc.consumer.name=BC Consumer
-powerconverters.bc.producer.name=BC Producer
+#Bc Blocks Dead. Kept for no reason at all
+#powerconverters.bc.consumer.name=BC Consumer
+#powerconverters.bc.producer.name=BC Producer
 
+#IC2
 powerconverters.ic2.lv.consumer.name=IC2 LV Consumer
 powerconverters.ic2.lv.producer.name=IC2 LV Producer
 powerconverters.ic2.mv.consumer.name=IC2 MV Consumer
@@ -13,18 +16,29 @@ powerconverters.ic2.hv.producer.name=IC2 HV Producer
 powerconverters.ic2.ev.consumer.name=IC2 EV Consumer
 powerconverters.ic2.ev.producer.name=IC2 EV Producer
 
+#RF
 powerconverters.rf.consumer.name=RF Consumer
 powerconverters.rf.producer.name=RF Producer
 
+#Steam
 powerconverters.steam.consumer.name=Steam Consumer
 powerconverters.steam.producer.name=Steam Producer
 
+#Factorization
 powerconverters.fz.consumer.name=Factorization Consumer
 powerconverters.fz.producer.name=Factorization Producer
 
+#Items
 item.pcdebugitem.name=Power Converters Debug Probe
 
-
+#Documentation, see powercrystals.powerconverters.nei.InfoHandler,
 item.pcdebugitem.documentation=This item will tell you the current percent energy stored in a EnergyBridge multi block, simply right click on any Consumer or Producer or the Energy Bridge.
+powerconverters.common.bridge.documentation=This is the Common Block for PowerConverters, When you place a consumer next to this block the Consumer will deposit the energy received into the energy bridge, When a Producer is placed next to this block it will produce energy from the energy stored in the Bridge.
+powerconverters.common.charger.documentation=In the future this block will charge items placed in it, as well as when you stand on it items in your inventory will be charged.
+powerconverters.steam.consumer.documentation=This block when placed next to a EnergyBridge will accept Steam and convert it into energy that will be stored in the EnergyBridge.
+powerconverters.steam.producer.documentation=This block when placed next to a EnergyBridge will Provide Steam to adjacent blocks and pipes using the energy stored in the EnergyBridge.
+powerconverters.rf.consumer.documentation=This block when placed next to a EnergyBridge will accept Redstone Flux Energy (RF) at a infinite rate and convert it into energy that will be stored in the Bridge.
+powerconverters.rf.producer.documentation=This block when placed next to a EnergyBridge will Provide Redstone Flux Energy (RF) at a infinate rate to adjacent blocks and conduits that support RF using the energy stored in the EnergyBridge.
+powerconverters.fz.consumer.documentation=This block when placed next to a EnergyBridge will accept Factorization GC and convert it into energy that will be stored in the EnergyBridge.
+powerconverters.fz.producer.documentation=This block when placed next to a EnergyBridge will Provice Factorization GC to adjacent blocks and Lead Cables using the energy stored in the EnergyBridge.
 
-powerconverters.common.bridge.documentation=This is the Common Block for PowerConverters, Place Consumers and Producers next to this block for the Magic to happen.

@@ -195,9 +195,9 @@ public class InfoHandler implements IUsageHandler, ICraftingHandler {
 	public boolean isValidItem(ItemStack item) {
 		boolean flag = false;
 		LogHelper.info(item.getUnlocalizedName() + suffix);
-		LogHelper.info(item.getItem().getUnlocalizedName() + suffix);
-		LogHelper.info(item.getUnlocalizedName() + suffix + ".0");
-		LogHelper.info(item.getItem().getUnlocalizedName() + suffix + ".0");
+		// LogHelper.info(item.getItem().getUnlocalizedName() + suffix);
+		// LogHelper.info(item.getUnlocalizedName() + suffix + ".0");
+		// LogHelper.info(item.getItem().getUnlocalizedName() + suffix + ".0");
 		if (StatCollector.canTranslate(item.getUnlocalizedName() + suffix)) {
 			flag = true;
 		} else if (StatCollector.canTranslate(item.getItem().getUnlocalizedName() + suffix)) {
