@@ -33,7 +33,7 @@ public class PCEventHandler {
 
 	@SubscribeEvent
 	public void onGuiOpen(GuiOpenEvent event) {
-		LogHelper.info("Gui Opened");
+		// LogHelper.info("Gui Opened");
 		GuiScreen screen = event.gui;
 		if (screen instanceof GuiOptions) {
 			LogHelper.info("Adding Button");

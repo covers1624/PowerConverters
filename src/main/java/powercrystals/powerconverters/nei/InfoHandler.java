@@ -10,6 +10,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
+import powercrystals.powerconverters.util.LogHelper;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.api.IOverlayHandler;
@@ -192,7 +193,21 @@ public class InfoHandler implements IUsageHandler, ICraftingHandler {
 	}
 
 	public boolean isValidItem(ItemStack item) {
-		return StatCollector.canTranslate(item.getUnlocalizedName() + suffix) || StatCollector.canTranslate(item.getItem().getUnlocalizedName() + suffix) || StatCollector.canTranslate(item.getUnlocalizedName() + ".documentation" + ".0") || StatCollector.canTranslate(item.getItem().getUnlocalizedName() + ".documentation" + ".0");
+		boolean flag = false;
+		LogHelper.info(item.getUnlocalizedName() + suffix);
+		LogHelper.info(item.getItem().getUnlocalizedName() + suffix);
+		LogHelper.info(item.getUnlocalizedName() + suffix + ".0");
+		LogHelper.info(item.getItem().getUnlocalizedName() + suffix + ".0");
+		if (StatCollector.canTranslate(item.getUnlocalizedName() + suffix)) {
+			flag = true;
+		} else if (StatCollector.canTranslate(item.getItem().getUnlocalizedName() + suffix)) {
+			flag = true;
+		} else if (StatCollector.canTranslate(item.getUnlocalizedName() + suffix + ".0")) {
+			flag = true;
+		} else if (StatCollector.canTranslate(item.getItem().getUnlocalizedName() + suffix + ".0")) {
+			flag = true;
+		}
+		return flag;
 	}
 
 	@Override

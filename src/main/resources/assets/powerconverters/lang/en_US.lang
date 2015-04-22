@@ -25,6 +25,6 @@ powerconverters.fz.producer.name=Factorization Producer
 item.pcdebugitem.name=Power Converters Debug Probe
 
 
-item.pcdebugitem.name.documentation=Test
+item.pcdebugitem.documentation=This item will tell you the current percent energy stored in a EnergyBridge multi block, simply right click on any Consumer or Producer or the Energy Bridge.
 
-powerconverters.common.bridge.name.documentation=This is the Common Block for PowerConverters
+powerconverters.common.bridge.documentation=This is the Common Block for PowerConverters, Place Consumers and Producers next to this block for the Magic to happen.
