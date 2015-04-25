@@ -2,6 +2,7 @@ package powercrystals.powerconverters.util;
 
 import org.apache.logging.log4j.Level;
 
+import powercrystals.powerconverters.handler.ConfigurationHandler;
 import cpw.mods.fml.common.FMLLog;
 
 public class LogHelper {
@@ -14,9 +15,9 @@ public class LogHelper {
 		log(Level.ALL, object);
 	}
 
-	public static void debug(Object object) {
-		log(Level.DEBUG, object);
-	}
+	// public static void debug(Object object) {
+	// log(Level.DEBUG, object);
+	// }
 
 	public static void error(Object object) {
 		log(Level.ERROR, object);
@@ -34,12 +35,23 @@ public class LogHelper {
 		log(Level.OFF, object);
 	}
 
+	/**
+	 * This will log out to either TRACE or INFO, depending on "Log Debug Messages" config option.
+	 * 
+	 * @param Object
+	 *            ,The Thing to log.
+	 *
+	 */
 	public static void trace(Object object) {
-		log(Level.TRACE, object);
+		if (ConfigurationHandler.logDebug) {
+			info(object);
+		} else {
+			log(Level.TRACE, object);
+		}
+
 	}
 
 	public static void warn(Object object) {
 		log(Level.WARN, object);
 	}
-
 }

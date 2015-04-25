@@ -2,15 +2,26 @@ package powercrystals.powerconverters.handler;
 
 import java.io.File;
 
+import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
+import powercrystals.powerconverters.gui.options.EnumCapeResulution;
 import powercrystals.powerconverters.power.PowerSystem;
 import powercrystals.powerconverters.reference.Reference;
+import powercrystals.powerconverters.util.LogHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ConfigurationHandler {
 
-	public static Configuration configuration;
+	public Configuration configuration;
 
-	public static boolean stopRain;
+	public static ConfigurationHandler INSTANCE;
+	// don't load from config as it is internal only.
+	public static boolean stopRain = false;
+	public static boolean logDebug;
+
+	public static EnumCapeResulution capeResulution;
 
 	public static int bridgeBufferSize;
 
@@ -25,19 +36,20 @@ public class ConfigurationHandler {
 
 	public static boolean doFlatBedrock;
 
-	public static void init(File config) {
+	public ConfigurationHandler(File config) {
+		INSTANCE = this;
 		if (configuration == null) {
 			configuration = new Configuration(config);
 		}
 		loadConfiguration();
 	}
 
-	public static void loadConfiguration() {
+	public void loadConfiguration() {
 		bridgeBufferSize = configuration.get(Reference.BASIC_CATEGORY, "BridgeBufferSize", 160000000).getInt();
 
-		stopRain = configuration.get("RAIN", "Stop Rain Server Side", false, "THIS IS INTERNAL USE ONLY").getBoolean();
+		logDebug = configuration.get(Reference.BASIC_CATEGORY, "Log Debug Messages", false, "Set this to true to see all debug messages.").getBoolean();
 
-		doFlatBedrock = configuration.get(Configuration.CATEGORY_GENERAL, "Do Flat Bedrock", false, "Set this to false for normal Bedrock.").getBoolean();
+		doFlatBedrock = configuration.get(Reference.BASIC_CATEGORY, "Do Flat Bedrock", false, "Set this to false for normal Bedrock.").getBoolean();
 
 		altRecipes = configuration.get(Reference.BASIC_CATEGORY, "AlternateRecipes", false, "ThermalExpansion Recipes").getBoolean();
 
@@ -50,11 +62,31 @@ public class ConfigurationHandler {
 
 		PowerSystem.loadConfig(configuration);
 
+		// if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
+		// loadCapeRes();
+		// }
+
 		configuration.save();
 	}
 
-	public static void saveConfig() {
-		configuration.save();
+	@SideOnly(Side.CLIENT)
+	public void loadCapeRes() {
+		String cape = configuration.get("CapeResulution", EnumCapeResulution.configCategory, "HIGH", "This Value is used to determine how large the cape textures are.").getString();
+		capeResulution = EnumCapeResulution.parse(cape);
 	}
 
+	@SideOnly(Side.CLIENT)
+	public void saveCapeRes() {
+		ConfigCategory category = configuration.getCategory(EnumCapeResulution.configCategory);
+		Property current = category.get("CapeResulution");
+		LogHelper.info("Current: " + current.getString());
+		if (!current.getString().equals(capeResulution.toString())) {
+			current.set(capeResulution.toString());
+			category.remove("CapeResulution");
+			category.put("CapeResulution", current);
+			configuration.save();
+			LogHelper.info("After: " + current.getString());
+		}
+		LogHelper.info("No Change Needed.");
+	}
 }

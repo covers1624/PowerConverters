@@ -21,12 +21,15 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 public class CloakHandler {
 	private boolean reBuilding = false;
 
+	public static CloakHandler INSTANCE;
+
 	private final String server = "https://raw.githubusercontent.com/covers1624/PowerConverters/master/capes.info";
 
 	private HashMap<String, CapeType> cloaks = new HashMap<String, CapeType>();
 	private ArrayList<AbstractClientPlayer> capePlayers = new ArrayList<AbstractClientPlayer>();
 
 	public CloakHandler() {
+		INSTANCE = this;
 		buildCloakURLDatabase();
 	}
 
@@ -55,10 +58,12 @@ public class CloakHandler {
 			int LineTracker = 1;
 			String str;
 			while ((str = br.readLine()) != null) {
+				LogHelper.trace("[CapeDebug] " + str);
 				if (!str.startsWith("--")) {
 					if (str.contains(":")) {
 						String nick = str.substring(0, str.indexOf(":"));
 						String type = str.substring(str.indexOf(":") + 1);
+						LogHelper.trace("[CapeDebug] Parsed line " + LineTracker + " as: " + nick + ", " + type);
 						this.cloaks.put(nick, CapeType.parse(type));
 					} else {
 						LogHelper.error("Syntax error on line " + LineTracker + ":" + str);
@@ -77,7 +82,11 @@ public class CloakHandler {
 	}
 
 	public void reBuild() {
+		LogHelper.trace("Refreshing Cpaes.");
+		reBuilding = true;
 		cloaks.clear();
 		buildCloakURLDatabase();
+		reBuilding = false;
+		LogHelper.trace("Refresh Capes Finished.");
 	}
 }

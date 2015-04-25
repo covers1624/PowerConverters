@@ -4,6 +4,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
 import powercrystals.powerconverters.command.EnumCommands;
 import powercrystals.powerconverters.gui.PCGUIHandler;
+import powercrystals.powerconverters.gui.options.EnumCapeResulution;
 import powercrystals.powerconverters.handler.CloakHandler;
 import powercrystals.powerconverters.handler.ConfigurationHandler;
 import powercrystals.powerconverters.handler.PCEventHandler;
@@ -14,7 +15,6 @@ import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.init.Recipes;
 import powercrystals.powerconverters.init.WorldGenerators;
 import powercrystals.powerconverters.net.IPCProxy;
-import powercrystals.powerconverters.power.conduit.grid.GridTickHandler;
 import powercrystals.powerconverters.reference.Reference;
 import powercrystals.powerconverters.updatechecker.UpdateManager;
 import powercrystals.powerconverters.util.LogHelper;
@@ -32,6 +32,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = "after:BuildCraft|Energy;after:factorization;after:IC2;after:Railcraft;after:ThermalExpansion", guiFactory = Reference.GUI_FACTORY)
 public class PowerConverterCore {
@@ -42,25 +43,32 @@ public class PowerConverterCore {
 	@Instance("Power Converters")
 	public static PowerConverterCore instance;
 
+	private static ConfigurationHandler configHandler;
+
+	@SideOnly(Side.CLIENT)
+	public static EnumCapeResulution currentCapeRes;
+
 	public static int steamId = -1;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		instance = this;
+
+		proxy.preInit();
+
 		LogHelper.info("Power Converters PreInitialization Started.");
+
+		LogHelper.trace("Initalizing Configuration File");
+		configHandler = new ConfigurationHandler(event.getSuggestedConfigurationFile());
 
 		LogHelper.trace("Registering Updae Manager");
 		UpdateManager updateManager = new UpdateManager();
 		FMLCommonHandler.instance().bus().register(updateManager);
 
-		// First thing we do so we can catch fluid register Events.
 		LogHelper.trace("Registering Event Handlers.");
 		PCEventHandler eventHandler = new PCEventHandler();
 		MinecraftForge.EVENT_BUS.register(eventHandler);
 		FMLCommonHandler.instance().bus().register(eventHandler);
-
-		LogHelper.trace("Initalizing Configuration File");
-		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 
 		LogHelper.trace("Initalizing PowerSystems");
 		PowerSystems.init();
@@ -78,7 +86,8 @@ public class PowerConverterCore {
 		if (FluidRegistry.isFluidRegistered("steam")) {
 			LogHelper.info("Detected Steam at Init Stage");
 		}
-		MinecraftForge.EVENT_BUS.register(GridTickHandler.energy);
+
+		// MinecraftForge.EVENT_BUS.register(GridTickHandler.energy);
 		LogHelper.trace("Checking For RF API...");
 		RFHelper.init();
 
@@ -131,4 +140,5 @@ public class PowerConverterCore {
 		}
 		LogHelper.trace("Server Starting Finished");
 	}
+
 }

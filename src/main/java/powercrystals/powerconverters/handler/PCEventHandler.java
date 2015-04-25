@@ -2,10 +2,10 @@ package powercrystals.powerconverters.handler;
 
 import net.minecraft.client.gui.GuiOptions;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraftforge.client.event.GuiOpenEvent;
+import net.minecraftforge.client.event.GuiScreenEvent.InitGuiEvent;
 import net.minecraftforge.fluids.FluidRegistry.FluidRegisterEvent;
 import powercrystals.powerconverters.PowerConverterCore;
-import powercrystals.powerconverters.gui.PCGuiButton;
+import powercrystals.powerconverters.gui.options.PCOptionsGuiButton;
 import powercrystals.powerconverters.reference.Reference;
 import powercrystals.powerconverters.util.LogHelper;
 import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
@@ -25,20 +25,19 @@ public class PCEventHandler {
 
 	@SubscribeEvent
 	public void onConfigChanged(OnConfigChangedEvent event) {
-		LogHelper.info("Detected A Config Change");
 		if (event.modID.equalsIgnoreCase(Reference.MOD_ID)) {
-			ConfigurationHandler.loadConfiguration();
+			ConfigurationHandler.INSTANCE.loadConfiguration();
 		}
 	}
 
 	@SubscribeEvent
-	public void onGuiOpen(GuiOpenEvent event) {
+	public void onGuiOpen(InitGuiEvent.Post event) {
 		// LogHelper.info("Gui Opened");
 		GuiScreen screen = event.gui;
 		if (screen instanceof GuiOptions) {
-			LogHelper.info("Adding Button");
 			GuiOptions optionsGui = (GuiOptions) screen;
-			event.gui.buttonList.add(new PCGuiButton(500, optionsGui.width / 2, optionsGui.height / 2, 150, 20, "Power Converters"));
+			// LogHelper.info("Adding Button @" + (optionsGui.width / 2 - 155) + "," + (optionsGui.height / 6 + 48 - 6));
+			event.buttonList.add(new PCOptionsGuiButton(500, optionsGui.width / 2 - 155, optionsGui.height / 6 + 48 - 6, "Power Converters"));
 		}
 	}
 }
