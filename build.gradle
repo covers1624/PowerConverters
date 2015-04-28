@@ -27,11 +27,12 @@ minecraft {
     runDir = "eclipse"
 }
 
-jar {
-        manifest {
-        attributes 'FMLAT': 'PowerConverters_at.cfg'
-    }
+String buildNo = "unknown"
+if(System.getenv("BUILD_NUMBER") != null){
+	buildNo = System.getenv("BUILD_NUMBER")
 }
+version = version + ".${buildNo}"
+
 
 repositories {
 
@@ -59,6 +60,17 @@ dependencies {
 	
 	runtime fileTree(dir: 'libs', include: '*.jar') // COFH core and Factorization
 
+}
+
+task deobfJar(type: Jar, dependsOn: 'jar') {
+	from sourceSets.main.output
+	classifier "dev"
+}
+
+build.dependsOn deobfJar
+
+artifacts {
+	archives deobfJar
 }
 
 processResources
