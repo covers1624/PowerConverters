@@ -30,8 +30,9 @@ minecraft {
 String buildNo = "unknown"
 if(System.getenv("BUILD_NUMBER") != null){
 	buildNo = System.getenv("BUILD_NUMBER")
+	version = version + "-#${buildNo}"
 }
-version = version + ".${buildNo}"
+
 
 
 repositories {

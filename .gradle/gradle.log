@@ -14,7 +14,7 @@ Found AccessTransformer in main resources: PowerConverters_at.cfg
 :processResources
 :classes
 :jar
-:deobfJar
+:deobfJar UP-TO-DATE
 :compileTestJava UP-TO-DATE
 :processTestResources UP-TO-DATE
 :testClasses UP-TO-DATE
@@ -30,4 +30,4 @@ Found AccessTransformer in main resources: PowerConverters_at.cfg
 
 BUILD SUCCESSFUL
 
-Total time: 17.483 secs
+Total time: 22.737 secs
