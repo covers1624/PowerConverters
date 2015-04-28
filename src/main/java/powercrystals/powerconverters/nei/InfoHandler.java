@@ -183,7 +183,6 @@ public class InfoHandler implements IUsageHandler, ICraftingHandler {
 
 	@Override
 	public void onUpdate() {
-		// TODO Auto-generated method stub
 
 	}
 

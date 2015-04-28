@@ -2,13 +2,13 @@ package powercrystals.powerconverters.power.ic2;
 
 import java.util.List;
 
-import powercrystals.powerconverters.reference.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import powercrystals.powerconverters.reference.Reference;
 
 public class ItemBlockPowerConverterIndustrialCraft extends ItemBlock {
 	public ItemBlockPowerConverterIndustrialCraft(Block block) {
@@ -75,4 +75,5 @@ public class ItemBlockPowerConverterIndustrialCraft extends ItemBlock {
 			subTypes.add(new ItemStack(item, 1, i));
 		}
 	}
+
 }

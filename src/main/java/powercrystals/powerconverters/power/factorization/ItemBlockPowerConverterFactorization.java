@@ -37,4 +37,5 @@ public class ItemBlockPowerConverterFactorization extends ItemBlock {
 			subTypes.add(new ItemStack(item, 1, i));
 		}
 	}
+
 }

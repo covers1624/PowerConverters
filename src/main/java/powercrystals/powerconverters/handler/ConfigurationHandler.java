@@ -2,15 +2,9 @@ package powercrystals.powerconverters.handler;
 
 import java.io.File;
 
-import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
-import powercrystals.powerconverters.gui.options.EnumCapeResulution;
 import powercrystals.powerconverters.power.PowerSystem;
 import powercrystals.powerconverters.reference.Reference;
-import powercrystals.powerconverters.util.LogHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ConfigurationHandler {
 
@@ -20,8 +14,6 @@ public class ConfigurationHandler {
 	// don't load from config as it is internal only.
 	public static boolean stopRain = false;
 	public static boolean logDebug;
-
-	public static EnumCapeResulution capeResulution;
 
 	public static int bridgeBufferSize;
 
@@ -62,31 +54,6 @@ public class ConfigurationHandler {
 
 		PowerSystem.loadConfig(configuration);
 
-		// if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
-		// loadCapeRes();
-		// }
-
 		configuration.save();
-	}
-
-	@SideOnly(Side.CLIENT)
-	public void loadCapeRes() {
-		String cape = configuration.get("CapeResulution", EnumCapeResulution.configCategory, "HIGH", "This Value is used to determine how large the cape textures are.").getString();
-		capeResulution = EnumCapeResulution.parse(cape);
-	}
-
-	@SideOnly(Side.CLIENT)
-	public void saveCapeRes() {
-		ConfigCategory category = configuration.getCategory(EnumCapeResulution.configCategory);
-		Property current = category.get("CapeResulution");
-		LogHelper.info("Current: " + current.getString());
-		if (!current.getString().equals(capeResulution.toString())) {
-			current.set(capeResulution.toString());
-			category.remove("CapeResulution");
-			category.put("CapeResulution", current);
-			configuration.save();
-			LogHelper.info("After: " + current.getString());
-		}
-		LogHelper.info("No Change Needed.");
 	}
 }

@@ -4,7 +4,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
 import powercrystals.powerconverters.command.EnumCommands;
 import powercrystals.powerconverters.gui.PCGUIHandler;
-import powercrystals.powerconverters.gui.options.EnumCapeResulution;
 import powercrystals.powerconverters.handler.CloakHandler;
 import powercrystals.powerconverters.handler.ConfigurationHandler;
 import powercrystals.powerconverters.handler.PCEventHandler;
@@ -32,7 +31,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = "after:BuildCraft|Energy;after:factorization;after:IC2;after:Railcraft;after:ThermalExpansion", guiFactory = Reference.GUI_FACTORY)
 public class PowerConverterCore {
@@ -44,9 +42,6 @@ public class PowerConverterCore {
 	public static PowerConverterCore instance;
 
 	private static ConfigurationHandler configHandler;
-
-	@SideOnly(Side.CLIENT)
-	public static EnumCapeResulution currentCapeRes;
 
 	public static int steamId = -1;
 
