@@ -24,5 +24,5 @@
 
 
 ## Custom
-.gradle/*
+.gradle/
 /run

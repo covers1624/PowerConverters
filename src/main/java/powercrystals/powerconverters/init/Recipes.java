@@ -38,7 +38,7 @@ public class Recipes {
 
 		} catch (Exception e) {
 			GameRegistry.addRecipe(new ItemStack(ModBlocks.converterBlockRedstoneFlux, 1, 0), "G G", " E ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('E'), new ItemStack(Items.iron_ingot));
-			FMLLogHelper.logException(Level.FATAL, "Found ThermalExpansion But Failed To Load Recipes, Mabey They Changed Their Item / Block Names?", e);
+			FMLLogHelper.logException(Level.ERROR, "Found ThermalExpansion But Failed To Load Recipes, Mabey They Changed Their Item / Block Names? This is not a fatal error only recipes wont be registered.", e);
 		}
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.converterBlockRedstoneFlux, 1, 1), new ItemStack(ModBlocks.converterBlockRedstoneFlux, 1, 0));
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.converterBlockRedstoneFlux, 1, 0), new ItemStack(ModBlocks.converterBlockRedstoneFlux, 1, 1));
@@ -51,7 +51,7 @@ public class Recipes {
 			GameRegistry.addRecipe(new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 4), "G G", " T ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('T'), (Class.forName("ic2.core.Ic2Items").getField("hvTransformer").get(null)));
 			GameRegistry.addRecipe(new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 6), "G G", " T ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('T'), (Class.forName("ic2.core.Ic2Items").getField("mfsUnit").get(null)));
 		} catch (Exception e) {
-			FMLLogHelper.logException(Level.FATAL, "Found IC2 But Failed To Load Recipes, Mabey They Changed Their Item / Block Names?", e);
+			FMLLogHelper.logException(Level.ERROR, "Found IC2 But Failed To Load Recipes, Mabey They Changed Their Item / Block Names?  This is not a fatal error only recipes wont be registered.", e);
 		}
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 1), new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 0));
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 0), new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 1));
@@ -73,7 +73,7 @@ public class Recipes {
 				GameRegistry.addRecipe(new ItemStack(ModBlocks.converterBlockSteam, 1, 0), "G G", " E ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('E'), (Class.forName("factorization.common.Registry").getField("steamturbine_item").get(fzRegistry)));
 			}
 		} catch (Exception e) {
-			FMLLogHelper.logException(Level.FATAL, "Found Railcraft / Factorization But Failed To Load Recipes, Mabey They Changed Ther Item / Block Names?", e);
+			FMLLogHelper.logException(Level.ERROR, "Found Railcraft / Factorization But Failed To Load Recipes, Mabey They Changed Ther Item / Block Names? This is not a fatal error only recipes wont be registered.", e);
 		}
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.converterBlockSteam, 1, 1), new ItemStack(ModBlocks.converterBlockSteam, 1, 0));
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.converterBlockSteam, 1, 0), new ItemStack(ModBlocks.converterBlockSteam, 1, 1));
@@ -84,7 +84,7 @@ public class Recipes {
 			Object fzRegistry = Class.forName("factorization.shared.Core").getField("registry").get(null);
 			GameRegistry.addRecipe(new ItemStack(ModBlocks.converterBlockFactorization, 1, 0), "I I", " B ", "I I", Character.valueOf('I'), Items.gold_ingot, Character.valueOf('B'), (Class.forName("factorization.common.Registry").getField("solarboiler_item").get(fzRegistry)));
 		} catch (Exception e) {
-			FMLLogHelper.logException(Level.FATAL, "Found Factorization But Failed To Load Recipes, Mabey They Changed Their Item / Block Names?", e);
+			FMLLogHelper.logException(Level.ERROR, "Found Factorization But Failed To Load Recipes, Mabey They Changed Their Item / Block Names? This is not a fatal error only recipes wont be registered.", e);
 		}
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.converterBlockFactorization, 1, 1), new ItemStack(ModBlocks.converterBlockFactorization, 1, 0));
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.converterBlockFactorization, 1, 0), new ItemStack(ModBlocks.converterBlockFactorization, 1, 1));
