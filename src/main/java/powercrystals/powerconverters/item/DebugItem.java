@@ -34,9 +34,6 @@ public class DebugItem extends Item {
 
 	@Override
 	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitx, float hity, float hitz) {
-		if (world.isRemote) {
-			return false;
-		}
 		TileEntity te = world.getTileEntity(x, y, z);
 		TileEntityEnergyBridge teb = null;
 		if (te instanceof TileEntityEnergyBridge || te instanceof TileEntityBridgeComponent<?>) {
@@ -65,9 +62,11 @@ public class DebugItem extends Item {
 				player.addChatMessage(info.get(i));
 			}
 			return true;
-		} else {
-			return false;
+		} else if (world.getBlock(x, y, z) != null) {
+			player.addChatMessage(new ChatComponentText(String.valueOf(world.getBlockMetadata(x, y, z))));
 		}
+		return false;
+
 	}
 
 }

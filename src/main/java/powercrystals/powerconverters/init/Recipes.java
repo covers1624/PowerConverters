@@ -30,9 +30,12 @@ public class Recipes {
 	public static void RedstoneFluxRecipes() {
 		try {
 			if (Loader.isModLoaded("ThermalExpansion")) {
-				GameRegistry.addRecipe(new ItemStack(ModBlocks.converterBlockRedstoneFlux, 1, 0), "G G", " E ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('E'), new ItemStack((Block) (Class.forName("thermalexpansion.block.TEBlocks").getField("blockDynamo").get(null)), 1, 1));
+				GameRegistry.addRecipe(new ItemStack(ModBlocks.converterBlockRedstoneFlux, 1, 0), "G G", " E ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('E'), new ItemStack((Block) (Class.forName("cofh.thermalexpansion.block.TEBlocks").getField("blockDynamo").get(null)), 1, 1));
 			}
-			GameRegistry.addRecipe(new ItemStack(ModBlocks.converterBlockRedstoneFlux, 1, 0), "G G", " E ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('E'), new ItemStack((Block) (Class.forName("buildcraft.BuildCraftEnergy").getField("engineBlock").get(null)), 1, 1));
+			if (Loader.isModLoaded("BuildCraft|Energy")) {
+				GameRegistry.addRecipe(new ItemStack(ModBlocks.converterBlockRedstoneFlux, 1, 0), "G G", " E ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('E'), new ItemStack((Block) (Class.forName("buildcraft.BuildCraftEnergy").getField("engineBlock").get(null)), 1, 1));
+			}
+
 		} catch (Exception e) {
 			GameRegistry.addRecipe(new ItemStack(ModBlocks.converterBlockRedstoneFlux, 1, 0), "G G", " E ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('E'), new ItemStack(Items.iron_ingot));
 			FMLLogHelper.logException(Level.FATAL, "Found ThermalExpansion But Failed To Load Recipes, Mabey They Changed Their Item / Block Names?", e);
