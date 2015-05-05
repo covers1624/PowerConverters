@@ -48,7 +48,6 @@ public class PowerConverterCore {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		instance = this;
-
 		proxy.preInit();
 
 		LogHelper.info("Power Converters PreInitialization Started.");

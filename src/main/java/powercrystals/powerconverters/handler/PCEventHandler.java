@@ -10,6 +10,8 @@ import powercrystals.powerconverters.reference.Reference;
 import powercrystals.powerconverters.util.LogHelper;
 import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class PCEventHandler {
 
@@ -30,6 +32,7 @@ public class PCEventHandler {
 		}
 	}
 
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onGuiOpen(InitGuiEvent.Post event) {
 		// LogHelper.info("Gui Opened");

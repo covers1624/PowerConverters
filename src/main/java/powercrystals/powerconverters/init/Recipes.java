@@ -81,8 +81,10 @@ public class Recipes {
 
 	public static void FactorizationRecipes() {
 		try {
-			Object fzRegistry = Class.forName("factorization.shared.Core").getField("registry").get(null);
-			GameRegistry.addRecipe(new ItemStack(ModBlocks.converterBlockFactorization, 1, 0), "I I", " B ", "I I", Character.valueOf('I'), Items.gold_ingot, Character.valueOf('B'), (Class.forName("factorization.common.Registry").getField("solarboiler_item").get(fzRegistry)));
+			if (Loader.isModLoaded("factorization")) {
+				Object fzRegistry = Class.forName("factorization.shared.Core").getField("registry").get(null);
+				GameRegistry.addRecipe(new ItemStack(ModBlocks.converterBlockFactorization, 1, 0), "I I", " B ", "I I", Character.valueOf('I'), Items.gold_ingot, Character.valueOf('B'), (Class.forName("factorization.common.Registry").getField("solarboiler_item").get(fzRegistry)));
+			}
 		} catch (Exception e) {
 			FMLLogHelper.logException(Level.ERROR, "Found Factorization But Failed To Load Recipes, Mabey They Changed Their Item / Block Names? This is not a fatal error only recipes wont be registered.", e);
 		}
