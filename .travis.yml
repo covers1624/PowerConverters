@@ -8,3 +8,6 @@ script: ./gradlew setupCIWorkspace build -S
 env:
   global:
     TERM=dumb
+notifications:
+   irc:
+    - "irc.esper.net#PowerConverters"
