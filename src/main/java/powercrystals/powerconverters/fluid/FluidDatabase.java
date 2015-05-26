@@ -7,7 +7,7 @@ public class FluidDatabase {
 
 	public static boolean isFluidSupported(FluidStack fluid) {
 		for (int i = 0; i < supportedFluids.length; i++) {
-			if (supportedFluids[i].equals(fluid.fluidID)) {
+			if (supportedFluids[i].equals(fluid.getFluidID())) {
 				return true;
 			}
 		}

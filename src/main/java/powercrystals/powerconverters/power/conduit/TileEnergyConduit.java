@@ -7,6 +7,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
 import net.minecraftforge.common.util.ForgeDirection;
+import powercrystals.powerconverters.power.conduit.grid.GridTickHandler;
 import powercrystals.powerconverters.power.conduit.grid.IGridController;
 import powercrystals.powerconverters.power.conduit.grid.INode;
 import powercrystals.powerconverters.util.BlockPosition;
@@ -48,10 +49,10 @@ public class TileEnergyConduit extends TileEntity implements INode, IEnergyHandl
 		receiverCache = null;
 		providerCache = null;
 		// It is placed here so we only tick on the server side, as it is not registered on the client.
-		if (worldObj.isRemote) {
+		if (worldObj == null || worldObj.isRemote) {
 			return;
 		}
-		EnergyNetwork.HANDLER.addConduitForTick(this);
+		GridTickHandler.energy.addConduitForTick(this);
 	}
 
 	@Override
@@ -141,12 +142,14 @@ public class TileEnergyConduit extends TileEntity implements INode, IEnergyHandl
 				if (BlockPosition.blockExists(this, dir)) {
 					TileEnergyConduit pipe = BlockPosition.getAdjacentTileEntity(this, dir, TileEnergyConduit.class);
 					if (pipe != null) {
-						if (pipe.grid != null && pipe.canInterface(this, dir)) {
-							if (hasGrid) {
-								pipe.grid.mergeGrid(grid);
-							} else {
-								pipe.grid.addConduit(this);
-								hasGrid = grid != null;
+						if (pipe.grid != null) {
+							if (pipe.canInterface(this, dir)) {
+								if (hasGrid) {
+									pipe.grid.mergeGrid(grid);
+								} else {
+									pipe.grid.addConduit(this);
+									hasGrid = grid != null;
+								}
 							}
 						}
 					}
@@ -187,31 +190,38 @@ public class TileEnergyConduit extends TileEntity implements INode, IEnergyHandl
 
 	@Override
 	public boolean canConnectEnergy(ForgeDirection from) {
-		// TODO Auto-generated method stub
+		if (grid != null) {
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
-		// TODO Auto-generated method stub
+		if (grid != null) {
+			return grid.storage.receiveEnergy(maxReceive, simulate);
+		}
 		return 0;
 	}
 
 	@Override
 	public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int getEnergyStored(ForgeDirection from) {
-		// TODO Auto-generated method stub
+		if (grid != null) {
+			return grid.storage.getEnergyStored();
+		}
 		return 0;
 	}
 
 	@Override
 	public int getMaxEnergyStored(ForgeDirection from) {
-		// TODO Auto-generated method stub
+		if (grid != null) {
+			grid.storage.getMaxEnergyStored();
+		}
 		return 0;
 	}
 
@@ -222,8 +232,16 @@ public class TileEnergyConduit extends TileEntity implements INode, IEnergyHandl
 	}
 
 	// Called by the grid to transfer energy from the grid to adjacent tiles.
-	public int transfer(ForgeDirection forgeDirection, int sideDistribute) {
-		// TODO Auto-generated method stub
+	public int transfer(ForgeDirection forgeDirection, int energy) {
+		if (deadCache) {
+			return 0;
+		}
+		if (receiverCache != null) {
+			IEnergyReceiver handlerTile = receiverCache[forgeDirection.ordinal()];
+			if (handlerTile != null) {
+				return handlerTile.receiveEnergy(forgeDirection, energy, false);
+			}
+		}
 		return 0;
 	}
 
@@ -238,8 +256,14 @@ public class TileEnergyConduit extends TileEntity implements INode, IEnergyHandl
 	}
 
 	public boolean canInterface(TileEnergyConduit teConduit, ForgeDirection dir) {
-		if (receiverCache[dir.ordinal()] != null || providerCache[dir.ordinal()] != null) {
-			return true;
+		if (receiverCache != null) {
+			if (receiverCache[dir.ordinal()] != null) {
+				return true;
+			}
+		} else if (providerCache != null) {
+			if (providerCache[dir.ordinal()] != null) {
+				return true;
+			}
 		}
 		return false;
 	}

@@ -32,7 +32,8 @@ public class EnergyNetwork implements IGrid {
 	}
 
 	public EnergyNetwork(TileEnergyConduit base) {
-		this();
+		storage.setCapacity(STORAGE);
+		storage.setMaxTransfer(TRANSFER_RATE);
 		conduitSet = new LinkedHashList<TileEnergyConduit>();
 		regenerating = true;
 		addConduit(base);

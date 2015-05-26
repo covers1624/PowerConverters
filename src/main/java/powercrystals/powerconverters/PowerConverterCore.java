@@ -1,23 +1,28 @@
 package powercrystals.powerconverters;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
-import powercrystals.powerconverters.command.EnumCommands;
 import powercrystals.powerconverters.gui.PCGUIHandler;
 import powercrystals.powerconverters.handler.CloakHandler;
 import powercrystals.powerconverters.handler.ConfigurationHandler;
 import powercrystals.powerconverters.handler.PCEventHandler;
-import powercrystals.powerconverters.handler.RainHandler;
+import powercrystals.powerconverters.handler.ShaderHelper;
 import powercrystals.powerconverters.init.ModBlocks;
 import powercrystals.powerconverters.init.ModItems;
 import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.init.Recipes;
 import powercrystals.powerconverters.init.WorldGenerators;
 import powercrystals.powerconverters.net.IPCProxy;
+import powercrystals.powerconverters.power.conduit.grid.GridTickHandler;
 import powercrystals.powerconverters.reference.Reference;
 import powercrystals.powerconverters.updatechecker.UpdateManager;
+import powercrystals.powerconverters.util.CapeType;
 import powercrystals.powerconverters.util.LogHelper;
 import powercrystals.powerconverters.util.RFHelper;
+import powercrystals.powerconverters.util.Vec3F;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -43,6 +48,9 @@ public class PowerConverterCore {
 
 	private static ConfigurationHandler configHandler;
 
+	private static HashMap<String, CapeType> cloaks = new HashMap<String, CapeType>();
+	private static HashMap<String, ArrayList<Vec3F>> particleColors = new HashMap<String, ArrayList<Vec3F>>();
+
 	public static int steamId = -1;
 
 	@EventHandler
@@ -55,7 +63,7 @@ public class PowerConverterCore {
 		LogHelper.trace("Initalizing Configuration File");
 		configHandler = new ConfigurationHandler(event.getSuggestedConfigurationFile());
 
-		LogHelper.trace("Registering Updae Manager");
+		LogHelper.trace("Registering Update Manager");
 		UpdateManager updateManager = new UpdateManager();
 		FMLCommonHandler.instance().bus().register(updateManager);
 
@@ -77,11 +85,8 @@ public class PowerConverterCore {
 	public void init(FMLInitializationEvent event) {
 		LogHelper.info("Power Converters Core Initialization Started.");
 
-		if (FluidRegistry.isFluidRegistered("steam")) {
-			LogHelper.info("Detected Steam at Init Stage");
-		}
-
 		// MinecraftForge.EVENT_BUS.register(GridTickHandler.energy);
+		FMLCommonHandler.instance().bus().register(GridTickHandler.energy);
 		LogHelper.trace("Checking For RF API...");
 		RFHelper.init();
 
@@ -110,6 +115,7 @@ public class PowerConverterCore {
 
 		if (event.getSide() == Side.CLIENT) {
 			MinecraftForge.EVENT_BUS.register(new CloakHandler());
+			ShaderHelper.initShaders();
 		}
 	}
 
@@ -124,15 +130,43 @@ public class PowerConverterCore {
 	public void serverStarting(FMLServerStartingEvent event) {
 		LogHelper.trace("Server Starting Started");
 
-		LogHelper.trace("Registering Rain Handler");
-		MinecraftForge.EVENT_BUS.register(new RainHandler());
+		// 0--LogHelper.trace("Registering Rain Handler");
+		// MinecraftForge.EVENT_BUS.register(new RainHandler());
 
-		LogHelper.trace("Registering Commands");
-		for (EnumCommands command : EnumCommands.values()) {
-			LogHelper.trace("Registering Command: " + command.getCommand().getCommandName());
-			event.registerServerCommand(command.getCommand());
-		}
+		// LogHelper.trace("Registering Commands");
+		// for (EnumCommands command : EnumCommands.values()) {
+		// LogHelper.trace("Registering Command: " + command.getCommand().getCommandName());
+		// event.registerServerCommand(command.getCommand());
+		// }
 		LogHelper.trace("Server Starting Finished");
+	}
+
+	public static void addCloak(String name, CapeType type) {
+		cloaks.put(name, type);
+	}
+
+	public static CapeType getCloak(String name) {
+		return cloaks.get(name);
+	}
+
+	public static void clearCloaks() {
+		cloaks.clear();
+	}
+
+	public static void addParticleCloak(String name, ArrayList<Vec3F> colors) {
+		particleColors.put(name, colors);
+	}
+
+	public static ArrayList<Vec3F> getPrarticleCloak(String name) {
+		return particleColors.get(name);
+	}
+
+	public static void clearParticleCloaks() {
+		particleColors.clear();
+	}
+
+	public static HashMap<String, ArrayList<Vec3F>> getParticlehashMap() {
+		return particleColors;
 	}
 
 }

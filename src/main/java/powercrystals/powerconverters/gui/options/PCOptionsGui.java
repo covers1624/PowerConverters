@@ -23,7 +23,8 @@ public class PCOptionsGui extends GuiScreen implements GuiYesNoCallback {
 	public void initGui() {
 		buttonList.clear();
 		this.buttonList.add(new GuiButton(200, this.width / 2 - 100, this.height / 6 + 168, I18n.format("gui.done", new Object[0])));
-		this.buttonList.add(new PCCapeReloadGuiButton(100, this.width / 2 - 155, this.height / 6 + 144 - 6, "RefreshCapes"));
+		this.buttonList.add(new PCCapeReloadGuiButton(100, this.width / 2 - 155, this.height / 6 + 144 - 6, "Refresh Capes"));
+		this.buttonList.add(new PCParticleGuiButton(101, this.width / 2 + 5, this.height / 6 + 144 - 6, "Refresh Particles"));
 	}
 
 	@Override

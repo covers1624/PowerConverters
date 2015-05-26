@@ -48,7 +48,7 @@ public class TileEntitySteamConsumer extends TileEntityEnergyConsumer<IFluidHand
 
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-		if (resource == null || resource.fluidID != PowerConverterCore.steamId || PowerConverterCore.steamId == -1)
+		if (resource == null || resource.getFluidID() != PowerConverterCore.steamId || PowerConverterCore.steamId == -1)
 			return 0;
 		return _steamTank.fill(resource, doFill);
 
