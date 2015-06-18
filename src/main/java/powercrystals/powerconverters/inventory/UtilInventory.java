@@ -1,6 +1,5 @@
 package powercrystals.powerconverters.inventory;
 
-//import buildcraft.api.transport.IPipeTile;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
