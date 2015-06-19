@@ -2,13 +2,13 @@
 {
   "modid": "PowerConverters",
   "name": "Power Converters",
-  "description": "Converting Power Between mods.",
+  "description": "Power your mods!",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
   "authorList": ["powercrystals", "covers1624", "podge"],
-  "credits": "All The Mod Developers For Doing Awsome Things! Seriously You Guys Rock!",
+  "credits": "powercrystals for making this awesome mod!",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
