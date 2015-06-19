@@ -30,7 +30,6 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 
@@ -121,21 +120,6 @@ public class PowerConverterCore {
 		if (FluidRegistry.isFluidRegistered("steam")) {
 			steamId = FluidRegistry.getFluidID("steam");
 		}
-	}
-
-	@EventHandler
-	public void serverStarting(FMLServerStartingEvent event) {
-		LogHelper.trace("Server Starting Started");
-
-		// 0--LogHelper.trace("Registering Rain Handler");
-		// MinecraftForge.EVENT_BUS.register(new RainHandler());
-
-		// LogHelper.trace("Registering Commands");
-		// for (EnumCommands command : EnumCommands.values()) {
-		// LogHelper.trace("Registering Command: " + command.getCommand().getCommandName());
-		// event.registerServerCommand(command.getCommand());
-		// }
-		LogHelper.trace("Server Starting Finished");
 	}
 
 	public static void addCloak(String name, CapeType type) {
