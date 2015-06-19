@@ -6,17 +6,14 @@ import java.util.HashMap;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
 import powercrystals.powerconverters.gui.PCGUIHandler;
-import powercrystals.powerconverters.handler.CloakHandler;
 import powercrystals.powerconverters.handler.ConfigurationHandler;
 import powercrystals.powerconverters.handler.PCEventHandler;
-import powercrystals.powerconverters.handler.ShaderHelper;
 import powercrystals.powerconverters.init.ModBlocks;
 import powercrystals.powerconverters.init.ModItems;
 import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.init.Recipes;
 import powercrystals.powerconverters.init.WorldGenerators;
 import powercrystals.powerconverters.net.IPCProxy;
-import powercrystals.powerconverters.power.conduit.grid.GridTickHandler;
 import powercrystals.powerconverters.reference.Reference;
 import powercrystals.powerconverters.updatechecker.UpdateManager;
 import powercrystals.powerconverters.util.CapeType;
@@ -86,7 +83,7 @@ public class PowerConverterCore {
 		LogHelper.info("Power Converters Core Initialization Started.");
 
 		// MinecraftForge.EVENT_BUS.register(GridTickHandler.energy);
-		FMLCommonHandler.instance().bus().register(GridTickHandler.energy);
+		// FMLCommonHandler.instance().bus().register(GridTickHandler.energy);
 		LogHelper.trace("Checking For RF API...");
 		RFHelper.init();
 
@@ -114,8 +111,8 @@ public class PowerConverterCore {
 		}
 
 		if (event.getSide() == Side.CLIENT) {
-			MinecraftForge.EVENT_BUS.register(new CloakHandler());
-			ShaderHelper.initShaders();
+			// MinecraftForge.EVENT_BUS.register(new CloakHandler());
+			// ShaderHelper.initShaders();
 		}
 	}
 

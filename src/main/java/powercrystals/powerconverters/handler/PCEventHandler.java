@@ -53,7 +53,7 @@ public class PCEventHandler {
 	}
 
 	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
+	// @SubscribeEvent
 	public void clientTickEvent(ClientTickEvent event) {
 		if (event.phase == Phase.END) {
 			GuiScreen gui = Minecraft.getMinecraft().currentScreen;
@@ -64,7 +64,7 @@ public class PCEventHandler {
 	}
 
 	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
+	// @SubscribeEvent
 	public void onRenderWorldLast(RenderWorldLastEvent event) {
 		Profiler profiler = Minecraft.getMinecraft().mcProfiler;
 

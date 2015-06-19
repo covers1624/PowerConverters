@@ -5,8 +5,6 @@ import powercrystals.powerconverters.common.BlockPowerConverterCommon;
 import powercrystals.powerconverters.common.ItemBlockPowerConverterCommon;
 import powercrystals.powerconverters.common.TileEntityCharger;
 import powercrystals.powerconverters.common.TileEntityEnergyBridge;
-import powercrystals.powerconverters.power.conduit.BlockEnergyConduit;
-import powercrystals.powerconverters.power.conduit.TileEnergyConduit;
 import powercrystals.powerconverters.power.factorization.BlockPowerConverterFactorization;
 import powercrystals.powerconverters.power.factorization.ItemBlockPowerConverterFactorization;
 import powercrystals.powerconverters.power.factorization.TileEntityPowerConverterFactorizationConsumer;
@@ -40,9 +38,9 @@ public class ModBlocks {
 
 	public static void init() {
 
-		conduitBlock = new BlockEnergyConduit();
-		GameRegistry.registerBlock(conduitBlock, conduitBlock.getUnlocalizedName());
-		GameRegistry.registerTileEntity(TileEnergyConduit.class, "powerConverterConduit");
+		// conduitBlock = new BlockEnergyConduit();
+		// GameRegistry.registerBlock(conduitBlock, conduitBlock.getUnlocalizedName());
+		// GameRegistry.registerTileEntity(TileEnergyConduit.class, "powerConverterConduit");
 
 		converterBlockCommon = new BlockPowerConverterCommon();
 		GameRegistry.registerBlock(converterBlockCommon, ItemBlockPowerConverterCommon.class, converterBlockCommon.getUnlocalizedName());
