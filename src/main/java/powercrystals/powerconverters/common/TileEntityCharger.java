@@ -2,38 +2,43 @@ package powercrystals.powerconverters.common;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map.Entry;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.IChatComponent;
 import net.minecraftforge.common.util.ForgeDirection;
-import powercrystals.powerconverters.PowerConverterCore;
 import powercrystals.powerconverters.init.PowerSystems;
-import powercrystals.powerconverters.inventory.IInventoryManager;
-import powercrystals.powerconverters.inventory.InventoryManager;
-import powercrystals.powerconverters.power.PowerSystem;
 import powercrystals.powerconverters.power.TileEntityEnergyProducer;
+import powercrystals.powerconverters.util.BlockPosition;
+import powercrystals.powerconverters.util.IAdvancedLogTile;
 import powercrystals.powerconverters.util.LogHelper;
 
-public class TileEntityCharger extends TileEntityEnergyProducer<IInventory> {
+public class TileEntityCharger extends TileEntityEnergyProducer<IInventory> implements IAdvancedLogTile, ISidedInventory {
 	private static List<IChargeHandler> _chargeHandlers = new ArrayList<IChargeHandler>();
-	private EntityPlayer _player;
+	private TileEntity[] sideCache = new TileEntity[6];
+	private ItemStack[] slots;
 
 	public static void registerChargeHandler(IChargeHandler handler) {
+		LogHelper.trace(String.format("Registered Charge Handler %s.", handler.name()));
 		_chargeHandlers.add(handler);
 	}
 
 	public TileEntityCharger() {
-		super(PowerSystems.powerSystemIndustrialCraft, 0, IInventory.class);
+		super(PowerSystems.powerSystemRedstoneFlux, 0, IInventory.class);
+		slots = new ItemStack[32];
 	}
 
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
-		if (_player != null && _player.getDistance(xCoord, yCoord, zCoord) > 2D) {
-			setPlayer(null);
-		}
+		// Update our cache on every tick.
+		searchForTiles();
 	}
 
 	@Override
@@ -41,69 +46,166 @@ public class TileEntityCharger extends TileEntityEnergyProducer<IInventory> {
 		if (energy == 0) {
 			return 0;
 		}
-
-		double energyRemaining = energy;
-		if (_player != null) {
-			energyRemaining = chargeInventory(_player.inventory, ForgeDirection.UNKNOWN, energyRemaining);
-		}
-
-		for (Entry<ForgeDirection, IInventory> inv : getTiles().entrySet()) {
-			energyRemaining = chargeInventory(inv.getValue(), inv.getKey(), energyRemaining);
-		}
-
-		return energyRemaining;
+		return energy;
 	}
 
-	private double chargeInventory(IInventory inventory, ForgeDirection toSide, double energy) {
-		PowerSystem nextPowerSystem = getPowerSystem();
-		double energyRemaining = energy;
+	private void searchForTiles() {
+		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+			TileEntity tileEntity = BlockPosition.getAdjacentTileEntity(this, dir);
+			// Add new Tiles to our cache.
+			if (tileEntity != null && tileEntity instanceof IInventory) {
+				sideCache[dir.ordinal()] = tileEntity;
+			}
 
-		IInventoryManager inv = InventoryManager.create(inventory, toSide.getOpposite());
-		for (Entry<Integer, ItemStack> contents : inv.getContents().entrySet()) {
-			for (IChargeHandler chargeHandler : _chargeHandlers) {
-				ItemStack s = contents.getValue();
-				if (s == null) {
-					continue;
-				}
+			// Validate our cache.
+			if (tileEntity == null) {
+				sideCache[dir.ordinal()] = null;
+			}
+		}
+	}
 
-				if (chargeHandler.canHandle(s)) {
-					energyRemaining = chargeHandler.charge(s, energyRemaining);
-					if (energyRemaining < energy) {
-						nextPowerSystem = chargeHandler.getPowerSystem();
-						energy = energyRemaining;
-					}
-				}
+	@Override
+	public void getTileInfo(List<IChatComponent> info, ForgeDirection side, EntityPlayer player, boolean debug) {
+		info.add(text("-SideCache-"));
+		for (int i = 0; i < sideCache.length; i++) {
+			String data = sideCache[i] != null ? sideCache[i].getClass().getName() : "Null";
+			info.add(text(String.format("Side: %s, Data: %s", ForgeDirection.VALID_DIRECTIONS[i], data)));
+		}
+	}
+
+	private ChatComponentText text(String string) {
+		return new ChatComponentText(string);
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound tagCompound) {
+		super.writeToNBT(tagCompound);
+		NBTTagList nbttaglist = new NBTTagList();
+
+		for (int i = 0; i < slots.length; i++) {
+			if (slots[i] != null) {
+				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				nbttagcompound1.setInteger("Slot", i);
+				slots[i].writeToNBT(nbttagcompound1);
+				nbttaglist.appendTag(nbttagcompound1);
 			}
 		}
 
-		_powerSystem = nextPowerSystem;
-		return energyRemaining;
+		tagCompound.setTag("Items", nbttaglist);
 	}
 
-	public void setPlayer(EntityPlayer player) {
-		if (worldObj.isRemote && _player != player) {
-			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-			_player = player;
+	@Override
+	public void readFromNBT(NBTTagCompound tagCompound) {
+		super.readFromNBT(tagCompound);
+
+		NBTTagList nbttaglist = tagCompound.getTagList("Items", 10);
+		slots = new ItemStack[getSizeInventory()];
+
+		for (int i = 0; i < nbttaglist.tagCount(); i++) {
+			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+			int j = nbttagcompound1.getInteger("Slot");
+
+			if (j >= 0 && j < slots.length) {
+				slots[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+			}
 		}
 	}
 
 	@Override
-	public boolean isConnected() {
-		return super.isConnected() || _player != null;
+	public int getSizeInventory() {
+		return slots.length;
 	}
 
 	@Override
-	public boolean isSideConnected(int side) {
-		LogHelper.info(side);
-		if (side == 1 && _player != null)
-			return true;
-		return super.isSideConnected(side);
+	public ItemStack getStackInSlot(int slot) {
+		return slots[slot];
 	}
 
 	@Override
-	public boolean isSideConnectedClient(int side) {
-		if (side == 1 && _player != null)
-			return true;
-		return super.isSideConnectedClient(side);
+	public ItemStack decrStackSize(int slot, int ammount) {
+		if (slots[slot] != null) {
+			if (slots[slot].stackSize <= ammount) {
+				ItemStack itemStack = slots[slot];
+				slots[slot] = null;
+				return itemStack;
+			}
+			ItemStack itemStack = slots[slot].splitStack(ammount);
+			if (slots[slot].stackSize == 0) {
+				slots[slot] = null;
+			}
+			return itemStack;
+		}
+		return null;
+	}
+
+	@Override
+	public ItemStack getStackInSlotOnClosing(int slot) {
+		return slots[slot];
+	}
+
+	@Override
+	public void setInventorySlotContents(int slot, ItemStack stack) {
+		slots[slot] = stack;
+
+		if (stack != null && stack.stackSize > this.getInventoryStackLimit()) {
+			stack.stackSize = this.getInventoryStackLimit();
+		}
+	}
+
+	@Override
+	public String getInventoryName() {
+		return "Universal Charger";
+	}
+
+	@Override
+	public boolean hasCustomInventoryName() {
+		return true;
+	}
+
+	@Override
+	public int getInventoryStackLimit() {
+		return 64;
+	}
+
+	@Override
+	public boolean isUseableByPlayer(EntityPlayer p_70300_1_) {
+		return true;
+	}
+
+	@Override
+	public void openInventory() {
+
+	}
+
+	@Override
+	public void closeInventory() {
+
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int slot, ItemStack stack) {
+		if (slot < 16) {
+			for (IChargeHandler chargeHandler : _chargeHandlers) {
+				if (chargeHandler.canHandle(stack)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public int[] getAccessibleSlotsFromSide(int side) {
+		return new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+	}
+
+	@Override
+	public boolean canInsertItem(int slot, ItemStack stack, int side) {
+		return isItemValidForSlot(slot, stack);
+	}
+
+	@Override
+	public boolean canExtractItem(int slot, ItemStack stack, int side) {
+		return slot > 16;
 	}
 }

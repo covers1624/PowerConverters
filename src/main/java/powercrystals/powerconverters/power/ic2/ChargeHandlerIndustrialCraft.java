@@ -2,9 +2,7 @@ package powercrystals.powerconverters.power.ic2;
 
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import powercrystals.powerconverters.PowerConverterCore;
 import powercrystals.powerconverters.common.IChargeHandler;
 import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.power.PowerSystem;
@@ -35,5 +33,10 @@ public class ChargeHandlerIndustrialCraft implements IChargeHandler {
 		double eu = energyRequest / PowerSystems.powerSystemIndustrialCraft.getInternalEnergyPerInput();
 		eu = ElectricItem.manager.discharge(stack, eu, ((IElectricItem) stack.getItem()).getTier(stack), false, false, false);
 		return eu * PowerSystems.powerSystemIndustrialCraft.getInternalEnergyPerInput();
+	}
+
+	@Override
+	public String name() {
+		return "Industrial Craft";
 	}
 }

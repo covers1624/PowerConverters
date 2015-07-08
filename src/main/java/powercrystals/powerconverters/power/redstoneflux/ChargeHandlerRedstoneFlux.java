@@ -1,12 +1,11 @@
 package powercrystals.powerconverters.power.redstoneflux;
 
-import cofh.api.energy.IEnergyContainerItem;
-import cofh.api.energy.ItemEnergyContainer;
 import net.minecraft.item.ItemStack;
-import powercrystals.powerconverters.PowerConverterCore;
 import powercrystals.powerconverters.common.IChargeHandler;
 import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.power.PowerSystem;
+import cofh.api.energy.IEnergyContainerItem;
+import cofh.api.energy.ItemEnergyContainer;
 
 public class ChargeHandlerRedstoneFlux implements IChargeHandler {
 
@@ -31,6 +30,11 @@ public class ChargeHandlerRedstoneFlux implements IChargeHandler {
 	public double discharge(ItemStack stack, double energyRequest) {
 		ItemEnergyContainer cell = (ItemEnergyContainer) stack.getItem();
 		return ((cell.extractEnergy(stack, (int) (energyRequest / getPowerSystem().getInternalEnergyPerOutput()), false)) * getPowerSystem().getInternalEnergyPerOutput());
+	}
+
+	@Override
+	public String name() {
+		return "Redstone Flux";
 	}
 
 }

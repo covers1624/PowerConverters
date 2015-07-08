@@ -71,8 +71,8 @@ public class PowerConverterCore {
 		LogHelper.trace("Initalizing PowerSystems");
 		PowerSystems.init();
 
-		// LogHelper.trace("Initalizing ChargeHandlers");
-		// PowerSystems.initChargeHandlers();
+		LogHelper.trace("Initalizing ChargeHandlers");
+		PowerSystems.initChargeHandlers();
 
 		LogHelper.info("Power Converters PreInitialization Finished.");
 	}

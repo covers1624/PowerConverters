@@ -1,7 +1,7 @@
 package powercrystals.powerconverters.common;
 
-import powercrystals.powerconverters.power.PowerSystem;
 import net.minecraft.item.ItemStack;
+import powercrystals.powerconverters.power.PowerSystem;
 
 public interface IChargeHandler {
 	public PowerSystem getPowerSystem();
@@ -11,4 +11,6 @@ public interface IChargeHandler {
 	double charge(ItemStack stack, double energyInput);
 
 	double discharge(ItemStack stack, double energyRequest);
+
+	String name();
 }
