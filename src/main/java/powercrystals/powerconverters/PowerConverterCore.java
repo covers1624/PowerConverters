@@ -1,8 +1,5 @@
 package powercrystals.powerconverters;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
 import powercrystals.powerconverters.gui.PCGUIHandler;
@@ -16,10 +13,8 @@ import powercrystals.powerconverters.init.WorldGenerators;
 import powercrystals.powerconverters.net.IPCProxy;
 import powercrystals.powerconverters.reference.Reference;
 import powercrystals.powerconverters.updatechecker.UpdateManager;
-import powercrystals.powerconverters.util.CapeType;
 import powercrystals.powerconverters.util.LogHelper;
 import powercrystals.powerconverters.util.RFHelper;
-import powercrystals.powerconverters.util.Vec3F;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -43,9 +38,6 @@ public class PowerConverterCore {
 	public static PowerConverterCore instance;
 
 	private static ConfigurationHandler configHandler;
-
-	private static HashMap<String, CapeType> cloaks = new HashMap<String, CapeType>();
-	private static HashMap<String, ArrayList<Vec3F>> particleColors = new HashMap<String, ArrayList<Vec3F>>();
 
 	public static int steamId = -1;
 
@@ -121,33 +113,4 @@ public class PowerConverterCore {
 			steamId = FluidRegistry.getFluidID("steam");
 		}
 	}
-
-	public static void addCloak(String name, CapeType type) {
-		cloaks.put(name, type);
-	}
-
-	public static CapeType getCloak(String name) {
-		return cloaks.get(name);
-	}
-
-	public static void clearCloaks() {
-		cloaks.clear();
-	}
-
-	public static void addParticleCloak(String name, ArrayList<Vec3F> colors) {
-		particleColors.put(name, colors);
-	}
-
-	public static ArrayList<Vec3F> getPrarticleCloak(String name) {
-		return particleColors.get(name);
-	}
-
-	public static void clearParticleCloaks() {
-		particleColors.clear();
-	}
-
-	public static HashMap<String, ArrayList<Vec3F>> getParticlehashMap() {
-		return particleColors;
-	}
-
 }
