@@ -39,4 +39,15 @@ public class ChargeHandlerIndustrialCraft implements IChargeHandler {
 	public String name() {
 		return "Industrial Craft";
 	}
+
+	@Override
+	public boolean isItemCharged(ItemStack stack) {
+		if (canHandle(stack)) {
+			IElectricItem item = (IElectricItem) stack.getItem();
+			if (item.getMaxCharge(stack) == ElectricItem.manager.getCharge(stack)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

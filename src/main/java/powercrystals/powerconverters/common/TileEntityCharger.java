@@ -39,6 +39,7 @@ public class TileEntityCharger extends TileEntityEnergyProducer<IInventory> impl
 		super.updateEntity();
 		// Update our cache on every tick.
 		searchForTiles();
+		validateSlots();
 	}
 
 	@Override
@@ -46,7 +47,23 @@ public class TileEntityCharger extends TileEntityEnergyProducer<IInventory> impl
 		if (energy == 0) {
 			return 0;
 		}
-		return energy;
+		double energyRemaining = energy;
+		// Iterate over the main part of the inventory.
+		for (int i = 0; i < 16; i++) {
+			ItemStack stack = slots[i];
+			if (stack == null) {
+				continue;
+			}
+			for (IChargeHandler handler : _chargeHandlers) {
+				if (handler.canHandle(stack)) {
+					energyRemaining = handler.charge(stack, energyRemaining);
+					if (energyRemaining == 0) {
+						return 0;
+					}
+				}
+			}
+		}
+		return energyRemaining;
 	}
 
 	private void searchForTiles() {
@@ -60,6 +77,27 @@ public class TileEntityCharger extends TileEntityEnergyProducer<IInventory> impl
 			// Validate our cache.
 			if (tileEntity == null) {
 				sideCache[dir.ordinal()] = null;
+			}
+		}
+	}
+
+	// Validates that the input slots don't have charged items in it. I.E. Moves all charged items to the Right hand inventory.
+	private void validateSlots() {
+		for (int i = 0; i < 16; i++) {
+			if (slots[i] != null) {
+				for (IChargeHandler handler : _chargeHandlers) {
+					if (handler.canHandle(slots[i])) {
+						if (handler.isItemCharged(slots[i])) {
+							for (int j = 16; j < 32; j++) {
+								if (slots[j] == null) {
+									slots[j] = slots[i];
+									slots[i] = null;
+									break;
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 	}
@@ -207,5 +245,9 @@ public class TileEntityCharger extends TileEntityEnergyProducer<IInventory> impl
 	@Override
 	public boolean canExtractItem(int slot, ItemStack stack, int side) {
 		return slot > 16;
+	}
+
+	public static List<IChargeHandler> getChargeHandlers() {
+		return _chargeHandlers;
 	}
 }

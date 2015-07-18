@@ -12,5 +12,7 @@ public interface IChargeHandler {
 
 	double discharge(ItemStack stack, double energyRequest);
 
+	boolean isItemCharged(ItemStack stack);
+
 	String name();
 }
