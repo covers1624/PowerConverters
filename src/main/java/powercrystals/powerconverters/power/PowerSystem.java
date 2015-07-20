@@ -7,44 +7,44 @@ import java.util.Map.Entry;
 import net.minecraftforge.common.config.Configuration;
 
 public class PowerSystem {
-	private static Map<Integer, PowerSystem> _powerSystems = new HashMap<Integer, PowerSystem>();
-	private static Integer _nextPowerSystemId = 0;
+	private static Map<Integer, PowerSystem> powerSystems = new HashMap<Integer, PowerSystem>();
+	private static Integer nextPowerSystemId = 0;
 
-	private String _abbreviation;
-	private String _name;
-	private int _internalEnergyPerInput;
-	private int _internalEnergyPerOutput;
-	private String[] _voltageNames;
-	private int[] _voltageValues;
-	private String _unit;
-	private int _id;
+	private String abbreviation;
+	private String name;
+	private int internalEnergyPerInput;
+	private int internalEnergyPerOutput;
+	private String[] voltageNames;
+	private int[] voltageValues;
+	private String unit;
+	private int id;
 
 	public PowerSystem(String name, String abbreviation, int energyPerInput, int energyPerOutput, String[] voltageNames, int[] voltageValues, String unit) {
-		_name = name;
-		_abbreviation = abbreviation;
-		_internalEnergyPerInput = energyPerInput;
-		_internalEnergyPerOutput = energyPerOutput;
-		_voltageNames = voltageNames;
-		_voltageValues = voltageValues;
-		_unit = unit;
+		this.name = name;
+		this.abbreviation = abbreviation;
+		this.internalEnergyPerInput = energyPerInput;
+		this.internalEnergyPerOutput = energyPerOutput;
+		this.voltageNames = voltageNames;
+		this.voltageValues = voltageValues;
+		this.unit = unit;
 	}
 
 	public static void registerPowerSystem(PowerSystem powerSystem) {
-		_powerSystems.put(_nextPowerSystemId, powerSystem);
-		powerSystem._id = _nextPowerSystemId;
-		_nextPowerSystemId++;
+		powerSystems.put(nextPowerSystemId, powerSystem);
+		powerSystem.id = nextPowerSystemId;
+		nextPowerSystemId++;
 	}
 
 	public static PowerSystem getPowerSystemById(int id) {
-		return _powerSystems.get(id);
+		return powerSystems.get(id);
 	}
 
 	public String getAbbreviation() {
-		return _abbreviation;
+		return abbreviation;
 	}
 
 	public String getName() {
-		return _name;
+		return name;
 	}
 
 	public static void loadConfig(Configuration c) {
@@ -52,34 +52,34 @@ public class PowerSystem {
 
 		c.addCustomCategoryComment("PowerRatios", powerRatioComment);
 
-		for (Entry<Integer, PowerSystem> p : _powerSystems.entrySet()) {
-			String configSection = "PowerRatios." + p.getValue()._name;
-			p.getValue()._internalEnergyPerInput = c.get(configSection, p.getValue()._name + "InternalEnergyPerEachInput", p.getValue()._internalEnergyPerInput).getInt();
-			p.getValue()._internalEnergyPerOutput = c.get(configSection, p.getValue()._name + "InternalEnergyPerEachOutput", p.getValue()._internalEnergyPerOutput).getInt();
+		for (Entry<Integer, PowerSystem> p : powerSystems.entrySet()) {
+			String configSection = "PowerRatios." + p.getValue().name;
+			p.getValue().internalEnergyPerInput = c.get(configSection, p.getValue().name + "InternalEnergyPerEachInput", p.getValue().internalEnergyPerInput).getInt();
+			p.getValue().internalEnergyPerOutput = c.get(configSection, p.getValue().name + "InternalEnergyPerEachOutput", p.getValue().internalEnergyPerOutput).getInt();
 		}
 	}
 
 	public int getInternalEnergyPerInput() {
-		return _internalEnergyPerInput;
+		return internalEnergyPerInput;
 	}
 
 	public int getInternalEnergyPerOutput() {
-		return _internalEnergyPerOutput;
+		return internalEnergyPerOutput;
 	}
 
 	public String[] getVoltageNames() {
-		return _voltageNames;
+		return voltageNames;
 	}
 
 	public int[] getVoltageValues() {
-		return _voltageValues;
+		return voltageValues;
 	}
 
 	public String getUnit() {
-		return _unit;
+		return unit;
 	}
 
 	public int getId() {
-		return _id;
+		return id;
 	}
 }

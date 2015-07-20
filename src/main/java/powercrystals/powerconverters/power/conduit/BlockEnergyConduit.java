@@ -14,6 +14,22 @@ public class BlockEnergyConduit extends BlockContainer {
 		super(Material.rock);
 		setBlockName("powerconverters.conduit");
 		setCreativeTab(PCCreativeTab.tab);
+		// setBlockBounds(0.75F, 0.75F, 0.75F, 0.75F, 0.75F, 0.75F);
+	}
+
+	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
+	}
+
+	@Override
+	public int getRenderType() {
+		return 22;
+	}
+
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
 	}
 
 	@Override

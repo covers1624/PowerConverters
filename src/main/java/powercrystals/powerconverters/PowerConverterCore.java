@@ -11,6 +11,7 @@ import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.init.Recipes;
 import powercrystals.powerconverters.init.WorldGenerators;
 import powercrystals.powerconverters.net.IPCProxy;
+import powercrystals.powerconverters.power.conduit.grid.GridTickHandler;
 import powercrystals.powerconverters.reference.Reference;
 import powercrystals.powerconverters.updatechecker.UpdateManager;
 import powercrystals.powerconverters.util.LogHelper;
@@ -44,7 +45,6 @@ public class PowerConverterCore {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		instance = this;
-		proxy.preInit();
 
 		LogHelper.info("Power Converters PreInitialization Started.");
 
@@ -73,8 +73,8 @@ public class PowerConverterCore {
 	public void init(FMLInitializationEvent event) {
 		LogHelper.info("Power Converters Core Initialization Started.");
 
-		// MinecraftForge.EVENT_BUS.register(GridTickHandler.energy);
-		// FMLCommonHandler.instance().bus().register(GridTickHandler.energy);
+		MinecraftForge.EVENT_BUS.register(GridTickHandler.energy);
+		FMLCommonHandler.instance().bus().register(GridTickHandler.energy);
 		LogHelper.trace("Checking For RF API...");
 		RFHelper.init();
 
@@ -89,6 +89,9 @@ public class PowerConverterCore {
 
 		LogHelper.trace("Registering World Generators.");
 		WorldGenerators.init();
+
+		LogHelper.trace("Registering Client Rendering.");
+		proxy.initRendering();
 
 		if (ConfigurationHandler.altRecipes) {
 

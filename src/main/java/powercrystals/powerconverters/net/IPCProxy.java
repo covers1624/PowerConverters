@@ -1,9 +1,7 @@
 package powercrystals.powerconverters.net;
 
-
 public interface IPCProxy {
 
-	void preInit();
+	public void initRendering();
 
-	void load();
 }
