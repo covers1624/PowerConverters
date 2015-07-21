@@ -49,31 +49,31 @@ public class LogHelper {
 	}
 
 	/** Formatable */
-	public static void all(String object, String... format) {
+	public static void all(String object, Object... format) {
 		log(Level.ALL, String.format(object, format));
 	}
 
-	public static void debug(String object, String... format) {
+	public static void debug(String object, Object... format) {
 		log(Level.DEBUG, String.format(object, format));
 	}
 
-	public static void error(String object, String... format) {
+	public static void error(String object, Object... format) {
 		log(Level.ERROR, String.format(object, format));
 	}
 
-	public static void fatal(String object, String... format) {
+	public static void fatal(String object, Object... format) {
 		log(Level.FATAL, String.format(object, format));
 	}
 
-	public static void info(String object, String... format) {
+	public static void info(String object, Object... format) {
 		log(Level.INFO, String.format(object, format));
 	}
 
-	public static void off(String object, String... format) {
+	public static void off(String object, Object... format) {
 		log(Level.OFF, String.format(object, format));
 	}
 
-	public static void trace(String object, String... format) {
+	public static void trace(String object, Object... format) {
 		if (ConfigurationHandler.logDebug) {
 			log(Level.INFO, String.format(object, format));
 		} else {
@@ -82,7 +82,7 @@ public class LogHelper {
 
 	}
 
-	public static void warn(String object, String... format) {
+	public static void warn(String object, Object... format) {
 		log(Level.WARN, String.format(object, format));
 	}
 

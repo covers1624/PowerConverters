@@ -23,7 +23,8 @@ public class ConfigurationHandler {
 	public static int throttleIC2HVProducer;
 	public static int throttleIC2EVProducer;
 
-	public static boolean altRecipes;
+	public static boolean useThermalExpansionRecipes;
+	public static boolean useTechRebornRecipes;
 
 	public static boolean doFlatBedrock;
 
@@ -42,7 +43,8 @@ public class ConfigurationHandler {
 
 		doFlatBedrock = configuration.get(Reference.BASIC_CATEGORY, "Do Flat Bedrock", false, "Set this to false for normal Bedrock.").getBoolean();
 
-		altRecipes = configuration.get(Reference.BASIC_CATEGORY, "AlternateRecipes", false, "ThermalExpansion Recipes").getBoolean();
+		useThermalExpansionRecipes = configuration.get(Reference.RECIPES_CATEGORY, "Thermal Expansion", false, "Thermal Expansion Recipes").getBoolean();
+		useTechRebornRecipes = configuration.get(Reference.RECIPES_CATEGORY, "Tech Reborn", false, "Tech Reborn Recipes").getBoolean();
 
 		// TODO Throttles
 		throttleSteamConsumer = configuration.get("Throttles", "Steam.Consumer", 1000, "mB/t").getInt();

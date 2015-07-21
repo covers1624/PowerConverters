@@ -93,7 +93,9 @@ public class PowerConverterCore {
 		LogHelper.trace("Registering Client Rendering.");
 		proxy.initRendering();
 
-		if (ConfigurationHandler.altRecipes) {
+		if (ConfigurationHandler.useTechRebornRecipes) {
+
+		} else if (ConfigurationHandler.useThermalExpansionRecipes) {
 
 		} else {
 			LogHelper.trace("Registering Default Recipes.");
