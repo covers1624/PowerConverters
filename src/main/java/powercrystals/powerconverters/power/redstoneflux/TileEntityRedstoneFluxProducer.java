@@ -31,7 +31,7 @@ public class TileEntityRedstoneFluxProducer extends TileEntityEnergyProducer<IEn
 		TileEntityEnergyBridge bridge = getFirstBridge();
 		if (bridge == null)
 			return 0;
-		return (int) (bridge.getEnergyStored() / getPowerSystem().getInternalEnergyPerInput());
+		return (int) (bridge.getEnergyStored() / getPowerSystem().getScaleAmmount());
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class TileEntityRedstoneFluxProducer extends TileEntityEnergyProducer<IEn
 		TileEntityEnergyBridge bridge = getFirstBridge();
 		if (bridge == null)
 			return 0;
-		return (int) (bridge.getEnergyStoredMax() / getPowerSystem().getInternalEnergyPerInput());
+		return (int) (bridge.getEnergyStoredMax() / getPowerSystem().getScaleAmmount());
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class TileEntityRedstoneFluxProducer extends TileEntityEnergyProducer<IEn
 
 	@Override
 	public double produceEnergy(double energy) {
-		final double toUseRF = energy / getPowerSystem().getInternalEnergyPerOutput();
+		final double toUseRF = energy / getPowerSystem().getScaleAmmount();
 
 		if (toUseRF > 0) {
 			List<BlockPosition> pos = new BlockPosition(xCoord, yCoord, zCoord).getAdjacent(true);
@@ -58,7 +58,7 @@ public class TileEntityRedstoneFluxProducer extends TileEntityEnergyProducer<IEn
 				if ((te instanceof IEnergyHandler) && !((te instanceof TileEntityRedstoneFluxConsumer) || (te instanceof TileEntityEnergyBridge))) {
 					IEnergyHandler handler = (IEnergyHandler) te;
 					final double RF = handler.receiveEnergy(p.orientation.getOpposite(), (int) (toUseRF), false);
-					energy -= RF * getPowerSystem().getInternalEnergyPerOutput();
+					energy -= RF * getPowerSystem().getScaleAmmount();
 					if (energy <= 0)
 						break;
 				}

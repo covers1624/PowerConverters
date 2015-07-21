@@ -1,15 +1,15 @@
 package powercrystals.powerconverters.gui;
 
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
+import net.minecraftforge.common.util.ForgeDirection;
+
 import org.lwjgl.opengl.GL11;
 
 import powercrystals.powerconverters.common.BridgeSideData;
 import powercrystals.powerconverters.common.TileEntityEnergyBridge;
 import powercrystals.powerconverters.reference.Reference;
-
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.util.StatCollector;
-import net.minecraftforge.common.util.ForgeDirection;
 
 public class GuiEnergyBridge extends GuiContainer {
 	private static final int _barColor = (255) | (165 << 8) | (0 << 16) | (255 << 24);

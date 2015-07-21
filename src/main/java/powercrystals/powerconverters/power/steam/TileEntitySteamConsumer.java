@@ -26,9 +26,9 @@ public class TileEntitySteamConsumer extends TileEntityEnergyConsumer<IFluidHand
 
 		if (_steamTank != null && _steamTank.getFluid() != null) {
 			int amount = _steamTank.getFluid().amount;
-			double energy = amount * PowerSystems.powerSystemSteam.getInternalEnergyPerInput();
+			double energy = amount * PowerSystems.powerSystemSteam.getScaleAmmount();
 			energy = storeEnergy(energy);
-			int toDrain = amount - (int) (energy / PowerSystems.powerSystemSteam.getInternalEnergyPerInput());
+			int toDrain = amount - (int) (energy / PowerSystems.powerSystemSteam.getScaleAmmount());
 			_steamTank.drain(toDrain, true);
 			_mBLastTick = toDrain;
 		} else {

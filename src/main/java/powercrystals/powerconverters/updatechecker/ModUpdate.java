@@ -1,8 +1,7 @@
 package powercrystals.powerconverters.updatechecker;
 
-import powercrystals.powerconverters.reference.Reference;
 import net.minecraft.item.ItemStack;
-import scala.annotation.meta.getter;
+import powercrystals.powerconverters.reference.Reference;
 
 public class ModUpdate {
 	

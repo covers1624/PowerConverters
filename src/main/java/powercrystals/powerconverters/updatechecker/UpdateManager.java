@@ -1,10 +1,9 @@
 package powercrystals.powerconverters.updatechecker;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
 import powercrystals.powerconverters.gui.GuiModUpdateNotification;
 import powercrystals.powerconverters.init.ModBlocks;

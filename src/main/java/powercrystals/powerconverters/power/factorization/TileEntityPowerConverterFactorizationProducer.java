@@ -1,15 +1,13 @@
 package powercrystals.powerconverters.power.factorization;
 
-import factorization.api.Charge;
-import factorization.api.Coord;
-import factorization.api.IChargeConductor;
-
 import java.util.Map.Entry;
 
 import net.minecraftforge.common.util.ForgeDirection;
-import powercrystals.powerconverters.PowerConverterCore;
 import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.power.TileEntityEnergyProducer;
+import factorization.api.Charge;
+import factorization.api.Coord;
+import factorization.api.IChargeConductor;
 
 public class TileEntityPowerConverterFactorizationProducer extends TileEntityEnergyProducer<IChargeConductor> implements IChargeConductor {
 	private Charge _charge = new Charge(this);
@@ -21,13 +19,13 @@ public class TileEntityPowerConverterFactorizationProducer extends TileEntityEne
 
 	@Override
 	public double produceEnergy(double energy) {
-		double CG = energy / PowerSystems.powerSystemFactorization.getInternalEnergyPerOutput();
+		double CG = energy / PowerSystems.powerSystemFactorization.getScaleAmmount();
 		for (Entry<ForgeDirection, IChargeConductor> output : this.getTiles().entrySet()) {
 			IChargeConductor o = output.getValue();
 			if (o != null) {
 				if (o.getCharge().getValue() < _maxCG) {
 					double store = Math.min(_maxCG - o.getCharge().getValue(), CG);
-					o.getCharge().addValue((int)store);
+					o.getCharge().addValue((int) store);
 					CG -= store;
 					if (CG <= 0) {
 						break;
@@ -35,7 +33,7 @@ public class TileEntityPowerConverterFactorizationProducer extends TileEntityEne
 				}
 			}
 		}
-		return CG * PowerSystems.powerSystemFactorization.getInternalEnergyPerOutput();
+		return CG * PowerSystems.powerSystemFactorization.getScaleAmmount();
 	}
 
 	@Override

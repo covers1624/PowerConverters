@@ -4,18 +4,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import powercrystals.powerconverters.util.BlockPosition;
-import powercrystals.powerconverters.util.INeighboorUpdateTile;
-import powercrystals.powerconverters.PowerConverterCore;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 import powercrystals.powerconverters.handler.ConfigurationHandler;
 import powercrystals.powerconverters.power.TileEntityBridgeComponent;
 import powercrystals.powerconverters.power.TileEntityEnergyConsumer;
 import powercrystals.powerconverters.power.TileEntityEnergyProducer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
+import powercrystals.powerconverters.util.BlockPosition;
+import powercrystals.powerconverters.util.INeighboorUpdateTile;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityEnergyBridge extends TileEntity implements INeighboorUpdateTile {
 	private double _energyStored;
@@ -73,7 +72,7 @@ public class TileEntityEnergyBridge extends TileEntity implements INeighboorUpda
 					if (energyNotProduced > energyRemaining) {
 						energyNotProduced = energyRemaining;
 					}
-					_producerOutputRates.put(prod.getKey(), (energyRemaining - energyNotProduced) / prod.getValue().getPowerSystem().getInternalEnergyPerOutput());
+					_producerOutputRates.put(prod.getKey(), (energyRemaining - energyNotProduced) / prod.getValue().getPowerSystem().getScaleAmmount());
 					energyRemaining = energyNotProduced;
 				} else {
 					prod.getValue().produceEnergy(0);

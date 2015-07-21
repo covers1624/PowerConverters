@@ -1,8 +1,8 @@
 package powercrystals.powerconverters.init;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import powercrystals.powerconverters.item.DebugItem;
 import net.minecraft.item.Item;
+import powercrystals.powerconverters.item.DebugItem;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ModItems {
 	

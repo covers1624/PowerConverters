@@ -1,14 +1,13 @@
 package powercrystals.powerconverters.power.ic2;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MathHelper;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.common.MinecraftForge;
 import ic2.api.energy.event.EnergyTileLoadEvent;
 import ic2.api.energy.event.EnergyTileUnloadEvent;
 import ic2.api.energy.tile.IEnergyAcceptor;
 import ic2.api.energy.tile.IEnergySource;
-import powercrystals.powerconverters.PowerConverterCore;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MathHelper;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.ForgeDirection;
 import powercrystals.powerconverters.handler.ConfigurationHandler;
 import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.power.TileEntityEnergyProducer;
@@ -71,10 +70,10 @@ public class TileEntityIndustrialCraftProducer extends TileEntityEnergyProducer<
 	@Override
 	public double produceEnergy(double energy) {
 
-		double eu = energy / PowerSystems.powerSystemIndustrialCraft.getInternalEnergyPerOutput();
+		double eu = energy / PowerSystems.powerSystemIndustrialCraft.getScaleAmmount();
 		double usedEu = Math.min(eu, getMaxEnergyOutput() - this.eu);
 		this.eu += usedEu;
-		return (eu - usedEu) * PowerSystems.powerSystemIndustrialCraft.getInternalEnergyPerOutput();
+		return (eu - usedEu) * PowerSystems.powerSystemIndustrialCraft.getScaleAmmount();
 	}
 
 	public double getMaxEnergyOutput() {

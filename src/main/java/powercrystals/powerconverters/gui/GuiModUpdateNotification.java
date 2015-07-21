@@ -1,19 +1,18 @@
 package powercrystals.powerconverters.gui;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import powercrystals.powerconverters.updatechecker.ModUpdate;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.stats.Achievement;
 import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+
+import powercrystals.powerconverters.updatechecker.ModUpdate;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiModUpdateNotification extends Gui {
 	private static final ResourceLocation field_146261_a = new ResourceLocation("textures/gui/achievement/achievement_background.png");

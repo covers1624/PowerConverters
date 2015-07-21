@@ -26,7 +26,7 @@ public class TileEntitySteamProducer extends TileEntityEnergyProducer<IFluidHand
 		if (PowerConverterCore.steamId == -1) {
 			return energy;
 		}
-		energy = energy / PowerSystems.powerSystemSteam.getInternalEnergyPerOutput();
+		energy = energy / PowerSystems.powerSystemSteam.getScaleAmmount();
 		for (int i = 0; i < 6; i++) {
 			BlockPosition bp = new BlockPosition(this);
 			bp.orientation = ForgeDirection.getOrientation(i);
@@ -41,7 +41,7 @@ public class TileEntitySteamProducer extends TileEntityEnergyProducer<IFluidHand
 			}
 		}
 
-		return energy * PowerSystems.powerSystemSteam.getInternalEnergyPerOutput();
+		return energy * PowerSystems.powerSystemSteam.getScaleAmmount();
 
 	}
 

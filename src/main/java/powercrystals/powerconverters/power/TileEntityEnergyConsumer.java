@@ -2,9 +2,9 @@ package powercrystals.powerconverters.power;
 
 import java.util.Map.Entry;
 
-import powercrystals.powerconverters.common.TileEntityEnergyBridge;
-
 import net.minecraftforge.common.util.ForgeDirection;
+import powercrystals.powerconverters.common.TileEntityEnergyBridge;
+import powercrystals.powerconverters.power.PowerSystemRegistry.PowerSystem;
 
 public abstract class TileEntityEnergyConsumer<T> extends TileEntityBridgeComponent<T> {
 	public TileEntityEnergyConsumer(PowerSystem powerSystem, int voltageNameIndex, Class<T> adjacentClass) {

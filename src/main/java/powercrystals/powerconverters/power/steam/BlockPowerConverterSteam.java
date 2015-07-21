@@ -1,13 +1,13 @@
 package powercrystals.powerconverters.power.steam;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import powercrystals.powerconverters.gui.PCCreativeTab;
 import powercrystals.powerconverters.power.BlockPowerConverter;
 import powercrystals.powerconverters.reference.Reference;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockPowerConverterSteam extends BlockPowerConverter {
 	public BlockPowerConverterSteam() {

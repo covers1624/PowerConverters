@@ -1,12 +1,11 @@
 package powercrystals.powerconverters.power.factorization;
 
+import net.minecraft.util.MathHelper;
+import powercrystals.powerconverters.init.PowerSystems;
+import powercrystals.powerconverters.power.TileEntityEnergyConsumer;
 import factorization.api.Charge;
 import factorization.api.Coord;
 import factorization.api.IChargeConductor;
-import net.minecraft.util.MathHelper;
-import powercrystals.powerconverters.PowerConverterCore;
-import powercrystals.powerconverters.init.PowerSystems;
-import powercrystals.powerconverters.power.TileEntityEnergyConsumer;
 
 public class TileEntityPowerConverterFactorizationConsumer extends TileEntityEnergyConsumer<IChargeConductor> implements IChargeConductor {
 	private Charge _charge = new Charge(this);
@@ -31,7 +30,7 @@ public class TileEntityPowerConverterFactorizationConsumer extends TileEntityEne
 		if (this._charge.getValue() > 0) {
 			double used = _charge.tryTake(_charge.getValue());
 			_chargeLastTick = MathHelper.floor_double(used);
-			storeEnergy((int) (used * PowerSystems.powerSystemFactorization.getInternalEnergyPerInput()));
+			storeEnergy((int) (used * PowerSystems.powerSystemFactorization.getScaleAmmount()));
 		} else {
 			this._chargeLastTick = 0;
 		}

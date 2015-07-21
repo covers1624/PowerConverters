@@ -1,14 +1,13 @@
 package powercrystals.powerconverters.power.ic2;
 
-import net.minecraft.block.Block;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.common.MinecraftForge;
 import ic2.api.energy.event.EnergyTileLoadEvent;
 import ic2.api.energy.event.EnergyTileUnloadEvent;
 import ic2.api.energy.tile.IEnergyEmitter;
 import ic2.api.energy.tile.IEnergySink;
-import powercrystals.powerconverters.PowerConverterCore;
+import net.minecraft.block.Block;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.ForgeDirection;
 import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.power.TileEntityEnergyConsumer;
 
@@ -66,7 +65,7 @@ public class TileEntityIndustrialCraftConsumer extends TileEntityEnergyConsumer<
 
 	@Override
 	public double getDemandedEnergy() {
-		return getTotalEnergyDemand() / PowerSystems.powerSystemIndustrialCraft.getInternalEnergyPerInput();
+		return getTotalEnergyDemand() / PowerSystems.powerSystemIndustrialCraft.getScaleAmmount();
 	}
 
 	@Override
@@ -82,8 +81,8 @@ public class TileEntityIndustrialCraftConsumer extends TileEntityEnergyConsumer<
 			return amount;
 		}
 
-		double pcuNotStored = storeEnergy(amount * PowerSystems.powerSystemIndustrialCraft.getInternalEnergyPerInput());
-		double euNotStored = pcuNotStored / PowerSystems.powerSystemIndustrialCraft.getInternalEnergyPerInput();
+		double pcuNotStored = storeEnergy(amount * PowerSystems.powerSystemIndustrialCraft.getScaleAmmount());
+		double euNotStored = pcuNotStored / PowerSystems.powerSystemIndustrialCraft.getScaleAmmount();
 
 		double euThisInjection = (amount - euNotStored);
 

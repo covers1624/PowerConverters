@@ -3,7 +3,6 @@ package powercrystals.powerconverters.handler;
 import java.io.File;
 
 import net.minecraftforge.common.config.Configuration;
-import powercrystals.powerconverters.power.PowerSystem;
 import powercrystals.powerconverters.reference.Reference;
 
 public class ConfigurationHandler {
@@ -45,6 +44,7 @@ public class ConfigurationHandler {
 
 		altRecipes = configuration.get(Reference.BASIC_CATEGORY, "AlternateRecipes", false, "ThermalExpansion Recipes").getBoolean();
 
+		// TODO Throttles
 		throttleSteamConsumer = configuration.get("Throttles", "Steam.Consumer", 1000, "mB/t").getInt();
 		throttleSteamProducer = configuration.get("Throttles", "Steam.Producer", 1000, "mB/t").getInt();
 		throttleIC2LVProducer = configuration.get("Throttles", "IC2.Consumer.LV", 1, "Packets/t").getInt();
@@ -52,7 +52,8 @@ public class ConfigurationHandler {
 		throttleIC2HVProducer = configuration.get("Throttles", "IC2.Consumer.HV", 1, "Packets/t").getInt();
 		throttleIC2EVProducer = configuration.get("Throttles", "IC2.Consumer.EV", 1, "Packets/t").getInt();
 
-		PowerSystem.loadConfig(configuration);
+		// TODO
+		// PowerSystemOld.loadConfig(configuration);
 
 		configuration.save();
 	}

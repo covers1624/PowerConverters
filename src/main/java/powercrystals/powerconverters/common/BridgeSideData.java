@@ -1,7 +1,7 @@
 package powercrystals.powerconverters.common;
 
-import powercrystals.powerconverters.power.PowerSystem;
 import net.minecraftforge.common.util.ForgeDirection;
+import powercrystals.powerconverters.power.PowerSystemRegistry.PowerSystem;
 
 public class BridgeSideData {
 	public ForgeDirection side;

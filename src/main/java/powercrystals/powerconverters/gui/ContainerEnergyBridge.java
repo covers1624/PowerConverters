@@ -1,8 +1,5 @@
 package powercrystals.powerconverters.gui;
 
-import powercrystals.powerconverters.common.BridgeSideData;
-import powercrystals.powerconverters.common.TileEntityEnergyBridge;
-import powercrystals.powerconverters.power.PowerSystem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -10,6 +7,9 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
+import powercrystals.powerconverters.common.BridgeSideData;
+import powercrystals.powerconverters.common.TileEntityEnergyBridge;
+import powercrystals.powerconverters.power.PowerSystemRegistry;
 
 public class ContainerEnergyBridge extends Container {
 	private static final int _numParams = 6;
@@ -43,7 +43,7 @@ public class ContainerEnergyBridge extends Container {
 			if (sidevar == 2)
 				_bridge.getDataForSide(ForgeDirection.getOrientation(side)).isProducer = (value != 0);
 			if (sidevar == 3)
-				_bridge.getDataForSide(ForgeDirection.getOrientation(side)).powerSystem = PowerSystem.getPowerSystemById(value);
+				_bridge.getDataForSide(ForgeDirection.getOrientation(side)).powerSystem = PowerSystemRegistry.getPowerSystemById(value);
 			if (sidevar == 4)
 				_bridge.getDataForSide(ForgeDirection.getOrientation(side)).isConnected = (value != 0);
 			if (sidevar == 5)
@@ -65,13 +65,13 @@ public class ContainerEnergyBridge extends Container {
 					((ICrafting) crafters.get(i)).sendProgressBarUpdate(this, side * _numParams + 3, data.powerSystem.getId());
 				}
 				((ICrafting) crafters.get(i)).sendProgressBarUpdate(this, side * _numParams + 4, data.isConnected ? 1 : 0);
-				((ICrafting) crafters.get(i)).sendProgressBarUpdate(this, side * _numParams + 5, (int)data.outputRate);
+				((ICrafting) crafters.get(i)).sendProgressBarUpdate(this, side * _numParams + 5, (int) data.outputRate);
 			}
 		}
 
 		for (int i = 0; i < crafters.size(); i++) {
 			((ICrafting) crafters.get(i)).sendProgressBarUpdate(this, 1000, _bridge.isInputLimited() ? 1 : 0);
-			((ICrafting) crafters.get(i)).sendProgressBarUpdate(this, 1001, (int)_bridge.getEnergyScaled());
+			((ICrafting) crafters.get(i)).sendProgressBarUpdate(this, 1001, (int) _bridge.getEnergyScaled());
 		}
 	}
 

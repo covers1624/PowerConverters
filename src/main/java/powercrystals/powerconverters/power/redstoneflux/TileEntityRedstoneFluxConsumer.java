@@ -1,7 +1,6 @@
 package powercrystals.powerconverters.power.redstoneflux;
 
 import net.minecraftforge.common.util.ForgeDirection;
-import powercrystals.powerconverters.PowerConverterCore;
 import powercrystals.powerconverters.common.TileEntityEnergyBridge;
 import powercrystals.powerconverters.init.PowerSystems;
 import powercrystals.powerconverters.power.TileEntityEnergyConsumer;
@@ -44,7 +43,7 @@ public class TileEntityRedstoneFluxConsumer extends TileEntityEnergyConsumer<IEn
 		TileEntityEnergyBridge bridge = getFirstBridge();
 		if (bridge == null)
 			return 0;
-		return (int) (bridge.getEnergyStored() / getPowerSystem().getInternalEnergyPerInput());
+		return (int) (bridge.getEnergyStored() / getPowerSystem().getScaleAmmount());
 	}
 
 	@Override
@@ -52,7 +51,7 @@ public class TileEntityRedstoneFluxConsumer extends TileEntityEnergyConsumer<IEn
 		TileEntityEnergyBridge bridge = getFirstBridge();
 		if (bridge == null)
 			return 0;
-		return (int) (bridge.getEnergyStoredMax() / getPowerSystem().getInternalEnergyPerInput());
+		return (int) (bridge.getEnergyStoredMax() / getPowerSystem().getScaleAmmount());
 	}
 
 	@Override
@@ -60,13 +59,13 @@ public class TileEntityRedstoneFluxConsumer extends TileEntityEnergyConsumer<IEn
 		TileEntityEnergyBridge bridge = getFirstBridge();
 		if (bridge == null)
 			return 0;
-		int RF = getPowerSystem().getInternalEnergyPerInput() * recieveMax;
+		int RF = getPowerSystem().getScaleAmmount() * recieveMax;
 		int recievedRF = (int) (RF - storeEnergy(RF));
 		if (!simulate) {
-			lastReceivedRF = (int) (recievedRF / getPowerSystem().getInternalEnergyPerInput());
-			return (int)lastReceivedRF;
+			lastReceivedRF = recievedRF / getPowerSystem().getScaleAmmount();
+			return (int) lastReceivedRF;
 		}
-		return (int) (recievedRF / getPowerSystem().getInternalEnergyPerInput());
+		return recievedRF / getPowerSystem().getScaleAmmount();
 	}
 
 }

@@ -6,22 +6,23 @@ import java.util.Map;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
+import powercrystals.powerconverters.common.TileEntityEnergyBridge;
+import powercrystals.powerconverters.power.PowerSystemRegistry.PowerSystem;
 import powercrystals.powerconverters.util.BlockPosition;
 import powercrystals.powerconverters.util.INeighboorUpdateTile;
-import powercrystals.powerconverters.common.TileEntityEnergyBridge;
 
 public class TileEntityBridgeComponent<T> extends TileEntity implements INeighboorUpdateTile {
 	private Map<ForgeDirection, TileEntityEnergyBridge> _adjacentBridges = new HashMap<ForgeDirection, TileEntityEnergyBridge>();
 	private Map<ForgeDirection, T> _adjacentTiles = new HashMap<ForgeDirection, T>();
 
 	private Class<?> _adjacentClass;
-	protected PowerSystem _powerSystem;
+	protected PowerSystem powerSystem;
 	protected int _voltageIndex;
 
 	private boolean _initialized;
 
 	protected TileEntityBridgeComponent(PowerSystem powersystem, int voltageNameIndex, Class<T> adjacentClass) {
-		_powerSystem = powersystem;
+		this.powerSystem = powersystem;
 		_voltageIndex = voltageNameIndex;
 		_adjacentClass = adjacentClass;
 	}
@@ -56,7 +57,7 @@ public class TileEntityBridgeComponent<T> extends TileEntity implements INeighbo
 	}
 
 	public PowerSystem getPowerSystem() {
-		return _powerSystem;
+		return powerSystem;
 	}
 
 	public boolean isConnected() {

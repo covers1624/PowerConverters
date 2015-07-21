@@ -1,14 +1,13 @@
 package powercrystals.powerconverters.power.ic2;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import powercrystals.powerconverters.gui.PCCreativeTab;
-import powercrystals.powerconverters.power.BlockPowerConverter;
-import powercrystals.powerconverters.reference.Reference;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import powercrystals.powerconverters.gui.PCCreativeTab;
+import powercrystals.powerconverters.power.BlockPowerConverter;
+import powercrystals.powerconverters.reference.Reference;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockPowerConverterIndustrialCraft extends BlockPowerConverter {
 	public BlockPowerConverterIndustrialCraft() {

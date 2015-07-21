@@ -6,7 +6,6 @@ import java.net.URL;
 
 import org.apache.logging.log4j.Level;
 
-import cpw.mods.fml.common.FMLLog;
 import powercrystals.powerconverters.reference.Reference;
 import powercrystals.powerconverters.util.FMLLogHelper;
 import powercrystals.powerconverters.util.LogHelper;

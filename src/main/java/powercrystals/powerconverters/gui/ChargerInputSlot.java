@@ -2,11 +2,11 @@ package powercrystals.powerconverters.gui;
 
 import java.util.List;
 
-import powercrystals.powerconverters.common.IChargeHandler;
-import powercrystals.powerconverters.common.TileEntityCharger;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import powercrystals.powerconverters.common.IChargeHandler;
+import powercrystals.powerconverters.common.TileEntityCharger;
 
 public class ChargerInputSlot extends Slot {
 

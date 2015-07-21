@@ -15,9 +15,9 @@ public class LogHelper {
 		log(Level.ALL, object);
 	}
 
-	// public static void debug(Object object) {
-	// log(Level.DEBUG, object);
-	// }
+	public static void debug(Object object) {
+		log(Level.DEBUG, object);
+	}
 
 	public static void error(Object object) {
 		log(Level.ERROR, object);
@@ -35,13 +35,6 @@ public class LogHelper {
 		log(Level.OFF, object);
 	}
 
-	/**
-	 * This will log out to either TRACE or INFO, depending on "Log Debug Messages" config option.
-	 * 
-	 * @param Object
-	 *            ,The Thing to log.
-	 *
-	 */
 	public static void trace(Object object) {
 		if (ConfigurationHandler.logDebug) {
 			info(object);
@@ -54,4 +47,43 @@ public class LogHelper {
 	public static void warn(Object object) {
 		log(Level.WARN, object);
 	}
+
+	/** Formatable */
+	public static void all(String object, String... format) {
+		log(Level.ALL, String.format(object, format));
+	}
+
+	public static void debug(String object, String... format) {
+		log(Level.DEBUG, String.format(object, format));
+	}
+
+	public static void error(String object, String... format) {
+		log(Level.ERROR, String.format(object, format));
+	}
+
+	public static void fatal(String object, String... format) {
+		log(Level.FATAL, String.format(object, format));
+	}
+
+	public static void info(String object, String... format) {
+		log(Level.INFO, String.format(object, format));
+	}
+
+	public static void off(String object, String... format) {
+		log(Level.OFF, String.format(object, format));
+	}
+
+	public static void trace(String object, String... format) {
+		if (ConfigurationHandler.logDebug) {
+			log(Level.INFO, String.format(object, format));
+		} else {
+			log(Level.TRACE, String.format(object, format));
+		}
+
+	}
+
+	public static void warn(String object, String... format) {
+		log(Level.WARN, String.format(object, format));
+	}
+
 }

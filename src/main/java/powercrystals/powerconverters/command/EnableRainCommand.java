@@ -2,11 +2,11 @@ package powercrystals.powerconverters.command;
 
 import java.util.List;
 
-import powercrystals.powerconverters.handler.ConfigurationHandler;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
+import powercrystals.powerconverters.handler.ConfigurationHandler;
 
 public class EnableRainCommand implements ICommand{
 
