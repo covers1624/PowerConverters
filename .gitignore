@@ -1,28 +1,26 @@
-## gradle
-/.gradle
-/build
-/gradle
+#Stolen form AE2 Repo. :D
+# exclude all
 
-## ForgeGradle
-/run
+/*
 
-## eclipse
-/eclipse
-/.settings
-/.metadata
-/.classpath
-/.project
-/bin
+# Include important folders
 
-## intellij
-/out
-/.idea
-/*.iml
-/*.ipr
-/*.iws
-/atlassian-ide-plugin.xm
+# Gradle stuff
+!gradle/
+!gradlew
+!gradlew.bat
+!build.gradle
 
+# Other Files.
+!LICENSE.txt
+!UpdateInfo.update
+!RoadMap.txt
+!README.md
 
-## Custom
-.gradle/
-/run
+# Include git important files
+!.gitmodules
+!.gitignore
+
+# Include Important Folders
+!src/
+!libs/
