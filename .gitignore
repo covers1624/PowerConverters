@@ -10,6 +10,7 @@
 !gradlew
 !gradlew.bat
 !build.gradle
+!.gradle/
 
 # Other Files.
 !LICENSE.txt
