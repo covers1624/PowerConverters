@@ -13,5 +13,7 @@ public class TODO {
 
 	// TODO Re balance all PowerRatios.
 
-	// TODO Add back the Throttles for consumers / producers
+	// TODO Add back the Throttles for steam as it is infinite at the moment.
+
+	// TODO Revamp Energy Bridge Gui.
 }
