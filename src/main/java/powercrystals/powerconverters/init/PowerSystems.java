@@ -5,6 +5,7 @@ import powercrystals.powerconverters.power.PowerSystemRegistry;
 import powercrystals.powerconverters.power.PowerSystemRegistry.PowerSystem;
 import powercrystals.powerconverters.power.ic2.ChargeHandlerIndustrialCraft;
 import powercrystals.powerconverters.power.redstoneflux.ChargeHandlerRedstoneFlux;
+import powercrystals.powerconverters.util.RFHelper;
 
 public class PowerSystems {
 
@@ -25,8 +26,11 @@ public class PowerSystems {
 	}
 
 	public static void initChargeHandlers() {
-		TileEntityCharger.registerChargeHandler(new ChargeHandlerRedstoneFlux());
-		TileEntityCharger.registerChargeHandler(new ChargeHandlerIndustrialCraft());
+		if (RFHelper.iEnergyContainerItemExists) {
+			TileEntityCharger.registerChargeHandler(new ChargeHandlerRedstoneFlux());
+		}
+		if (Recipes.industrialCraftFound) {
+			TileEntityCharger.registerChargeHandler(new ChargeHandlerIndustrialCraft());
+		}
 	}
-
 }

@@ -11,11 +11,13 @@ import powercrystals.powerconverters.reference.Reference;
 
 public class TileUniversalConduitRender extends TileEntitySpecialRenderer {
 
-	private CustomTechneModel model = new CustomTechneModel(new ResourceLocation(Reference.MODEL_FOLDER + "universalConduitModel.tcn"));
+	private CustomTechneModel model;
 
 	@Override
 	public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float partialTicks) {
-
+		if (model == null) {
+			model = new CustomTechneModel(new ResourceLocation(Reference.MODEL_FOLDER + "universalConduitModel.tcn"));
+		}
 		CustomTechneModel modelConduit = model;
 		// bindTexture(new ResourceLocation(Reference.MODEL_FOLDER + "universalConduitTexture.png"));
 		bindTexture(new ResourceLocation(Reference.MODEL_FOLDER + "universalConduitTextureDebug.png"));
@@ -29,5 +31,4 @@ public class TileUniversalConduitRender extends TileEntitySpecialRenderer {
 		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
 		GL11.glPopMatrix();
 	}
-
 }

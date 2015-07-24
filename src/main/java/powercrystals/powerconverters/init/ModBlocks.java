@@ -50,7 +50,7 @@ public class ModBlocks {
 		GameRegistry.registerTileEntity(TileEntityCharger.class, "powerConverterUniversalCharger");
 
 		// RF
-		if (Loader.isModLoaded("ThermalExpansion") || Loader.isModLoaded("BuildCraft") || RFHelper.getiEnergyHandlerResults()) {
+		if (Loader.isModLoaded("ThermalExpansion") || Loader.isModLoaded("BuildCraft") || RFHelper.iEnergyHandlerExists) {
 			converterBlockRedstoneFlux = new BlockPowerConverterRedstoneFlux();
 			GameRegistry.registerBlock(converterBlockRedstoneFlux, ItemBlockPowerConverterRedstoneFlux.class, converterBlockRedstoneFlux.getUnlocalizedName());
 			GameRegistry.registerTileEntity(TileEntityRedstoneFluxConsumer.class, "powerConverterRFConsumer");
