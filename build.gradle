@@ -36,33 +36,38 @@ if(System.getenv("BUILD_NUMBER") != null){
 
 
 repositories {
-
+	// Waila
 	maven {
 		name = "Mobius Repo"
 		url "http://mobiusstrip.eu/maven/"
 	}
-		
+	// All the CB stuff, Core, NEI, FMP and lib are on the forge maven.
 	maven {
 		name = "CB Repo"
 		url "http://chickenbones.net/maven/"
 	}
+	// IC2
 	maven {
 		name = "ic2"
 		url = "http://maven.ic2.player.to/"
 	}
+	// PneumaticCraft
+	maven {
+        name = "MM repo"
+        url = "http://maven.k-4u.nl/"
+    }
 }
 
 dependencies {
-	compile "codechicken:CodeChickenLib:1.7.10-1.1.3.136:dev"
-	compile "codechicken:CodeChickenCore:1.7.10-1.0.6.44:dev"
-	compile "codechicken:NotEnoughItems:1.7.10-1.0.4.107:dev"
-	compile "mcp.mobius.waila:Waila:1.5.10_1.7.10"
-	compile 'com.mod-buildcraft:buildcraft:6.2.6:dev'  // adds buildcraft to the dev env
+	compile "codechicken:CodeChickenLib:1.7.10-1.1.3.138:dev"
+	compile "codechicken:CodeChickenCore:1.7.10-1.0.7.46:dev"
+	compile "codechicken:NotEnoughItems:1.7.10-1.0.5.111:dev"
+	compile "mcp.mobius.waila:Waila:1.5.10_1.7.10"// Waila
+	compile 'com.mod-buildcraft:buildcraft:6.2.6:dev'  // Buildcraft
 	compile 'net.industrial-craft:industrialcraft-2:2.2.504-experimental:dev' //IC2
-	compile "mcp.mobius.waila:Waila:1.5.9b_dev2_1.7.10"
-
+	compile "pneumaticCraft:PneumaticCraft-1.7.10:1.9.10-98:userdev"
 	
-	runtime fileTree(dir: 'libs', include: '*.jar') // COFH core and Factorization
+	runtime fileTree(dir: 'libs', include: '*.jar') // Anything i cant be bothered finding a maven for...
 
 }
 
