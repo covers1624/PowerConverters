@@ -2,9 +2,9 @@ package covers1624.powerconverters.init;
 
 import covers1624.powerconverters.api.registry.PowerSystemRegistry;
 import covers1624.powerconverters.api.registry.PowerSystemRegistry.PowerSystem;
+import covers1624.powerconverters.api.registry.UniversalChargerRegistry;
 import covers1624.powerconverters.charge.ChargeHandlerIndustrialCraft;
 import covers1624.powerconverters.charge.ChargeHandlerRedstoneFlux;
-import covers1624.powerconverters.tile.main.TileEntityCharger;
 import covers1624.powerconverters.util.RFHelper;
 
 public class PowerSystems {
@@ -29,10 +29,10 @@ public class PowerSystems {
 
 	public static void initChargeHandlers() {
 		if (RFHelper.iEnergyContainerItemExists) {
-			TileEntityCharger.registerChargeHandler(new ChargeHandlerRedstoneFlux());
+			UniversalChargerRegistry.registerChargeHandler(new ChargeHandlerRedstoneFlux());
 		}
 		if (Recipes.industrialCraftFound) {
-			TileEntityCharger.registerChargeHandler(new ChargeHandlerIndustrialCraft());
+			UniversalChargerRegistry.registerChargeHandler(new ChargeHandlerIndustrialCraft());
 		}
 	}
 }

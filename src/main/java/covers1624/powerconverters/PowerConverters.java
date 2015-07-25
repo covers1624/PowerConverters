@@ -48,7 +48,10 @@ public class PowerConverters {
 
 		LogHelper.info("Power Converters PreInitialization Started.");
 
-		LogHelper.trace("Initalizing Configuration File");
+		LogHelper.trace("Checking For RF API...");
+		RFHelper.init();
+
+		LogHelper.trace("Initializing Configuration File");
 		configHandler = new ConfigurationHandler(event.getSuggestedConfigurationFile());
 
 		LogHelper.trace("Registering Update Manager");
@@ -60,10 +63,10 @@ public class PowerConverters {
 		MinecraftForge.EVENT_BUS.register(eventHandler);
 		FMLCommonHandler.instance().bus().register(eventHandler);
 
-		LogHelper.trace("Initalizing PowerSystems");
+		LogHelper.trace("Initializing PowerSystems");
 		PowerSystems.init();
 
-		LogHelper.trace("Initalizing ChargeHandlers");
+		LogHelper.trace("Initializing ChargeHandlers");
 		PowerSystems.initChargeHandlers();
 
 		LogHelper.info("Power Converters PreInitialization Finished.");
@@ -75,8 +78,6 @@ public class PowerConverters {
 
 		MinecraftForge.EVENT_BUS.register(GridTickHandler.energy);
 		FMLCommonHandler.instance().bus().register(GridTickHandler.energy);
-		LogHelper.trace("Checking For RF API...");
-		RFHelper.init();
 
 		LogHelper.trace("Registering Gui Handler.");
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new PCGUIHandler());

@@ -1,13 +1,7 @@
 package covers1624.powerconverters.tile.main;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import covers1624.powerconverters.api.charge.IChargeHandler;
-import covers1624.powerconverters.init.PowerSystems;
-import covers1624.powerconverters.util.BlockPosition;
-import covers1624.powerconverters.util.IAdvancedLogTile;
-import covers1624.powerconverters.util.LogHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -18,17 +12,22 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
 import net.minecraftforge.common.util.ForgeDirection;
+import covers1624.powerconverters.api.charge.IChargeHandler;
+import covers1624.powerconverters.api.registry.UniversalChargerRegistry;
+import covers1624.powerconverters.init.PowerSystems;
+import covers1624.powerconverters.util.BlockPosition;
+import covers1624.powerconverters.util.IAdvancedLogTile;
 
 public class TileEntityCharger extends TileEntityEnergyProducer<IInventory> implements IAdvancedLogTile, ISidedInventory {
-	private static List<IChargeHandler> chargeHandlers = new ArrayList<IChargeHandler>();
+	// private static List<IChargeHandler> chargeHandlers = new ArrayList<IChargeHandler>();
 	// Array of all IInventory devices touching the block, indexed with ForgeDirection.
 	private TileEntity[] sideCache = new TileEntity[6];
 	private ItemStack[] slots;
 
-	public static void registerChargeHandler(IChargeHandler handler) {
-		LogHelper.trace(String.format("Registered Charge Handler %s.", handler.name()));
-		chargeHandlers.add(handler);
-	}
+	// public static void registerChargeHandler(IChargeHandler handler) {
+	// LogHelper.trace(String.format("Registered Charge Handler %s.", handler.name()));
+	// chargeHandlers.add(handler);
+	// }
 
 	public TileEntityCharger() {
 		super(PowerSystems.powerSystemRedstoneFlux, 0, IInventory.class);
@@ -56,7 +55,7 @@ public class TileEntityCharger extends TileEntityEnergyProducer<IInventory> impl
 			if (stack == null) {
 				continue;
 			}
-			for (IChargeHandler handler : chargeHandlers) {
+			for (IChargeHandler handler : UniversalChargerRegistry.getChargeHandlers()) {
 				if (handler.canHandle(stack)) {
 					energyRemaining = handler.charge(stack, energyRemaining);
 					if (energyRemaining == 0) {
@@ -88,7 +87,7 @@ public class TileEntityCharger extends TileEntityEnergyProducer<IInventory> impl
 	private void validateSlots() {
 		for (int i = 0; i < 16; i++) {
 			if (slots[i] != null) {
-				for (IChargeHandler handler : chargeHandlers) {
+				for (IChargeHandler handler : UniversalChargerRegistry.getChargeHandlers()) {
 					if (handler.canHandle(slots[i])) {
 						if (handler.isItemCharged(slots[i])) {
 							for (int j = 16; j < 32; j++) {
@@ -113,7 +112,7 @@ public class TileEntityCharger extends TileEntityEnergyProducer<IInventory> impl
 				for (int i = 0; i < iInventory.getSizeInventory(); i++) {
 					ItemStack itemStack = iInventory.getStackInSlot(i);
 					if (itemStack != null) {
-						for (IChargeHandler handler : chargeHandlers) {
+						for (IChargeHandler handler : UniversalChargerRegistry.getChargeHandlers()) {
 							if (handler.canHandle(itemStack)) {
 								energyRemaining = handler.charge(itemStack, energyRemaining);
 								if (energyRemaining == 0) {
@@ -249,7 +248,7 @@ public class TileEntityCharger extends TileEntityEnergyProducer<IInventory> impl
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
 		if (slot < 16) {
-			for (IChargeHandler chargeHandler : chargeHandlers) {
+			for (IChargeHandler chargeHandler : UniversalChargerRegistry.getChargeHandlers()) {
 				if (chargeHandler.canHandle(stack)) {
 					return true;
 				}
@@ -271,9 +270,5 @@ public class TileEntityCharger extends TileEntityEnergyProducer<IInventory> impl
 	@Override
 	public boolean canExtractItem(int slot, ItemStack stack, int side) {
 		return slot > 16;
-	}
-
-	public static List<IChargeHandler> getChargeHandlers() {
-		return chargeHandlers;
 	}
 }

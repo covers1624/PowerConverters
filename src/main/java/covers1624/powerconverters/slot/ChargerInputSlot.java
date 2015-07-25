@@ -1,12 +1,10 @@
 package covers1624.powerconverters.slot;
 
-import java.util.List;
-
-import covers1624.powerconverters.api.charge.IChargeHandler;
-import covers1624.powerconverters.tile.main.TileEntityCharger;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import covers1624.powerconverters.api.charge.IChargeHandler;
+import covers1624.powerconverters.api.registry.UniversalChargerRegistry;
 
 public class ChargerInputSlot extends Slot {
 
@@ -16,8 +14,7 @@ public class ChargerInputSlot extends Slot {
 
 	@Override
 	public boolean isItemValid(ItemStack stack) {
-		List<IChargeHandler> handlers = TileEntityCharger.getChargeHandlers();
-		for (IChargeHandler handler : handlers) {
+		for (IChargeHandler handler : UniversalChargerRegistry.getChargeHandlers()) {
 			if (handler.canHandle(stack)) {
 				return true;
 			}
