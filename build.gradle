@@ -73,7 +73,7 @@ dependencies {
 
 jar {
     manifest {
-        attributes 'FMLCorePlugin': 'covers1624.powerconverters.asm.PowerConvertersASMHandler'
+        attributes 'FMLCorePlugin': 'covers1624.powerconverters.asm.ASMHandler'
     }
 }
 

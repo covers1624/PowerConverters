@@ -10,7 +10,7 @@ import cpw.mods.fml.relauncher.IFMLLoadingPlugin.SortingIndex;
 
 @SortingIndex(100)
 @MCVersion("1.7.10")
-public class PowerConvertersASMHandler implements IFMLLoadingPlugin {
+public class ASMHandler implements IFMLLoadingPlugin {
 
 	static {
 		// Yes i know what you are thinking, "WHY THE FUCK IS HE NOT ALLOWING US TO ASM HIS CODE".
