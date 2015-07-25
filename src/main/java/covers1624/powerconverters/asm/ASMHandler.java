@@ -6,9 +6,7 @@ import net.minecraft.launchwrapper.Launch;
 import covers1624.powerconverters.util.LogHelper;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.MCVersion;
-import cpw.mods.fml.relauncher.IFMLLoadingPlugin.SortingIndex;
 
-@SortingIndex(100)
 @MCVersion("1.7.10")
 public class ASMHandler implements IFMLLoadingPlugin {
 
