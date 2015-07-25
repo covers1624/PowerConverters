@@ -72,9 +72,9 @@ dependencies {
 }
 
 jar {
-	manifest {
-	attributes 'FMLCorePlugin': 'covers1624.powerconverters.asm.PowerConvertersASMHandler'
-	}
+    manifest {
+        attributes 'FMLCorePlugin': 'covers1624.powerconverters.asm.PowerConvertersASMHandler'
+    }
 }
 
 task deobfJar(type: Jar, dependsOn: 'jar') {
