@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 import covers1624.powerconverters.api.bridge.BridgeSideData;
 import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.util.BlockPosition;
 import covers1624.powerconverters.util.INeighboorUpdateTile;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -65,16 +65,18 @@ public class TileEntityEnergyBridge extends TileEntity implements INeighboorUpda
 			double energyRemaining = Math.min(_energyStored, _energyStoredMax);
 			double energyNotProduced = 0;
 			for (Entry<ForgeDirection, TileEntityEnergyProducer<?>> prod : _producerTiles.entrySet()) {
-				if (energyRemaining > 0) {
-					energyNotProduced = prod.getValue().produceEnergy(energyRemaining);
-					if (energyNotProduced > energyRemaining) {
-						energyNotProduced = energyRemaining;
+				if (!prod.getValue().isGettingRedstone()) {
+					if (energyRemaining > 0) {
+						energyNotProduced = prod.getValue().produceEnergy(energyRemaining);
+						if (energyNotProduced > energyRemaining) {
+							energyNotProduced = energyRemaining;
+						}
+						_producerOutputRates.put(prod.getKey(), (energyRemaining - energyNotProduced) / prod.getValue().getPowerSystem().getScaleAmmount());
+						energyRemaining = energyNotProduced;
+					} else {
+						prod.getValue().produceEnergy(0);
+						_producerOutputRates.put(prod.getKey(), 0D);
 					}
-					_producerOutputRates.put(prod.getKey(), (energyRemaining - energyNotProduced) / prod.getValue().getPowerSystem().getScaleAmmount());
-					energyRemaining = energyNotProduced;
-				} else {
-					prod.getValue().produceEnergy(0);
-					_producerOutputRates.put(prod.getKey(), 0D);
 				}
 			}
 			_energyStored = Math.max(0, energyRemaining);

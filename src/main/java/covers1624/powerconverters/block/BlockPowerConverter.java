@@ -1,10 +1,7 @@
 package covers1624.powerconverters.block;
 
-import covers1624.powerconverters.PowerConverters;
-import covers1624.powerconverters.item.DebugItem;
-import covers1624.powerconverters.tile.main.TileEntityBridgeComponent;
-import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
-import covers1624.powerconverters.util.INeighboorUpdateTile;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -13,14 +10,21 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import covers1624.powerconverters.PowerConverters;
+import covers1624.powerconverters.item.DebugItem;
+import covers1624.powerconverters.tile.main.TileEntityBridgeComponent;
+import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
+import covers1624.powerconverters.util.INeighboorUpdateTile;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockPowerConverter extends BlockContainer {
 	protected IIcon[] _icons;
 
+	protected boolean isGettingRedstone;
+
 	public BlockPowerConverter(int metaCount) {
-		super(Material.clay);
+		super(Material.iron);
 		setHardness(1.0F);
 		_icons = new IIcon[metaCount * 2];
 	}
@@ -43,17 +47,13 @@ public class BlockPowerConverter extends BlockContainer {
 	}
 
 	@Override
-	public boolean canProvidePower() {
-		return true;
-	}
-
-	@Override
 	public int damageDropped(int par1) {
 		return par1;
 	}
 
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
+		checkRedstone(world, x, y, z);
 		TileEntity te = world.getTileEntity(x, y, z);
 		if (te != null && te instanceof INeighboorUpdateTile) {
 			((INeighboorUpdateTile) te).onNeighboorChanged();
@@ -77,6 +77,33 @@ public class BlockPowerConverter extends BlockContainer {
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public boolean shouldCheckWeakPower(IBlockAccess world, int x, int y, int z, int side) {
+		return true;
+	}
+
+	@Override
+	public boolean getWeakChanges(IBlockAccess world, int x, int y, int z) {
+		return true;
+	}
+
+	@Override
+	public void updateTick(World world, int x, int y, int z, Random random) {
+		checkRedstone(world, x, y, z);
+	}
+
+	public boolean isGettingRedstone() {
+		return isGettingRedstone;
+	}
+
+	private void checkRedstone(World world, int x, int y, int z) {
+		if (world.isBlockIndirectlyGettingPowered(x, y, z)) {
+			isGettingRedstone = true;
+		} else {
+			isGettingRedstone = false;
+		}
 	}
 
 }

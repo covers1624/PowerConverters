@@ -5,5 +5,4 @@ public class RandomDebugShit {
 	public static void init() {
 
 	}
-
 }

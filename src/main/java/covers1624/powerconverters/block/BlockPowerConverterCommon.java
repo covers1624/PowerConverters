@@ -1,13 +1,5 @@
 package covers1624.powerconverters.block;
 
-import covers1624.powerconverters.PowerConverters;
-import covers1624.powerconverters.gui.PCCreativeTab;
-import covers1624.powerconverters.item.DebugItem;
-import covers1624.powerconverters.reference.Reference;
-import covers1624.powerconverters.tile.main.TileEntityBridgeComponent;
-import covers1624.powerconverters.tile.main.TileEntityCharger;
-import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
-import covers1624.powerconverters.util.INeighboorUpdateTile;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -19,6 +11,14 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import covers1624.powerconverters.PowerConverters;
+import covers1624.powerconverters.gui.PCCreativeTab;
+import covers1624.powerconverters.item.DebugItem;
+import covers1624.powerconverters.reference.Reference;
+import covers1624.powerconverters.tile.main.TileEntityBridgeComponent;
+import covers1624.powerconverters.tile.main.TileEntityCharger;
+import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
+import covers1624.powerconverters.util.INeighboorUpdateTile;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -28,7 +28,7 @@ public class BlockPowerConverterCommon extends BlockContainer {
 	private IIcon _iconChargerOff;
 
 	public BlockPowerConverterCommon() {
-		super(Material.clay);
+		super(Material.iron);
 		setHardness(1.0F);
 		setBlockName("powerconverters.common");
 		setCreativeTab(PCCreativeTab.tab);
@@ -118,11 +118,6 @@ public class BlockPowerConverterCommon extends BlockContainer {
 	@Override
 	public int damageDropped(int i) {
 		return i;
-	}
-
-	@Override
-	public boolean canProvidePower() {
-		return true;
 	}
 
 	@Override
