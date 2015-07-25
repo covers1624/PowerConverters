@@ -1,6 +1,7 @@
 package covers1624.powerconverters.tile.main;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -23,17 +24,17 @@ public class TileEntityEnergyBridge extends TileEntity implements INeighboorUpda
 	private boolean _isInputLimited;
 
 	private Map<ForgeDirection, TileEntityEnergyProducer<?>> _producerTiles;
-	private Map<ForgeDirection, BridgeSideData> _clientSideData;
+	private Map<ForgeDirection, BridgeSideData> clientSideData;
 	private Map<ForgeDirection, Double> _producerOutputRates;
 
 	private boolean _initialized;
 
 	public TileEntityEnergyBridge() {
 		_producerTiles = new HashMap<ForgeDirection, TileEntityEnergyProducer<?>>();
-		_clientSideData = new HashMap<ForgeDirection, BridgeSideData>();
+		clientSideData = new HashMap<ForgeDirection, BridgeSideData>();
 		_producerOutputRates = new HashMap<ForgeDirection, Double>();
 		for (ForgeDirection d : ForgeDirection.VALID_DIRECTIONS) {
-			_clientSideData.put(d, new BridgeSideData());
+			clientSideData.put(d, new BridgeSideData());
 			_producerOutputRates.put(d, 0D);
 		}
 	}
@@ -132,7 +133,7 @@ public class TileEntityEnergyBridge extends TileEntity implements INeighboorUpda
 
 			return d;
 		} else {
-			return _clientSideData.get(dir);
+			return clientSideData.get(dir);
 		}
 	}
 
@@ -155,6 +156,9 @@ public class TileEntityEnergyBridge extends TileEntity implements INeighboorUpda
 
 	public void setEnergyScaled(int scaled) {
 		_energyScaledClient = scaled;
+	}
+
+	public void addWailaInfo(List<String> info) {
 	}
 
 	@Override

@@ -16,6 +16,8 @@ import covers1624.powerconverters.block.BlockPowerConverter;
 import covers1624.powerconverters.util.BlockPosition;
 import covers1624.powerconverters.util.IAdvancedLogTile;
 import covers1624.powerconverters.util.INeighboorUpdateTile;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityBridgeComponent<T> extends TileEntity implements INeighboorUpdateTile, IAdvancedLogTile {
 	private Map<ForgeDirection, TileEntityEnergyBridge> _adjacentBridges = new HashMap<ForgeDirection, TileEntityEnergyBridge>();
@@ -24,6 +26,7 @@ public class TileEntityBridgeComponent<T> extends TileEntity implements INeighbo
 	private Class<?> _adjacentClass;
 	protected PowerSystem powerSystem;
 	protected int _voltageIndex;
+	protected String type;
 
 	private boolean _initialized;
 
@@ -116,6 +119,12 @@ public class TileEntityBridgeComponent<T> extends TileEntity implements INeighbo
 			return blockPowerConverter.isGettingRedstone();
 		}
 		return false;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public void addWailaInfo(List<String> info) {
+		info.add("Type: " + type);
+		info.add("PowerSystem: " + powerSystem.getName());
 	}
 
 	@Override

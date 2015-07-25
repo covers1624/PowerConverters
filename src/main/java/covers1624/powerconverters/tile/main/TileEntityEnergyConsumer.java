@@ -8,6 +8,7 @@ import covers1624.powerconverters.api.registry.PowerSystemRegistry.PowerSystem;
 public abstract class TileEntityEnergyConsumer<T> extends TileEntityBridgeComponent<T> {
 	public TileEntityEnergyConsumer(PowerSystem powerSystem, int voltageNameIndex, Class<T> adjacentClass) {
 		super(powerSystem, voltageNameIndex, adjacentClass);
+		type = "Consumer";
 	}
 
 	protected double storeEnergy(double energy) {
