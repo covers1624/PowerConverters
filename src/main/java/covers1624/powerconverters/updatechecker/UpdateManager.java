@@ -29,10 +29,10 @@ public class UpdateManager {
 	GuiModUpdateNotification updateNotification;
 
 	public UpdateManager() {
+		updateThread = new UpdateCheckThread(Reference.MOD_ID);
 		if (!ConfigurationHandler.doUpdateCheck) {
 			return;
 		}
-		updateThread = new UpdateCheckThread(Reference.MOD_ID);
 		updateThread.start();
 	}
 

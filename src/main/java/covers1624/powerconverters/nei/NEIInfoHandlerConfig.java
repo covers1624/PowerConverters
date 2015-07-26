@@ -1,8 +1,8 @@
 package covers1624.powerconverters.nei;
 
-import covers1624.powerconverters.util.LogHelper;
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
+import covers1624.powerconverters.util.LogHelper;
 
 public class NEIInfoHandlerConfig implements IConfigureNEI {
 
