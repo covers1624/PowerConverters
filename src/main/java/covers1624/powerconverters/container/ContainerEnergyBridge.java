@@ -1,8 +1,5 @@
 package covers1624.powerconverters.container;
 
-import covers1624.powerconverters.api.bridge.BridgeSideData;
-import covers1624.powerconverters.api.registry.PowerSystemRegistry;
-import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -10,6 +7,9 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
+import covers1624.powerconverters.api.bridge.BridgeSideData;
+import covers1624.powerconverters.api.registry.PowerSystemRegistry;
+import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
 
 public class ContainerEnergyBridge extends Container {
 	private static final int _numParams = 6;

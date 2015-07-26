@@ -1,7 +1,7 @@
 package covers1624.powerconverters.api.bridge;
 
-import covers1624.powerconverters.api.registry.PowerSystemRegistry.PowerSystem;
 import net.minecraftforge.common.util.ForgeDirection;
+import covers1624.powerconverters.api.registry.PowerSystemRegistry.PowerSystem;
 
 public class BridgeSideData {
 	public ForgeDirection side;

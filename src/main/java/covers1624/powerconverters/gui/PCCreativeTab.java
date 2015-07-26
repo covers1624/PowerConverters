@@ -1,9 +1,9 @@
 package covers1624.powerconverters.gui;
 
-import covers1624.powerconverters.init.ModBlocks;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import covers1624.powerconverters.init.ModBlocks;
 
 public class PCCreativeTab extends CreativeTabs {
 	public static final PCCreativeTab tab = new PCCreativeTab();

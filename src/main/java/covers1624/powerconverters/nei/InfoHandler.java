@@ -3,7 +3,6 @@ package covers1624.powerconverters.nei;
 import java.util.ArrayList;
 import java.util.List;
 
-import covers1624.powerconverters.util.LogHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -18,6 +17,7 @@ import codechicken.nei.api.IRecipeOverlayRenderer;
 import codechicken.nei.recipe.GuiRecipe;
 import codechicken.nei.recipe.ICraftingHandler;
 import codechicken.nei.recipe.IUsageHandler;
+import covers1624.powerconverters.util.LogHelper;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModContainer;
 

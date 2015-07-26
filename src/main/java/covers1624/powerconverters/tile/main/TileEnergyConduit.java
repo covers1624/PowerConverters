@@ -2,13 +2,6 @@ package covers1624.powerconverters.tile.main;
 
 import java.util.List;
 
-import covers1624.powerconverters.grid.GridTickHandler;
-import covers1624.powerconverters.grid.IGridController;
-import covers1624.powerconverters.grid.INode;
-import covers1624.powerconverters.util.BlockPosition;
-import covers1624.powerconverters.util.IAdvancedLogTile;
-import covers1624.powerconverters.util.IUpdateTileWithCords;
-import covers1624.powerconverters.util.LogHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
@@ -19,6 +12,13 @@ import cofh.api.energy.IEnergyConnection;
 import cofh.api.energy.IEnergyHandler;
 import cofh.api.energy.IEnergyProvider;
 import cofh.api.energy.IEnergyReceiver;
+import covers1624.powerconverters.grid.GridTickHandler;
+import covers1624.powerconverters.grid.IGridController;
+import covers1624.powerconverters.grid.INode;
+import covers1624.powerconverters.util.BlockPosition;
+import covers1624.powerconverters.util.IAdvancedLogTile;
+import covers1624.powerconverters.util.IUpdateTileWithCords;
+import covers1624.powerconverters.util.LogHelper;
 
 public class TileEnergyConduit extends TileEntity implements INode, IEnergyHandler, IUpdateTileWithCords, IAdvancedLogTile {
 

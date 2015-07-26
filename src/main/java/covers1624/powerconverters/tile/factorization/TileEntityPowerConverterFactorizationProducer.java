@@ -2,9 +2,9 @@ package covers1624.powerconverters.tile.factorization;
 
 import java.util.Map.Entry;
 
+import net.minecraftforge.common.util.ForgeDirection;
 import covers1624.powerconverters.init.PowerSystems;
 import covers1624.powerconverters.tile.main.TileEntityEnergyProducer;
-import net.minecraftforge.common.util.ForgeDirection;
 import factorization.api.Charge;
 import factorization.api.Coord;
 import factorization.api.IChargeConductor;

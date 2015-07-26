@@ -1,13 +1,13 @@
 package covers1624.powerconverters.container;
 
-import covers1624.powerconverters.slot.ChargerInputSlot;
-import covers1624.powerconverters.slot.ChargerOutputSlot;
-import covers1624.powerconverters.tile.main.TileEntityCharger;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import covers1624.powerconverters.slot.ChargerInputSlot;
+import covers1624.powerconverters.slot.ChargerOutputSlot;
+import covers1624.powerconverters.tile.main.TileEntityCharger;
 
 public class ContainerUniversalCharger extends Container {
 

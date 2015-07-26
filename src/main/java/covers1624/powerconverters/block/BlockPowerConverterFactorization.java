@@ -1,12 +1,12 @@
 package covers1624.powerconverters.block;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import covers1624.powerconverters.gui.PCCreativeTab;
 import covers1624.powerconverters.reference.Reference;
 import covers1624.powerconverters.tile.factorization.TileEntityPowerConverterFactorizationConsumer;
 import covers1624.powerconverters.tile.factorization.TileEntityPowerConverterFactorizationProducer;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

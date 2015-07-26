@@ -1,7 +1,7 @@
 package covers1624.powerconverters.api.charge;
 
-import covers1624.powerconverters.api.registry.PowerSystemRegistry.PowerSystem;
 import net.minecraft.item.ItemStack;
+import covers1624.powerconverters.api.registry.PowerSystemRegistry.PowerSystem;
 
 public interface IChargeHandler {
 	public PowerSystem getPowerSystem();

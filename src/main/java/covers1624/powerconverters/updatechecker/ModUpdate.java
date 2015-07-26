@@ -1,7 +1,7 @@
 package covers1624.powerconverters.updatechecker;
 
-import covers1624.powerconverters.reference.Reference;
 import net.minecraft.item.ItemStack;
+import covers1624.powerconverters.reference.Reference;
 
 public class ModUpdate {
 	

@@ -1,10 +1,10 @@
 package covers1624.powerconverters.tile.redstoneflux;
 
+import net.minecraftforge.common.util.ForgeDirection;
+import cofh.api.energy.IEnergyHandler;
 import covers1624.powerconverters.init.PowerSystems;
 import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
 import covers1624.powerconverters.tile.main.TileEntityEnergyConsumer;
-import net.minecraftforge.common.util.ForgeDirection;
-import cofh.api.energy.IEnergyHandler;
 
 public class TileEntityRedstoneFluxConsumer extends TileEntityEnergyConsumer<IEnergyHandler> implements IEnergyHandler {
 

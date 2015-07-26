@@ -11,6 +11,13 @@ import net.minecraft.item.crafting.ShapedRecipes;
  * @author modmuss50, gigabit101
  */
 public class RecipeRemover {
+
+	public static void removeAnyRecipes(List<ItemStack> removeList) {
+		for (ItemStack stack : removeList) {
+			removeAnyRecipe(stack);
+		}
+	}
+
 	public static void removeShapedRecipes(List<ItemStack> removelist) {
 		for (ItemStack stack : removelist)
 			removeShapedRecipe(stack);

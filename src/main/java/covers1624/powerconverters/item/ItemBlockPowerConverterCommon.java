@@ -2,13 +2,13 @@ package covers1624.powerconverters.item;
 
 import java.util.List;
 
-import covers1624.powerconverters.reference.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import covers1624.powerconverters.reference.Reference;
 
 public class ItemBlockPowerConverterCommon extends ItemBlock {
 	public ItemBlockPowerConverterCommon(Block block) {

@@ -1,13 +1,13 @@
 package covers1624.powerconverters.block;
 
-import covers1624.powerconverters.gui.PCCreativeTab;
-import covers1624.powerconverters.tile.main.TileEnergyConduit;
-import covers1624.powerconverters.util.IUpdateTileWithCords;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import covers1624.powerconverters.gui.PCCreativeTab;
+import covers1624.powerconverters.tile.main.TileEnergyConduit;
+import covers1624.powerconverters.util.IUpdateTileWithCords;
 
 public class BlockEnergyConduit extends BlockContainer {
 

@@ -1,8 +1,5 @@
 package covers1624.powerconverters.tile.steam;
 
-import covers1624.powerconverters.PowerConverters;
-import covers1624.powerconverters.init.PowerSystems;
-import covers1624.powerconverters.tile.main.TileEntityEnergyConsumer;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -10,6 +7,9 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
+import covers1624.powerconverters.PowerConverters;
+import covers1624.powerconverters.init.PowerSystems;
+import covers1624.powerconverters.tile.main.TileEntityEnergyConsumer;
 
 public class TileEntitySteamConsumer extends TileEntityEnergyConsumer<IFluidHandler> implements IFluidHandler {
 	private FluidTank _steamTank;

@@ -22,8 +22,9 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Recipes {
-
-	private static List<IRecipe> recipes = new ArrayList<IRecipe>();
+	// The fall back recipes when the client leaves the server.
+	private static List<IRecipe> defaultRecipes = new ArrayList<IRecipe>();
+	private static List<IRecipe> curentRecipes = new ArrayList<IRecipe>();
 
 	public static boolean buildcraftFound = Loader.isModLoaded("BuildCraft|Energy");
 	public static boolean industrialCraftFound = Loader.isModLoaded("IC2");
@@ -37,6 +38,18 @@ public class Recipes {
 		Defaults.industrialCraft2Recipes();
 		Defaults.railcraftRecipes();
 		Defaults.factorizationRecipes();
+	}
+
+	public static List<IRecipe> getCurrentRecipes() {
+		return curentRecipes;
+	}
+
+	public static List<IRecipe> getDefaultRecipes() {
+		return defaultRecipes;
+	}
+
+	public static void setDefaultRecipes(List<IRecipe> recipes) {
+		defaultRecipes = recipes;
 	}
 
 	private static void addRecipe(ItemStack output, Object... params) {
@@ -93,7 +106,7 @@ public class Recipes {
 		}
 
 		ShapedRecipes shapedrecipes = new ShapedRecipes(j, k, aitemstack, output);
-		recipes.add(shapedrecipes);
+		curentRecipes.add(shapedrecipes);
 		CraftingManager.getInstance().getRecipeList().add(shapedrecipes);
 	}
 
@@ -118,7 +131,7 @@ public class Recipes {
 			}
 		}
 
-		recipes.add(new ShapelessRecipes(output, arraylist));
+		curentRecipes.add(new ShapelessRecipes(output, arraylist));
 		CraftingManager.getInstance().getRecipeList().add(new ShapelessRecipes(output, arraylist));
 	}
 

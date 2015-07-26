@@ -12,6 +12,7 @@ import covers1624.powerconverters.init.PowerSystems;
 import covers1624.powerconverters.init.Recipes;
 import covers1624.powerconverters.init.WorldGenerators;
 import covers1624.powerconverters.net.PacketPipeline;
+import covers1624.powerconverters.net.RecipeSyncPacket;
 import covers1624.powerconverters.proxy.IPCProxy;
 import covers1624.powerconverters.reference.Reference;
 import covers1624.powerconverters.updatechecker.UpdateManager;
@@ -80,6 +81,7 @@ public class PowerConverters {
 
 		LogHelper.trace("Initializing PacketPipeline");
 		packetPipeline.initalise();
+		packetPipeline.registerPacket(RecipeSyncPacket.class);
 
 		MinecraftForge.EVENT_BUS.register(GridTickHandler.energy);
 		FMLCommonHandler.instance().bus().register(GridTickHandler.energy);
@@ -107,6 +109,7 @@ public class PowerConverters {
 			LogHelper.trace("Registering Default Recipes.");
 			Recipes.initDefaults();
 		}
+		Recipes.setDefaultRecipes(Recipes.getCurrentRecipes());
 
 		if (Loader.isModLoaded("Waila")) {
 			FMLInterModComms.sendMessage("Waila", "register", "covers1624.powerconverters.waila.WailaModule.callBackRegister");

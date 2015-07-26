@@ -1,5 +1,6 @@
 package covers1624.powerconverters.init;
 
+import net.minecraft.block.Block;
 import covers1624.powerconverters.block.BlockEnergyConduit;
 import covers1624.powerconverters.block.BlockPowerConverterCommon;
 import covers1624.powerconverters.block.BlockPowerConverterFactorization;
@@ -23,7 +24,6 @@ import covers1624.powerconverters.tile.redstoneflux.TileEntityRedstoneFluxProduc
 import covers1624.powerconverters.tile.steam.TileEntitySteamConsumer;
 import covers1624.powerconverters.tile.steam.TileEntitySteamProducer;
 import covers1624.powerconverters.util.RFHelper;
-import net.minecraft.block.Block;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 

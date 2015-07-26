@@ -1,11 +1,11 @@
 package covers1624.powerconverters.charge;
 
-import covers1624.powerconverters.api.charge.IChargeHandler;
-import covers1624.powerconverters.api.registry.PowerSystemRegistry.PowerSystem;
-import covers1624.powerconverters.init.PowerSystems;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
 import net.minecraft.item.ItemStack;
+import covers1624.powerconverters.api.charge.IChargeHandler;
+import covers1624.powerconverters.api.registry.PowerSystemRegistry.PowerSystem;
+import covers1624.powerconverters.init.PowerSystems;
 
 public class ChargeHandlerIndustrialCraft implements IChargeHandler {
 	@Override
