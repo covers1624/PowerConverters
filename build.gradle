@@ -74,6 +74,7 @@ dependencies {
 jar {
     manifest {
         attributes 'FMLCorePlugin': 'covers1624.powerconverters.asm.ASMHandler'
+		attributes 'FMLCorePluginContainsFMLMod': 'true'
     }
 }
 
