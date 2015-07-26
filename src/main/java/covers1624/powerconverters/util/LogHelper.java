@@ -86,4 +86,14 @@ public class LogHelper {
 		log(Level.WARN, String.format(object, format));
 	}
 
+	public static void bigFatal(String format, Object... data) {
+		StackTraceElement[] trace = Thread.currentThread().getStackTrace();
+		fatal("****************************************");
+		fatal("* " + format, data);
+		for (int i = 2; i < 8 && i < trace.length; i++) {
+			fatal("*  at %s%s", trace[i].toString(), i == 7 ? "..." : "");
+		}
+		fatal("****************************************");
+	}
+
 }

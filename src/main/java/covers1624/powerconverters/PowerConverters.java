@@ -11,6 +11,7 @@ import covers1624.powerconverters.init.ModItems;
 import covers1624.powerconverters.init.PowerSystems;
 import covers1624.powerconverters.init.Recipes;
 import covers1624.powerconverters.init.WorldGenerators;
+import covers1624.powerconverters.net.PacketPipeline;
 import covers1624.powerconverters.proxy.IPCProxy;
 import covers1624.powerconverters.reference.Reference;
 import covers1624.powerconverters.updatechecker.UpdateManager;
@@ -34,6 +35,8 @@ public class PowerConverters {
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY, serverSide = Reference.SERVER_PROXY)
 	public static IPCProxy proxy;
 
+	public static final PacketPipeline packetPipeline = new PacketPipeline();
+
 	@Instance("Power Converters")
 	public static PowerConverters instance;
 
@@ -45,7 +48,7 @@ public class PowerConverters {
 	public void preInit(FMLPreInitializationEvent event) {
 		instance = this;
 
-		LogHelper.info("Power Converters PreInitialization Started.");
+		LogHelper.info("PowerConverters PreInitialization Started.");
 
 		LogHelper.trace("Checking For RF API...");
 		RFHelper.init();
@@ -68,12 +71,15 @@ public class PowerConverters {
 		LogHelper.trace("Initializing ChargeHandlers");
 		PowerSystems.initChargeHandlers();
 
-		LogHelper.info("Power Converters PreInitialization Finished.");
+		LogHelper.info("PowerConverters PreInitialization Finished.");
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		LogHelper.info("Power Converters Core Initialization Started.");
+		LogHelper.info("PowerConverters Core Initialization Started.");
+
+		LogHelper.trace("Initializing PacketPipeline");
+		packetPipeline.initalise();
 
 		MinecraftForge.EVENT_BUS.register(GridTickHandler.energy);
 		FMLCommonHandler.instance().bus().register(GridTickHandler.energy);
@@ -105,12 +111,21 @@ public class PowerConverters {
 		if (Loader.isModLoaded("Waila")) {
 			FMLInterModComms.sendMessage("Waila", "register", "covers1624.powerconverters.waila.WailaModule.callBackRegister");
 		}
+		LogHelper.info("PowerConverters Core Initialization Finished.");
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
+		LogHelper.info("PowerConverters PostInitialization Started.");
+
+		LogHelper.trace("PostInitializing PacketPipeline. ALL PACKETS SHOULD BE REGISTERED BY NOW!");
+		packetPipeline.postInitialise();
+
+		// Pull steam ID
 		if (FluidRegistry.isFluidRegistered("steam")) {
 			steamId = FluidRegistry.getFluidID("steam");
 		}
+
+		LogHelper.trace("PowerConverters PostInitialization Finished.");
 	}
 }
