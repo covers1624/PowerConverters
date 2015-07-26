@@ -1,13 +1,15 @@
 package covers1624.powerconverters.updatechecker;
 
-import covers1624.powerconverters.gui.GuiModUpdateNotification;
-import covers1624.powerconverters.init.ModBlocks;
-import covers1624.powerconverters.reference.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
+import net.minecraft.util.IChatComponent.Serializer;
+import covers1624.powerconverters.gui.GuiModUpdateNotification;
+import covers1624.powerconverters.handler.ConfigurationHandler;
+import covers1624.powerconverters.init.ModBlocks;
+import covers1624.powerconverters.reference.Reference;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
@@ -27,6 +29,9 @@ public class UpdateManager {
 	GuiModUpdateNotification updateNotification;
 
 	public UpdateManager() {
+		if (!ConfigurationHandler.doUpdateCheck) {
+			return;
+		}
 		updateThread = new UpdateCheckThread(Reference.MOD_ID);
 		updateThread.start();
 	}
@@ -50,7 +55,7 @@ public class UpdateManager {
 					EntityPlayer player = event.player;
 					IChatComponent chatComponent;
 
-					chatComponent = IChatComponent.Serializer.func_150699_a("[{\"text\":\"" + message + "\",\"color\":\"aqua\"}," + "{\"text\":\" " + EnumChatFormatting.WHITE + "[" + EnumChatFormatting.GREEN + "Download" + EnumChatFormatting.WHITE + "]\"," + "\"color\":\"green\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":" + "{\"text\":\"Click this to download the latest version\",\"color\":\"yellow\"}}," + "\"clickEvent\":{\"action\":\"open_url\",\"value\":\"" + location + "\"}}]");
+					chatComponent = Serializer.func_150699_a("[{\"text\":\"" + message + "\",\"color\":\"aqua\"}," + "{\"text\":\" " + EnumChatFormatting.WHITE + "[" + EnumChatFormatting.GREEN + "Download" + EnumChatFormatting.WHITE + "]\"," + "\"color\":\"green\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":" + "{\"text\":\"Click this to download the latest version\",\"color\":\"yellow\"}}," + "\"clickEvent\":{\"action\":\"open_url\",\"value\":\"" + location + "\"}}]");
 					player.addChatMessage(chatComponent);
 				}
 
@@ -59,7 +64,7 @@ public class UpdateManager {
 
 	}
 
-	//@SubscribeEvent
+	// @SubscribeEvent
 	public void tickEvent(RenderTickEvent event) {
 		if (lastPoll2 > 0) {
 			--lastPoll2;

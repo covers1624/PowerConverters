@@ -23,4 +23,6 @@ public class Reference {
 	// Config
 	public static final String BASIC_CATEGORY = "basic";
 	public static final String RECIPES_CATEGORY = "Recipes";
+	public static final String FEATURES_CATEGORY = "Features";
+	public static final String THROTTLES_CATEGORY = "Throttles";
 }
