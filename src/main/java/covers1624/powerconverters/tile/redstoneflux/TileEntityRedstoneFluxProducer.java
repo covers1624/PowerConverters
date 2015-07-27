@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import cofh.api.energy.IEnergyHandler;
+import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.init.PowerSystems;
 import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
 import covers1624.powerconverters.tile.main.TileEntityEnergyProducer;
@@ -49,6 +50,9 @@ public class TileEntityRedstoneFluxProducer extends TileEntityEnergyProducer<IEn
 
 	@Override
 	public double produceEnergy(double energy) {
+		if (ConfigurationHandler.dissableRFProducer) {
+			return energy;
+		}
 		final double toUseRF = energy / getPowerSystem().getScaleAmmount();
 
 		if (toUseRF > 0) {

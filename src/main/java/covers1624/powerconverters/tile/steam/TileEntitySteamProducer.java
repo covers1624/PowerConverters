@@ -9,6 +9,7 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import covers1624.powerconverters.PowerConverters;
+import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.init.PowerSystems;
 import covers1624.powerconverters.tile.main.TileEntityEnergyProducer;
 import covers1624.powerconverters.util.BlockPosition;
@@ -23,7 +24,7 @@ public class TileEntitySteamProducer extends TileEntityEnergyProducer<IFluidHand
 
 	@Override
 	public double produceEnergy(double energy) {
-		if (PowerConverters.steamId == -1) {
+		if (PowerConverters.steamId == -1 || ConfigurationHandler.dissableSteamProducer) {
 			return energy;
 		}
 		energy = energy / PowerSystems.powerSystemSteam.getScaleAmmount();

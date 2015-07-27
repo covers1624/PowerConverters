@@ -14,6 +14,7 @@ import net.minecraft.util.IChatComponent;
 import net.minecraftforge.common.util.ForgeDirection;
 import covers1624.powerconverters.api.charge.IChargeHandler;
 import covers1624.powerconverters.api.registry.UniversalChargerRegistry;
+import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.init.PowerSystems;
 import covers1624.powerconverters.util.BlockPosition;
 import covers1624.powerconverters.util.IAdvancedLogTile;
@@ -47,6 +48,9 @@ public class TileEntityCharger extends TileEntityEnergyProducer<IInventory> impl
 	public double produceEnergy(double energy) {
 		if (energy == 0) {
 			return 0;
+		}
+		if (ConfigurationHandler.dissableUniversalCharger) {
+			return energy;
 		}
 		double energyRemaining = energy;
 		// Iterate over the main part of the inventory.

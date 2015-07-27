@@ -8,6 +8,7 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import covers1624.powerconverters.PowerConverters;
+import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.init.PowerSystems;
 import covers1624.powerconverters.tile.main.TileEntityEnergyConsumer;
 
@@ -66,7 +67,7 @@ public class TileEntitySteamConsumer extends TileEntityEnergyConsumer<IFluidHand
 
 	@Override
 	public boolean canFill(ForgeDirection from, Fluid fluid) {
-		return fluid != null && fluid.getID() == PowerConverters.steamId;
+		return fluid != null && fluid.getID() == PowerConverters.steamId && !ConfigurationHandler.dissableSteamConsumer;
 	}
 
 	@Override

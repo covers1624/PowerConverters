@@ -25,4 +25,5 @@ public class Reference {
 	public static final String RECIPES_CATEGORY = "Recipes";
 	public static final String FEATURES_CATEGORY = "Features";
 	public static final String THROTTLES_CATEGORY = "Throttles";
+	public static final String DEVICES_CATEGORY = "Devices";
 }

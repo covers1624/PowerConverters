@@ -3,6 +3,7 @@ package covers1624.powerconverters.tile.factorization;
 import java.util.Map.Entry;
 
 import net.minecraftforge.common.util.ForgeDirection;
+import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.init.PowerSystems;
 import covers1624.powerconverters.tile.main.TileEntityEnergyProducer;
 import factorization.api.Charge;
@@ -19,6 +20,9 @@ public class TileEntityPowerConverterFactorizationProducer extends TileEntityEne
 
 	@Override
 	public double produceEnergy(double energy) {
+		if (ConfigurationHandler.dissableFactorizationProducer) {
+			return energy;
+		}
 		double CG = energy / PowerSystems.powerSystemFactorization.getScaleAmmount();
 		for (Entry<ForgeDirection, IChargeConductor> output : this.getTiles().entrySet()) {
 			IChargeConductor o = output.getValue();

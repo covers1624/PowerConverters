@@ -2,6 +2,7 @@ package covers1624.powerconverters.tile.redstoneflux;
 
 import net.minecraftforge.common.util.ForgeDirection;
 import cofh.api.energy.IEnergyHandler;
+import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.init.PowerSystems;
 import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
 import covers1624.powerconverters.tile.main.TileEntityEnergyConsumer;
@@ -29,7 +30,7 @@ public class TileEntityRedstoneFluxConsumer extends TileEntityEnergyConsumer<IEn
 	@Override
 	public boolean canConnectEnergy(ForgeDirection arg0) {
 
-		return true;
+		return !ConfigurationHandler.dissableRFConsumer;
 	}
 
 	@Override

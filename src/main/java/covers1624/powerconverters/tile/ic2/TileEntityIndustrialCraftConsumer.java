@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
+import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.init.PowerSystems;
 import covers1624.powerconverters.tile.main.TileEntityEnergyConsumer;
 
@@ -60,7 +61,7 @@ public class TileEntityIndustrialCraftConsumer extends TileEntityEnergyConsumer<
 
 	@Override
 	public boolean acceptsEnergyFrom(TileEntity emitter, ForgeDirection direction) {
-		return true;
+		return ConfigurationHandler.dissableIC2Consumer;
 	}
 
 	@Override

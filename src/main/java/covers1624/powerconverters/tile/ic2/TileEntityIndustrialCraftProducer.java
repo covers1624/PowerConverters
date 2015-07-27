@@ -70,6 +70,10 @@ public class TileEntityIndustrialCraftProducer extends TileEntityEnergyProducer<
 	@Override
 	public double produceEnergy(double energy) {
 
+		if (ConfigurationHandler.dissableIC2Producer) {
+			return energy;
+		}
+
 		double eu = energy / PowerSystems.powerSystemIndustrialCraft.getScaleAmmount();
 		double usedEu = Math.min(eu, getMaxEnergyOutput() - this.eu);
 		this.eu += usedEu;

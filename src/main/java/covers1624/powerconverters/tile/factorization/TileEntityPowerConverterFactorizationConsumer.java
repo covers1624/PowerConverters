@@ -1,6 +1,7 @@
 package covers1624.powerconverters.tile.factorization;
 
 import net.minecraft.util.MathHelper;
+import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.init.PowerSystems;
 import covers1624.powerconverters.tile.main.TileEntityEnergyConsumer;
 import factorization.api.Charge;
@@ -20,6 +21,10 @@ public class TileEntityPowerConverterFactorizationConsumer extends TileEntityEne
 	public void updateEntity() {
 		super.updateEntity();
 		if (worldObj.isRemote) {
+			return;
+		}
+
+		if (ConfigurationHandler.dissableFactorizationConsumer) {
 			return;
 		}
 
