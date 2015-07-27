@@ -2,7 +2,6 @@ package covers1624.powerconverters.tile.steam;
 
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
@@ -18,7 +17,7 @@ public class TileEntitySteamConsumer extends TileEntityEnergyConsumer<IFluidHand
 
 	public TileEntitySteamConsumer() {
 		super(PowerSystems.powerSystemSteam, 0, IFluidHandler.class);
-		_steamTank = new FluidTank(1 * FluidContainerRegistry.BUCKET_VOLUME);
+		_steamTank = new FluidTank(10000);
 	}
 
 	@Override

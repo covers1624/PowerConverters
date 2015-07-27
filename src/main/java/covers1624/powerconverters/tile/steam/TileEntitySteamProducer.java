@@ -3,7 +3,7 @@ package covers1624.powerconverters.tile.steam;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
@@ -19,7 +19,7 @@ public class TileEntitySteamProducer extends TileEntityEnergyProducer<IFluidHand
 
 	public TileEntitySteamProducer() {
 		super(PowerSystems.powerSystemSteam, 0, IFluidHandler.class);
-		_tank = new FluidTank(1 * FluidContainerRegistry.BUCKET_VOLUME);
+		_tank = new FluidTank(10000);
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class TileEntitySteamProducer extends TileEntityEnergyProducer<IFluidHand
 			TileEntity te = worldObj.getTileEntity(bp.x, bp.y, bp.z);
 
 			if (te != null && te instanceof IFluidHandler) {
-				energy -= ((IFluidHandler) te).fill(bp.orientation.getOpposite(), new FluidStack(PowerConverters.steamId, (int) energy), true);
+				energy -= ((IFluidHandler) te).fill(bp.orientation.getOpposite(), new FluidStack(FluidRegistry.getFluid(PowerConverters.steamId), (int) energy), true);
 			}
 			if (energy <= 0) {
 				return 0;

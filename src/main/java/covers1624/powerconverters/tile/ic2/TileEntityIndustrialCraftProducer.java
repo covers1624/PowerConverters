@@ -18,7 +18,7 @@ public class TileEntityIndustrialCraftProducer extends TileEntityEnergyProducer<
 
 	private double eu;
 
-	private int _packetCount;
+	private int _packetCount = 1;
 
 	public TileEntityIndustrialCraftProducer() {
 		this(0);
@@ -26,15 +26,15 @@ public class TileEntityIndustrialCraftProducer extends TileEntityEnergyProducer<
 
 	public TileEntityIndustrialCraftProducer(int voltageIndex) {
 		super(PowerSystems.powerSystemIndustrialCraft, voltageIndex, IEnergyAcceptor.class);
-		if (voltageIndex == 0) {
-			_packetCount = ConfigurationHandler.throttleIC2LVProducer;
-		} else if (voltageIndex == 1) {
-			_packetCount = ConfigurationHandler.throttleIC2MVProducer;
-		} else if (voltageIndex == 2) {
-			_packetCount = ConfigurationHandler.throttleIC2HVProducer;
-		} else if (voltageIndex == 3) {
-			_packetCount = ConfigurationHandler.throttleIC2EVProducer;
-		}
+		// if (voltageIndex == 0) {
+		// _packetCount = ConfigurationHandler.throttleIC2LVProducer;
+		// } else if (voltageIndex == 1) {
+		// _packetCount = ConfigurationHandler.throttleIC2MVProducer;
+		// }/ else if (voltageIndex == 2) {
+		// _packetCount = ConfigurationHandler.throttleIC2HVProducer;
+		// } else if (voltageIndex == 3) {
+		// _packetCount = ConfigurationHandler.throttleIC2EVProducer;
+		// }
 	}
 
 	@Override

@@ -9,11 +9,7 @@ public class TODO {
 
 	// TODO Save all PowerRatios to the config.
 
-	// TODO Add configs for all consumers and producers.
-
 	// TODO Re balance all PowerRatios.
-
-	// TODO Add back the Throttles for steam as it is infinite at the moment.
 
 	// TODO Revamp Energy Bridge Gui.
 }

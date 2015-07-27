@@ -15,12 +15,10 @@ public class ConfigurationHandler {
 	public static int bridgeBufferSize;
 
 	// Throttles
-	public static int throttleSteamConsumer;
-	public static int throttleSteamProducer;
-	public static int throttleIC2LVProducer;
-	public static int throttleIC2MVProducer;
-	public static int throttleIC2HVProducer;
-	public static int throttleIC2EVProducer;
+	// public static int throttleIC2LVProducer;
+	// public static int throttleIC2MVProducer;
+	// public static int throttleIC2HVProducer;
+	// public static int throttleIC2EVProducer;
 
 	// Recipes
 	public static boolean useThermalExpansionRecipes;
@@ -30,8 +28,7 @@ public class ConfigurationHandler {
 	public static boolean doFlatBedrock;
 	public static boolean doUpdateCheck;
 
-	// Functionality
-
+	// Devices
 	public static boolean dissableRFProducer;
 	public static boolean dissableRFConsumer;
 
@@ -66,13 +63,10 @@ public class ConfigurationHandler {
 		useThermalExpansionRecipes = configuration.get(Reference.RECIPES_CATEGORY, "Thermal Expansion", false, "Thermal Expansion Recipes").getBoolean();
 		useTechRebornRecipes = configuration.get(Reference.RECIPES_CATEGORY, "Tech Reborn", false, "Tech Reborn Recipes").getBoolean();
 
-		// TODO Throttles
-		throttleSteamConsumer = configuration.get(Reference.THROTTLES_CATEGORY, "Steam.Consumer", 1000, "mB/t").getInt();
-		throttleSteamProducer = configuration.get(Reference.THROTTLES_CATEGORY, "Steam.Producer", 1000, "mB/t").getInt();
-		throttleIC2LVProducer = configuration.get(Reference.THROTTLES_CATEGORY, "IC2.Consumer.LV", 1, "Packets/t").getInt();
-		throttleIC2MVProducer = configuration.get(Reference.THROTTLES_CATEGORY, "IC2.Consumer.MV", 1, "Packets/t").getInt();
-		throttleIC2HVProducer = configuration.get(Reference.THROTTLES_CATEGORY, "IC2.Consumer.HV", 1, "Packets/t").getInt();
-		throttleIC2EVProducer = configuration.get(Reference.THROTTLES_CATEGORY, "IC2.Consumer.EV", 1, "Packets/t").getInt();
+		// throttleIC2LVProducer = configuration.get(Reference.THROTTLES_CATEGORY, "IC2.Consumer.LV", 1, "Packets/t").getInt();
+		// throttleIC2MVProducer = configuration.get(Reference.THROTTLES_CATEGORY, "IC2.Consumer.MV", 1, "Packets/t").getInt();
+		// throttleIC2HVProducer = configuration.get(Reference.THROTTLES_CATEGORY, "IC2.Consumer.HV", 1, "Packets/t").getInt();
+		// throttleIC2EVProducer = configuration.get(Reference.THROTTLES_CATEGORY, "IC2.Consumer.EV", 1, "Packets/t").getInt();
 
 		dissableRFProducer = configuration.getBoolean("Dissable RF Producer", Reference.DEVICES_CATEGORY, false, "Dissables the RF Producer");
 		dissableRFConsumer = configuration.getBoolean("Dissable RF Consumer", Reference.DEVICES_CATEGORY, false, "Dissables the RF Consumer");
