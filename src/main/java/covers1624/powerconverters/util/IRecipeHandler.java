@@ -60,8 +60,9 @@ public class IRecipeHandler {
 
 	public static IRecipe readIRecipeFromTag(NBTTagCompound tagCompound) {
 		String type = tagCompound.getString("Type");
-
-		if (type == "Shaped") {
+		// LogHelper.info(type);
+		if (type.equals("Shaped")) {
+			// LogHelper.info("Detected Shaped Recipe Stored.");
 			ItemStack output = ItemStack.loadItemStackFromNBT((NBTTagCompound) tagCompound.getTag("Output"));
 			int height = tagCompound.getInteger("Height");
 			int width = tagCompound.getInteger("Width");
@@ -77,7 +78,8 @@ public class IRecipeHandler {
 			ShapedRecipes shapedRecipe = new ShapedRecipes(width, height, recipeItems, output);
 			return shapedRecipe;
 		}
-		if (type == "Shapeless") {
+		if (type.equals("Shapeless")) {
+			// LogHelper.info("Detected Shapeless Recipe Stored.");
 			ItemStack output = ItemStack.loadItemStackFromNBT((NBTTagCompound) tagCompound.getTag("Output"));
 			ArrayList<ItemStack> recipeItems = new ArrayList<ItemStack>();
 
@@ -90,6 +92,7 @@ public class IRecipeHandler {
 			ShapelessRecipes shapelessRecipe = new ShapelessRecipes(output, recipeItems);
 			return shapelessRecipe;
 		}
+
 		return null;
 	}
 }

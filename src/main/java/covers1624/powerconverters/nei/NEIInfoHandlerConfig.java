@@ -41,6 +41,7 @@ public class NEIInfoHandlerConfig implements IConfigureNEI {
 				for (IRecipe recipe : Recipes.getCurrentRecipes()) {
 					if (recipe instanceof ShapedRecipes) {
 						CachedShapedRecipe shapedRecipe = shapedRecipeHandler.new CachedShapedRecipe((ShapedRecipes) recipe);
+						shapedRecipe.computeVisuals();
 						shapedRecipeHandler.arecipes.add(shapedRecipe);
 					}
 				}
@@ -51,6 +52,7 @@ public class NEIInfoHandlerConfig implements IConfigureNEI {
 					if (recipe instanceof ShapelessRecipes) {
 						ShapelessRecipes shapelessRecipe = (ShapelessRecipes) recipe;
 						CachedShapelessRecipe cachedShapelessRecipe = shapelessRecipeHandler.new CachedShapelessRecipe(shapelessRecipe.recipeItems, shapelessRecipe.getRecipeOutput());
+						// cachedShapelessRecipe.
 						shapelessRecipeHandler.arecipes.add(cachedShapelessRecipe);
 					}
 				}
