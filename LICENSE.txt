@@ -1,3 +1,9 @@
+ALL RIGHTS RESERVED
+
+
+EXCLUSION, The classes covers1624.repack.cohf.lib.util.ArrayHashList and covers1624.repack.cohf.lib.util.LinkedHashList
+are licenced under the GNU Lesser Public License Version 3 (LGPLv3) and are property of the CoFH Team.
+
                    GNU LESSER GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
