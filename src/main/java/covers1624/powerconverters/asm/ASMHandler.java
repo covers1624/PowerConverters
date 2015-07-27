@@ -45,7 +45,7 @@ public class ASMHandler implements IFMLLoadingPlugin {
 
 	@Override
 	public String getAccessTransformerClass() {
-		return "";
+		return null;
 	}
 
 }

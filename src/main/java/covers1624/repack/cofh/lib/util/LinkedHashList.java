@@ -1,6 +1,5 @@
 /**
- * This Class is property of the CoFH Team.
- * With the qualified name of: cofh.lib.util.LinkedHashList
+ * This Class is property of the CoFH Team and is licensed under LGPLv3.
  */
 package covers1624.repack.cofh.lib.util;
 

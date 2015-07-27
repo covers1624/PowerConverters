@@ -7,20 +7,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import covers1624.powerconverters.init.Recipes;
+import covers1624.powerconverters.nei.NEIInfoHandlerConfig;
 import covers1624.powerconverters.util.IRecipeHandler;
+import covers1624.powerconverters.util.LogHelper;
 import covers1624.powerconverters.util.RecipeRemover;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.network.ByteBufUtils;
 
 public class RecipeSyncPacket extends AbstractPacket {
 
 	private NBTTagCompound tagCompound;
+
+	public RecipeSyncPacket() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public RecipeSyncPacket(NBTTagCompound tag) {
 		tagCompound = tag;
@@ -38,6 +44,7 @@ public class RecipeSyncPacket extends AbstractPacket {
 
 	@Override
 	public void handleClientSide(EntityPlayer player) {
+		LogHelper.info("packet arrived");
 		NBTTagList tagList = tagCompound.getTagList("Recipes", 10);
 		List<IRecipe> recipes = new ArrayList<IRecipe>();
 		for (int i = 0; i < tagList.tagCount(); i++) {
@@ -55,20 +62,14 @@ public class RecipeSyncPacket extends AbstractPacket {
 		for (IRecipe recipe : recipes) {
 			CraftingManager.getInstance().getRecipeList().add(recipe);
 		}
+		if (Loader.isModLoaded("NotEnoughItems")) {
+			NEIInfoHandlerConfig.addRecipesToNEI();
+		}
 	}
 
 	@Override
 	public void handleServerSide(EntityPlayer player) {
-		NBTTagCompound tag = new NBTTagCompound();
-		List<IRecipe> recipes = Recipes.getCurrentRecipes();
-		NBTTagList tagList = new NBTTagList();
-		for (IRecipe recipe : recipes) {
-			NBTTagCompound tagCompound = IRecipeHandler.writeIRecipeToTag(recipe);
-			tagList.appendTag(tagCompound);
-		}
-		tag.setTag("Recipes", tagList);
-		RecipeSyncPacket syncPacket = new RecipeSyncPacket(tag);
-		PacketPipeline.INSTANCE.sendTo(syncPacket, (EntityPlayerMP) player);
+
 	}
 
 }

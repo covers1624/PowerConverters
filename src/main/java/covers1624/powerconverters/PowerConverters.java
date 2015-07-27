@@ -29,6 +29,7 @@ import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = "after:BuildCraft|Energy;after:factorization;after:IC2;after:Railcraft;after:ThermalExpansion", guiFactory = Reference.GUI_FACTORY)
 public class PowerConverters {
@@ -98,16 +99,17 @@ public class PowerConverters {
 
 		LogHelper.trace("Registering Client Rendering.");
 		proxy.initRendering();
+		if (event.getSide() == Side.SERVER) {
+			if (ConfigurationHandler.useTechRebornRecipes) {
 
-		if (ConfigurationHandler.useTechRebornRecipes) {
+			} else if (ConfigurationHandler.useThermalExpansionRecipes) {
 
-		} else if (ConfigurationHandler.useThermalExpansionRecipes) {
-
-		} else {
-			LogHelper.trace("Registering Default Recipes.");
-			Recipes.initDefaults();
+			} else {
+				LogHelper.trace("Registering Default Recipes.");
+				Recipes.initDefaults();
+			}
+			Recipes.setDefaultRecipes(Recipes.getCurrentRecipes());
 		}
-		Recipes.setDefaultRecipes(Recipes.getCurrentRecipes());
 
 		if (Loader.isModLoaded("Waila")) {
 			FMLInterModComms.sendMessage("Waila", "register", "covers1624.powerconverters.waila.WailaModule.callBackRegister");
