@@ -36,8 +36,6 @@ public class PowerConverters {
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY, serverSide = Reference.SERVER_PROXY)
 	public static IPCProxy proxy;
 
-	public static final PacketPipeline packetPipeline = new PacketPipeline();
-
 	@Instance("Power Converters")
 	public static PowerConverters instance;
 
@@ -80,8 +78,8 @@ public class PowerConverters {
 		LogHelper.info("PowerConverters Core Initialization Started.");
 
 		LogHelper.trace("Initializing PacketPipeline");
-		packetPipeline.initalise();
-		packetPipeline.registerPacket(RecipeSyncPacket.class);
+		PacketPipeline.INSTANCE.initalise();
+		PacketPipeline.INSTANCE.registerPacket(RecipeSyncPacket.class);
 
 		MinecraftForge.EVENT_BUS.register(GridTickHandler.energy);
 		FMLCommonHandler.instance().bus().register(GridTickHandler.energy);
@@ -122,7 +120,7 @@ public class PowerConverters {
 		LogHelper.info("PowerConverters PostInitialization Started.");
 
 		LogHelper.trace("PostInitializing PacketPipeline. ALL PACKETS SHOULD BE REGISTERED BY NOW!");
-		packetPipeline.postInitialise();
+		PacketPipeline.INSTANCE.postInitialise();
 
 		// Pull steam ID
 		if (FluidRegistry.isFluidRegistered("steam")) {

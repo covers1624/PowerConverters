@@ -13,7 +13,6 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import covers1624.powerconverters.PowerConverters;
 import covers1624.powerconverters.init.Recipes;
 import covers1624.powerconverters.util.IRecipeHandler;
 import covers1624.powerconverters.util.RecipeRemover;
@@ -69,7 +68,7 @@ public class RecipeSyncPacket extends AbstractPacket {
 		}
 		tag.setTag("Recipes", tagList);
 		RecipeSyncPacket syncPacket = new RecipeSyncPacket(tag);
-		PowerConverters.packetPipeline.sendTo(syncPacket, (EntityPlayerMP) player);
+		PacketPipeline.INSTANCE.sendTo(syncPacket, (EntityPlayerMP) player);
 	}
 
 }

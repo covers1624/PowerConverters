@@ -10,6 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidRegistry.FluidRegisterEvent;
 import covers1624.powerconverters.PowerConverters;
 import covers1624.powerconverters.init.Recipes;
+import covers1624.powerconverters.net.PacketPipeline;
 import covers1624.powerconverters.net.RecipeSyncPacket;
 import covers1624.powerconverters.reference.Reference;
 import covers1624.powerconverters.util.LogHelper;
@@ -51,7 +52,7 @@ public class PCEventHandler {
 			return;
 		}
 		RecipeSyncPacket syncPacket = new RecipeSyncPacket(new NBTTagCompound());
-		PowerConverters.packetPipeline.sendToServer(syncPacket);
+		PacketPipeline.INSTANCE.sendToServer(syncPacket);
 	}
 
 	@SideOnly(Side.CLIENT)

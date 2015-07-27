@@ -1,6 +1,3 @@
-/**
- * Stolen from TinkersConstruct :D
- */
 package covers1624.powerconverters.net;
 
 import io.netty.buffer.ByteBuf;
@@ -15,11 +12,12 @@ import java.util.EnumMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.INetHandler;
 import net.minecraft.network.NetHandlerPlayServer;
+import covers1624.powerconverters.PowerConverters;
+import covers1624.powerconverters.reference.Reference;
 import covers1624.powerconverters.util.LogHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.FMLEmbeddedChannel;
@@ -41,6 +39,8 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 	private LinkedList<Class<? extends AbstractPacket>> packets = new LinkedList<Class<? extends AbstractPacket>>();
 	private boolean isPostInitialised = false;
 
+	public static final PacketPipeline INSTANCE = new PacketPipeline();
+
 	/**
 	 * Register your packet with the pipeline. Discriminators are automatically set.
 	 * 
@@ -61,7 +61,7 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 		}
 
 		if (this.isPostInitialised) {
-			LogHelper.bigFatal("Already started PostInit, You are doing it wrong, Add Packets any time before PostInit.");
+			LogHelper.fatal("Already started PostInit, You are doing it wrong, Add Packets any time before PostInit.");
 			return false;
 		}
 
@@ -117,7 +117,7 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 
 	// Method to call from FMLInitializationEvent
 	public void initalise() {
-		this.channels = NetworkRegistry.INSTANCE.newChannel("PowerConverters", this);
+		this.channels = NetworkRegistry.INSTANCE.newChannel(Reference.MOD_NAME, this);
 	}
 
 	// Method to call from FMLPostInitializationEvent
@@ -145,7 +145,7 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 
 	@SideOnly(Side.CLIENT)
 	private EntityPlayer getClientPlayer() {
-		return Minecraft.getMinecraft().thePlayer;
+		return PowerConverters.proxy.getClientPlayer();
 	}
 
 	/**
