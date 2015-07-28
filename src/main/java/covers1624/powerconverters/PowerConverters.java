@@ -71,6 +71,7 @@ public class PowerConverters {
 		PowerSystems.initChargeHandlers();
 
 		LogHelper.info("PowerConverters PreInitialization Finished.");
+
 	}
 
 	@EventHandler
@@ -128,5 +129,10 @@ public class PowerConverters {
 		}
 
 		LogHelper.trace("PowerConverters PostInitialization Finished.");
+
+		// LogHelper.info("Dumping Blackboard...");
+		// for (Entry<String, Object> entry : Launch.blackboard.entrySet()) {
+		// LogHelper.info(entry.getKey() + " " + entry.getValue());
+		// }
 	}
 }

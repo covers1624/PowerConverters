@@ -54,9 +54,15 @@ public class PowerSystemRegistry {
 		private int[] voltageValues;
 		private String unit;
 		private int id;
+		private boolean consumerDissabled = false;
+		private boolean producerDissabled = false;
 
 		public PowerSystem(String name, String abbreviation, int scaleAmmount, String unit) {
 			this(name, abbreviation, scaleAmmount, null, null, unit);
+		}
+
+		public PowerSystem(String name, String abbreviation, int scaleAmmount, String unit, boolean consumerDissabled, boolean producerDissabled) {
+			this(name, abbreviation, scaleAmmount, null, null, unit, consumerDissabled, producerDissabled);
 		}
 
 		public PowerSystem(String name, String abbreviation, int scaleAmmount, String[] voltageNames, int[] voltageValues, String unit) {
@@ -66,6 +72,17 @@ public class PowerSystemRegistry {
 			this.voltageNames = voltageNames;
 			this.voltageValues = voltageValues;
 			this.unit = unit;
+		}
+
+		public PowerSystem(String name, String abbreviation, int scaleAmmount, String[] voltageNames, int[] voltageValues, String unit, boolean consumerDissabled, boolean producerDissabled) {
+			this.name = name;
+			this.abbreviation = abbreviation;
+			this.scaleAmmount = scaleAmmount;
+			this.voltageNames = voltageNames;
+			this.voltageValues = voltageValues;
+			this.unit = unit;
+			this.consumerDissabled = consumerDissabled;
+			this.producerDissabled = producerDissabled;
 		}
 
 		public String getName() {
@@ -94,6 +111,24 @@ public class PowerSystemRegistry {
 
 		public int getId() {
 			return id;
+		}
+
+		public boolean consumerDissabled() {
+			return consumerDissabled;
+		}
+
+		public boolean producerDissabled() {
+			return producerDissabled;
+		}
+
+		public PowerSystem setProducerState(boolean state) {
+			producerDissabled = state;
+			return this;
+		}
+
+		public PowerSystem setConsumerState(boolean state) {
+			consumerDissabled = state;
+			return this;
 		}
 
 	}

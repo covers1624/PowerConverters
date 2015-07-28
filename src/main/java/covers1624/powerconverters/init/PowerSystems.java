@@ -5,6 +5,7 @@ import covers1624.powerconverters.api.registry.PowerSystemRegistry.PowerSystem;
 import covers1624.powerconverters.api.registry.UniversalChargerRegistry;
 import covers1624.powerconverters.charge.ChargeHandlerIndustrialCraft;
 import covers1624.powerconverters.charge.ChargeHandlerRedstoneFlux;
+import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.util.RFHelper;
 
 public class PowerSystems {
@@ -21,6 +22,13 @@ public class PowerSystems {
 		powerSystemFactorization = new PowerSystem("Factorization", "FZ", 175, "CG/t");
 		powerSystemRedstoneFlux = new PowerSystem("RedstoneFlux", "RF", 1000, "RF/t");
 		powerSystemPneumaticCraft = new PowerSystem("PneumaticCraft", "PSI", 100, "PSI");
+
+		powerSystemIndustrialCraft.setConsumerState(ConfigurationHandler.dissableIC2Consumer).setProducerState(ConfigurationHandler.dissableIC2Producer);
+		powerSystemSteam.setConsumerState(ConfigurationHandler.dissableSteamConsumer).setProducerState(ConfigurationHandler.dissableSteamProducer);
+		powerSystemFactorization.setConsumerState(ConfigurationHandler.dissableFactorizationConsumer).setProducerState(ConfigurationHandler.dissableFactorizationProducer);
+		powerSystemRedstoneFlux.setConsumerState(ConfigurationHandler.dissableRFConsumer).setProducerState(ConfigurationHandler.dissableRFProducer);
+		// powerSystemPneumaticCraft.setConsumerState(ConfigurationHandler.dissableIC2Consumer).setProducerState(ConfigurationHandler.dissableIC2Producer);
+
 		PowerSystemRegistry.registerPowerSystem(powerSystemIndustrialCraft);
 		PowerSystemRegistry.registerPowerSystem(powerSystemSteam);
 		PowerSystemRegistry.registerPowerSystem(powerSystemFactorization);

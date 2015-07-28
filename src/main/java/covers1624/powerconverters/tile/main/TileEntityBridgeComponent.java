@@ -125,6 +125,11 @@ public class TileEntityBridgeComponent<T> extends TileEntity implements INeighbo
 	public void addWailaInfo(List<String> info) {
 		info.add("Type: " + type);
 		info.add("PowerSystem: " + powerSystem.getName());
+		if (type.equals("Consumer")) {
+			info.add("Consumer Dissabled: " + powerSystem.consumerDissabled());
+		} else if (type.equals("Producer")) {
+			info.add("Producer Dissabled: " + powerSystem.producerDissabled());
+		}
 	}
 
 	@Override

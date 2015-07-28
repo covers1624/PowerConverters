@@ -1,6 +1,7 @@
 package covers1624.powerconverters.gui;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.launchwrapper.Launch;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -13,11 +14,10 @@ import covers1624.powerconverters.reference.Reference;
 import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
 
 public class GuiEnergyBridge extends GuiContainer {
-	private static final int _barColor = (255) | (165 << 8) | (0 << 16) | (255 << 24);
 
 	protected TileEntityEnergyBridge _bridge;
 
-	public static final ResourceLocation BridgeGui = new ResourceLocation(Reference.GUI_FOLDER + "energybridge.png");
+	private static boolean isDevEnv = (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
 
 	public GuiEnergyBridge(ContainerEnergyBridge container, TileEntityEnergyBridge te) {
 		super(container);
@@ -27,6 +27,46 @@ public class GuiEnergyBridge extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+
+		if (!isDevEnv) {
+			// Draws the old gui so i can secretly work on the new one
+			drawOldGuiContainerForegroundLayer(mouseX, mouseY);
+		}
+
+		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 95 + 2, 4210752);
+	}
+
+	@Override
+	protected void drawGuiContainerBackgroundLayer(float gameTicks, int mouseX, int mouseY) {
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		this.mc.renderEngine.bindTexture(new ResourceLocation(Reference.GUI_FOLDER + "energybridgeBlank.png"));
+		int x = (width - xSize) / 2;
+		int y = (height - ySize) / 2;
+		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
+		if (!isDevEnv) {
+			// Draws the old gui so i can secretly work on the new one
+			drawOldGuiContainerBackgroundLayer(gameTicks, mouseX, mouseY, x, y);
+		}
+	}
+
+	@Override
+	protected void mouseClicked(int mouseX, int mouseY, int clickedButton) {
+		super.mouseClicked(mouseX, mouseY, clickedButton);
+
+	}
+
+	private String getOutputRateString(BridgeSideData data) {
+		if (!data.isConnected)
+			return "NO LINK";
+		double rate = data.outputRate;
+		if (rate > 1000) {
+			double rateThousand = (rate / 1000.0);
+			return String.format("%.1f %s%s", rateThousand, "k", data.powerSystem.getUnit());
+		}
+		return rate + " " + data.powerSystem.getUnit();
+	}
+
+	private void drawOldGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		fontRendererObj.drawString("Energy Bridge", 8, 6, 4210752);
 
 		if (_bridge.isInputLimited()) {
@@ -57,20 +97,11 @@ public class GuiEnergyBridge extends GuiContainer {
 		fontRendererObj.drawString("% CHG", 10, 90, -1);
 
 		GL11.glDisable(GL11.GL_LIGHTING);
-		drawRect(46, 97, 46 + (int)_bridge.getEnergyScaled(), 89, _barColor);
+		drawRect(46, 97, 46 + (int) _bridge.getEnergyScaled(), 89, (255) | (165 << 8) | (0 << 16) | (255 << 24));
 		GL11.glEnable(GL11.GL_LIGHTING);
-
-		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
 	}
 
-	@Override
-	protected void drawGuiContainerBackgroundLayer(float gameTicks, int mouseX, int mouseY) {
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.bindTexture(BridgeGui);
-		int x = (width - xSize) / 2;
-		int y = (height - ySize) / 2;
-		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
-
+	private void drawOldGuiContainerBackgroundLayer(float gameTicks, int mouseX, int mouseY, int x, int y) {
 		for (int i = 0; i < 6; i++) {
 			ForgeDirection dir = ForgeDirection.getOrientation(i);
 			BridgeSideData data = _bridge.getDataForSide(dir);
@@ -87,16 +118,5 @@ public class GuiEnergyBridge extends GuiContainer {
 				drawTexturedModalRect(x + 7, y + 15 + 12 * i, 0, 221, 162, 12);
 			}
 		}
-	}
-
-	private String getOutputRateString(BridgeSideData data) {
-		if (!data.isConnected)
-			return "NO LINK";
-		double rate = data.outputRate;
-		if (rate > 1000) {
-			double rateThousand = (rate / 1000.0);
-			return String.format("%.1f %s%s", rateThousand, "k", data.powerSystem.getUnit());
-		}
-		return rate + " " + data.powerSystem.getUnit();
 	}
 }
