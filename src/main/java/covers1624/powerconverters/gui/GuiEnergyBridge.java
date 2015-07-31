@@ -1,5 +1,7 @@
 package covers1624.powerconverters.gui;
 
+import java.util.ArrayList;
+
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.util.ResourceLocation;
@@ -10,12 +12,16 @@ import org.lwjgl.opengl.GL11;
 
 import covers1624.powerconverters.api.bridge.BridgeSideData;
 import covers1624.powerconverters.container.ContainerEnergyBridge;
+import covers1624.powerconverters.gui.element.GuiElement;
 import covers1624.powerconverters.reference.Reference;
 import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
 
 public class GuiEnergyBridge extends GuiContainer {
 
 	protected TileEntityEnergyBridge _bridge;
+
+	// List of Elements to render. Rendered as they appear in the list.
+	private ArrayList<GuiElement> elements = new ArrayList<GuiElement>();
 
 	private static boolean isDevEnv = (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
 
@@ -33,6 +39,13 @@ public class GuiEnergyBridge extends GuiContainer {
 			drawOldGuiContainerForegroundLayer(mouseX, mouseY);
 		}
 
+		if (!elements.isEmpty()) {
+			for (int i = 0; i < elements.size(); i++) {
+				GuiElement element = elements.get(i);
+				element.drawElementForegroundLayer(mouseX, mouseY);
+			}
+		}
+
 		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 95 + 2, 4210752);
 	}
 
@@ -47,6 +60,13 @@ public class GuiEnergyBridge extends GuiContainer {
 			// Draws the old gui so i can secretly work on the new one
 			drawOldGuiContainerBackgroundLayer(gameTicks, mouseX, mouseY, x, y);
 		}
+		if (!elements.isEmpty()) {
+			for (int i = 0; i < elements.size(); i++) {
+				GuiElement element = elements.get(i);
+				element.drawElementBackgroundLayer(mouseX, mouseY);
+			}
+		}
+
 	}
 
 	@Override
