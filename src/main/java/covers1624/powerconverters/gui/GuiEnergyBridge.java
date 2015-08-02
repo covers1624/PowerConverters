@@ -1,9 +1,6 @@
 package covers1624.powerconverters.gui;
 
-import java.util.ArrayList;
-
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.launchwrapper.Launch;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -12,67 +9,76 @@ import org.lwjgl.opengl.GL11;
 
 import covers1624.powerconverters.api.bridge.BridgeSideData;
 import covers1624.powerconverters.container.ContainerEnergyBridge;
-import covers1624.powerconverters.gui.element.GuiElement;
 import covers1624.powerconverters.reference.Reference;
 import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
+import covers1624.powerconverters.util.GuiArea;
 
 public class GuiEnergyBridge extends GuiContainer {
 
-	protected TileEntityEnergyBridge _bridge;
+	private TileEntityEnergyBridge energyBridge;
+	private ContainerEnergyBridge containerEnergyBridge;
 
-	// List of Elements to render. Rendered as they appear in the list.
-	private ArrayList<GuiElement> elements = new ArrayList<GuiElement>();
-
-	private static boolean isDevEnv = (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
+	private GuiArea[] guiAreas = new GuiArea[7];
 
 	public GuiEnergyBridge(ContainerEnergyBridge container, TileEntityEnergyBridge te) {
 		super(container);
-		ySize = 195;
-		_bridge = te;
+		xSize = 248;
+		ySize = 255;
+		energyBridge = te;
+		containerEnergyBridge = container;
+		initGuiAreas();
+	}
+
+	// Not the most efficient but it works
+	private void initGuiAreas() {
+		guiAreas[0] = new GuiArea(8, 17, 122, 47);
+		guiAreas[1] = new GuiArea(8, 51, 122, 81);
+		guiAreas[2] = new GuiArea(8, 85, 122, 115);
+
+		guiAreas[3] = new GuiArea(126, 17, 240, 47);
+		guiAreas[4] = new GuiArea(126, 51, 240, 81);
+		guiAreas[5] = new GuiArea(126, 85, 240, 115);
+
+		guiAreas[6] = new GuiArea(44, 119, 204, 163);
 	}
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-
-		if (!isDevEnv) {
-			// Draws the old gui so i can secretly work on the new one
-			drawOldGuiContainerForegroundLayer(mouseX, mouseY);
-		}
-
-		if (!elements.isEmpty()) {
-			for (int i = 0; i < elements.size(); i++) {
-				GuiElement element = elements.get(i);
-				element.drawElementForegroundLayer(mouseX, mouseY);
-			}
-		}
-
-		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 95 + 2, 4210752);
+		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 44, ySize - 91, 4210752);
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float gameTicks, int mouseX, int mouseY) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.bindTexture(new ResourceLocation(Reference.GUI_FOLDER + "energybridgeBlank.png"));
+		this.mc.renderEngine.bindTexture(new ResourceLocation(Reference.GUI_FOLDER + "guiEnergyBridge.png"));
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
-		if (!isDevEnv) {
-			// Draws the old gui so i can secretly work on the new one
-			drawOldGuiContainerBackgroundLayer(gameTicks, mouseX, mouseY, x, y);
-		}
-		if (!elements.isEmpty()) {
-			for (int i = 0; i < elements.size(); i++) {
-				GuiElement element = elements.get(i);
-				element.drawElementBackgroundLayer(mouseX, mouseY);
-			}
-		}
-
+		drawSlotLighting(mouseX, mouseY, x, y);
 	}
 
 	@Override
 	protected void mouseClicked(int mouseX, int mouseY, int clickedButton) {
 		super.mouseClicked(mouseX, mouseY, clickedButton);
 
+	}
+
+	private void drawSlotLighting(int mouseX, int mouseY, int x, int y) {
+		GL11.glPushMatrix();
+
+		for (GuiArea guiArea : guiAreas) {
+			if (guiArea.isMouseInArea(mouseX, mouseY, x, y)) {
+				GL11.glDisable(GL11.GL_LIGHTING);
+				GL11.glDisable(GL11.GL_DEPTH_TEST);
+				GL11.glColorMask(true, true, true, false);
+				drawGradientRect(guiArea.xTop + x, guiArea.yTop + y, guiArea.xBottom + x, guiArea.yBottom + y, -2130706433, -2130706433);
+				GL11.glColorMask(true, true, true, true);
+				GL11.glEnable(GL11.GL_LIGHTING);
+				GL11.glEnable(GL11.GL_DEPTH_TEST);
+			}
+		}
+
+		GL11.glPopMatrix();
 	}
 
 	private String getOutputRateString(BridgeSideData data) {
@@ -89,7 +95,7 @@ public class GuiEnergyBridge extends GuiContainer {
 	private void drawOldGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		fontRendererObj.drawString("Energy Bridge", 8, 6, 4210752);
 
-		if (_bridge.isInputLimited()) {
+		if (energyBridge.isInputLimited()) {
 			fontRendererObj.drawString("INPUT LIMITED", 98, 6, -1);
 		} else {
 			fontRendererObj.drawString("OUTPUT LIMITED", 90, 6, -1);
@@ -99,7 +105,7 @@ public class GuiEnergyBridge extends GuiContainer {
 			ForgeDirection dir = ForgeDirection.getOrientation(i);
 
 			fontRendererObj.drawString(dir.toString(), 10, 6 + 12 * (i + 1), -1);
-			BridgeSideData data = _bridge.getDataForSide(dir);
+			BridgeSideData data = energyBridge.getDataForSide(dir);
 
 			if ((data.isConsumer || data.isProducer) && data.powerSystem != null) {
 				String name = data.powerSystem.getAbbreviation();
@@ -117,14 +123,14 @@ public class GuiEnergyBridge extends GuiContainer {
 		fontRendererObj.drawString("% CHG", 10, 90, -1);
 
 		GL11.glDisable(GL11.GL_LIGHTING);
-		drawRect(46, 97, 46 + (int) _bridge.getEnergyScaled(), 89, (255) | (165 << 8) | (0 << 16) | (255 << 24));
+		drawRect(46, 97, 46 + (int) energyBridge.getEnergyScaled(), 89, (255) | (165 << 8) | (0 << 16) | (255 << 24));
 		GL11.glEnable(GL11.GL_LIGHTING);
 	}
 
 	private void drawOldGuiContainerBackgroundLayer(float gameTicks, int mouseX, int mouseY, int x, int y) {
 		for (int i = 0; i < 6; i++) {
 			ForgeDirection dir = ForgeDirection.getOrientation(i);
-			BridgeSideData data = _bridge.getDataForSide(dir);
+			BridgeSideData data = energyBridge.getDataForSide(dir);
 
 			if ((data.isConsumer || data.isProducer) && data.powerSystem != null) {
 				if (!data.isConnected) {

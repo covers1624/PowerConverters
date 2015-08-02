@@ -50,3 +50,5 @@ powerconverters.ic2.hv.producer.documentation=This block when placed next to a E
 powerconverters.ic2.ev.consumer.documentation=This block when placed next to a EnergyBridge will accept EU at a MAX of 2048 EU/t (MFSU) and convert it into energy that will be stored in the EnergyBridge.
 powerconverters.ic2.ev.producer.documentation=This block when placed next to a EnergyBridge will provide EU at a MAX of 2048 EU/t (MFSU) to adjacent blocks and cables using the energy stored in the EnergyBridge.
 
+#Gui Element Tooltips.
+gui.element.test=Hello World
