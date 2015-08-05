@@ -31,20 +31,30 @@ public class GuiEnergyBridge extends GuiContainer {
 
 	// Not the most efficient but it works
 	private void initGuiAreas() {
-		guiAreas[0] = new GuiArea(8, 17, 122, 47);
-		guiAreas[1] = new GuiArea(8, 51, 122, 81);
-		guiAreas[2] = new GuiArea(8, 85, 122, 115);
+		guiAreas[0] = new GuiArea(8, 17, 122, 47, ForgeDirection.UP);
+		guiAreas[1] = new GuiArea(8, 51, 122, 81, ForgeDirection.NORTH);
+		guiAreas[2] = new GuiArea(8, 85, 122, 115, ForgeDirection.EAST);
 
-		guiAreas[3] = new GuiArea(126, 17, 240, 47);
-		guiAreas[4] = new GuiArea(126, 51, 240, 81);
-		guiAreas[5] = new GuiArea(126, 85, 240, 115);
+		guiAreas[3] = new GuiArea(126, 17, 240, 47, ForgeDirection.DOWN);
+		guiAreas[4] = new GuiArea(126, 51, 240, 81, ForgeDirection.SOUTH);
+		guiAreas[5] = new GuiArea(126, 85, 240, 115, ForgeDirection.WEST);
 
-		guiAreas[6] = new GuiArea(44, 119, 204, 163);
+		guiAreas[6] = new GuiArea(44, 119, 204, 163, ForgeDirection.UNKNOWN);
 	}
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 44, ySize - 91, 4210752);
+		BridgeSideData data[] = energyBridge.getClientData();
+		GL11.glPushMatrix();
+		// GL11.glScalef(.9F, .9F, .9F);
+		for (GuiArea guiArea : guiAreas) {
+			if (guiArea.direction != ForgeDirection.UNKNOWN) {
+				itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, data[guiArea.direction.ordinal()].displayStack, guiArea.xTop, guiArea.yTop);
+			}
+			fontRendererObj.drawString(guiArea.direction.name(), guiArea.xTop + 18, guiArea.yTop + 2, 4210752);
+		}
+		GL11.glPopMatrix();
 	}
 
 	@Override

@@ -5,11 +5,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import covers1624.powerconverters.api.bridge.BridgeSideData;
 import covers1624.powerconverters.handler.ConfigurationHandler;
+import covers1624.powerconverters.net.EnergyBridgeSyncPacket;
 import covers1624.powerconverters.util.BlockPosition;
 import covers1624.powerconverters.util.INeighboorUpdateTile;
 import cpw.mods.fml.relauncher.Side;
@@ -130,11 +133,29 @@ public class TileEntityEnergyBridge extends TileEntity implements INeighboorUpda
 				d.side = dir;
 				d.voltageNameIndex = c.getVoltageIndex();
 			}
+			Block block = worldObj.getBlock(p.x, p.y, p.z);
+			int meta = worldObj.getBlockMetadata(p.x, p.y, p.z);
+			d.displayStack = new ItemStack(block, 1, meta);
 
 			return d;
 		} else {
 			return clientSideData.get(dir);
 		}
+	}
+
+	public BridgeSideData[] getClientData() {
+		BridgeSideData[] data = new BridgeSideData[6];
+		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+			data[dir.ordinal()] = clientSideData.get(dir);
+		}
+		return data;
+	}
+
+	public void setClientDataForSide(ForgeDirection dir, BridgeSideData data) {
+		if (clientSideData.containsKey(dir)) {
+			clientSideData.remove(dir);
+		}
+		clientSideData.put(dir, data);
 	}
 
 	public boolean isInputLimited() {
@@ -154,7 +175,7 @@ public class TileEntityEnergyBridge extends TileEntity implements INeighboorUpda
 		}
 	}
 
-	public void setEnergyScaled(int scaled) {
+	public void setEnergyScaled(double scaled) {
 		_energyScaledClient = scaled;
 	}
 
@@ -171,5 +192,24 @@ public class TileEntityEnergyBridge extends TileEntity implements INeighboorUpda
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 		super.readFromNBT(par1nbtTagCompound);
 		_energyStored = par1nbtTagCompound.getDouble("energyStored");
+	}
+
+	public EnergyBridgeSyncPacket getNetPacket() {
+		BridgeSideData[] bridgeSideData = new BridgeSideData[6];
+		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+			bridgeSideData[dir.ordinal()] = getDataForSide(dir);
+		}
+
+		NBTTagCompound tagCompound = new NBTTagCompound();
+		for (int side = 0; side < 6; side++) {
+			BridgeSideData data = bridgeSideData[side];
+			NBTTagCompound tag = new NBTTagCompound();
+			data.writeToNBT(tag);
+			tagCompound.setTag(String.valueOf(side), tag);
+		}
+		tagCompound.setBoolean("InputLimited", isInputLimited());
+		tagCompound.setDouble("Energy", getEnergyScaled());
+		EnergyBridgeSyncPacket syncPacket = new EnergyBridgeSyncPacket(tagCompound, xCoord, yCoord, zCoord);
+		return syncPacket;
 	}
 }

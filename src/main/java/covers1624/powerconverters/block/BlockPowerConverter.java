@@ -6,12 +6,14 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import covers1624.powerconverters.PowerConverters;
 import covers1624.powerconverters.item.DebugItem;
+import covers1624.powerconverters.net.PacketPipeline;
 import covers1624.powerconverters.tile.main.TileEntityBridgeComponent;
 import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
 import covers1624.powerconverters.util.INeighboorUpdateTile;
@@ -73,6 +75,7 @@ public class BlockPowerConverter extends BlockContainer {
 		if (te != null && te instanceof TileEntityBridgeComponent<?>) {
 			TileEntityEnergyBridge bridge = ((TileEntityBridgeComponent<?>) te).getFirstBridge();
 			if (bridge != null) {
+				PacketPipeline.INSTANCE.sendTo(bridge.getNetPacket(), (EntityPlayerMP) player);
 				player.openGui(PowerConverters.instance, 0, world, bridge.xCoord, bridge.yCoord, bridge.zCoord);
 			}
 		}

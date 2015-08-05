@@ -1,6 +1,7 @@
 package covers1624.powerconverters.proxy;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 
 public class ProxyServer implements IPCProxy {
 
@@ -10,6 +11,12 @@ public class ProxyServer implements IPCProxy {
 
 	@Override
 	public EntityPlayer getClientPlayer() {
+		return null;
+	}
+
+	@Override
+	public World getClientWorld() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

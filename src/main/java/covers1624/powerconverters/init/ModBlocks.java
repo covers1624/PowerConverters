@@ -1,6 +1,7 @@
 package covers1624.powerconverters.init;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemBlock;
 import covers1624.powerconverters.block.BlockEnergyConduit;
 import covers1624.powerconverters.block.BlockPowerConverterCommon;
 import covers1624.powerconverters.block.BlockPowerConverterFactorization;
@@ -24,6 +25,7 @@ import covers1624.powerconverters.tile.redstoneflux.TileEntityRedstoneFluxProduc
 import covers1624.powerconverters.tile.steam.TileEntitySteamConsumer;
 import covers1624.powerconverters.tile.steam.TileEntitySteamProducer;
 import covers1624.powerconverters.util.RFHelper;
+import covers1624.powerconverters.util.TextureUtils;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -41,44 +43,52 @@ public class ModBlocks {
 	public static void init() {
 
 		conduitBlock = new BlockEnergyConduit();
-		GameRegistry.registerBlock(conduitBlock, conduitBlock.getUnlocalizedName());
+		registerBlock(conduitBlock, conduitBlock.getUnlocalizedName());
 		GameRegistry.registerTileEntity(TileEnergyConduit.class, "powerConverterConduit");
 
 		converterBlockCommon = new BlockPowerConverterCommon();
-		GameRegistry.registerBlock(converterBlockCommon, ItemBlockPowerConverterCommon.class, converterBlockCommon.getUnlocalizedName());
-		GameRegistry.registerTileEntity(TileEntityEnergyBridge.class, "powerConverterEnergyBridge");
-		GameRegistry.registerTileEntity(TileEntityCharger.class, "powerConverterUniversalCharger");
+		registerBlock(converterBlockCommon, ItemBlockPowerConverterCommon.class, converterBlockCommon.getUnlocalizedName());
+		GameRegistry.registerTileEntity(TileEntityEnergyBridge.class, "EnergyBridge");
+		GameRegistry.registerTileEntity(TileEntityCharger.class, "UniversalCharger");
 
 		// RF
 		if (Loader.isModLoaded("ThermalExpansion") || Loader.isModLoaded("BuildCraft") || RFHelper.iEnergyHandlerExists) {
 			converterBlockRedstoneFlux = new BlockPowerConverterRedstoneFlux();
-			GameRegistry.registerBlock(converterBlockRedstoneFlux, ItemBlockPowerConverterRedstoneFlux.class, converterBlockRedstoneFlux.getUnlocalizedName());
-			GameRegistry.registerTileEntity(TileEntityRedstoneFluxConsumer.class, "powerConverterRFConsumer");
-			GameRegistry.registerTileEntity(TileEntityRedstoneFluxProducer.class, "powerConverterRFProducer");
+			registerBlock(converterBlockRedstoneFlux, ItemBlockPowerConverterRedstoneFlux.class, converterBlockRedstoneFlux.getUnlocalizedName());
+			GameRegistry.registerTileEntity(TileEntityRedstoneFluxConsumer.class, "RFConsumer");
+			GameRegistry.registerTileEntity(TileEntityRedstoneFluxProducer.class, "RFProducer");
 		}
 		// EU
 		if (Loader.isModLoaded("IC2")) {
 			converterBlockIndustrialCraft = new BlockPowerConverterIndustrialCraft();
-			GameRegistry.registerBlock(converterBlockIndustrialCraft, ItemBlockPowerConverterIndustrialCraft.class, converterBlockIndustrialCraft.getUnlocalizedName());
-			GameRegistry.registerTileEntity(TileEntityIndustrialCraftConsumer.class, "powerConverterIC2Consumer");
-			GameRegistry.registerTileEntity(TileEntityIndustrialCraftProducer.class, "powerConverterIC2Producer");
+			registerBlock(converterBlockIndustrialCraft, ItemBlockPowerConverterIndustrialCraft.class, converterBlockIndustrialCraft.getUnlocalizedName());
+			GameRegistry.registerTileEntity(TileEntityIndustrialCraftConsumer.class, "IC2Consumer");
+			GameRegistry.registerTileEntity(TileEntityIndustrialCraftProducer.class, "IC2Producer");
 		}
 		// Steam
 		// THIS IT A TEMP CHANGE
 		// if (PowerConverterCore.steamId != -1) {
 		converterBlockSteam = new BlockPowerConverterSteam();
-		GameRegistry.registerBlock(converterBlockSteam, ItemBlockPowerConverterSteam.class, converterBlockSteam.getUnlocalizedName());
-		GameRegistry.registerTileEntity(TileEntitySteamConsumer.class, "powerConverterSteamConsumer");
-		GameRegistry.registerTileEntity(TileEntitySteamProducer.class, "powerConverterSteamProducer");
+		registerBlock(converterBlockSteam, ItemBlockPowerConverterSteam.class, converterBlockSteam.getUnlocalizedName());
+		GameRegistry.registerTileEntity(TileEntitySteamConsumer.class, "SteamConsumer");
+		GameRegistry.registerTileEntity(TileEntitySteamProducer.class, "SteamProducer");
 		// }
 		// GC
 		if (Loader.isModLoaded("factorization")) {
 			converterBlockFactorization = new BlockPowerConverterFactorization();
-			GameRegistry.registerBlock(converterBlockFactorization, ItemBlockPowerConverterFactorization.class, converterBlockFactorization.getUnlocalizedName());
-			GameRegistry.registerTileEntity(TileEntityPowerConverterFactorizationConsumer.class, "powerConverterFZConsumer");
-			GameRegistry.registerTileEntity(TileEntityPowerConverterFactorizationProducer.class, "powerConverterFZProducer");
+			registerBlock(converterBlockFactorization, ItemBlockPowerConverterFactorization.class, converterBlockFactorization.getUnlocalizedName());
+			GameRegistry.registerTileEntity(TileEntityPowerConverterFactorizationConsumer.class, "FZConsumer");
+			GameRegistry.registerTileEntity(TileEntityPowerConverterFactorizationProducer.class, "FZProducer");
 		}
 
+	}
+
+	private static void registerBlock(Block block, Class<? extends ItemBlock> itemclass, String name) {
+		GameRegistry.registerBlock(block, itemclass, TextureUtils.stripUnlocalizedName(name));
+	}
+
+	private static void registerBlock(Block block, String name) {
+		GameRegistry.registerBlock(block, TextureUtils.stripUnlocalizedName(name));
 	}
 
 }

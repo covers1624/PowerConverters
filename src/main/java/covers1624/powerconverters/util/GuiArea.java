@@ -1,5 +1,7 @@
 package covers1624.powerconverters.util;
 
+import net.minecraftforge.common.util.ForgeDirection;
+
 public class GuiArea {
 
 	public int xTop;
@@ -8,12 +10,16 @@ public class GuiArea {
 	public int xBottom;
 	public int yBottom;
 
-	public GuiArea(int xTop, int yTop, int xBottom, int yBottom) {
+	public ForgeDirection direction;
+
+	public GuiArea(int xTop, int yTop, int xBottom, int yBottom, ForgeDirection dir) {
 		this.xTop = xTop;
 		this.yTop = yTop;
 
 		this.xBottom = xBottom;
 		this.yBottom = yBottom;
+
+		this.direction = dir;
 	}
 
 	public void scaleValues(int xTopScale, int yTopScale, int xBottomScale, int yBottomScale, boolean type) {
