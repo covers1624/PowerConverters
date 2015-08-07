@@ -1,10 +1,5 @@
 package covers1624.powerconverters.gui;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
-import net.minecraftforge.common.util.ForgeDirection;
-
 import org.lwjgl.opengl.GL11;
 
 import covers1624.powerconverters.api.bridge.BridgeSideData;
@@ -12,6 +7,10 @@ import covers1624.powerconverters.container.ContainerEnergyBridge;
 import covers1624.powerconverters.reference.Reference;
 import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
 import covers1624.powerconverters.util.GuiArea;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class GuiEnergyBridge extends GuiContainer {
 
@@ -49,10 +48,7 @@ public class GuiEnergyBridge extends GuiContainer {
 		GL11.glPushMatrix();
 		// GL11.glScalef(.9F, .9F, .9F);
 		for (GuiArea guiArea : guiAreas) {
-			if (guiArea.direction != ForgeDirection.UNKNOWN) {
-				itemRender.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, data[guiArea.direction.ordinal()].displayStack, guiArea.xTop, guiArea.yTop);
-			}
-			fontRendererObj.drawString(guiArea.direction.name(), guiArea.xTop + 18, guiArea.yTop + 2, 4210752);
+			fontRendererObj.drawString(guiArea.direction.name(), guiArea.xTop + 2, guiArea.yTop + 2, 4210752);
 		}
 		GL11.glPopMatrix();
 	}

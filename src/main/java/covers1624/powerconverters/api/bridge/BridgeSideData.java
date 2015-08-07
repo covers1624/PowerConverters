@@ -1,10 +1,9 @@
 package covers1624.powerconverters.api.bridge;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.util.ForgeDirection;
 import covers1624.powerconverters.api.registry.PowerSystemRegistry;
 import covers1624.powerconverters.api.registry.PowerSystemRegistry.PowerSystem;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BridgeSideData {
 	public ForgeDirection side;
@@ -14,7 +13,7 @@ public class BridgeSideData {
 	public boolean isConnected;
 	public int voltageNameIndex;
 	public double outputRate;
-	public ItemStack displayStack;
+	// public ItemStack displayStack;
 
 	public void writeToNBT(NBTTagCompound tag) {
 		tag.setInteger("VoltageIndex", voltageNameIndex);
@@ -25,11 +24,11 @@ public class BridgeSideData {
 		}
 		tag.setBoolean("Connected", isConnected);
 		tag.setDouble("OutputRate", outputRate);
-		if (displayStack != null) {
-			NBTTagCompound itemTag = new NBTTagCompound();
-			displayStack.writeToNBT(itemTag);
-			tag.setTag("DisplayStack", itemTag);
-		}
+		// if (displayStack != null) {
+		// NBTTagCompound itemTag = new NBTTagCompound();
+		// displayStack.writeToNBT(itemTag);
+		// tag.setTag("DisplayStack", itemTag);
+		// }
 	}
 
 	public void loadFromNBT(NBTTagCompound tag) {
@@ -41,8 +40,8 @@ public class BridgeSideData {
 		}
 		isConnected = tag.getBoolean("Connected");
 		outputRate = tag.getDouble("OutputRate");
-		if (tag.hasKey("DisplayStack")) {
-			displayStack = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("DisplayStack"));
-		}
+		// if (tag.hasKey("DisplayStack")) {
+		// displayStack = ItemStack.loadItemStackFromNBT(tag.getCompoundTag("DisplayStack"));
+		// }
 	}
 }

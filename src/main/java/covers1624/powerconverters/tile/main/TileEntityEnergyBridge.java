@@ -5,11 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
 import covers1624.powerconverters.api.bridge.BridgeSideData;
 import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.net.EnergyBridgeSyncPacket;
@@ -17,6 +12,9 @@ import covers1624.powerconverters.util.BlockPosition;
 import covers1624.powerconverters.util.INeighboorUpdateTile;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityEnergyBridge extends TileEntity implements INeighboorUpdateTile {
 	private double _energyStored;
@@ -133,9 +131,9 @@ public class TileEntityEnergyBridge extends TileEntity implements INeighboorUpda
 				d.side = dir;
 				d.voltageNameIndex = c.getVoltageIndex();
 			}
-			Block block = worldObj.getBlock(p.x, p.y, p.z);
-			int meta = worldObj.getBlockMetadata(p.x, p.y, p.z);
-			d.displayStack = new ItemStack(block, 1, meta);
+			// Block block = worldObj.getBlock(p.x, p.y, p.z);
+			// int meta = worldObj.getBlockMetadata(p.x, p.y, p.z);
+			// d.displayStack = new ItemStack(block, 1, meta);
 
 			return d;
 		} else {
