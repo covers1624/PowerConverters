@@ -7,6 +7,7 @@ import covers1624.powerconverters.container.ContainerEnergyBridge;
 import covers1624.powerconverters.reference.Reference;
 import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
 import covers1624.powerconverters.util.GuiArea;
+import covers1624.powerconverters.util.GuiUtils;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
@@ -48,7 +49,8 @@ public class GuiEnergyBridge extends GuiContainer {
 		GL11.glPushMatrix();
 		// GL11.glScalef(.9F, .9F, .9F);
 		for (GuiArea guiArea : guiAreas) {
-			fontRendererObj.drawString(guiArea.direction.name(), guiArea.xTop + 2, guiArea.yTop + 2, 4210752);
+			String dir = GuiUtils.dirToAbbreviation(guiArea.direction);
+			fontRendererObj.drawString(dir.equals("NULL") ? "Bridge" : dir, guiArea.xTop + 2, guiArea.yTop + 2, 4210752);
 		}
 		GL11.glPopMatrix();
 	}
