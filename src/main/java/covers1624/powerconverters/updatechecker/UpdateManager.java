@@ -1,21 +1,16 @@
 package covers1624.powerconverters.updatechecker;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IChatComponent;
-import net.minecraft.util.IChatComponent.Serializer;
-import covers1624.powerconverters.gui.GuiModUpdateNotification;
 import covers1624.powerconverters.handler.ConfigurationHandler;
-import covers1624.powerconverters.init.ModBlocks;
-import covers1624.powerconverters.reference.Reference;
+import covers1624.powerconverters.util.LogHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.RenderTickEvent;
 import cpw.mods.fml.relauncher.Side;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.IChatComponent;
+import net.minecraft.util.IChatComponent.Serializer;
 
 public class UpdateManager {
 
@@ -24,13 +19,13 @@ public class UpdateManager {
 	private boolean notificationDisplayed = false;
 	private boolean acievementShown = false;
 	private UpdateCheckThread updateThread;
-	private String location = "http://minecraft.curseforge.com/mc-mods/225064-power-converters";
+	private String location = "http://minecraft.curseforge.com/mc-mods/225064-power-converters3";
 	private String message = "Hey PowerConverters has an update, It may include some cool stuff";
-	GuiModUpdateNotification updateNotification;
 
 	public UpdateManager() {
-		updateThread = new UpdateCheckThread(Reference.MOD_ID);
+		updateThread = new UpdateCheckThread();
 		if (!ConfigurationHandler.doUpdateCheck) {
+			LogHelper.info("Update Checker is turned off.");
 			return;
 		}
 		updateThread.start();
@@ -38,7 +33,7 @@ public class UpdateManager {
 
 	@SubscribeEvent
 	public void tickStart(PlayerTickEvent event) {
-		if (event.phase != Phase.START) {
+		if (!notificationDisplayed || event.phase != Phase.START) {
 			return;
 		}
 
@@ -48,13 +43,12 @@ public class UpdateManager {
 		}
 		lastPoll = 400;
 
-		if (!notificationDisplayed && updateThread.checkFinished()) {
+		if (updateThread.checkFinished()) {
 			notificationDisplayed = true;
 			if (updateThread.newVersion()) {
 				if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
 					EntityPlayer player = event.player;
 					IChatComponent chatComponent;
-
 					chatComponent = Serializer.func_150699_a("[{\"text\":\"" + message + "\",\"color\":\"aqua\"}," + "{\"text\":\" " + EnumChatFormatting.WHITE + "[" + EnumChatFormatting.GREEN + "Download" + EnumChatFormatting.WHITE + "]\"," + "\"color\":\"green\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":" + "{\"text\":\"Click this to download the latest version\",\"color\":\"yellow\"}}," + "\"clickEvent\":{\"action\":\"open_url\",\"value\":\"" + location + "\"}}]");
 					player.addChatMessage(chatComponent);
 				}
@@ -63,25 +57,4 @@ public class UpdateManager {
 		}
 
 	}
-
-	// @SubscribeEvent
-	public void tickEvent(RenderTickEvent event) {
-		if (lastPoll2 > 0) {
-			--lastPoll2;
-			return;
-		}
-		lastPoll2 = 400;
-		if (!acievementShown && updateThread.checkFinished()) {
-			if (Minecraft.getMinecraft().theWorld == null) {
-				return;
-			}
-			acievementShown = true;
-			if (updateThread.newVersion()) {
-				ModUpdate update = new ModUpdate(updateThread, new ItemStack(ModBlocks.converterBlockCommon));
-				updateNotification = new GuiModUpdateNotification(Minecraft.getMinecraft(), update);
-				updateNotification.update();
-			}
-		}
-	}
-
 }

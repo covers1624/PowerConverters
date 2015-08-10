@@ -1,8 +1,7 @@
 package covers1624.powerconverters;
 
-import net.minecraft.item.Item;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.FluidRegistry;
+import java.util.Set;
+
 import covers1624.powerconverters.grid.GridTickHandler;
 import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.handler.PCEventHandler;
@@ -35,6 +34,12 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.GameRegistry.Type;
+import cpw.mods.fml.relauncher.ReflectionHelper;
+import net.minecraft.item.Item;
+import net.minecraft.launchwrapper.Launch;
+import net.minecraft.launchwrapper.LaunchClassLoader;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.FluidRegistry;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = "after:BuildCraft|Energy;after:factorization;after:IC2;after:Railcraft;after:ThermalExpansion", guiFactory = Reference.GUI_FACTORY)
 public class PowerConverters {
@@ -51,6 +56,7 @@ public class PowerConverters {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		checkClassLoader();
 		instance = this;
 
 		LogHelper.info("PowerConverters PreInitialization Started.");
@@ -203,6 +209,13 @@ public class PowerConverters {
 					mapping.remap(Item.getItemFromBlock(ModBlocks.converterBlockCommon));
 				}
 			}
+		}
+	}
+
+	private static void checkClassLoader() {
+		Set<String> transformerExceptions = ReflectionHelper.getPrivateValue(LaunchClassLoader.class, Launch.classLoader, "transformerExceptions");
+		if (!transformerExceptions.contains("covers1624.powerconverters.")) {
+			LogHelper.fatal("PowerConverters has detected that it has been removed from the transformerExceptions list, this could cause unknown issues.");
 		}
 	}
 }
