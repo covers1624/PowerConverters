@@ -18,8 +18,8 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.7.10-2.7"
-group= "powercrystals.powerconverters" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+version = "1.7.10-2.8"
+group= "covers1624.powerconverters" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "PowerConverters"
 
 minecraft {

@@ -15,9 +15,7 @@ import net.minecraft.util.IChatComponent.Serializer;
 public class UpdateManager {
 
 	private int lastPoll = 400;
-	private int lastPoll2 = 400;
 	private boolean notificationDisplayed = false;
-	private boolean acievementShown = false;
 	private UpdateCheckThread updateThread;
 	private String location = "http://minecraft.curseforge.com/mc-mods/225064-power-converters3";
 	private String message = "Hey PowerConverters has an update, It may include some cool stuff";

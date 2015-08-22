@@ -7,7 +7,6 @@ import covers1624.powerconverters.container.ContainerEnergyBridge;
 import covers1624.powerconverters.reference.Reference;
 import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
 import covers1624.powerconverters.util.GuiArea;
-import covers1624.powerconverters.util.GuiUtils;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
@@ -16,17 +15,19 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class GuiEnergyBridge extends GuiContainer {
 
 	private TileEntityEnergyBridge energyBridge;
-	private ContainerEnergyBridge containerEnergyBridge;
+	// private ContainerEnergyBridge containerEnergyBridge;
 
 	private GuiArea[] guiAreas = new GuiArea[7];
 
 	public GuiEnergyBridge(ContainerEnergyBridge container, TileEntityEnergyBridge te) {
 		super(container);
-		xSize = 248;
-		ySize = 255;
+		// xSize = 248;
+		// ySize = 255;
+
+		ySize = 195;
 		energyBridge = te;
-		containerEnergyBridge = container;
-		initGuiAreas();
+		// containerEnergyBridge = container;
+		// initGuiAreas();
 	}
 
 	// Not the most efficient but it works
@@ -44,25 +45,27 @@ public class GuiEnergyBridge extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 44, ySize - 91, 4210752);
-		BridgeSideData data[] = energyBridge.getClientData();
-		GL11.glPushMatrix();
+		// fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 44, ySize - 91, 4210752);
+		drawOldGuiContainerForegroundLayer(mouseX, mouseY);
+		// BridgeSideData data[] = energyBridge.getClientData();
+		// GL11.glPushMatrix();
 		// GL11.glScalef(.9F, .9F, .9F);
-		for (GuiArea guiArea : guiAreas) {
-			String dir = GuiUtils.dirToAbbreviation(guiArea.direction);
-			fontRendererObj.drawString(dir.equals("NULL") ? "Bridge" : dir, guiArea.xTop + 2, guiArea.yTop + 2, 4210752);
-		}
-		GL11.glPopMatrix();
+		// for (GuiArea guiArea : guiAreas) {
+		// String dir = GuiUtils.dirToAbbreviation(guiArea.direction);
+		// fontRendererObj.drawString(dir.equals("NULL") ? "Bridge" : dir, guiArea.xTop + 2, guiArea.yTop + 2, 4210752);
+		// }
+		// GL11.glPopMatrix();
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float gameTicks, int mouseX, int mouseY) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.bindTexture(new ResourceLocation(Reference.GUI_FOLDER + "guiEnergyBridge.png"));
+		this.mc.renderEngine.bindTexture(new ResourceLocation(Reference.GUI_FOLDER + "energyBridge.png"));
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
-		drawSlotLighting(mouseX, mouseY, x, y);
+		// drawSlotLighting(mouseX, mouseY, x, y);
+		drawOldGuiContainerBackgroundLayer(gameTicks, mouseX, mouseY, x, y);
 	}
 
 	@Override
@@ -133,6 +136,8 @@ public class GuiEnergyBridge extends GuiContainer {
 		GL11.glDisable(GL11.GL_LIGHTING);
 		drawRect(46, 97, 46 + (int) energyBridge.getEnergyScaled(), 89, (255) | (165 << 8) | (0 << 16) | (255 << 24));
 		GL11.glEnable(GL11.GL_LIGHTING);
+
+		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
 	}
 
 	private void drawOldGuiContainerBackgroundLayer(float gameTicks, int mouseX, int mouseY, int x, int y) {

@@ -34,7 +34,7 @@ item.pcdebugitem.name=Power Converters Debug Probe
 #Documentation, see powercrystals.powerconverters.nei.InfoHandler,
 item.pcdebugitem.documentation=This item will tell you the current percent energy stored in a EnergyBridge multi block, simply right click on any Consumer or Producer or the Energy Bridge. It will also show you advanced information about the status of a Energy Conduit Network.
 powerconverters.common.bridge.documentation=This is the Common Block for PowerConverters, When you place a consumer next to this block the Consumer will deposit the energy received into the energy bridge, When a Producer is placed next to this block it will produce energy from the energy stored in the Bridge.
-powerconverters.common.charger.documentation=In the future this block will charge items placed in it, as well as when you stand on it items in your inventory will be charged.
+powerconverters.common.charger.documentation=This block when placed next to a EnergyBridge will charge any items that work of IC2 power or RF power, The items can be placed in the Charger itself or in any chest next to it. Please note: if you have any server tps issues with this please submit a bug report it is NOT intended.
 powerconverters.steam.consumer.documentation=This block when placed next to a EnergyBridge will accept Steam and convert it into energy that will be stored in the EnergyBridge.
 powerconverters.steam.producer.documentation=This block when placed next to a EnergyBridge will Provide Steam to adjacent blocks and pipes using the energy stored in the EnergyBridge.
 powerconverters.rf.consumer.documentation=This block when placed next to a EnergyBridge will accept Redstone Flux Energy (RF) at a infinite rate and convert it into energy that will be stored in the EnergyBridge.
@@ -49,6 +49,3 @@ powerconverters.ic2.hv.consumer.documentation=This block when placed next to a E
 powerconverters.ic2.hv.producer.documentation=This block when placed next to a EnergyBridge will provide EU at a MAX of 512 EU/t (MFE) to adjacent blocks and cables using the energy stored in the EnergyBridge.
 powerconverters.ic2.ev.consumer.documentation=This block when placed next to a EnergyBridge will accept EU at a MAX of 2048 EU/t (MFSU) and convert it into energy that will be stored in the EnergyBridge.
 powerconverters.ic2.ev.producer.documentation=This block when placed next to a EnergyBridge will provide EU at a MAX of 2048 EU/t (MFSU) to adjacent blocks and cables using the energy stored in the EnergyBridge.
-
-#Gui Element Tooltips.
-gui.element.test=Hello World
