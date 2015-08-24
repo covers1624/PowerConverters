@@ -3,13 +3,6 @@ package covers1624.powerconverters.handler;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.fluids.FluidRegistry.FluidRegisterEvent;
 import covers1624.powerconverters.PowerConverters;
 import covers1624.powerconverters.init.Recipes;
 import covers1624.powerconverters.net.PacketPipeline;
@@ -25,6 +18,13 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.network.FMLNetworkEvent.ClientDisconnectionFromServerEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.fluids.FluidRegistry.FluidRegisterEvent;
 
 public class PCEventHandler {
 
@@ -47,8 +47,13 @@ public class PCEventHandler {
 		}
 	}
 
+	@SideOnly(Side.SERVER)
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onClientJoin(PlayerLoggedInEvent event) {
+		if (!ConfigurationHandler.sendRecipesToClient) {
+			LogHelper.trace("Recipe Sending is turned off.");
+			return;
+		}
 		NBTTagCompound tag = new NBTTagCompound();
 		List<IRecipe> recipes = Recipes.getCurrentRecipes();
 		NBTTagList tagList = new NBTTagList();
@@ -62,7 +67,7 @@ public class PCEventHandler {
 	}
 
 	@SideOnly(Side.CLIENT)
-	// @SubscribeEvent
+	@SubscribeEvent
 	public void onClientDisconnect(ClientDisconnectionFromServerEvent event) {
 		List<ItemStack> currentOutputs = new ArrayList<ItemStack>();
 		for (IRecipe recipe : Recipes.getCurrentRecipes()) {

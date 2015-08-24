@@ -1,17 +1,9 @@
 package covers1624.powerconverters.net;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelHandlerContext;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.init.Recipes;
 import covers1624.powerconverters.nei.NEIInfoHandlerConfig;
 import covers1624.powerconverters.util.IRecipeHandler;
@@ -19,6 +11,14 @@ import covers1624.powerconverters.util.LogHelper;
 import covers1624.powerconverters.util.RecipeRemover;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.network.ByteBufUtils;
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelHandlerContext;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 
 public class RecipeSyncPacket extends AbstractPacket {
 
@@ -44,7 +44,11 @@ public class RecipeSyncPacket extends AbstractPacket {
 
 	@Override
 	public void handleClientSide(EntityPlayer player) {
-		LogHelper.info("packet arrived");
+		// LogHelper.info("packet arrived");
+		if (ConfigurationHandler.ignoreRecipesFromServer) {
+			LogHelper.trace("Ignoring recipe packet from server.");
+			return;
+		}
 		NBTTagList tagList = tagCompound.getTagList("Recipes", 10);
 		List<IRecipe> recipes = new ArrayList<IRecipe>();
 		for (int i = 0; i < tagList.tagCount(); i++) {

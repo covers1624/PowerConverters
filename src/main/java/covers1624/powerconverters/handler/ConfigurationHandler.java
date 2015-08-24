@@ -2,8 +2,8 @@ package covers1624.powerconverters.handler;
 
 import java.io.File;
 
-import net.minecraftforge.common.config.Configuration;
 import covers1624.powerconverters.reference.Reference;
+import net.minecraftforge.common.config.Configuration;
 
 public class ConfigurationHandler {
 
@@ -27,6 +27,8 @@ public class ConfigurationHandler {
 	// Features
 	public static boolean doFlatBedrock;
 	public static boolean doUpdateCheck;
+	public static boolean sendRecipesToClient;
+	public static boolean ignoreRecipesFromServer;
 
 	// Devices
 	public static boolean dissableRFProducer;
@@ -59,6 +61,8 @@ public class ConfigurationHandler {
 
 		doFlatBedrock = configuration.get(Reference.BASIC_CATEGORY, "Do Flat Bedrock", false, "Set this to false for normal Bedrock.").getBoolean();
 		doUpdateCheck = configuration.get(Reference.BASIC_CATEGORY, "Do Update Check", true, "Set to false and PowerConverters will not check for an update").getBoolean();
+		sendRecipesToClient = configuration.get(Reference.BASIC_CATEGORY, "Send Recipes To Client", true, "Setting this to false will dissable recipe syncing with the server").getBoolean();
+		ignoreRecipesFromServer = configuration.get(Reference.BASIC_CATEGORY, "Ignore Server Recipes", false, "Setting this to true will dissable the client using the server recipes.").getBoolean();
 
 		useThermalExpansionRecipes = configuration.get(Reference.RECIPES_CATEGORY, "Thermal Expansion", false, "Thermal Expansion Recipes").getBoolean();
 		useTechRebornRecipes = configuration.get(Reference.RECIPES_CATEGORY, "Tech Reborn", false, "Tech Reborn Recipes").getBoolean();

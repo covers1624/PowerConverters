@@ -4,7 +4,7 @@ public class Reference {
 	// Mod Info.
 	public static final String MOD_ID = "PowerConverters3";
 	public static final String MOD_NAME = "Power Converters 3";
-	public static final String MOD_VERSION = "1.7.10-2.8";
+	public static final String MOD_VERSION = "1.7.10-2.9";
 
 	// Texture Info
 	public static final String MOD_PREFIX = "powerconverters:";
