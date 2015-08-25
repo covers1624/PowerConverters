@@ -1,5 +1,8 @@
 package covers1624.powerconverters.tile.ic2;
 
+import covers1624.powerconverters.handler.ConfigurationHandler;
+import covers1624.powerconverters.init.PowerSystems;
+import covers1624.powerconverters.tile.main.TileEntityEnergyConsumer;
 import ic2.api.energy.event.EnergyTileLoadEvent;
 import ic2.api.energy.event.EnergyTileUnloadEvent;
 import ic2.api.energy.tile.IEnergyEmitter;
@@ -8,11 +11,8 @@ import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
-import covers1624.powerconverters.handler.ConfigurationHandler;
-import covers1624.powerconverters.init.PowerSystems;
-import covers1624.powerconverters.tile.main.TileEntityEnergyConsumer;
 
-public class TileEntityIndustrialCraftConsumer extends TileEntityEnergyConsumer<IEnergyEmitter> implements IEnergySink {
+public class TileEntityIndustrialCraftConsumer extends TileEntityEnergyConsumer<IEnergyEmitter>implements IEnergySink {
 	private boolean _isAddedToEnergyNet;
 	private boolean _didFirstAddToNet;
 	private double _euLastTick;
@@ -61,7 +61,7 @@ public class TileEntityIndustrialCraftConsumer extends TileEntityEnergyConsumer<
 
 	@Override
 	public boolean acceptsEnergyFrom(TileEntity emitter, ForgeDirection direction) {
-		return ConfigurationHandler.dissableIC2Consumer;
+		return !ConfigurationHandler.dissableIC2Consumer;
 	}
 
 	@Override

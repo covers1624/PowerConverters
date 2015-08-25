@@ -12,7 +12,6 @@ import covers1624.powerconverters.util.IRecipeHandler;
 import covers1624.powerconverters.util.LogHelper;
 import covers1624.powerconverters.util.RecipeRemover;
 import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
-import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.network.FMLNetworkEvent.ClientDisconnectionFromServerEvent;
@@ -48,7 +47,7 @@ public class PCEventHandler {
 	}
 
 	@SideOnly(Side.SERVER)
-	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	// @SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onClientJoin(PlayerLoggedInEvent event) {
 		if (!ConfigurationHandler.sendRecipesToClient) {
 			LogHelper.trace("Recipe Sending is turned off.");
@@ -67,7 +66,7 @@ public class PCEventHandler {
 	}
 
 	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
+	// @SubscribeEvent
 	public void onClientDisconnect(ClientDisconnectionFromServerEvent event) {
 		List<ItemStack> currentOutputs = new ArrayList<ItemStack>();
 		for (IRecipe recipe : Recipes.getCurrentRecipes()) {

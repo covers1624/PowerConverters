@@ -2,6 +2,14 @@ package covers1624.powerconverters.block;
 
 import java.util.Random;
 
+import covers1624.powerconverters.PowerConverters;
+import covers1624.powerconverters.item.DebugItem;
+import covers1624.powerconverters.net.PacketPipeline;
+import covers1624.powerconverters.tile.main.TileEntityBridgeComponent;
+import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
+import covers1624.powerconverters.util.INeighboorUpdateTile;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -11,14 +19,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import covers1624.powerconverters.PowerConverters;
-import covers1624.powerconverters.item.DebugItem;
-import covers1624.powerconverters.net.PacketPipeline;
-import covers1624.powerconverters.tile.main.TileEntityBridgeComponent;
-import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
-import covers1624.powerconverters.util.INeighboorUpdateTile;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockPowerConverter extends BlockContainer {
 	protected IIcon[] _icons;
@@ -65,6 +65,7 @@ public class BlockPowerConverter extends BlockContainer {
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
+
 		try {
 			if (player.getHeldItem().getItem() instanceof DebugItem) {
 				return false;
@@ -75,7 +76,9 @@ public class BlockPowerConverter extends BlockContainer {
 		if (te != null && te instanceof TileEntityBridgeComponent<?>) {
 			TileEntityEnergyBridge bridge = ((TileEntityBridgeComponent<?>) te).getFirstBridge();
 			if (bridge != null) {
-				PacketPipeline.INSTANCE.sendTo(bridge.getNetPacket(), (EntityPlayerMP) player);
+				if (!world.isRemote) {
+					PacketPipeline.INSTANCE.sendTo(bridge.getNetPacket(), (EntityPlayerMP) player);
+				}
 				player.openGui(PowerConverters.instance, 0, world, bridge.xCoord, bridge.yCoord, bridge.zCoord);
 			}
 		}

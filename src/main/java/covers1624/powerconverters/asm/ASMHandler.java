@@ -2,10 +2,10 @@ package covers1624.powerconverters.asm;
 
 import java.util.Map;
 
-import net.minecraft.launchwrapper.Launch;
 import covers1624.powerconverters.util.LogHelper;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.MCVersion;
+import net.minecraft.launchwrapper.Launch;
 
 @MCVersion("1.7.10")
 public class ASMHandler implements IFMLLoadingPlugin {
