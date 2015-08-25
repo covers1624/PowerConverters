@@ -6,7 +6,7 @@ Power Your Mods!
 For Minecraft 1.7.10
 
 IRC Channel:
-# PowerConverters on Esper.net
+PowerConverters on Esper.net
 Feel free to drop by and say hi, i dont bite i prommise.
 
 ALL RIGHTS RESERVED
