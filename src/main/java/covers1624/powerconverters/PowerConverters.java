@@ -124,6 +124,7 @@ public class PowerConverters {
 		Recipes.setDefaultRecipes(Recipes.getCurrentRecipes());
 
 		if (Loader.isModLoaded("Waila")) {
+			LogHelper.trace("Regestering Waila Module.");
 			FMLInterModComms.sendMessage("Waila", "register", "covers1624.powerconverters.waila.WailaModule.callBackRegister");
 		}
 		LogHelper.info("PowerConverters Core Initialization Finished.");
