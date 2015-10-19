@@ -1,13 +1,13 @@
 package covers1624.powerconverters.util;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlockPosition {
 	public int x;

@@ -1,7 +1,5 @@
 package covers1624.powerconverters.block;
 
-import java.util.Random;
-
 import covers1624.powerconverters.PowerConverters;
 import covers1624.powerconverters.item.DebugItem;
 import covers1624.powerconverters.net.PacketPipeline;
@@ -19,6 +17,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class BlockPowerConverter extends BlockContainer {
 	protected IIcon[] _icons;

@@ -1,11 +1,11 @@
 package covers1624.powerconverters.util;
 
-import java.util.List;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
+
+import java.util.List;
 
 /**
  * @author modmuss50, gigabit101
@@ -19,8 +19,9 @@ public class RecipeRemover {
 	}
 
 	public static void removeShapedRecipes(List<ItemStack> removelist) {
-		for (ItemStack stack : removelist)
+		for (ItemStack stack : removelist) {
 			removeShapedRecipe(stack);
+		}
 	}
 
 	public static void removeAnyRecipe(ItemStack resultItem) {

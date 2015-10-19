@@ -1,10 +1,10 @@
 package covers1624.powerconverters.gui;
 
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraftforge.common.config.ConfigElement;
 import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.reference.Reference;
 import cpw.mods.fml.client.config.GuiConfig;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraftforge.common.config.ConfigElement;
 
 public class PCConfigGui extends GuiConfig {
 

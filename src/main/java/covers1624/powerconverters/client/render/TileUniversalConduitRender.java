@@ -1,13 +1,11 @@
 package covers1624.powerconverters.client.render;
 
+import covers1624.powerconverters.reference.Reference;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
-
-import covers1624.powerconverters.reference.Reference;
 
 public class TileUniversalConduitRender extends TileEntitySpecialRenderer {
 
@@ -19,7 +17,8 @@ public class TileUniversalConduitRender extends TileEntitySpecialRenderer {
 			model = new CustomTechneModel(new ResourceLocation(Reference.MODEL_FOLDER + "universalConduitModel.tcn"));
 		}
 		CustomTechneModel modelConduit = model;
-		// bindTexture(new ResourceLocation(Reference.MODEL_FOLDER + "universalConduitTexture.png"));
+		// bindTexture(new ResourceLocation(Reference.MODEL_FOLDER +
+		// "universalConduitTexture.png"));
 		bindTexture(new ResourceLocation(Reference.MODEL_FOLDER + "universalConduitTextureDebug.png"));
 		GL11.glPushMatrix();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);

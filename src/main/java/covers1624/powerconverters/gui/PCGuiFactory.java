@@ -1,10 +1,10 @@
 package covers1624.powerconverters.gui;
 
-import java.util.Set;
-
+import cpw.mods.fml.client.IModGuiFactory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
-import cpw.mods.fml.client.IModGuiFactory;
+
+import java.util.Set;
 
 public class PCGuiFactory implements IModGuiFactory {
 

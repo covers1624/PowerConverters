@@ -1,8 +1,5 @@
 package covers1624.powerconverters.handler;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import covers1624.powerconverters.PowerConverters;
 import covers1624.powerconverters.init.Recipes;
 import covers1624.powerconverters.net.PacketPipeline;
@@ -24,6 +21,9 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.fluids.FluidRegistry.FluidRegisterEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PCEventHandler {
 

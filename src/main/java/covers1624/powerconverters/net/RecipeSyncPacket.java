@@ -1,8 +1,5 @@
 package covers1624.powerconverters.net;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.init.Recipes;
 import covers1624.powerconverters.nei.NEIInfoHandlerConfig;
@@ -19,6 +16,9 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RecipeSyncPacket extends AbstractPacket {
 

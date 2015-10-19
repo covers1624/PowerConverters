@@ -1,8 +1,7 @@
 package covers1624.powerconverters.util;
 
-import org.apache.logging.log4j.Level;
-
 import cpw.mods.fml.relauncher.FMLRelaunchLog;
+import org.apache.logging.log4j.Level;
 
 public class FMLLogHelper {
 

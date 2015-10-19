@@ -1,14 +1,12 @@
 package covers1624.powerconverters.gui;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
 import covers1624.powerconverters.container.ContainerUniversalCharger;
 import covers1624.powerconverters.reference.Reference;
 import covers1624.powerconverters.tile.main.TileEntityCharger;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 public class GuiUniversalCharger extends GuiContainer {
 

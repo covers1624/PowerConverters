@@ -73,10 +73,12 @@ public class InventoryUtils {
 			if (slot instanceof ChargerOutputSlot) {
 				continue;
 			}
-			if (!slot.isItemValid(stackToShift))
+			if (!slot.isItemValid(stackToShift)) {
 				continue;
-			if (shiftItemStack(container, stackToShift, machineIndex, machineIndex + 1))
+			}
+			if (shiftItemStack(container, stackToShift, machineIndex, machineIndex + 1)) {
 				return true;
+			}
 		}
 		return false;
 	}

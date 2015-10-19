@@ -1,5 +1,8 @@
 package covers1624.powerconverters.tile.ic2;
 
+import covers1624.powerconverters.handler.ConfigurationHandler;
+import covers1624.powerconverters.init.PowerSystems;
+import covers1624.powerconverters.tile.main.TileEntityEnergyProducer;
 import ic2.api.energy.event.EnergyTileLoadEvent;
 import ic2.api.energy.event.EnergyTileUnloadEvent;
 import ic2.api.energy.tile.IEnergyAcceptor;
@@ -8,9 +11,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
-import covers1624.powerconverters.handler.ConfigurationHandler;
-import covers1624.powerconverters.init.PowerSystems;
-import covers1624.powerconverters.tile.main.TileEntityEnergyProducer;
 
 public class TileEntityIndustrialCraftProducer extends TileEntityEnergyProducer<IEnergyAcceptor> implements IEnergySource {
 	private boolean _isAddedToEnergyNet;

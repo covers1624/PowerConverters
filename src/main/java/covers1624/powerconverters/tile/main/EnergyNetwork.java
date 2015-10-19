@@ -1,14 +1,14 @@
 package covers1624.powerconverters.tile.main;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 import cofh.api.energy.EnergyStorage;
 import covers1624.powerconverters.grid.GridTickHandler;
 import covers1624.powerconverters.grid.IGrid;
 import covers1624.powerconverters.util.BlockPosition;
 import covers1624.repack.cofh.lib.util.ArrayHashList;
 import covers1624.repack.cofh.lib.util.LinkedHashList;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class EnergyNetwork implements IGrid {
 
@@ -107,7 +107,7 @@ public class EnergyNetwork implements IGrid {
 		}
 		ForgeDirection[] directions = ForgeDirection.VALID_DIRECTIONS;
 		for (TileEnergyConduit conduit : nodeSet) {
-			for (int i = 6; i-- > 0;) {
+			for (int i = 6; i-- > 0; ) {
 				conduit.extract(directions[i], tempStorage);
 			}
 		}
@@ -115,15 +115,17 @@ public class EnergyNetwork implements IGrid {
 
 	@Override
 	public void doGridUpdate() {
-		if (regenerating)
+		if (regenerating) {
 			return;
+		}
 		if (nodeSet.isEmpty()) {
 			HANDLER.removeGrid(this);
 			return;
 		}
 		EnergyStorage storage = this.storage;
-		if (storage.getEnergyStored() <= 0)
+		if (storage.getEnergyStored() <= 0) {
 			return;
+		}
 		ForgeDirection[] directions = ForgeDirection.VALID_DIRECTIONS;
 		int size = nodeSet.size();
 		int toDistribute = storage.getEnergyStored() / size;
@@ -135,31 +137,39 @@ public class EnergyNetwork implements IGrid {
 		int overflow = overflowSelector = (overflowSelector + 1) % size;
 		TileEnergyConduit master = nodeSet.get(overflow);
 
-		if (sideDistribute > 0)
-			for (TileEnergyConduit cond : nodeSet)
+		if (sideDistribute > 0) {
+			for (TileEnergyConduit cond : nodeSet) {
 				if (cond != master) {
 					int e = 0;
-					for (int i = 6; i-- > 0;)
+					for (int i = 6; i-- > 0; ) {
 						e += cond.transfer(directions[i], sideDistribute);
-					if (e > 0)
+					}
+					if (e > 0) {
 						storage.modifyEnergyStored(-e);
+					}
 				}
+			}
+		}
 
 		toDistribute += storage.getEnergyStored() % size;
 		sideDistribute = toDistribute / 6;
 
 		if (sideDistribute > 0) {
 			int e = 0;
-			for (int i = 6; i-- > 0;)
+			for (int i = 6; i-- > 0; ) {
 				e += master.transfer(directions[i], sideDistribute);
-			if (e > 0)
+			}
+			if (e > 0) {
 				storage.modifyEnergyStored(-e);
+			}
 		} else if (toDistribute > 0) {
 			int e = 0;
-			for (int i = 6; i-- > 0 && e < toDistribute;)
+			for (int i = 6; i-- > 0 && e < toDistribute; ) {
 				e += master.transfer(directions[i], toDistribute - e);
-			if (e > 0)
+			}
+			if (e > 0) {
 				storage.modifyEnergyStored(-e);
+			}
 		}
 
 	}
@@ -186,7 +196,7 @@ public class EnergyNetwork implements IGrid {
 			main = toCheck.shift();
 			addConduit(main);
 			World world = main.getWorldObj();
-			for (int i = 6; i-- > 0;) {
+			for (int i = 6; i-- > 0; ) {
 				bp.x = main.xCoord;
 				bp.y = main.yCoord;
 				bp.z = main.zCoord;
@@ -240,14 +250,16 @@ public class EnergyNetwork implements IGrid {
 	}
 
 	public boolean canMergeGrid(EnergyNetwork otherGrid) {
-		if (otherGrid == null)
+		if (otherGrid == null) {
 			return false;
+		}
 		return true;
 	}
 
 	public void mergeGrid(EnergyNetwork grid) {
-		if (grid == this)
+		if (grid == this) {
 			return;
+		}
 		boolean r = regenerating || grid.regenerating;
 		grid.destroyGrid();
 		if (!regenerating & r) {

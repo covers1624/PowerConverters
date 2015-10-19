@@ -1,8 +1,8 @@
 package covers1624.powerconverters.waila;
 
-import mcp.mobius.waila.api.IWailaRegistrar;
 import covers1624.powerconverters.tile.main.TileEntityBridgeComponent;
 import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
+import mcp.mobius.waila.api.IWailaRegistrar;
 
 public class WailaModule {
 

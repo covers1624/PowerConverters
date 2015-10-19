@@ -1,16 +1,5 @@
 package covers1624.powerconverters.tile.main;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
-import net.minecraftforge.common.util.ForgeDirection;
 import covers1624.powerconverters.api.registry.PowerSystemRegistry.PowerSystem;
 import covers1624.powerconverters.block.BlockPowerConverter;
 import covers1624.powerconverters.util.BlockPosition;
@@ -18,6 +7,17 @@ import covers1624.powerconverters.util.IAdvancedLogTile;
 import covers1624.powerconverters.util.INeighboorUpdateTile;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.IChatComponent;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TileEntityBridgeComponent<T> extends TileEntity implements INeighboorUpdateTile, IAdvancedLogTile {
 	private Map<ForgeDirection, TileEntityEnergyBridge> _adjacentBridges = new HashMap<ForgeDirection, TileEntityEnergyBridge>();

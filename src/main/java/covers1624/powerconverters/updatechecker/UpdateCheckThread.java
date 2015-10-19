@@ -1,14 +1,13 @@
 package covers1624.powerconverters.updatechecker;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
-
-import org.apache.logging.log4j.Level;
-
 import covers1624.powerconverters.reference.Reference;
 import covers1624.powerconverters.util.FMLLogHelper;
 import covers1624.powerconverters.util.LogHelper;
+import org.apache.logging.log4j.Level;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
 
 public class UpdateCheckThread extends Thread {
 

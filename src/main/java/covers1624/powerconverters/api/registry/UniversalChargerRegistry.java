@@ -1,11 +1,11 @@
 package covers1624.powerconverters.api.registry;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import covers1624.powerconverters.api.charge.IChargeHandler;
 import covers1624.powerconverters.util.LogHelper;
 import cpw.mods.fml.common.Loader;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UniversalChargerRegistry {
 

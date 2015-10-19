@@ -1,15 +1,5 @@
 package covers1624.powerconverters.nei;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.inventory.Container;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.api.IOverlayHandler;
@@ -20,6 +10,16 @@ import codechicken.nei.recipe.IUsageHandler;
 import covers1624.powerconverters.util.LogHelper;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModContainer;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.inventory.Container;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class InfoHandler implements IUsageHandler, ICraftingHandler {
 

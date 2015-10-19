@@ -1,14 +1,14 @@
 package covers1624.powerconverters.item;
 
-import java.util.List;
-
+import covers1624.powerconverters.reference.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import covers1624.powerconverters.reference.Reference;
+
+import java.util.List;
 
 public class ItemBlockPowerConverterRedstoneFlux extends ItemBlock {
 
@@ -26,10 +26,12 @@ public class ItemBlockPowerConverterRedstoneFlux extends ItemBlock {
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack) {
 		int md = itemstack.getItemDamage();
-		if (md == 0)
+		if (md == 0) {
 			return "powerconverters.rf.consumer";
-		if (md == 1)
+		}
+		if (md == 1) {
 			return "powerconverters.rf.producer";
+		}
 		return "unknown";
 	}
 
@@ -37,12 +39,13 @@ public class ItemBlockPowerConverterRedstoneFlux extends ItemBlock {
 	@Override
 	public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean par4) {
 		int md = itemstack.getItemDamage();
-		if (md == 0)
+		if (md == 0) {
 			list.add("Consumes RedstoneFlux");
-		else if (md == 1)
+		} else if (md == 1) {
 			list.add("Produces RedstoneFlux");
-		else
+		} else {
 			list.add(Reference.TOOLTIP_ERROR);
+		}
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

@@ -1,12 +1,12 @@
 package covers1624.powerconverters.tile.factorization;
 
-import net.minecraft.util.MathHelper;
 import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.init.PowerSystems;
 import covers1624.powerconverters.tile.main.TileEntityEnergyConsumer;
 import factorization.api.Charge;
 import factorization.api.Coord;
 import factorization.api.IChargeConductor;
+import net.minecraft.util.MathHelper;
 
 public class TileEntityPowerConverterFactorizationConsumer extends TileEntityEnergyConsumer<IChargeConductor> implements IChargeConductor {
 	private Charge _charge = new Charge(this);
@@ -35,7 +35,7 @@ public class TileEntityPowerConverterFactorizationConsumer extends TileEntityEne
 		if (this._charge.getValue() > 0) {
 			double used = _charge.tryTake(_charge.getValue());
 			_chargeLastTick = MathHelper.floor_double(used);
-			storeEnergy((int) (used * PowerSystems.powerSystemFactorization.getScaleAmmount()));
+			storeEnergy((int) (used * PowerSystems.powerSystemFactorization.getScaleAmmount()), false);
 		} else {
 			this._chargeLastTick = 0;
 		}

@@ -1,7 +1,11 @@
 package covers1624.powerconverters.tile.main;
 
-import java.util.List;
-
+import covers1624.powerconverters.api.charge.IChargeHandler;
+import covers1624.powerconverters.api.registry.UniversalChargerRegistry;
+import covers1624.powerconverters.handler.ConfigurationHandler;
+import covers1624.powerconverters.init.PowerSystems;
+import covers1624.powerconverters.util.BlockPosition;
+import covers1624.powerconverters.util.IAdvancedLogTile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -12,12 +16,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
 import net.minecraftforge.common.util.ForgeDirection;
-import covers1624.powerconverters.api.charge.IChargeHandler;
-import covers1624.powerconverters.api.registry.UniversalChargerRegistry;
-import covers1624.powerconverters.handler.ConfigurationHandler;
-import covers1624.powerconverters.init.PowerSystems;
-import covers1624.powerconverters.util.BlockPosition;
-import covers1624.powerconverters.util.IAdvancedLogTile;
+
+import java.util.List;
 
 public class TileEntityCharger extends TileEntityEnergyProducer<IInventory> implements IAdvancedLogTile, ISidedInventory {
 	// private static List<IChargeHandler> chargeHandlers = new ArrayList<IChargeHandler>();

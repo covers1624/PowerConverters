@@ -1,10 +1,10 @@
 package covers1624.powerconverters.charge;
 
-import net.minecraft.item.ItemStack;
 import cofh.api.energy.IEnergyContainerItem;
 import covers1624.powerconverters.api.charge.IChargeHandler;
 import covers1624.powerconverters.api.registry.PowerSystemRegistry.PowerSystem;
 import covers1624.powerconverters.init.PowerSystems;
+import net.minecraft.item.ItemStack;
 
 public class ChargeHandlerRedstoneFlux implements IChargeHandler {
 

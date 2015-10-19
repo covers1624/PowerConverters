@@ -1,9 +1,9 @@
 package covers1624.powerconverters.handler;
 
-import java.io.File;
-
 import covers1624.powerconverters.reference.Reference;
 import net.minecraftforge.common.config.Configuration;
+
+import java.io.File;
 
 public class ConfigurationHandler {
 

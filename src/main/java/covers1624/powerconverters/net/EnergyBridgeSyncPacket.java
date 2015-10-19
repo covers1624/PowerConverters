@@ -1,15 +1,15 @@
 package covers1624.powerconverters.net;
 
+import covers1624.powerconverters.PowerConverters;
+import covers1624.powerconverters.api.bridge.BridgeSideData;
+import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
+import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
-import covers1624.powerconverters.PowerConverters;
-import covers1624.powerconverters.api.bridge.BridgeSideData;
-import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
-import cpw.mods.fml.common.network.ByteBufUtils;
 
 public class EnergyBridgeSyncPacket extends AbstractPacket {
 

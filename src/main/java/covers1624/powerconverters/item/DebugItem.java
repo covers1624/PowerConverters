@@ -1,7 +1,11 @@
 package covers1624.powerconverters.item;
 
-import java.util.ArrayList;
-
+import covers1624.powerconverters.reference.Reference;
+import covers1624.powerconverters.tile.main.TileEntityBridgeComponent;
+import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
+import covers1624.powerconverters.util.IAdvancedLogTile;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -11,12 +15,8 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import covers1624.powerconverters.reference.Reference;
-import covers1624.powerconverters.tile.main.TileEntityBridgeComponent;
-import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
-import covers1624.powerconverters.util.IAdvancedLogTile;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
+import java.util.ArrayList;
 
 public class DebugItem extends Item {
 
@@ -46,8 +46,9 @@ public class DebugItem extends Item {
 		if (te instanceof TileEntityEnergyBridge || te instanceof TileEntityBridgeComponent<?>) {
 			if (te instanceof TileEntityBridgeComponent<?>) {
 				teb = ((TileEntityBridgeComponent<?>) te).getFirstBridge();
-			} else
+			} else {
 				teb = (TileEntityEnergyBridge) te;
+			}
 			double energyamount = 100 * (teb.getEnergyStored() / teb.getEnergyStoredMax());
 			String energy = String.valueOf((int) energyamount);
 			player.addChatMessage(new ChatComponentText("Energy Bridge Is " + energy + "% Full"));

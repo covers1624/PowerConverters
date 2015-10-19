@@ -1,16 +1,10 @@
 package covers1624.powerconverters;
 
-import java.util.Set;
-
 import covers1624.powerconverters.grid.GridTickHandler;
 import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.handler.PCEventHandler;
 import covers1624.powerconverters.handler.PCGUIHandler;
-import covers1624.powerconverters.init.ModBlocks;
-import covers1624.powerconverters.init.ModItems;
-import covers1624.powerconverters.init.PowerSystems;
-import covers1624.powerconverters.init.Recipes;
-import covers1624.powerconverters.init.WorldGenerators;
+import covers1624.powerconverters.init.*;
 import covers1624.powerconverters.net.EnergyBridgeSyncPacket;
 import covers1624.powerconverters.net.PacketPipeline;
 import covers1624.powerconverters.net.RecipeSyncPacket;
@@ -25,12 +19,8 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLInterModComms;
-import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
+import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.event.FMLMissingMappingsEvent.MissingMapping;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.GameRegistry.Type;
@@ -40,6 +30,8 @@ import net.minecraft.launchwrapper.Launch;
 import net.minecraft.launchwrapper.LaunchClassLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
+
+import java.util.Set;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = "after:BuildCraft|Energy;after:factorization;after:IC2;after:Railcraft;after:ThermalExpansion", guiFactory = Reference.GUI_FACTORY)
 public class PowerConverters {
@@ -156,57 +148,57 @@ public class PowerConverters {
 		for (MissingMapping mapping : event.getAll()) {
 			if (mapping.type == GameRegistry.Type.BLOCK) {
 				if (mapping.name.equals("PowerConverters:tile.powerconverters.conduit")) {
-					LogHelper.warn("REMAPING BLOCK: " + mapping.name);
+					LogHelper.warn("REMAPPING BLOCK: " + mapping.name);
 					mapping.remap(ModBlocks.conduitBlock);
 				}
 				if (mapping.name.equals("PowerConverters:tile.powerconverters.rf")) {
-					LogHelper.warn("REMAPING BLOCK: " + mapping.name);
+					LogHelper.warn("REMAPPING BLOCK: " + mapping.name);
 					mapping.remap(ModBlocks.converterBlockRedstoneFlux);
 				}
 				if (mapping.name.equals("PowerConverters:tile.powerconverters.ic2")) {
-					LogHelper.warn("REMAPING BLOCK: " + mapping.name);
+					LogHelper.warn("REMAPPING BLOCK: " + mapping.name);
 					mapping.remap(ModBlocks.converterBlockIndustrialCraft);
 				}
 				if (mapping.name.equals("PowerConverters:tile.powerconverters.fz")) {
-					LogHelper.warn("REMAPING BLOCK: " + mapping.name);
+					LogHelper.warn("REMAPPING BLOCK: " + mapping.name);
 					mapping.remap(ModBlocks.converterBlockFactorization);
 				}
 				if (mapping.name.equals("PowerConverters:tile.powerconverters.steam")) {
-					LogHelper.warn("REMAPING BLOCK: " + mapping.name);
+					LogHelper.warn("REMAPPING BLOCK: " + mapping.name);
 					mapping.remap(ModBlocks.converterBlockSteam);
 				}
 				if (mapping.name.equals("PowerConverters:tile.powerconverters.common")) {
-					LogHelper.warn("REMAPING BLOCK: " + mapping.name);
+					LogHelper.warn("REMAPPING BLOCK: " + mapping.name);
 					mapping.remap(ModBlocks.converterBlockCommon);
 				}
 			}
 			if (mapping.type == Type.ITEM) {
 				if (mapping.name.equals("PowerConverters:debugItem")) {
-					LogHelper.warn("REMAPING ITEM: " + mapping.name);
+					LogHelper.warn("REMAPPING ITEM: " + mapping.name);
 					mapping.remap(ModItems.debugItem);
 				}
 				if (mapping.name.equals("PowerConverters:tile.powerconverters.conduit")) {
-					LogHelper.warn("REMAPING ITEM: " + mapping.name);
+					LogHelper.warn("REMAPPING ITEM: " + mapping.name);
 					mapping.remap(Item.getItemFromBlock(ModBlocks.conduitBlock));
 				}
 				if (mapping.name.equals("PowerConverters:tile.powerconverters.rf")) {
-					LogHelper.warn("REMAPING ITEM: " + mapping.name);
+					LogHelper.warn("REMAPPING ITEM: " + mapping.name);
 					mapping.remap(Item.getItemFromBlock(ModBlocks.converterBlockRedstoneFlux));
 				}
 				if (mapping.name.equals("PowerConverters:tile.powerconverters.ic2")) {
-					LogHelper.warn("REMAPING ITEM: " + mapping.name);
+					LogHelper.warn("REMAPPING ITEM: " + mapping.name);
 					mapping.remap(Item.getItemFromBlock(ModBlocks.converterBlockIndustrialCraft));
 				}
 				if (mapping.name.equals("PowerConverters:tile.powerconverters.fz")) {
-					LogHelper.warn("REMAPING ITEM: " + mapping.name);
+					LogHelper.warn("REMAPPING ITEM: " + mapping.name);
 					mapping.remap(Item.getItemFromBlock(ModBlocks.converterBlockFactorization));
 				}
 				if (mapping.name.equals("PowerConverters:tile.powerconverters.steam")) {
-					LogHelper.warn("REMAPING ITEM: " + mapping.name);
+					LogHelper.warn("REMAPPING ITEM: " + mapping.name);
 					mapping.remap(Item.getItemFromBlock(ModBlocks.converterBlockSteam));
 				}
 				if (mapping.name.equals("PowerConverters:tile.powerconverters.common")) {
-					LogHelper.warn("REMAPING ITEM: " + mapping.name);
+					LogHelper.warn("REMAPPING ITEM: " + mapping.name);
 					mapping.remap(Item.getItemFromBlock(ModBlocks.converterBlockCommon));
 				}
 			}
@@ -216,7 +208,7 @@ public class PowerConverters {
 	private static void checkClassLoader() {
 		Set<String> transformerExceptions = ReflectionHelper.getPrivateValue(LaunchClassLoader.class, Launch.classLoader, "transformerExceptions");
 		if (!transformerExceptions.contains("covers1624.powerconverters.")) {
-			LogHelper.fatal("PowerConverters has detected that it has been removed from the transformerExceptions list, this could cause unknown issues.");
+			LogHelper.fatal("PowerConverters has detected that it has been removed from the transformerExceptions list, this could cause unknown issues. I Will provide no support for PowerConverters in this state.");
 		}
 	}
 }

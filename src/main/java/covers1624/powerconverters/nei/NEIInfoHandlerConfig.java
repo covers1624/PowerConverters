@@ -1,8 +1,5 @@
 package covers1624.powerconverters.nei;
 
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.ShapedRecipes;
-import net.minecraft.item.crafting.ShapelessRecipes;
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
 import codechicken.nei.recipe.GuiCraftingRecipe;
@@ -13,6 +10,9 @@ import codechicken.nei.recipe.ShapelessRecipeHandler;
 import codechicken.nei.recipe.ShapelessRecipeHandler.CachedShapelessRecipe;
 import covers1624.powerconverters.init.Recipes;
 import covers1624.powerconverters.util.LogHelper;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.ShapedRecipes;
+import net.minecraft.item.crafting.ShapelessRecipes;
 
 public class NEIInfoHandlerConfig implements IConfigureNEI {
 

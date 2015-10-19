@@ -1,9 +1,8 @@
 package covers1624.powerconverters.util;
 
-import org.apache.logging.log4j.Level;
-
 import covers1624.powerconverters.handler.ConfigurationHandler;
 import cpw.mods.fml.common.FMLLog;
+import org.apache.logging.log4j.Level;
 
 public class LogHelper {
 
@@ -48,7 +47,9 @@ public class LogHelper {
 		log(Level.WARN, object);
 	}
 
-	/** Formatable */
+	/**
+	 * Formatable
+	 */
 	public static void all(String object, Object... format) {
 		log(Level.ALL, String.format(object, format));
 	}

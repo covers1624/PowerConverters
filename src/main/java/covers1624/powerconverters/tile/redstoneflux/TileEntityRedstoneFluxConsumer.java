@@ -1,18 +1,18 @@
 package covers1624.powerconverters.tile.redstoneflux;
 
-import net.minecraftforge.common.util.ForgeDirection;
-import cofh.api.energy.IEnergyHandler;
+import cofh.api.energy.IEnergyReceiver;
 import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.init.PowerSystems;
 import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
 import covers1624.powerconverters.tile.main.TileEntityEnergyConsumer;
+import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityRedstoneFluxConsumer extends TileEntityEnergyConsumer<IEnergyHandler> implements IEnergyHandler {
+public class TileEntityRedstoneFluxConsumer extends TileEntityEnergyConsumer<IEnergyReceiver> implements IEnergyReceiver {
 
 	private double lastReceivedRF;
 
 	public TileEntityRedstoneFluxConsumer() {
-		super(PowerSystems.powerSystemRedstoneFlux, 0, IEnergyHandler.class);
+		super(PowerSystems.powerSystemRedstoneFlux, 0, IEnergyReceiver.class);
 	}
 
 	@Override
@@ -29,44 +29,36 @@ public class TileEntityRedstoneFluxConsumer extends TileEntityEnergyConsumer<IEn
 
 	@Override
 	public boolean canConnectEnergy(ForgeDirection arg0) {
-
 		return !ConfigurationHandler.dissableRFConsumer;
-	}
-
-	@Override
-	public int extractEnergy(ForgeDirection arg0, int arg1, boolean arg2) {
-
-		return 0;
 	}
 
 	@Override
 	public int getEnergyStored(ForgeDirection arg0) {
 		TileEntityEnergyBridge bridge = getFirstBridge();
-		if (bridge == null)
+		if (bridge == null) {
 			return 0;
+		}
 		return (int) (bridge.getEnergyStored() / getPowerSystem().getScaleAmmount());
 	}
 
 	@Override
 	public int getMaxEnergyStored(ForgeDirection arg0) {
 		TileEntityEnergyBridge bridge = getFirstBridge();
-		if (bridge == null)
+		if (bridge == null) {
 			return 0;
+		}
 		return (int) (bridge.getEnergyStoredMax() / getPowerSystem().getScaleAmmount());
 	}
 
 	@Override
-	public int receiveEnergy(ForgeDirection from, int recieveMax, boolean simulate) {
-		TileEntityEnergyBridge bridge = getFirstBridge();
-		if (bridge == null)
+	public int receiveEnergy(ForgeDirection from, int receiveMax, boolean simulate) {
+		if (getFirstBridge() == null) {
 			return 0;
-		int RF = getPowerSystem().getScaleAmmount() * recieveMax;
-		int recievedRF = (int) (RF - storeEnergy(RF));
-		if (!simulate) {
-			lastReceivedRF = recievedRF / getPowerSystem().getScaleAmmount();
-			return (int) lastReceivedRF;
 		}
-		return recievedRF / getPowerSystem().getScaleAmmount();
+
+		int actualRF = getPowerSystem().getScaleAmmount() * receiveMax;
+		int rfNotStored = (int) (actualRF - storeEnergy(actualRF, simulate));
+		return rfNotStored / getPowerSystem().getScaleAmmount();
 	}
 
 }

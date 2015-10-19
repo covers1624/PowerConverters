@@ -51,6 +51,12 @@ repositories {
 		name = "ic2"
 		url = "http://maven.ic2.player.to/"
 	}
+	// Buildcraft
+    ivy {
+        name "BuildCraft"
+        artifactPattern "http://www.mod-buildcraft.com/releases/BuildCraft/[revision]/[module]-[revision]-[classifier].[ext]"
+    }
+
 	// PneumaticCraft
 	maven {
         name = "MM repo"
@@ -63,12 +69,11 @@ dependencies {
 	compile "codechicken:CodeChickenCore:1.7.10-1.0.7.46:dev"
 	compile "codechicken:NotEnoughItems:1.7.10-1.0.5.111:dev"
 	compile "mcp.mobius.waila:Waila:1.5.10_1.7.10"// Waila
-	compile 'com.mod-buildcraft:buildcraft:6.2.6:dev'  // Buildcraft
+    compile name: "buildcraft", version: "7.1.8", classifier: "dev"// Buildcraft
 	compile 'net.industrial-craft:industrialcraft-2:2.2.504-experimental:dev' //IC2
 	compile "pneumaticCraft:PneumaticCraft-1.7.10:1.9.10-98:userdev"
 	
-	runtime fileTree(dir: 'libs', include: '*.jar') // Anything i cant be bothered finding a maven for...
-
+	runtime fileTree(dir: 'libs', include: '*.jar') // Anything i cant be bothered finding a maven for..
 }
 
 jar {

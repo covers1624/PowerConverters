@@ -1,20 +1,21 @@
 package covers1624.powerconverters.tile.redstoneflux;
 
-import java.util.List;
-
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
 import cofh.api.energy.IEnergyHandler;
+import cofh.api.energy.IEnergyProvider;
 import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.init.PowerSystems;
 import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
 import covers1624.powerconverters.tile.main.TileEntityEnergyProducer;
 import covers1624.powerconverters.util.BlockPosition;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityRedstoneFluxProducer extends TileEntityEnergyProducer<IEnergyHandler> implements IEnergyHandler {
+import java.util.List;
+
+public class TileEntityRedstoneFluxProducer extends TileEntityEnergyProducer<IEnergyProvider> implements IEnergyProvider {
 
 	public TileEntityRedstoneFluxProducer() {
-		super(PowerSystems.powerSystemRedstoneFlux, 0, IEnergyHandler.class);
+		super(PowerSystems.powerSystemRedstoneFlux, 0, IEnergyProvider.class);
 	}
 
 	@Override
@@ -30,22 +31,19 @@ public class TileEntityRedstoneFluxProducer extends TileEntityEnergyProducer<IEn
 	@Override
 	public int getEnergyStored(ForgeDirection arg0) {
 		TileEntityEnergyBridge bridge = getFirstBridge();
-		if (bridge == null)
+		if (bridge == null) {
 			return 0;
+		}
 		return (int) (bridge.getEnergyStored() / getPowerSystem().getScaleAmmount());
 	}
 
 	@Override
 	public int getMaxEnergyStored(ForgeDirection arg0) {
 		TileEntityEnergyBridge bridge = getFirstBridge();
-		if (bridge == null)
+		if (bridge == null) {
 			return 0;
+		}
 		return (int) (bridge.getEnergyStoredMax() / getPowerSystem().getScaleAmmount());
-	}
-
-	@Override
-	public int receiveEnergy(ForgeDirection arg0, int arg1, boolean arg2) {
-		return 0;
 	}
 
 	@Override
@@ -63,8 +61,9 @@ public class TileEntityRedstoneFluxProducer extends TileEntityEnergyProducer<IEn
 					IEnergyHandler handler = (IEnergyHandler) te;
 					final double RF = handler.receiveEnergy(p.orientation.getOpposite(), (int) (toUseRF), false);
 					energy -= RF * getPowerSystem().getScaleAmmount();
-					if (energy <= 0)
+					if (energy <= 0) {
 						break;
+					}
 				}
 			}
 

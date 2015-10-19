@@ -1,14 +1,14 @@
 package covers1624.powerconverters.tile.factorization;
 
-import java.util.Map.Entry;
-
-import net.minecraftforge.common.util.ForgeDirection;
 import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.init.PowerSystems;
 import covers1624.powerconverters.tile.main.TileEntityEnergyProducer;
 import factorization.api.Charge;
 import factorization.api.Coord;
 import factorization.api.IChargeConductor;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import java.util.Map.Entry;
 
 public class TileEntityPowerConverterFactorizationProducer extends TileEntityEnergyProducer<IChargeConductor> implements IChargeConductor {
 	private Charge _charge = new Charge(this);

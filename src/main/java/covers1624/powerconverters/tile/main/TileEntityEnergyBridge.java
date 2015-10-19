@@ -1,10 +1,5 @@
 package covers1624.powerconverters.tile.main;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import covers1624.powerconverters.api.bridge.BridgeSideData;
 import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.net.EnergyBridgeSyncPacket;
@@ -15,6 +10,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class TileEntityEnergyBridge extends TileEntity implements INeighboorUpdateTile {
 	private double _energyStored;
@@ -48,8 +48,11 @@ public class TileEntityEnergyBridge extends TileEntity implements INeighboorUpda
 		return _energyStoredMax;
 	}
 
-	public double storeEnergy(double energy) {
+	public double storeEnergy(double energy, boolean simulate) {
 		double toStore = Math.min(energy, _energyStoredMax - _energyStored);
+		if (simulate) {
+			return energy - toStore;
+		}
 		_energyStored += toStore;
 		return energy - toStore;
 	}

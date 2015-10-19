@@ -1,17 +1,6 @@
 package covers1624.powerconverters.tile.main;
 
-import java.util.List;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
-import net.minecraftforge.common.util.ForgeDirection;
-import cofh.api.energy.EnergyStorage;
-import cofh.api.energy.IEnergyConnection;
-import cofh.api.energy.IEnergyHandler;
-import cofh.api.energy.IEnergyProvider;
-import cofh.api.energy.IEnergyReceiver;
+import cofh.api.energy.*;
 import covers1624.powerconverters.grid.GridTickHandler;
 import covers1624.powerconverters.grid.IGridController;
 import covers1624.powerconverters.grid.INode;
@@ -19,6 +8,13 @@ import covers1624.powerconverters.util.BlockPosition;
 import covers1624.powerconverters.util.IAdvancedLogTile;
 import covers1624.powerconverters.util.IUpdateTileWithCords;
 import covers1624.powerconverters.util.LogHelper;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.IChatComponent;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import java.util.List;
 
 public class TileEnergyConduit extends TileEntity implements INode, IEnergyHandler, IUpdateTileWithCords, IAdvancedLogTile {
 
@@ -137,8 +133,9 @@ public class TileEnergyConduit extends TileEntity implements INode, IEnergyHandl
 		if (grid == null) {
 			boolean hasGrid = false;
 			for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-				if (readFromNBT)
+				if (readFromNBT) {
 					continue;
+				}
 				if (BlockPosition.blockExists(this, dir)) {
 					TileEnergyConduit pipe = BlockPosition.getAdjacentTileEntity(this, dir, TileEnergyConduit.class);
 					if (pipe != null) {
@@ -247,7 +244,7 @@ public class TileEnergyConduit extends TileEntity implements INode, IEnergyHandl
 
 	/**
 	 * Sets the EnergyNetwork the cable is located on.
-	 * 
+	 *
 	 * @param energyNetwork
 	 */
 	public void setGrid(EnergyNetwork energyNetwork) {
@@ -304,12 +301,14 @@ public class TileEnergyConduit extends TileEntity implements INode, IEnergyHandl
 
 			if (!debug) {
 				float sat = 0;
-				if (grid.getNodeCount() != 0)
+				if (grid.getNodeCount() != 0) {
 					sat = (float) (Math.ceil(grid.storage.getEnergyStored() / (float) grid.storage.getMaxEnergyStored() * 1000f) / 10f);
+				}
 				info.add(text("Saturation: " + sat));
 			}
-		} else if (!debug)
+		} else if (!debug) {
 			info.add(text("Null Grid"));
+		}
 		if (debug) {
 			if (grid != null) {
 				info.add(text("Grid:" + grid));

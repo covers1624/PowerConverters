@@ -3,17 +3,10 @@
  */
 package covers1624.repack.cofh.lib.util;
 
-import java.util.AbstractCollection;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.NoSuchElementException;
-
 import com.google.common.base.Objects;
 import com.google.common.primitives.Ints;
+
+import java.util.*;
 
 @SuppressWarnings("unchecked")
 public class ArrayHashList<E extends Object> extends AbstractCollection<E> implements List<E>, Cloneable, java.io.Serializable {
@@ -219,7 +212,7 @@ public class ArrayHashList<E extends Object> extends AbstractCollection<E> imple
 
 		Object o = e.key;
 		Object[] data = elementData;
-		for (int i = size; i-- > 0;) {
+		for (int i = size; i-- > 0; ) {
 			if (data[i] == o) {
 				fastRemove(i);
 				break;
@@ -250,7 +243,7 @@ public class ArrayHashList<E extends Object> extends AbstractCollection<E> imple
 			elementData[i] = null;
 		}
 
-		for (int i = hashTable.length; i-- > 0;) {
+		for (int i = hashTable.length; i-- > 0; ) {
 			hashTable[i] = null;
 		}
 
@@ -271,8 +264,7 @@ public class ArrayHashList<E extends Object> extends AbstractCollection<E> imple
 	/**
 	 * Increases the capacity of this <tt>ArrayHashList</tt> instance, if necessary, to ensure that it can hold at least the number of elements specified by the minimum capacity argument.
 	 *
-	 * @param minCapacity
-	 *            the desired minimum capacity
+	 * @param minCapacity the desired minimum capacity
 	 */
 	public void ensureCapacity(int minCapacity) {
 
@@ -298,8 +290,7 @@ public class ArrayHashList<E extends Object> extends AbstractCollection<E> imple
 	/**
 	 * Increases the capacity to ensure that it can hold at least the number of elements specified by the minimum capacity argument.
 	 *
-	 * @param minCapacity
-	 *            the desired minimum capacity
+	 * @param minCapacity the desired minimum capacity
 	 */
 	private void grow(int minCapacity) {
 
@@ -393,7 +384,8 @@ public class ArrayHashList<E extends Object> extends AbstractCollection<E> imple
 
 	protected void delete(Entry entry) {
 
-		l: synchronized (hashTable) {
+		l:
+		synchronized (hashTable) {
 			int bucket = entry.hash & mask;
 			Entry prev = null, cur = hashTable[bucket];
 			if (cur == entry) {
@@ -419,7 +411,7 @@ public class ArrayHashList<E extends Object> extends AbstractCollection<E> imple
 				newTable = hashTable = new Entry[newTableSize];
 				mask = newMask;
 
-				for (int bucket = old.length; bucket-- > 0;) {
+				for (int bucket = old.length; bucket-- > 0; ) {
 					Entry entry = old[bucket];
 					while (entry != null) {
 						Entry nextEntry = entry.nextInBucket;

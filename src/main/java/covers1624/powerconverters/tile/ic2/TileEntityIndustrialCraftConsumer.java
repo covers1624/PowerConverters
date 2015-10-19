@@ -12,7 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityIndustrialCraftConsumer extends TileEntityEnergyConsumer<IEnergyEmitter>implements IEnergySink {
+public class TileEntityIndustrialCraftConsumer extends TileEntityEnergyConsumer<IEnergyEmitter> implements IEnergySink {
 	private boolean _isAddedToEnergyNet;
 	private boolean _didFirstAddToNet;
 	private double _euLastTick;
@@ -82,7 +82,7 @@ public class TileEntityIndustrialCraftConsumer extends TileEntityEnergyConsumer<
 			return amount;
 		}
 
-		double pcuNotStored = storeEnergy(amount * PowerSystems.powerSystemIndustrialCraft.getScaleAmmount());
+		double pcuNotStored = storeEnergy(amount * PowerSystems.powerSystemIndustrialCraft.getScaleAmmount(), false);
 		double euNotStored = pcuNotStored / PowerSystems.powerSystemIndustrialCraft.getScaleAmmount();
 
 		double euThisInjection = (amount - euNotStored);
@@ -99,8 +99,9 @@ public class TileEntityIndustrialCraftConsumer extends TileEntityEnergyConsumer<
 
 	@Override
 	public int getSinkTier() {
-		if (getVoltageIndex() == 3)
+		if (getVoltageIndex() == 3) {
 			return Integer.MAX_VALUE;
+		}
 		return getPowerSystem().getVoltageValues()[getVoltageIndex()];
 	}
 

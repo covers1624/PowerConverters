@@ -1,7 +1,5 @@
 package covers1624.powerconverters.gui;
 
-import org.lwjgl.opengl.GL11;
-
 import covers1624.powerconverters.api.bridge.BridgeSideData;
 import covers1624.powerconverters.container.ContainerEnergyBridge;
 import covers1624.powerconverters.reference.Reference;
@@ -11,6 +9,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
+import org.lwjgl.opengl.GL11;
 
 public class GuiEnergyBridge extends GuiContainer {
 
@@ -93,8 +92,9 @@ public class GuiEnergyBridge extends GuiContainer {
 	}
 
 	private String getOutputRateString(BridgeSideData data) {
-		if (!data.isConnected)
+		if (!data.isConnected) {
 			return "NO LINK";
+		}
 		double rate = data.outputRate;
 		if (rate > 1000) {
 			double rateThousand = (rate / 1000.0);

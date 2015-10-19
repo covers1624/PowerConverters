@@ -1,9 +1,9 @@
 package covers1624.powerconverters.tile.main;
 
-import java.util.Map.Entry;
-
-import net.minecraftforge.common.util.ForgeDirection;
 import covers1624.powerconverters.api.registry.PowerSystemRegistry.PowerSystem;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import java.util.Map.Entry;
 
 public abstract class TileEntityEnergyConsumer<T> extends TileEntityBridgeComponent<T> {
 	public TileEntityEnergyConsumer(PowerSystem powerSystem, int voltageNameIndex, Class<T> adjacentClass) {
@@ -11,10 +11,10 @@ public abstract class TileEntityEnergyConsumer<T> extends TileEntityBridgeCompon
 		type = "Consumer";
 	}
 
-	protected double storeEnergy(double energy) {
+	protected double storeEnergy(double energy, boolean simulate) {
 		for (Entry<ForgeDirection, TileEntityEnergyBridge> bridge : getBridges().entrySet()) {
 			if (!isGettingRedstone()) {
-				energy = bridge.getValue().storeEnergy(energy);
+				energy = bridge.getValue().storeEnergy(energy, simulate);
 			}
 			if (energy <= 0) {
 				return 0;

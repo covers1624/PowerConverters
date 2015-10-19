@@ -1,9 +1,9 @@
 package covers1624.powerconverters.init;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
+import covers1624.powerconverters.util.FMLLogHelper;
+import covers1624.powerconverters.util.LogHelper;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -13,13 +13,11 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
-
 import org.apache.logging.log4j.Level;
 
-import covers1624.powerconverters.util.FMLLogHelper;
-import covers1624.powerconverters.util.LogHelper;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.registry.GameRegistry;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class Recipes {
 	// The fall back recipes when the client leaves the server.

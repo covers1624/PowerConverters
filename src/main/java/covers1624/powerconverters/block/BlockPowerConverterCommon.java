@@ -1,5 +1,15 @@
 package covers1624.powerconverters.block;
 
+import covers1624.powerconverters.PowerConverters;
+import covers1624.powerconverters.gui.PCCreativeTab;
+import covers1624.powerconverters.item.DebugItem;
+import covers1624.powerconverters.reference.Reference;
+import covers1624.powerconverters.tile.main.TileEntityBridgeComponent;
+import covers1624.powerconverters.tile.main.TileEntityCharger;
+import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
+import covers1624.powerconverters.util.INeighboorUpdateTile;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -11,16 +21,6 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import covers1624.powerconverters.PowerConverters;
-import covers1624.powerconverters.gui.PCCreativeTab;
-import covers1624.powerconverters.item.DebugItem;
-import covers1624.powerconverters.reference.Reference;
-import covers1624.powerconverters.tile.main.TileEntityBridgeComponent;
-import covers1624.powerconverters.tile.main.TileEntityCharger;
-import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
-import covers1624.powerconverters.util.INeighboorUpdateTile;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockPowerConverterCommon extends BlockContainer {
 	private IIcon _iconBridge;
@@ -44,10 +44,11 @@ public class BlockPowerConverterCommon extends BlockContainer {
 
 	@Override
 	public IIcon getIcon(int side, int meta) {
-		if (meta == 0)
+		if (meta == 0) {
 			return _iconBridge;
-		else if (meta == 2)
+		} else if (meta == 2) {
 			return _iconChargerOff;
+		}
 
 		return null;
 	}
@@ -82,10 +83,12 @@ public class BlockPowerConverterCommon extends BlockContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int md) {
-		if (md == 0)
+		if (md == 0) {
 			return new TileEntityEnergyBridge();
-		if (md == 2)
+		}
+		if (md == 2) {
 			return new TileEntityCharger();
+		}
 		return null;
 	}
 

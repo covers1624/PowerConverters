@@ -1,7 +1,6 @@
 package covers1624.powerconverters.waila;
 
-import java.util.List;
-
+import covers1624.powerconverters.tile.main.TileEntityBridgeComponent;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
@@ -10,7 +9,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import covers1624.powerconverters.tile.main.TileEntityBridgeComponent;
+
+import java.util.List;
 
 public class WailaComponentProvider implements IWailaDataProvider {
 

@@ -1,13 +1,13 @@
 package covers1624.powerconverters.util;
 
-import java.util.ArrayList;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+
+import java.util.ArrayList;
 
 public class IRecipeHandler {
 

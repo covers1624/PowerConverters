@@ -1,21 +1,5 @@
 package covers1624.powerconverters.net;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelHandler;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.codec.MessageToMessageCodec;
-
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.EnumMap;
-import java.util.LinkedList;
-import java.util.List;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.network.INetHandler;
-import net.minecraft.network.NetHandlerPlayServer;
 import covers1624.powerconverters.PowerConverters;
 import covers1624.powerconverters.reference.Reference;
 import covers1624.powerconverters.util.LogHelper;
@@ -26,10 +10,21 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelHandler;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.handler.codec.MessageToMessageCodec;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.network.INetHandler;
+import net.minecraft.network.NetHandlerPlayServer;
+
+import java.util.*;
 
 /**
  * Packet pipeline class. Directs all registered packet data to be handled by the packets themselves.
- * 
+ *
  * @author sirgingalot some code from: cpw
  */
 @ChannelHandler.Sharable
@@ -43,10 +38,8 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 
 	/**
 	 * Register your packet with the pipeline. Discriminators are automatically set.
-	 * 
-	 * @param clazz
-	 *            the class to register
-	 * 
+	 *
+	 * @param clazz the class to register
 	 * @return whether registration was successful. Failure may occur if 256 packets have been registered or if the registry already contains this packet
 	 */
 	public boolean registerPacket(Class<? extends AbstractPacket> clazz) {
@@ -152,9 +145,8 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 	 * Send this message to everyone.
 	 * <p/>
 	 * Adapted from CPW's code in cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
-	 * 
-	 * @param message
-	 *            The message to send
+	 *
+	 * @param message The message to send
 	 */
 	public void sendToAll(AbstractPacket message) {
 		this.channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.ALL);
@@ -165,11 +157,9 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 	 * Send this message to the specified player.
 	 * <p/>
 	 * Adapted from CPW's code in cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
-	 * 
-	 * @param message
-	 *            The message to send
-	 * @param player
-	 *            The player to send it to
+	 *
+	 * @param message The message to send
+	 * @param player  The player to send it to
 	 */
 	public void sendTo(AbstractPacket message, EntityPlayerMP player) {
 		this.channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.PLAYER);
@@ -181,11 +171,9 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 	 * Send this message to everyone within a certain range of a point.
 	 * <p/>
 	 * Adapted from CPW's code in cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
-	 * 
-	 * @param message
-	 *            The message to send
-	 * @param point
-	 *            The {@link cpw.mods.fml.common.network.NetworkRegistry.TargetPoint} around which to send
+	 *
+	 * @param message The message to send
+	 * @param point   The {@link cpw.mods.fml.common.network.NetworkRegistry.TargetPoint} around which to send
 	 */
 	public void sendToAllAround(AbstractPacket message, NetworkRegistry.TargetPoint point) {
 		this.channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.ALLAROUNDPOINT);
@@ -197,11 +185,9 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 	 * Send this message to everyone within the supplied dimension.
 	 * <p/>
 	 * Adapted from CPW's code in cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
-	 * 
-	 * @param message
-	 *            The message to send
-	 * @param dimensionId
-	 *            The dimension id to target
+	 *
+	 * @param message     The message to send
+	 * @param dimensionId The dimension id to target
 	 */
 	public void sendToDimension(AbstractPacket message, int dimensionId) {
 		this.channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.DIMENSION);
@@ -213,9 +199,8 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 	 * Send this message to the server.
 	 * <p/>
 	 * Adapted from CPW's code in cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
-	 * 
-	 * @param message
-	 *            The message to send
+	 *
+	 * @param message The message to send
 	 */
 	public void sendToServer(AbstractPacket message) {
 		this.channels.get(Side.CLIENT).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.TOSERVER);

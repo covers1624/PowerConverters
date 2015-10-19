@@ -1,10 +1,10 @@
 package covers1624.powerconverters.slot;
 
+import covers1624.powerconverters.api.charge.IChargeHandler;
+import covers1624.powerconverters.api.registry.UniversalChargerRegistry;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import covers1624.powerconverters.api.charge.IChargeHandler;
-import covers1624.powerconverters.api.registry.UniversalChargerRegistry;
 
 public class ChargerInputSlot extends Slot {
 

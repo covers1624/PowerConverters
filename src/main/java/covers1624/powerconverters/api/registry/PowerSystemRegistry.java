@@ -1,9 +1,9 @@
 package covers1624.powerconverters.api.registry;
 
-import java.util.HashMap;
-
 import covers1624.powerconverters.util.LogHelper;
 import cpw.mods.fml.common.Loader;
+
+import java.util.HashMap;
 
 public class PowerSystemRegistry {
 

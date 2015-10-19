@@ -1,18 +1,7 @@
 package covers1624.powerconverters.init;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
-import covers1624.powerconverters.block.BlockEnergyConduit;
-import covers1624.powerconverters.block.BlockPowerConverterCommon;
-import covers1624.powerconverters.block.BlockPowerConverterFactorization;
-import covers1624.powerconverters.block.BlockPowerConverterIndustrialCraft;
-import covers1624.powerconverters.block.BlockPowerConverterRedstoneFlux;
-import covers1624.powerconverters.block.BlockPowerConverterSteam;
-import covers1624.powerconverters.item.ItemBlockPowerConverterCommon;
-import covers1624.powerconverters.item.ItemBlockPowerConverterFactorization;
-import covers1624.powerconverters.item.ItemBlockPowerConverterIndustrialCraft;
-import covers1624.powerconverters.item.ItemBlockPowerConverterRedstoneFlux;
-import covers1624.powerconverters.item.ItemBlockPowerConverterSteam;
+import covers1624.powerconverters.block.*;
+import covers1624.powerconverters.item.*;
 import covers1624.powerconverters.tile.factorization.TileEntityPowerConverterFactorizationConsumer;
 import covers1624.powerconverters.tile.factorization.TileEntityPowerConverterFactorizationProducer;
 import covers1624.powerconverters.tile.ic2.TileEntityIndustrialCraftConsumer;
@@ -28,6 +17,8 @@ import covers1624.powerconverters.util.RFHelper;
 import covers1624.powerconverters.util.TextureUtils;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemBlock;
 
 public class ModBlocks {
 

@@ -1,14 +1,14 @@
 package covers1624.powerconverters.block;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import covers1624.powerconverters.gui.PCCreativeTab;
 import covers1624.powerconverters.reference.Reference;
 import covers1624.powerconverters.tile.ic2.TileEntityIndustrialCraftConsumer;
 import covers1624.powerconverters.tile.ic2.TileEntityIndustrialCraftProducer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class BlockPowerConverterIndustrialCraft extends BlockPowerConverter {
 	public BlockPowerConverterIndustrialCraft() {
@@ -19,22 +19,23 @@ public class BlockPowerConverterIndustrialCraft extends BlockPowerConverter {
 
 	@Override
 	public TileEntity createTileEntity(World world, int metadata) {
-		if (metadata == 0)
+		if (metadata == 0) {
 			return new TileEntityIndustrialCraftConsumer(0);
-		else if (metadata == 1)
+		} else if (metadata == 1) {
 			return new TileEntityIndustrialCraftProducer(0);
-		else if (metadata == 2)
+		} else if (metadata == 2) {
 			return new TileEntityIndustrialCraftConsumer(1);
-		else if (metadata == 3)
+		} else if (metadata == 3) {
 			return new TileEntityIndustrialCraftProducer(1);
-		else if (metadata == 4)
+		} else if (metadata == 4) {
 			return new TileEntityIndustrialCraftConsumer(2);
-		else if (metadata == 5)
+		} else if (metadata == 5) {
 			return new TileEntityIndustrialCraftProducer(2);
-		else if (metadata == 6)
+		} else if (metadata == 6) {
 			return new TileEntityIndustrialCraftConsumer(3);
-		else if (metadata == 7)
+		} else if (metadata == 7) {
 			return new TileEntityIndustrialCraftProducer(3);
+		}
 
 		return null;
 	}

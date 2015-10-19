@@ -1,12 +1,12 @@
 package covers1624.powerconverters.item;
 
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+
+import java.util.List;
 
 public class ItemBlockPowerConverterSteam extends ItemBlock {
 	public ItemBlockPowerConverterSteam(Block block) {
@@ -23,10 +23,12 @@ public class ItemBlockPowerConverterSteam extends ItemBlock {
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack) {
 		int md = itemstack.getItemDamage();
-		if (md == 0)
+		if (md == 0) {
 			return "powerconverters.steam.consumer";
-		if (md == 1)
+		}
+		if (md == 1) {
 			return "powerconverters.steam.producer";
+		}
 		return "unknown";
 	}
 

@@ -1,13 +1,13 @@
 package covers1624.powerconverters.grid;
 
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-
 import covers1624.powerconverters.tile.main.EnergyNetwork;
 import covers1624.powerconverters.tile.main.TileEnergyConduit;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.ServerTickEvent;
+
+import java.util.Iterator;
+import java.util.LinkedHashSet;
 
 public class GridTickHandler<G extends IGrid, N extends INode> implements IGridController {
 
@@ -66,21 +66,24 @@ public class GridTickHandler<G extends IGrid, N extends INode> implements IGridC
 
 	public void tickStart() {
 		// { Grids that have had significant conduits removed and need to rebuild/split
-		if (!tickingGridsToRegenerate.isEmpty())
+		if (!tickingGridsToRegenerate.isEmpty()) {
 			synchronized (tickingGridsToRegenerate) {
-				for (G grid : tickingGridsToRegenerate)
+				for (G grid : tickingGridsToRegenerate) {
 					grid.markSweep();
+				}
 				tickingGridsToRegenerate.clear();
 			}
+		}
 		// }
 
 		// { Updating internal types of conduits
 		// this pass is needed to handle issues with threading
-		if (!conduitToUpd.isEmpty())
+		if (!conduitToUpd.isEmpty()) {
 			synchronized (conduitToUpd) {
 				conduit.addAll(conduitToUpd);
 				conduitToUpd.clear();
 			}
+		}
 
 		if (!conduit.isEmpty()) {
 			N cond = null;
@@ -88,8 +91,9 @@ public class GridTickHandler<G extends IGrid, N extends INode> implements IGridC
 				Iterator<N> iter = conduit.iterator();
 				while (iter.hasNext()) {
 					cond = iter.next();
-					if (!cond.isNotValid())
+					if (!cond.isNotValid()) {
 						cond.updateInternalTypes(this);
+					}
 				}
 				conduit.clear();
 			} catch (Throwable _) {
@@ -99,39 +103,46 @@ public class GridTickHandler<G extends IGrid, N extends INode> implements IGridC
 		// }
 
 		// { Early update pass to extract energy from sources
-		if (!tickingGrids.isEmpty())
-			for (G grid : tickingGrids)
+		if (!tickingGrids.isEmpty()) {
+			for (G grid : tickingGrids) {
 				grid.doGridPreUpdate();
+			}
+		}
 		// }
 	}
 
 	public void tickEnd() {
 		// { Changes in what grids are being ticked
-		if (!tickingGridsToRemove.isEmpty())
+		if (!tickingGridsToRemove.isEmpty()) {
 			synchronized (tickingGridsToRemove) {
 				tickingGrids.removeAll(tickingGridsToRemove);
 				tickingGridsToRemove.clear();
 			}
+		}
 
-		if (!tickingGridsToAdd.isEmpty())
+		if (!tickingGridsToAdd.isEmpty()) {
 			synchronized (tickingGridsToAdd) {
 				tickingGrids.addAll(tickingGridsToAdd);
 				tickingGridsToAdd.clear();
 			}
+		}
 		// }
 
 		// { Ticking grids to transfer energy/etc.
-		if (!tickingGrids.isEmpty())
-			for (G grid : tickingGrids)
+		if (!tickingGrids.isEmpty()) {
+			for (G grid : tickingGrids) {
 				grid.doGridUpdate();
+			}
+		}
 		// }
 
 		// { Initial update tick for conduits added to the world
-		if (!conduitToAdd.isEmpty())
+		if (!conduitToAdd.isEmpty()) {
 			synchronized (conduitToAdd) {
 				conduit.addAll(conduitToAdd);
 				conduitToAdd.clear();
 			}
+		}
 
 		if (!conduit.isEmpty()) {
 			N cond = null;
@@ -139,8 +150,9 @@ public class GridTickHandler<G extends IGrid, N extends INode> implements IGridC
 				Iterator<N> iter = conduit.iterator();
 				while (iter.hasNext()) {
 					cond = iter.next();
-					if (!cond.isNotValid())
+					if (!cond.isNotValid()) {
 						cond.firstTick(this);
+					}
 				}
 				conduit.clear();
 			} catch (Throwable _) {
