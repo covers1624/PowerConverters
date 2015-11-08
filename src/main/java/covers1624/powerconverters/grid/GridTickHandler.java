@@ -145,9 +145,8 @@ public class GridTickHandler<G extends IGrid, N extends INode> {
 		if (!conduit.isEmpty()) {
 			N cond = null;
 			try {
-				Iterator<N> iter = conduit.iterator();
-				while (iter.hasNext()) {
-					cond = iter.next();
+				for (N aConduit : conduit) {
+					cond = aConduit;
 					if (!cond.isNotValid()) {
 						cond.firstTick(this);
 					}

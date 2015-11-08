@@ -25,7 +25,6 @@ public class ConfigurationHandler {
 	public static boolean useTechRebornRecipes;
 
 	// Features
-	public static boolean doFlatBedrock;
 	public static boolean doUpdateCheck;
 	public static boolean sendRecipesToClient;
 	public static boolean ignoreRecipesFromServer;
@@ -59,7 +58,6 @@ public class ConfigurationHandler {
 
 		logDebug = configuration.get(Reference.BASIC_CATEGORY, "Log Debug Messages", false, "Set this to true to see all debug messages.").getBoolean();
 
-		doFlatBedrock = configuration.get(Reference.BASIC_CATEGORY, "Do Flat Bedrock", false, "Set this to false for normal Bedrock.").getBoolean();
 		doUpdateCheck = configuration.get(Reference.BASIC_CATEGORY, "Do Update Check", true, "Set to false and PowerConverters will not check for an update").getBoolean();
 		sendRecipesToClient = configuration.get(Reference.BASIC_CATEGORY, "Send Recipes To Client", true, "Setting this to false will dissable recipe syncing with the server").getBoolean();
 		ignoreRecipesFromServer = configuration.get(Reference.BASIC_CATEGORY, "Ignore Server Recipes", false, "Setting this to true will dissable the client using the server recipes.").getBoolean();
