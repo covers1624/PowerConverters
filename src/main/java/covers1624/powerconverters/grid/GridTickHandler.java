@@ -94,8 +94,8 @@ public class GridTickHandler<G extends IGrid, N extends INode> {
 					}
 				}
 				conduit.clear();
-			} catch (Throwable _) {
-				throw new RuntimeException("Crashing on conduit " + cond, _);
+			} catch (Throwable e) {
+				throw new RuntimeException("Crashing on conduit " + cond, e);
 			}
 		}
 		// }
@@ -153,8 +153,8 @@ public class GridTickHandler<G extends IGrid, N extends INode> {
 					}
 				}
 				conduit.clear();
-			} catch (Throwable _) {
-				throw new RuntimeException("Crashing on conduit " + cond, _);
+			} catch (Throwable e) {
+				throw new RuntimeException("Crashing on conduit " + cond, e);
 			}
 		}
 		// }

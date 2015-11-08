@@ -23,6 +23,7 @@ import java.util.List;
 
 public class InfoHandler implements IUsageHandler, ICraftingHandler {
 
+	private static final int WIDTH = 166;
 	public static FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
 	public static int color = -12566464;
 	ItemStack displayItem;
@@ -49,15 +50,15 @@ public class InfoHandler implements IUsageHandler, ICraftingHandler {
 			this.precise = true;
 		}
 		if (StatCollector.canTranslate(this.id + suffix)) {
-			List list = this.splitString(StatCollector.translateToLocal(this.id + suffix));
-			this.info = (String[]) list.toArray(new String[list.size()]);
+			List<String> list = this.splitString(StatCollector.translateToLocal(this.id + suffix));
+			this.info = list.toArray(new String[list.size()]);
 		} else {
-			ArrayList temp = new ArrayList();
+			ArrayList<String> temp = new ArrayList<String>();
 			for (int i = 0; StatCollector.canTranslate(this.id + suffix + "." + i); ++i) {
 				String a = StatCollector.translateToLocal(this.id + suffix + "." + i);
 				temp.addAll(this.splitString(a));
 			}
-			this.info = (String[]) temp.toArray(new String[temp.size()]);
+			this.info = temp.toArray(new String[temp.size()]);
 		}
 		this.displayItem = item.copy();
 		this.displayItem.stackSize = 1;
@@ -71,18 +72,18 @@ public class InfoHandler implements IUsageHandler, ICraftingHandler {
 	@Override
 	public void drawForeground(int recipe) {
 		// Draw the text
-		List<String> text = fontRenderer.listFormattedStringToWidth(this.info[recipe], this.getWidth() - 8);
+		@SuppressWarnings("unchecked")
+		List<String> text = fontRenderer.listFormattedStringToWidth(this.info[recipe], WIDTH - 8);
 		for (int i = 0; i < text.size(); i++) {
 			String toDraw = (String) text.get(i);
-			GuiDraw.drawString(toDraw, this.getWidth() / 2 - GuiDraw.getStringWidth(toDraw) / 2, 18 + i * 8, color, false);
+			GuiDraw.drawString(toDraw, WIDTH / 2 - GuiDraw.getStringWidth(toDraw) / 2, 18 + i * 8, color, false);
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<String> splitString(String input) {
-
 		ArrayList<String> list = new ArrayList<String>();
-		List<String> page = fontRenderer.listFormattedStringToWidth(input, this.getWidth() - 8);
+		@SuppressWarnings("unchecked")
+		List<String> page = fontRenderer.listFormattedStringToWidth(input, WIDTH - 8);
 
 		if (page.size() < this.noLinesPerPage) {
 			list.add(input);
@@ -103,10 +104,6 @@ public class InfoHandler implements IUsageHandler, ICraftingHandler {
 			}
 		}
 		return list;
-	}
-
-	public int getWidth() {
-		return 166;
 	}
 
 	@Override
@@ -148,7 +145,7 @@ public class InfoHandler implements IUsageHandler, ICraftingHandler {
 
 	@Override
 	public PositionedStack getResultStack(int arg0) {
-		return new PositionedStack(this.displayItem, this.getWidth() / 2 - 9, 0, false);
+		return new PositionedStack(this.displayItem, WIDTH / 2 - 9, 0, false);
 	}
 
 	@Override

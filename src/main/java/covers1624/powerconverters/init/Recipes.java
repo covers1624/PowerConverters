@@ -74,9 +74,9 @@ public class Recipes {
 			}
 		}
 
-		HashMap hashmap;
+		HashMap<Character, ItemStack> hashmap;
 
-		for (hashmap = new HashMap(); i < params.length; i += 2) {
+		for (hashmap = new HashMap<Character, ItemStack>(); i < params.length; i += 2) {
 			Character character = (Character) params[i];
 			ItemStack itemstack1 = null;
 
@@ -97,7 +97,7 @@ public class Recipes {
 			char c0 = s.charAt(i1);
 
 			if (hashmap.containsKey(Character.valueOf(c0))) {
-				aitemstack[i1] = ((ItemStack) hashmap.get(Character.valueOf(c0))).copy();
+				aitemstack[i1] = hashmap.get(Character.valueOf(c0)).copy();
 			} else {
 				aitemstack[i1] = null;
 			}
@@ -109,7 +109,7 @@ public class Recipes {
 	}
 
 	private static void addShapelessRecipe(ItemStack output, Object... params) {
-		ArrayList arraylist = new ArrayList();
+		ArrayList<ItemStack> arraylist = new ArrayList<ItemStack>();
 		Object[] aobject = params;
 		int i = params.length;
 
@@ -120,12 +120,10 @@ public class Recipes {
 				arraylist.add(((ItemStack) object1).copy());
 			} else if (object1 instanceof Item) {
 				arraylist.add(new ItemStack((Item) object1));
-			} else {
-				if (!(object1 instanceof Block)) {
-					throw new RuntimeException("Invalid shapeless recipy!");
-				}
-
+			} else if (object1 instanceof Block) {
 				arraylist.add(new ItemStack((Block) object1));
+			} else {
+				throw new RuntimeException("Invalid shapeless recipe!");
 			}
 		}
 
