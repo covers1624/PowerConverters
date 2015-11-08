@@ -2,7 +2,7 @@ package covers1624.powerconverters.block;
 
 import covers1624.powerconverters.PowerConverters;
 import covers1624.powerconverters.item.DebugItem;
-import covers1624.powerconverters.net.PacketPipeline;
+import covers1624.powerconverters.network.PacketPipeline;
 import covers1624.powerconverters.tile.main.TileEntityBridgeComponent;
 import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
 import covers1624.powerconverters.util.INeighboorUpdateTile;

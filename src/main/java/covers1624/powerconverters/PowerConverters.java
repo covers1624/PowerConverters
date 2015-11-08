@@ -5,9 +5,10 @@ import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.handler.PCEventHandler;
 import covers1624.powerconverters.handler.PCGUIHandler;
 import covers1624.powerconverters.init.*;
-import covers1624.powerconverters.net.EnergyBridgeSyncPacket;
-import covers1624.powerconverters.net.PacketPipeline;
-import covers1624.powerconverters.net.RecipeSyncPacket;
+import covers1624.powerconverters.network.packets.EnergyBridgeSyncPacket;
+import covers1624.powerconverters.network.PacketPipeline;
+import covers1624.powerconverters.network.packets.RecipeSyncPacket;
+import covers1624.powerconverters.network.packets.WailaSyncPacket;
 import covers1624.powerconverters.proxy.IPCProxy;
 import covers1624.powerconverters.reference.Reference;
 import covers1624.powerconverters.updatechecker.UpdateManager;
@@ -86,6 +87,7 @@ public class PowerConverters {
 		PacketPipeline.INSTANCE.initalise();
 		PacketPipeline.INSTANCE.registerPacket(RecipeSyncPacket.class);
 		PacketPipeline.INSTANCE.registerPacket(EnergyBridgeSyncPacket.class);
+		PacketPipeline.INSTANCE.registerPacket(WailaSyncPacket.class);
 
 		MinecraftForge.EVENT_BUS.register(GridTickHandler.energy);
 		FMLCommonHandler.instance().bus().register(GridTickHandler.energy);

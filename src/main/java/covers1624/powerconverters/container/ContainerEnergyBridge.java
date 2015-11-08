@@ -1,6 +1,6 @@
 package covers1624.powerconverters.container;
 
-import covers1624.powerconverters.net.PacketPipeline;
+import covers1624.powerconverters.network.PacketPipeline;
 import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
 import covers1624.powerconverters.util.InventoryUtils;
 import net.minecraft.entity.player.EntityPlayer;

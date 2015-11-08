@@ -2,8 +2,8 @@ package covers1624.powerconverters.handler;
 
 import covers1624.powerconverters.PowerConverters;
 import covers1624.powerconverters.init.Recipes;
-import covers1624.powerconverters.net.PacketPipeline;
-import covers1624.powerconverters.net.RecipeSyncPacket;
+import covers1624.powerconverters.network.PacketPipeline;
+import covers1624.powerconverters.network.packets.RecipeSyncPacket;
 import covers1624.powerconverters.reference.Reference;
 import covers1624.powerconverters.util.IRecipeHandler;
 import covers1624.powerconverters.util.LogHelper;

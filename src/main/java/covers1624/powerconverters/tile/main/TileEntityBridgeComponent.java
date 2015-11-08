@@ -5,6 +5,7 @@ import covers1624.powerconverters.block.BlockPowerConverter;
 import covers1624.powerconverters.util.BlockPosition;
 import covers1624.powerconverters.util.IAdvancedLogTile;
 import covers1624.powerconverters.util.INeighboorUpdateTile;
+import covers1624.powerconverters.waila.IWailaSync;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -19,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TileEntityBridgeComponent<T> extends TileEntity implements INeighboorUpdateTile, IAdvancedLogTile {
+public class TileEntityBridgeComponent<T> extends TileEntity implements INeighboorUpdateTile, IAdvancedLogTile, IWailaSync {
 	private Map<ForgeDirection, TileEntityEnergyBridge> _adjacentBridges = new HashMap<ForgeDirection, TileEntityEnergyBridge>();
 	private Map<ForgeDirection, T> _adjacentTiles = new HashMap<ForgeDirection, T>();
 
@@ -121,14 +122,13 @@ public class TileEntityBridgeComponent<T> extends TileEntity implements INeighbo
 		return false;
 	}
 
-	@SideOnly(Side.CLIENT)
 	public void addWailaInfo(List<String> info) {
 		info.add("Type: " + type);
 		info.add("PowerSystem: " + powerSystem.getName());
 		if (type.equals("Consumer")) {
-			info.add("Consumer Dissabled: " + powerSystem.consumerDissabled());
+			info.add("Consumer Disabled: " + powerSystem.consumerDissabled());
 		} else if (type.equals("Producer")) {
-			info.add("Producer Dissabled: " + powerSystem.producerDissabled());
+			info.add("Producer Disabled: " + powerSystem.producerDissabled());
 		}
 	}
 

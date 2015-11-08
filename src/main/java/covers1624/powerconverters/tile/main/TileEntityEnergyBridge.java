@@ -2,7 +2,7 @@ package covers1624.powerconverters.tile.main;
 
 import covers1624.powerconverters.api.bridge.BridgeSideData;
 import covers1624.powerconverters.handler.ConfigurationHandler;
-import covers1624.powerconverters.net.EnergyBridgeSyncPacket;
+import covers1624.powerconverters.network.packets.EnergyBridgeSyncPacket;
 import covers1624.powerconverters.util.BlockPosition;
 import covers1624.powerconverters.util.INeighboorUpdateTile;
 import cpw.mods.fml.relauncher.Side;
@@ -210,7 +210,6 @@ public class TileEntityEnergyBridge extends TileEntity implements INeighboorUpda
 		}
 		tagCompound.setBoolean("InputLimited", isInputLimited());
 		tagCompound.setDouble("Energy", getEnergyScaled());
-		EnergyBridgeSyncPacket syncPacket = new EnergyBridgeSyncPacket(tagCompound, xCoord, yCoord, zCoord);
-		return syncPacket;
+		return new EnergyBridgeSyncPacket(tagCompound, xCoord, yCoord, zCoord);
 	}
 }

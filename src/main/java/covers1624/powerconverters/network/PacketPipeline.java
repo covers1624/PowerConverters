@@ -1,4 +1,4 @@
-package covers1624.powerconverters.net;
+package covers1624.powerconverters.network;
 
 import covers1624.powerconverters.PowerConverters;
 import covers1624.powerconverters.reference.Reference;

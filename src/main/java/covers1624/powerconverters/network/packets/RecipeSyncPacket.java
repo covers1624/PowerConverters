@@ -1,8 +1,9 @@
-package covers1624.powerconverters.net;
+package covers1624.powerconverters.network.packets;
 
 import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.init.Recipes;
 import covers1624.powerconverters.nei.NEIInfoHandlerConfig;
+import covers1624.powerconverters.network.AbstractPacket;
 import covers1624.powerconverters.util.IRecipeHandler;
 import covers1624.powerconverters.util.LogHelper;
 import covers1624.powerconverters.util.RecipeRemover;

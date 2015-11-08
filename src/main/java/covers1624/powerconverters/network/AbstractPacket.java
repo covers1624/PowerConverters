@@ -1,7 +1,7 @@
 /**
  * Stolen from TinkersConstruct :D
  */
-package covers1624.powerconverters.net;
+package covers1624.powerconverters.network;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;

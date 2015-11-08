@@ -1,7 +1,8 @@
-package covers1624.powerconverters.net;
+package covers1624.powerconverters.network.packets;
 
 import covers1624.powerconverters.PowerConverters;
 import covers1624.powerconverters.api.bridge.BridgeSideData;
+import covers1624.powerconverters.network.AbstractPacket;
 import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
