@@ -71,6 +71,7 @@ public class InfoHandler implements IUsageHandler, ICraftingHandler {
 	@Override
 	public void drawForeground(int recipe) {
 		// Draw the text
+		@SuppressWarnings("unchecked")
 		List<String> text = fontRenderer.listFormattedStringToWidth(this.info[recipe], this.getWidth() - 8);
 		for (int i = 0; i < text.size(); i++) {
 			String toDraw = (String) text.get(i);
@@ -78,10 +79,10 @@ public class InfoHandler implements IUsageHandler, ICraftingHandler {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<String> splitString(String input) {
 
 		ArrayList<String> list = new ArrayList<String>();
+		@SuppressWarnings("unchecked")
 		List<String> page = fontRenderer.listFormattedStringToWidth(input, this.getWidth() - 8);
 
 		if (page.size() < this.noLinesPerPage) {
