@@ -120,12 +120,10 @@ public class Recipes {
 				arraylist.add(((ItemStack) object1).copy());
 			} else if (object1 instanceof Item) {
 				arraylist.add(new ItemStack((Item) object1));
-			} else {
-				if (!(object1 instanceof Block)) {
-					throw new RuntimeException("Invalid shapeless recipy!");
-				}
-
+			} else if (object1 instanceof Block) {
 				arraylist.add(new ItemStack((Block) object1));
+			} else {
+				throw new RuntimeException("Invalid shapeless recipe!");
 			}
 		}
 
