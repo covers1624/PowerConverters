@@ -49,15 +49,15 @@ public class InfoHandler implements IUsageHandler, ICraftingHandler {
 			this.precise = true;
 		}
 		if (StatCollector.canTranslate(this.id + suffix)) {
-			List list = this.splitString(StatCollector.translateToLocal(this.id + suffix));
-			this.info = (String[]) list.toArray(new String[list.size()]);
+			List<String> list = this.splitString(StatCollector.translateToLocal(this.id + suffix));
+			this.info = list.toArray(new String[list.size()]);
 		} else {
-			ArrayList temp = new ArrayList();
+			ArrayList<String> temp = new ArrayList<String>();
 			for (int i = 0; StatCollector.canTranslate(this.id + suffix + "." + i); ++i) {
 				String a = StatCollector.translateToLocal(this.id + suffix + "." + i);
 				temp.addAll(this.splitString(a));
 			}
-			this.info = (String[]) temp.toArray(new String[temp.size()]);
+			this.info = temp.toArray(new String[temp.size()]);
 		}
 		this.displayItem = item.copy();
 		this.displayItem.stackSize = 1;
