@@ -1,9 +1,10 @@
-package covers1624.powerconverters.tile.main;
+package covers1624.powerconverters.tile.conduit;
 
 import cofh.api.energy.*;
 import covers1624.powerconverters.grid.GridTickHandler;
-import covers1624.powerconverters.grid.IGridController;
 import covers1624.powerconverters.grid.INode;
+import covers1624.powerconverters.pipe.ConnectionMask;
+import covers1624.powerconverters.pipe.EnergyNetwork;
 import covers1624.powerconverters.util.BlockPosition;
 import covers1624.powerconverters.util.IAdvancedLogTile;
 import covers1624.powerconverters.util.IUpdateTileWithCords;
@@ -20,12 +21,13 @@ public class TileEnergyConduit extends TileEntity implements INode, IEnergyHandl
 
 	private IEnergyReceiver[] receiverCache = null;
 	private IEnergyProvider[] providerCache = null;
+	private ConnectionMask[] connectionMask = new ConnectionMask[6];// 6 sides.
 
 	private boolean readFromNBT = false;// Seems to be what is used to check if it has been initialized.
 	private boolean deadCache = false; // Used to re-check the adjacent Tiles.
 	boolean isNode = false;
-	int energyForGrid = 0;
-	EnergyNetwork grid;
+	private int energyForGrid = 0;
+	public EnergyNetwork grid;
 
 	public TileEnergyConduit() {
 		if (grid == null) {
@@ -113,7 +115,7 @@ public class TileEnergyConduit extends TileEntity implements INode, IEnergyHandl
 					providerCache[side] = (IEnergyProvider) tile;
 				}
 			}
-		} // TODO IC2
+		} // TODO Make this work off handlers instead of raw imports.
 
 	}
 
@@ -156,7 +158,7 @@ public class TileEnergyConduit extends TileEntity implements INode, IEnergyHandl
 	}
 
 	@Override
-	public void firstTick(IGridController grid) {
+	public void firstTick(GridTickHandler grid) {
 		LogHelper.info("First Grid Tick");
 		if (worldObj == null || worldObj.isRemote || grid != EnergyNetwork.HANDLER) {
 			return;
@@ -174,7 +176,7 @@ public class TileEnergyConduit extends TileEntity implements INode, IEnergyHandl
 	 * Seems to be used to check if the conduit is a node.
 	 */
 	@Override
-	public void updateInternalTypes(IGridController grid) {
+	public void updateInternalTypes(GridTickHandler grid) {
 		if (deadCache || grid != EnergyNetwork.HANDLER) {
 			return;
 		}
@@ -292,39 +294,57 @@ public class TileEnergyConduit extends TileEntity implements INode, IEnergyHandl
 		info.add(text("-Energy-"));
 		if (grid != null) {
 			/* TODO: advanced monitoring */
-			if (debug) {
-				if (isNode) {
-					info.add(text("Throughput All: " + grid.distribution));
-					info.add(text("Throughput Side: " + grid.distributionSide));
-				}
+			//if (debug) {
+			if (isNode) {
+				info.add(text("Throughput All: " + grid.distribution));
+				info.add(text("Throughput Side: " + grid.distributionSide));
 			}
+			//}
 
-			if (!debug) {
-				float sat = 0;
-				if (grid.getNodeCount() != 0) {
-					sat = (float) (Math.ceil(grid.storage.getEnergyStored() / (float) grid.storage.getMaxEnergyStored() * 1000f) / 10f);
-				}
-				info.add(text("Saturation: " + sat));
+			//if (!debug) {
+			float sat = 0;
+			if (grid.getNodeCount() != 0) {
+				sat = (float) (Math.ceil(grid.storage.getEnergyStored() / (float) grid.storage.getMaxEnergyStored() * 1000f) / 10f);
 			}
+			info.add(text("Saturation: " + sat));
+			//}
 		} else if (!debug) {
 			info.add(text("Null Grid"));
 		}
-		if (debug) {
-			if (grid != null) {
-				info.add(text("Grid:" + grid));
-				info.add(text("Conduits: " + grid.getConduitCount() + ", Nodes: " + grid.getNodeCount()));
-				info.add(text("Grid Max: " + grid.storage.getMaxEnergyStored() + ", Grid Cur: " + grid.storage.getEnergyStored()));
-				// info.add(text("Caches: (RF, EU):({" + Arrays.toString(receiverCache) + "," + Arrays.toString(providerCache) + "}, " + ic2Cache + ")"));
-			} else {
-				info.add(text("Null Grid"));
-			}
-			info.add(text("Node: " + isNode + ", Energy: " + energyForGrid));
-			return;
+		//if (debug) {
+		if (grid != null) {
+			info.add(text("Grid:" + grid));
+			info.add(text("Conduits: " + grid.getConduitCount() + ", Nodes: " + grid.getNodeCount()));
+			info.add(text("Grid Max: " + grid.storage.getMaxEnergyStored() + ", Grid Cur: " + grid.storage.getEnergyStored()));
+			// info.add(text("Caches: (RF, EU):({" + Arrays.toString(receiverCache) + "," + Arrays.toString(providerCache) + "}, " + ic2Cache + ")"));
+		} else {
+			info.add(text("Null Grid"));
 		}
+		info.add(text("Node: " + isNode + ", Energy: " + energyForGrid));
+		//}
 	}
 
 	public IChatComponent text(String str) {
 		return new ChatComponentText(str);
 	}
 
+	public int getEnergyForGrid() {
+		return energyForGrid;
+	}
+
+	public void setEnergyForGrid(int energyForGrid) {
+		this.energyForGrid = energyForGrid;
+	}
+
+	public boolean isNode(){
+		return isNode;
+	}
+
+	public ConnectionMask getConnectionMask(ForgeDirection dir) {
+		return getConnectionMask(dir.ordinal());
+	}
+
+	public ConnectionMask getConnectionMask(int dir) {
+		return connectionMask[dir];
+	}
 }

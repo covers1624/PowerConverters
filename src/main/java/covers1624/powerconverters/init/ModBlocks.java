@@ -6,7 +6,7 @@ import covers1624.powerconverters.tile.factorization.TileEntityPowerConverterFac
 import covers1624.powerconverters.tile.factorization.TileEntityPowerConverterFactorizationProducer;
 import covers1624.powerconverters.tile.ic2.TileEntityIndustrialCraftConsumer;
 import covers1624.powerconverters.tile.ic2.TileEntityIndustrialCraftProducer;
-import covers1624.powerconverters.tile.main.TileEnergyConduit;
+import covers1624.powerconverters.tile.conduit.TileEnergyConduit;
 import covers1624.powerconverters.tile.main.TileEntityCharger;
 import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
 import covers1624.powerconverters.tile.redstoneflux.TileEntityRedstoneFluxConsumer;

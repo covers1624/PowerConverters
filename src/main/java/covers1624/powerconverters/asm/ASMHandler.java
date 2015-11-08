@@ -12,7 +12,7 @@ public class ASMHandler implements IFMLLoadingPlugin {
 
 	static {
 		// Yes i know what you are thinking, "WHY THE FUCK IS HE NOT ALLOWING US TO ASM HIS CODE".
-		// Simple Answer, "FUCK OFF CUNT!".
+		// Simple Answer, "No!".
 		// If you have a problem with the way i run my mod.
 		// TELL ME. Don't just ASM the fuck out of it.
 

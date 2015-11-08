@@ -34,9 +34,10 @@ public class NEIInfoHandlerConfig implements IConfigureNEI {
 		return "1";
 	}
 
+	@Deprecated
 	public static void addRecipesToNEI() {
 		for (ICraftingHandler handler : GuiCraftingRecipe.craftinghandlers) {
-			if (handler.getClass().getName() == ShapedRecipeHandler.class.getName()) {
+			if (handler.getClass().getName().equals(ShapedRecipeHandler.class.getName())) {
 				ShapedRecipeHandler shapedRecipeHandler = (ShapedRecipeHandler) handler;
 				for (IRecipe recipe : Recipes.getCurrentRecipes()) {
 					if (recipe instanceof ShapedRecipes) {
@@ -46,7 +47,7 @@ public class NEIInfoHandlerConfig implements IConfigureNEI {
 					}
 				}
 			}
-			if (handler.getClass().getName() == ShapelessRecipeHandler.class.getName()) {
+			if (handler.getClass().getName().equals(ShapelessRecipeHandler.class.getName())) {
 				ShapelessRecipeHandler shapelessRecipeHandler = (ShapelessRecipeHandler) handler;
 				for (IRecipe recipe : Recipes.getCurrentRecipes()) {
 					if (recipe instanceof ShapelessRecipes) {

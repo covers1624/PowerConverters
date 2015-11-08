@@ -1,7 +1,7 @@
 package covers1624.powerconverters.grid;
 
-import covers1624.powerconverters.tile.main.EnergyNetwork;
-import covers1624.powerconverters.tile.main.TileEnergyConduit;
+import covers1624.powerconverters.pipe.EnergyNetwork;
+import covers1624.powerconverters.tile.conduit.TileEnergyConduit;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.ServerTickEvent;
@@ -9,7 +9,7 @@ import cpw.mods.fml.common.gameevent.TickEvent.ServerTickEvent;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 
-public class GridTickHandler<G extends IGrid, N extends INode> implements IGridController {
+public class GridTickHandler<G extends IGrid, N extends INode> {
 
 	public static final GridTickHandler<EnergyNetwork, TileEnergyConduit> energy = new GridTickHandler<EnergyNetwork, TileEnergyConduit>("Energy");
 
@@ -25,7 +25,6 @@ public class GridTickHandler<G extends IGrid, N extends INode> implements IGridC
 	private final String label;
 
 	public GridTickHandler(String name) {
-		name.hashCode();
 		label = "GridTickHandler[" + name + "]";
 	}
 
@@ -88,9 +87,8 @@ public class GridTickHandler<G extends IGrid, N extends INode> implements IGridC
 		if (!conduit.isEmpty()) {
 			N cond = null;
 			try {
-				Iterator<N> iter = conduit.iterator();
-				while (iter.hasNext()) {
-					cond = iter.next();
+				for (N aConduit : conduit) {
+					cond = aConduit;
 					if (!cond.isNotValid()) {
 						cond.updateInternalTypes(this);
 					}

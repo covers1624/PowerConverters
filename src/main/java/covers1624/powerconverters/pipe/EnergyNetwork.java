@@ -1,8 +1,9 @@
-package covers1624.powerconverters.tile.main;
+package covers1624.powerconverters.pipe;
 
 import cofh.api.energy.EnergyStorage;
 import covers1624.powerconverters.grid.GridTickHandler;
 import covers1624.powerconverters.grid.IGrid;
+import covers1624.powerconverters.tile.conduit.TileEnergyConduit;
 import covers1624.powerconverters.util.BlockPosition;
 import covers1624.repack.cofh.lib.util.ArrayHashList;
 import covers1624.repack.cofh.lib.util.LinkedHashList;
@@ -14,14 +15,14 @@ public class EnergyNetwork implements IGrid {
 
 	public static final int TRANSFER_RATE = 1000;
 	public static final int STORAGE = TRANSFER_RATE * 6;
-	static final GridTickHandler<EnergyNetwork, TileEnergyConduit> HANDLER = GridTickHandler.energy;
+	public static final GridTickHandler<EnergyNetwork, TileEnergyConduit> HANDLER = GridTickHandler.energy;
 
 	private ArrayHashList<TileEnergyConduit> nodeSet = new ArrayHashList<TileEnergyConduit>();
 	LinkedHashList<TileEnergyConduit> conduitSet;
 	private TileEnergyConduit master;
 	private int overflowSelector;
 	private boolean regenerating = false;
-	EnergyStorage storage = new EnergyStorage(480, 80);
+	public EnergyStorage storage = new EnergyStorage(480, 80);
 
 	public int distribution;
 	public int distributionSide;
@@ -57,14 +58,14 @@ public class EnergyNetwork implements IGrid {
 			if (!conduitAdded(conduit)) {
 				return;
 			}
-			if (conduit.isNode) {
+			if (conduit.isNode()) {
 				if (nodeSet.add(conduit)) {
 					nodeAdded(conduit);
 				}
 			} else if (!nodeSet.isEmpty()) {
 				int share = getNodeShare(conduit);
 				if (nodeSet.remove(conduit)) {
-					conduit.energyForGrid = storage.extractEnergy(share, false);
+					conduit.setEnergyForGrid(storage.extractEnergy(share, false));
 					nodeRemoved(conduit);
 
 				}
@@ -77,7 +78,7 @@ public class EnergyNetwork implements IGrid {
 		if (!nodeSet.isEmpty()) {
 			int share = getNodeShare(conduit);
 			if (nodeSet.remove(conduit)) {
-				conduit.energyForGrid = storage.extractEnergy(share, false);
+				conduit.setEnergyForGrid(storage.extractEnergy(share, false));
 				nodeRemoved(conduit);
 			}
 		}
@@ -241,7 +242,7 @@ public class EnergyNetwork implements IGrid {
 	}
 
 	public void destroyNode(TileEnergyConduit conduit) {
-		conduit.energyForGrid = getNodeShare(conduit);
+		conduit.setEnergyForGrid(getNodeShare(conduit));
 		conduit.grid = null;
 	}
 
@@ -280,7 +281,7 @@ public class EnergyNetwork implements IGrid {
 			HANDLER.addGrid(this);
 		}
 		rebalanceGrid();
-		storage.modifyEnergyStored(conduit.energyForGrid);
+		storage.modifyEnergyStored(conduit.getEnergyForGrid());
 	}
 
 	public void nodeRemoved(TileEnergyConduit conduit) {

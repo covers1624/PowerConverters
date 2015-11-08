@@ -16,6 +16,7 @@
 !UpdateInfo.update
 !RoadMap.txt
 !README.md
+!master_at.cfg
 
 # Include git important files
 !.gitmodules
