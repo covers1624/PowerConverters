@@ -72,7 +72,7 @@ public class WailaSyncPacket extends AbstractPacket {
 	public void handleServerSide(EntityPlayer player) {
 		TileEntity tileEntity = player.worldObj.getTileEntity(tagCompound.getInteger("x"), tagCompound.getInteger("y"), tagCompound.getInteger("z"));
 		if(tileEntity instanceof IWailaSync){
-			PacketPipeline.INSTANCE.sendTo(new WailaSyncPacket((IWailaSync)tileEntity), (EntityPlayerMP) player);
+			PacketPipeline.instance().sendTo(new WailaSyncPacket((IWailaSync)tileEntity), (EntityPlayerMP) player);
 		}
 	}
 }

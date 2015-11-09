@@ -34,7 +34,7 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 	private LinkedList<Class<? extends AbstractPacket>> packets = new LinkedList<Class<? extends AbstractPacket>>();
 	private boolean isPostInitialised = false;
 
-	public static final PacketPipeline INSTANCE = new PacketPipeline();
+	private static final PacketPipeline INSTANCE = new PacketPipeline();
 
 	/**
 	 * Register your packet with the pipeline. Discriminators are automatically set.
@@ -205,5 +205,9 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 	public void sendToServer(AbstractPacket message) {
 		this.channels.get(Side.CLIENT).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.TOSERVER);
 		this.channels.get(Side.CLIENT).writeAndFlush(message);
+	}
+
+	public static PacketPipeline instance(){
+		return INSTANCE;
 	}
 }

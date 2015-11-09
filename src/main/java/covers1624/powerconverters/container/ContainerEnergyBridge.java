@@ -74,7 +74,7 @@ public class ContainerEnergyBridge extends Container {
 		// ((ICrafting) crafters.get(i)).sendProgressBarUpdate(this, 1000, energyBridge.isInputLimited() ? 1 : 0);
 		// ((ICrafting) crafters.get(i)).sendProgressBarUpdate(this, 1001, (int) energyBridge.getEnergyScaled());
 		// }
-		PacketPipeline.INSTANCE.sendTo(energyBridge.getNetPacket(), (EntityPlayerMP) player);
+		PacketPipeline.instance().sendTo(energyBridge.getNetPacket(), (EntityPlayerMP) player);
 	}
 
 	@Override

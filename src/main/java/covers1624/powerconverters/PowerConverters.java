@@ -5,6 +5,7 @@ import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.handler.PCEventHandler;
 import covers1624.powerconverters.handler.PCGUIHandler;
 import covers1624.powerconverters.init.*;
+import covers1624.powerconverters.network.packets.ConnectionMaskStateChangePacket;
 import covers1624.powerconverters.network.packets.EnergyBridgeSyncPacket;
 import covers1624.powerconverters.network.PacketPipeline;
 import covers1624.powerconverters.network.packets.RecipeSyncPacket;
@@ -84,10 +85,11 @@ public class PowerConverters {
 		LogHelper.info("PowerConverters Core Initialization Started.");
 
 		LogHelper.trace("Initializing PacketPipeline");
-		PacketPipeline.INSTANCE.initalise();
-		PacketPipeline.INSTANCE.registerPacket(RecipeSyncPacket.class);
-		PacketPipeline.INSTANCE.registerPacket(EnergyBridgeSyncPacket.class);
-		PacketPipeline.INSTANCE.registerPacket(WailaSyncPacket.class);
+		PacketPipeline.instance().initalise();
+		PacketPipeline.instance().registerPacket(RecipeSyncPacket.class);
+		PacketPipeline.instance().registerPacket(EnergyBridgeSyncPacket.class);
+		PacketPipeline.instance().registerPacket(WailaSyncPacket.class);
+		PacketPipeline.instance().registerPacket(ConnectionMaskStateChangePacket.class);
 
 		MinecraftForge.EVENT_BUS.register(GridTickHandler.energy);
 		FMLCommonHandler.instance().bus().register(GridTickHandler.energy);
@@ -129,7 +131,7 @@ public class PowerConverters {
 		LogHelper.info("PowerConverters PostInitialization Started.");
 
 		LogHelper.trace("PostInitializing PacketPipeline. ALL PACKETS SHOULD BE REGISTERED BY NOW!");
-		PacketPipeline.INSTANCE.postInitialise();
+		PacketPipeline.instance().postInitialise();
 
 		// Pull steam ID
 		if (FluidRegistry.isFluidRegistered("steam")) {

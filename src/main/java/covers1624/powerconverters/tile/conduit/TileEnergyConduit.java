@@ -5,6 +5,7 @@ import covers1624.powerconverters.grid.GridTickHandler;
 import covers1624.powerconverters.grid.INode;
 import covers1624.powerconverters.pipe.ConnectionMask;
 import covers1624.powerconverters.pipe.EnergyNetwork;
+import covers1624.powerconverters.pipe.IConnectionMask;
 import covers1624.powerconverters.util.BlockPosition;
 import covers1624.powerconverters.util.IAdvancedLogTile;
 import covers1624.powerconverters.util.IUpdateTileWithCords;
@@ -17,7 +18,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.List;
 
-public class TileEnergyConduit extends TileEntity implements INode, IEnergyHandler, IUpdateTileWithCords, IAdvancedLogTile {
+public class TileEnergyConduit extends TileEntity implements INode, IEnergyHandler, IUpdateTileWithCords, IAdvancedLogTile, IConnectionMask {
 
 	private IEnergyReceiver[] receiverCache = null;
 	private IEnergyProvider[] providerCache = null;
@@ -340,11 +341,33 @@ public class TileEnergyConduit extends TileEntity implements INode, IEnergyHandl
 		return isNode;
 	}
 
-	public ConnectionMask getConnectionMask(ForgeDirection dir) {
-		return getConnectionMask(dir.ordinal());
+	@Override
+	public int getConnectionMaskSize() {
+		return connectionMask.length;
 	}
 
-	public ConnectionMask getConnectionMask(int dir) {
-		return connectionMask[dir];
+	@Override
+	public ConnectionMask getConnectionMaskAt(int i) {
+		return connectionMask[i];
+	}
+
+	@Override
+	public ConnectionMask[] getConnectonMaksArray() {
+		return connectionMask;
+	}
+
+	@Override
+	public boolean setConnectionMaskAt(int i, ConnectionMask mask) {
+		if (i > getConnectionMaskSize()){
+			return false;
+		}
+		connectionMask[i] = mask;
+		return true;
+	}
+
+	@Override
+	public boolean setConnectionMaskArray(ConnectionMask[] connectionMasks) {
+		connectionMask = connectionMasks;
+		return true;
 	}
 }

@@ -39,9 +39,9 @@ public class BlockPosition {
 	}
 
 	public BlockPosition(NBTTagCompound nbttagcompound) {
-		x = nbttagcompound.getInteger("i");
-		y = nbttagcompound.getInteger("j");
-		z = nbttagcompound.getInteger("k");
+		x = nbttagcompound.getInteger("BlockPos:x");
+		y = nbttagcompound.getInteger("BlockPos:y");
+		z = nbttagcompound.getInteger("BlockPos:z");
 
 		orientation = ForgeDirection.UNKNOWN;
 	}
@@ -152,9 +152,9 @@ public class BlockPosition {
 	}
 
 	public void writeToNBT(NBTTagCompound nbttagcompound) {
-		nbttagcompound.setDouble("i", x);
-		nbttagcompound.setDouble("j", y);
-		nbttagcompound.setDouble("k", z);
+		nbttagcompound.setDouble("BlockPos:x", x);
+		nbttagcompound.setDouble("BlockPos:y", y);
+		nbttagcompound.setDouble("BlockPos:z", z);
 	}
 
 	@Override

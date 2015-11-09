@@ -77,7 +77,7 @@ public class BlockPowerConverter extends BlockContainer {
 			TileEntityEnergyBridge bridge = ((TileEntityBridgeComponent<?>) te).getFirstBridge();
 			if (bridge != null) {
 				if (!world.isRemote) {
-					PacketPipeline.INSTANCE.sendTo(bridge.getNetPacket(), (EntityPlayerMP) player);
+					PacketPipeline.instance().sendTo(bridge.getNetPacket(), (EntityPlayerMP) player);
 				}
 				player.openGui(PowerConverters.instance, 0, world, bridge.xCoord, bridge.yCoord, bridge.zCoord);
 			}

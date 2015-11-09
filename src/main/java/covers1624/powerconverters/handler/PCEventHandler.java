@@ -62,7 +62,7 @@ public class PCEventHandler {
 		}
 		tag.setTag("Recipes", tagList);
 		RecipeSyncPacket syncPacket = new RecipeSyncPacket(tag);
-		PacketPipeline.INSTANCE.sendTo(syncPacket, (EntityPlayerMP) event.player);
+		PacketPipeline.instance().sendTo(syncPacket, (EntityPlayerMP) event.player);
 	}
 
 	@SideOnly(Side.CLIENT)
