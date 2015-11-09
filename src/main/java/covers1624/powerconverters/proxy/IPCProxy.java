@@ -13,7 +13,4 @@ public interface IPCProxy {
 	EntityPlayer getClientPlayer();
 
 	World getClientWorld();
-
-	List<String> getWailaInfo(IWailaSync sync);
-
 }

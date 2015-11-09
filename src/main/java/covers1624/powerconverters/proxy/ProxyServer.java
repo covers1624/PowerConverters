@@ -23,11 +23,4 @@ public class ProxyServer implements IPCProxy {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public List<String> getWailaInfo(IWailaSync sync) {
-		List<String> info = new ArrayList<String>();
-		sync.addWailaInfo(info);
-		return info;
-	}
 }

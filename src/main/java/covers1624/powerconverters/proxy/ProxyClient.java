@@ -29,9 +29,4 @@ public class ProxyClient implements IPCProxy {
 		return Minecraft.getMinecraft().theWorld;
 	}
 
-	@Override
-	public List<String> getWailaInfo(IWailaSync sync) {
-		return null;
-	}
-
 }
