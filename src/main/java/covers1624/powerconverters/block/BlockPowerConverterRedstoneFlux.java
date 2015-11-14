@@ -1,5 +1,6 @@
 package covers1624.powerconverters.block;
 
+import covers1624.powerconverters.PowerConverters;
 import covers1624.powerconverters.gui.PCCreativeTab;
 import covers1624.powerconverters.reference.Reference;
 import covers1624.powerconverters.tile.redstoneflux.TileEntityRedstoneFluxConsumer;
@@ -15,7 +16,7 @@ public class BlockPowerConverterRedstoneFlux extends BlockPowerConverter {
 	public BlockPowerConverterRedstoneFlux() {
 		super(2);
 		setBlockName("powerconverters.rf");
-		setCreativeTab(PCCreativeTab.tab);
+		setCreativeTab(PowerConverters.creativeTab);
 	}
 
 	@Override

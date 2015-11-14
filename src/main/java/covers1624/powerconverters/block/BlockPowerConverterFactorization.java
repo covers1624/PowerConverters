@@ -1,5 +1,6 @@
 package covers1624.powerconverters.block;
 
+import covers1624.powerconverters.PowerConverters;
 import covers1624.powerconverters.gui.PCCreativeTab;
 import covers1624.powerconverters.reference.Reference;
 import covers1624.powerconverters.tile.factorization.TileEntityPowerConverterFactorizationConsumer;
@@ -14,7 +15,7 @@ public class BlockPowerConverterFactorization extends BlockPowerConverter {
 	public BlockPowerConverterFactorization() {
 		super(2);
 		setBlockName("powerconverters.fz");
-		setCreativeTab(PCCreativeTab.tab);
+		setCreativeTab(PowerConverters.creativeTab);
 	}
 
 	@Override

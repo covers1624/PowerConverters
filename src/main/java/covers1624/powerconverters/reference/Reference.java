@@ -13,7 +13,7 @@ public class Reference {
 	public static final String MODEL_FOLDER = TEXTURE_FOLDER + "model/";
 
 	// Errors.
-	public static final String TOOLTIP_ERROR = "ERROR in tool tips contact covers1624";
+	public static final String TOOLTIP_ERROR = "TOOLTIP ERROR!";
 
 	// Other
 	public static final String CLIENT_PROXY = "covers1624.powerconverters.proxy.ProxyClient";

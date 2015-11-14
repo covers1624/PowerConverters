@@ -1,5 +1,6 @@
 package covers1624.powerconverters.block;
 
+import covers1624.powerconverters.PowerConverters;
 import covers1624.powerconverters.gui.PCCreativeTab;
 import covers1624.powerconverters.tile.conduit.TileEnergyConduit;
 import covers1624.powerconverters.util.IUpdateTileWithCords;
@@ -14,7 +15,7 @@ public class BlockEnergyConduit extends BlockContainer {
 	public BlockEnergyConduit() {
 		super(Material.rock);
 		setBlockName("powerconverters.conduit");
-		setCreativeTab(PCCreativeTab.tab);
+		setCreativeTab(PowerConverters.creativeTab);
 		// setBlockBounds(0.75F, 0.75F, 0.75F, 0.75F, 0.75F, 0.75F);
 	}
 

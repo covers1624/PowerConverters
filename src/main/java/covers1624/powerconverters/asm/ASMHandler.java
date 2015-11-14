@@ -25,17 +25,17 @@ public class ASMHandler implements IFMLLoadingPlugin {
 
 	@Override
 	public String[] getASMTransformerClass() {
-		return null;
+		return new String[]{""};
 	}
 
 	@Override
 	public String getModContainerClass() {
-		return null;
+		return "";
 	}
 
 	@Override
 	public String getSetupClass() {
-		return null;
+		return "";
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class ASMHandler implements IFMLLoadingPlugin {
 
 	@Override
 	public String getAccessTransformerClass() {
-		return null;
+		return "";
 	}
 
 }

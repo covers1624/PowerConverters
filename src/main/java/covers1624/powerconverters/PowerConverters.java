@@ -1,6 +1,7 @@
 package covers1624.powerconverters;
 
 import covers1624.powerconverters.grid.GridTickHandler;
+import covers1624.powerconverters.gui.PCCreativeTab;
 import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.handler.PCEventHandler;
 import covers1624.powerconverters.handler.PCGUIHandler;
@@ -45,6 +46,8 @@ public class PowerConverters {
 	public static PowerConverters instance;
 
 	private static ConfigurationHandler configHandler;
+
+	public static final PCCreativeTab creativeTab = new PCCreativeTab();
 
 	public static int steamId = -1;
 

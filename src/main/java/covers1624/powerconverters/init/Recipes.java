@@ -51,7 +51,9 @@ public class Recipes {
 	}
 
 	private static void addRecipe(ItemStack output, Object... params) {
-		String s = "";
+		GameRegistry.addRecipe(output,params);
+		// TODO Recipe Sync.
+		/*String s = "";
 		int i = 0;
 		int j = 0;
 		int k = 0;
@@ -105,11 +107,13 @@ public class Recipes {
 
 		ShapedRecipes shapedrecipes = new ShapedRecipes(j, k, aitemstack, output);
 		curentRecipes.add(shapedrecipes);
-		CraftingManager.getInstance().getRecipeList().add(shapedrecipes);
+		//CraftingManager.getInstance().getRecipeList().add(shapedrecipes);*/
 	}
 
 	private static void addShapelessRecipe(ItemStack output, Object... params) {
-		ArrayList<ItemStack> arraylist = new ArrayList<ItemStack>();
+		GameRegistry.addShapelessRecipe(output,params);
+		//TODO Recipe Sync.
+		/*ArrayList<ItemStack> arraylist = new ArrayList<ItemStack>();
 		Object[] aobject = params;
 		int i = params.length;
 
@@ -128,14 +132,14 @@ public class Recipes {
 		}
 
 		curentRecipes.add(new ShapelessRecipes(output, arraylist));
-		CraftingManager.getInstance().getRecipeList().add(new ShapelessRecipes(output, arraylist));
+		//CraftingManager.getInstance().getRecipeList().add(new ShapelessRecipes(output, arraylist));*/
 	}
 
 	public static class Defaults {
 		public static void mainRecipes() {
-			addRecipe(new ItemStack(ModBlocks.converterBlockCommon, 1, 0), "GRG", "LDL", "GRG", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('R'), Items.redstone, Character.valueOf('L'), Blocks.glass, Character.valueOf('D'), Items.diamond);
+			addRecipe(new ItemStack(ModBlocks.converterBlockCommon, 1, 0), "GRG", "LDL", "GRG", 'G', Items.gold_ingot, 'R', Items.redstone, 'L', Blocks.glass, 'D', Items.diamond);
 
-			addRecipe(new ItemStack(ModBlocks.converterBlockCommon, 1, 2), "GRG", "ICI", "GRG", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('R'), Items.redstone, Character.valueOf('I'), Items.iron_ingot, Character.valueOf('C'), Blocks.chest);
+			addRecipe(new ItemStack(ModBlocks.converterBlockCommon, 1, 2), "GRG", "ICI", "GRG", 'G', Items.gold_ingot, 'R', Items.redstone, 'I', Items.iron_ingot, 'C', Blocks.chest);
 		}
 
 		public static void redstoneFluxRecipes() {
@@ -146,7 +150,7 @@ public class Recipes {
 			if (thermalExpansionFound) {
 				LogHelper.trace("ThermalExpansion Found.");
 				if (blockDynamo != null) {
-					addRecipe(new ItemStack(ModBlocks.converterBlockRedstoneFlux, 1, 0), "G G", " E ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('E'), new ItemStack(blockDynamo, 1, 1));
+					addRecipe(new ItemStack(ModBlocks.converterBlockRedstoneFlux, 1, 0), "G G", " E ", "G G", 'G', Items.gold_ingot, 'E', new ItemStack(blockDynamo, 1, 1));
 				} else {
 					LogHelper.error("A Error has occored while trying to lookup \"Dynamo\" in GameRegistry. " // Format
 							+ "This can be caused by an outdated version of PowerConverters or ThermalExpansion. "// Format
@@ -159,9 +163,9 @@ public class Recipes {
 			if (buildcraftFound) {
 				LogHelper.trace("BuildCraft Found.");
 				if (engineBlock != null) {
-					addRecipe(new ItemStack(ModBlocks.converterBlockRedstoneFlux, 1, 0), "G G", " E ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('E'), new ItemStack(engineBlock, 1, 1));
+					addRecipe(new ItemStack(ModBlocks.converterBlockRedstoneFlux, 1, 0), "G G", " E ", "G G", 'G', Items.gold_ingot, 'E', new ItemStack(engineBlock, 1, 1));
 				} else if (engineBlock2 != null) {
-					addRecipe(new ItemStack(ModBlocks.converterBlockRedstoneFlux, 1, 0), "G G", " E ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('E'), new ItemStack(engineBlock2, 1, 1));
+					addRecipe(new ItemStack(ModBlocks.converterBlockRedstoneFlux, 1, 0), "G G", " E ", "G G", 'G', Items.gold_ingot, 'E', new ItemStack(engineBlock2, 1, 1));
 				} else {
 					LogHelper.error("A Error has occored while trying to lookup \"engineBlock\" in GameRegistry. " // Format
 							+ "This can be caused by an outdated version of PowerConverters or BuildCraft. "// Format
@@ -180,10 +184,10 @@ public class Recipes {
 		public static void industrialCraft2Recipes() {
 			if (industrialCraftFound) {
 				try {
-					addRecipe(new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 0), "G G", " T ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('T'), (Class.forName("ic2.core.Ic2Items").getField("lvTransformer").get(null)));
-					addRecipe(new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 2), "G G", " T ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('T'), (Class.forName("ic2.core.Ic2Items").getField("mvTransformer").get(null)));
-					addRecipe(new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 4), "G G", " T ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('T'), (Class.forName("ic2.core.Ic2Items").getField("hvTransformer").get(null)));
-					addRecipe(new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 6), "G G", " T ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('T'), (Class.forName("ic2.core.Ic2Items").getField("mfsUnit").get(null)));
+					addRecipe(new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 0), "G G", " T ", "G G", 'G', Items.gold_ingot, 'T', (Class.forName("ic2.core.Ic2Items").getField("lvTransformer").get(null)));
+					addRecipe(new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 2), "G G", " T ", "G G", 'G', Items.gold_ingot, 'T', (Class.forName("ic2.core.Ic2Items").getField("mvTransformer").get(null)));
+					addRecipe(new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 4), "G G", " T ", "G G", 'G', Items.gold_ingot, 'T', (Class.forName("ic2.core.Ic2Items").getField("hvTransformer").get(null)));
+					addRecipe(new ItemStack(ModBlocks.converterBlockIndustrialCraft, 1, 6), "G G", " T ", "G G", 'G', Items.gold_ingot, 'T', (Class.forName("ic2.core.Ic2Items").getField("mfsUnit").get(null)));
 				} catch (Exception e) {
 					FMLLogHelper.logException(Level.ERROR, "Found IC2 But Failed To Load Recipes, Mabey They Changed Their Item / Block Names?  This is not a fatal error only recipes wont be registered.", e);
 				}
@@ -201,14 +205,14 @@ public class Recipes {
 		public static void railcraftRecipes() {
 			try {
 				if (railcraftFound) {
-					addRecipe(new ItemStack(ModBlocks.converterBlockSteam, 1, 0), "G G", " E ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('E'), new ItemStack((Block) (Class.forName("mods.railcraft.common.blocks.RailcraftBlocks").getMethod("getBlockMachineBeta").invoke(null)), 1, 8));
+					addRecipe(new ItemStack(ModBlocks.converterBlockSteam, 1, 0), "G G", " E ", "G G", 'G', Items.gold_ingot, 'E', new ItemStack((Block) (Class.forName("mods.railcraft.common.blocks.RailcraftBlocks").getMethod("getBlockMachineBeta").invoke(null)), 1, 8));
 				}
 				if (factorizationFound) {
 					Object fzRegistry = Class.forName("factorization.shared.Core").getField("registry").get(null);
-					addRecipe(new ItemStack(ModBlocks.converterBlockSteam, 1, 0), "G G", " E ", "G G", Character.valueOf('G'), Items.gold_ingot, Character.valueOf('E'), (Class.forName("factorization.common.Registry").getField("steamturbine_item").get(fzRegistry)));
+					addRecipe(new ItemStack(ModBlocks.converterBlockSteam, 1, 0), "G G", " E ", "G G", 'G', Items.gold_ingot, 'E', (Class.forName("factorization.common.Registry").getField("steamturbine_item").get(fzRegistry)));
 				}
 			} catch (Exception e) {
-				FMLLogHelper.logException(Level.ERROR, "Found Railcraft / Factorization But Failed To Load Recipes, Mabey They Changed Ther Item / Block Names? This is not a fatal error only recipes wont be registered.", e);
+				FMLLogHelper.logException(Level.ERROR, "Found Railcraft / Factorization But Failed To Load Recipes, Maybe They Changed Their Item / Block Names? This is not a fatal error only recipes wont be registered.", e);
 			}
 			addShapelessRecipe(new ItemStack(ModBlocks.converterBlockSteam, 1, 1), new ItemStack(ModBlocks.converterBlockSteam, 1, 0));
 			addShapelessRecipe(new ItemStack(ModBlocks.converterBlockSteam, 1, 0), new ItemStack(ModBlocks.converterBlockSteam, 1, 1));
@@ -218,10 +222,10 @@ public class Recipes {
 			try {
 				if (factorizationFound) {
 					Object fzRegistry = Class.forName("factorization.shared.Core").getField("registry").get(null);
-					addRecipe(new ItemStack(ModBlocks.converterBlockFactorization, 1, 0), "I I", " B ", "I I", Character.valueOf('I'), Items.gold_ingot, Character.valueOf('B'), (Class.forName("factorization.common.Registry").getField("solarboiler_item").get(fzRegistry)));
+					addRecipe(new ItemStack(ModBlocks.converterBlockFactorization, 1, 0), "I I", " B ", "I I", 'I', Items.gold_ingot, 'B', (Class.forName("factorization.common.Registry").getField("solarboiler_item").get(fzRegistry)));
 				}
 			} catch (Exception e) {
-				FMLLogHelper.logException(Level.ERROR, "Found Factorization But Failed To Load Recipes, Mabey They Changed Their Item / Block Names? This is not a fatal error only recipes wont be registered.", e);
+				FMLLogHelper.logException(Level.ERROR, "Found Factorization But Failed To Load Recipes, Maybe They Changed Their Item / Block Names? This is not a fatal error only recipes wont be registered.", e);
 			}
 			addShapelessRecipe(new ItemStack(ModBlocks.converterBlockFactorization, 1, 1), new ItemStack(ModBlocks.converterBlockFactorization, 1, 0));
 			addShapelessRecipe(new ItemStack(ModBlocks.converterBlockFactorization, 1, 0), new ItemStack(ModBlocks.converterBlockFactorization, 1, 1));

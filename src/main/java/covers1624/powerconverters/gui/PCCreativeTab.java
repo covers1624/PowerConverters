@@ -6,7 +6,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class PCCreativeTab extends CreativeTabs {
-	public static final PCCreativeTab tab = new PCCreativeTab();
 
 	public PCCreativeTab() {
 		super("Power Converters");

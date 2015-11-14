@@ -27,8 +27,6 @@ import java.util.List;
 
 public class PCEventHandler {
 
-	public static int ticksInGame = 0;
-
 	@SubscribeEvent
 	public void onFluidRegisterEvent(FluidRegisterEvent event) {
 		LogHelper.info(event.fluidName);

@@ -1,5 +1,6 @@
 package covers1624.powerconverters.block;
 
+import covers1624.powerconverters.PowerConverters;
 import covers1624.powerconverters.gui.PCCreativeTab;
 import covers1624.powerconverters.reference.Reference;
 import covers1624.powerconverters.tile.steam.TileEntitySteamConsumer;
@@ -14,7 +15,7 @@ public class BlockPowerConverterSteam extends BlockPowerConverter {
 	public BlockPowerConverterSteam() {
 		super(2);
 		setBlockName("powerconverters.steam");
-		setCreativeTab(PCCreativeTab.tab);
+		setCreativeTab(PowerConverters.creativeTab);
 	}
 
 	@Override

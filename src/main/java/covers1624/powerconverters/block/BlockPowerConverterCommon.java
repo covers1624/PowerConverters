@@ -31,7 +31,7 @@ public class BlockPowerConverterCommon extends BlockContainer {
 		super(Material.iron);
 		setHardness(1.0F);
 		setBlockName("powerconverters.common");
-		setCreativeTab(PCCreativeTab.tab);
+		setCreativeTab(PowerConverters.creativeTab);
 	}
 
 	@Override

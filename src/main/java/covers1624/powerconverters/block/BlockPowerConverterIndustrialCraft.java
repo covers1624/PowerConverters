@@ -1,5 +1,6 @@
 package covers1624.powerconverters.block;
 
+import covers1624.powerconverters.PowerConverters;
 import covers1624.powerconverters.gui.PCCreativeTab;
 import covers1624.powerconverters.reference.Reference;
 import covers1624.powerconverters.tile.ic2.TileEntityIndustrialCraftConsumer;
@@ -14,7 +15,7 @@ public class BlockPowerConverterIndustrialCraft extends BlockPowerConverter {
 	public BlockPowerConverterIndustrialCraft() {
 		super(8);
 		setBlockName("powerconverters.ic2");
-		setCreativeTab(PCCreativeTab.tab);
+		setCreativeTab(PowerConverters.creativeTab);
 	}
 
 	@Override
