@@ -13,12 +13,10 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityIndustrialCraftProducer extends TileEntityEnergyProducer<IEnergyAcceptor> implements IEnergySource {
-	private boolean _isAddedToEnergyNet;
-	private boolean _didFirstAddToNet;
+	private boolean isAddedToEnergyNet;
+	private boolean didFirstAddToNet;
 
 	private double eu;
-
-	private int _packetCount = 1;
 
 	public TileEntityIndustrialCraftProducer() {
 		this(0);
@@ -26,24 +24,15 @@ public class TileEntityIndustrialCraftProducer extends TileEntityEnergyProducer<
 
 	public TileEntityIndustrialCraftProducer(int voltageIndex) {
 		super(PowerSystems.powerSystemIndustrialCraft, voltageIndex, IEnergyAcceptor.class);
-		// if (voltageIndex == 0) {
-		// _packetCount = ConfigurationHandler.throttleIC2LVProducer;
-		// } else if (voltageIndex == 1) {
-		// _packetCount = ConfigurationHandler.throttleIC2MVProducer;
-		// }/ else if (voltageIndex == 2) {
-		// _packetCount = ConfigurationHandler.throttleIC2HVProducer;
-		// } else if (voltageIndex == 3) {
-		// _packetCount = ConfigurationHandler.throttleIC2EVProducer;
-		// }
 	}
 
 	@Override
 	public void updateEntity() {
 
-		if (!_didFirstAddToNet && !worldObj.isRemote) {
+		if (!didFirstAddToNet && !worldObj.isRemote) {
 			MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
-			_didFirstAddToNet = true;
-			_isAddedToEnergyNet = true;
+			didFirstAddToNet = true;
+			isAddedToEnergyNet = true;
 		}
 		super.updateEntity();
 	}
@@ -51,18 +40,18 @@ public class TileEntityIndustrialCraftProducer extends TileEntityEnergyProducer<
 	@Override
 	public void validate() {
 		super.validate();
-		if (!_isAddedToEnergyNet) {
-			_didFirstAddToNet = false;
+		if (!isAddedToEnergyNet) {
+			didFirstAddToNet = false;
 		}
 	}
 
 	@Override
 	public void invalidate() {
-		if (_isAddedToEnergyNet) {
+		if (isAddedToEnergyNet) {
 			if (!worldObj.isRemote) {
 				MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
 			}
-			_isAddedToEnergyNet = false;
+			isAddedToEnergyNet = false;
 		}
 		super.invalidate();
 	}
@@ -98,7 +87,7 @@ public class TileEntityIndustrialCraftProducer extends TileEntityEnergyProducer<
 	@Override
 	public void drawEnergy(double amount) {
 
-		eu -= MathHelper.ceiling_double_int(amount);
+		eu -= amount;
 	}
 
 	@Override

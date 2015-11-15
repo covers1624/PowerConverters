@@ -21,26 +21,26 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class BlockPowerConverter extends BlockContainer {
-	protected IIcon[] _icons;
+	protected IIcon[] icons;
 
 	protected boolean isGettingRedstone;
 
 	public BlockPowerConverter(int metaCount) {
 		super(Material.iron);
 		setHardness(1.0F);
-		_icons = new IIcon[metaCount * 2];
+		icons = new IIcon[metaCount * 2];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
 		int offset = ((TileEntityBridgeComponent<?>) world.getTileEntity(x, y, z)).isSideConnectedClient(side) ? 1 : 0;
-		return _icons[world.getBlockMetadata(x, y, z) * 2 + offset];
+		return icons[world.getBlockMetadata(x, y, z) * 2 + offset];
 	}
 
 	@Override
 	public IIcon getIcon(int side, int metadata) {
-		return _icons[metadata * 2];
+		return icons[metadata * 2];
 	}
 
 	@Override

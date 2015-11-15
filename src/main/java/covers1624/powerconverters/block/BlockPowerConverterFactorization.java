@@ -1,7 +1,6 @@
 package covers1624.powerconverters.block;
 
 import covers1624.powerconverters.PowerConverters;
-import covers1624.powerconverters.gui.PCCreativeTab;
 import covers1624.powerconverters.reference.Reference;
 import covers1624.powerconverters.tile.factorization.TileEntityPowerConverterFactorizationConsumer;
 import covers1624.powerconverters.tile.factorization.TileEntityPowerConverterFactorizationProducer;
@@ -32,9 +31,9 @@ public class BlockPowerConverterFactorization extends BlockPowerConverter {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister ir) {
-		_icons[0] = ir.registerIcon(Reference.MOD_PREFIX + getUnlocalizedName() + ".consumer.off");
-		_icons[1] = ir.registerIcon(Reference.MOD_PREFIX + getUnlocalizedName() + ".consumer.on");
-		_icons[2] = ir.registerIcon(Reference.MOD_PREFIX + getUnlocalizedName() + ".producer.off");
-		_icons[3] = ir.registerIcon(Reference.MOD_PREFIX + getUnlocalizedName() + ".producer.on");
+		icons[0] = ir.registerIcon(Reference.MOD_PREFIX + getUnlocalizedName() + ".consumer.off");
+		icons[1] = ir.registerIcon(Reference.MOD_PREFIX + getUnlocalizedName() + ".consumer.on");
+		icons[2] = ir.registerIcon(Reference.MOD_PREFIX + getUnlocalizedName() + ".producer.off");
+		icons[3] = ir.registerIcon(Reference.MOD_PREFIX + getUnlocalizedName() + ".producer.on");
 	}
 }

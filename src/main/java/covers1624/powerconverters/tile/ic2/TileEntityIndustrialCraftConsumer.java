@@ -7,7 +7,6 @@ import ic2.api.energy.event.EnergyTileLoadEvent;
 import ic2.api.energy.event.EnergyTileUnloadEvent;
 import ic2.api.energy.tile.IEnergyEmitter;
 import ic2.api.energy.tile.IEnergySink;
-import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -15,8 +14,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class TileEntityIndustrialCraftConsumer extends TileEntityEnergyConsumer<IEnergyEmitter> implements IEnergySink {
 	private boolean _isAddedToEnergyNet;
 	private boolean _didFirstAddToNet;
-	private double _euLastTick;
-	private long _lastTickInjected;
+	private double euLastTick;
+	private long lastTickInjected;
 
 	public TileEntityIndustrialCraftConsumer() {
 		this(0);
@@ -35,8 +34,8 @@ public class TileEntityIndustrialCraftConsumer extends TileEntityEnergyConsumer<
 			_isAddedToEnergyNet = true;
 		}
 
-		if (worldObj.getWorldTime() - _lastTickInjected > 2) {
-			_euLastTick = 0;
+		if (worldObj.getWorldTime() - lastTickInjected > 2) {
+			euLastTick = 0;
 		}
 	}
 
@@ -71,27 +70,26 @@ public class TileEntityIndustrialCraftConsumer extends TileEntityEnergyConsumer<
 
 	@Override
 	public double injectEnergy(ForgeDirection directionFrom, double realAmount, double voltage) {
-		double amount = (int) Math.floor(realAmount);
+		// Disable explosions for now. TODO
+		//if (amount > getSinkTier()) {
+		//	Block block = worldObj.getBlock(xCoord, yCoord, zCoord);
+		//	int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+		//
+		//	worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+		//	block.dropBlockAsItem(worldObj, xCoord, yCoord, zCoord, meta, 0);
+		//	return amount;
+		//}
 
-		if (amount > getSinkTier()) {
-			Block block = worldObj.getBlock(xCoord, yCoord, zCoord);
-			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-
-			worldObj.setBlockToAir(xCoord, yCoord, zCoord);
-			block.dropBlockAsItem(worldObj, xCoord, yCoord, zCoord, meta, 0);
-			return amount;
-		}
-
-		double pcuNotStored = storeEnergy(amount * PowerSystems.powerSystemIndustrialCraft.getScaleAmmount(), false);
+		double pcuNotStored = storeEnergy(realAmount * PowerSystems.powerSystemIndustrialCraft.getScaleAmmount(), false);
 		double euNotStored = pcuNotStored / PowerSystems.powerSystemIndustrialCraft.getScaleAmmount();
 
-		double euThisInjection = (amount - euNotStored);
+		double euThisInjection = (realAmount - euNotStored);
 
-		if (_lastTickInjected == worldObj.getWorldTime()) {
-			_euLastTick += euThisInjection;
+		if (lastTickInjected == worldObj.getWorldTime()) {
+			euLastTick += euThisInjection;
 		} else {
-			_euLastTick = euThisInjection;
-			_lastTickInjected = worldObj.getWorldTime();
+			euLastTick = euThisInjection;
+			lastTickInjected = worldObj.getWorldTime();
 		}
 
 		return euNotStored;
@@ -99,14 +97,11 @@ public class TileEntityIndustrialCraftConsumer extends TileEntityEnergyConsumer<
 
 	@Override
 	public int getSinkTier() {
-		if (getVoltageIndex() == 3) {
-			return Integer.MAX_VALUE;
-		}
-		return getPowerSystem().getVoltageValues()[getVoltageIndex()];
+		return getVoltageIndex();
 	}
 
 	@Override
 	public double getInputRate() {
-		return _euLastTick;
+		return euLastTick;
 	}
 }

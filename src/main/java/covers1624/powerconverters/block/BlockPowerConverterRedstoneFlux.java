@@ -1,7 +1,6 @@
 package covers1624.powerconverters.block;
 
 import covers1624.powerconverters.PowerConverters;
-import covers1624.powerconverters.gui.PCCreativeTab;
 import covers1624.powerconverters.reference.Reference;
 import covers1624.powerconverters.tile.redstoneflux.TileEntityRedstoneFluxConsumer;
 import covers1624.powerconverters.tile.redstoneflux.TileEntityRedstoneFluxProducer;
@@ -34,10 +33,10 @@ public class BlockPowerConverterRedstoneFlux extends BlockPowerConverter {
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister ir) {
 
-		_icons[0] = ir.registerIcon(Reference.MOD_PREFIX + "tile.powerconverters.rf.consumer.off");
-		_icons[1] = ir.registerIcon(Reference.MOD_PREFIX + "tile.powerconverters.rf.consumer.on");
-		_icons[2] = ir.registerIcon(Reference.MOD_PREFIX + "tile.powerconverters.rf.producer.off");
-		_icons[3] = ir.registerIcon(Reference.MOD_PREFIX + "tile.powerconverters.rf.producer.on");
+		icons[0] = ir.registerIcon(Reference.MOD_PREFIX + "tile.powerconverters.rf.consumer.off");
+		icons[1] = ir.registerIcon(Reference.MOD_PREFIX + "tile.powerconverters.rf.consumer.on");
+		icons[2] = ir.registerIcon(Reference.MOD_PREFIX + "tile.powerconverters.rf.producer.off");
+		icons[3] = ir.registerIcon(Reference.MOD_PREFIX + "tile.powerconverters.rf.producer.on");
 	}
 
 }
