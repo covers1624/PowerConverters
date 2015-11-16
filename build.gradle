@@ -19,11 +19,11 @@ buildscript {
 apply plugin: 'forge'
 
 version = "1.7.10-2.11"
-group= "covers1624.powerconverters" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group= "covers1624.powerconverters"
 archivesBaseName = "PowerConverters"
 
 minecraft {
-    version = "1.7.10-10.13.4.1448-1.7.10"
+    version = "1.7.10-10.13.4.1558-1.7.10"
     runDir = "eclipse"
 }
 
@@ -32,7 +32,6 @@ if(System.getenv("BUILD_NUMBER") != null){
 	buildNo = System.getenv("BUILD_NUMBER")
 	version = version + "-#${buildNo}"
 }
-
 
 
 repositories {
@@ -56,12 +55,16 @@ repositories {
         name "BuildCraft"
         artifactPattern "http://www.mod-buildcraft.com/releases/BuildCraft/[revision]/[module]-[revision]-[classifier].[ext]"
     }
-
 	// PneumaticCraft
 	maven {
         name = "MM repo"
         url = "http://maven.k-4u.nl/"
     }
+	//Covers1624
+	maven {
+		name ="Covers1624 Repo"
+		url = "http://adel.podgeweb.com:1616/maven/"
+	}
 }
 
 dependencies {
@@ -72,8 +75,6 @@ dependencies {
     compile name: "buildcraft", version: "7.1.8", classifier: "dev"// Buildcraft
 	compile 'net.industrial-craft:industrialcraft-2:2.2.504-experimental:dev' //IC2
 	compile "pneumaticCraft:PneumaticCraft-1.7.10:1.9.10-98:userdev"
-	
-	//runtime fileTree(dir: 'libs', include: '*.jar') // Anything i cant be bothered finding a maven for..
 }
 
 jar {
@@ -94,21 +95,13 @@ artifacts {
 	archives deobfJar
 }
 
-processResources
-{
-    // this will ensure that this task is redone when the versions change.
+processResources{
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
-
-    // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-                
-        // replace version and mcversion
         expand 'version':project.version, 'mcversion':project.minecraft.version
     }
-        
-    // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
