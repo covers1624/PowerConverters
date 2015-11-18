@@ -71,7 +71,7 @@ public class TileEntityIndustrialCraftProducer extends TileEntityEnergyProducer<
 
 	public double getMaxEnergyOutput() {
 
-		return getPowerSystem().getVoltageValues()[getVoltageIndex()];
+		return getPowerSystem().getVoltageValues()[getVoltageIndex() - 1];
 	}
 
 	@Override
