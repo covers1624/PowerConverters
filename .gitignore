@@ -12,7 +12,7 @@
 !build.gradle
 
 # Other Files.
-!LICENSE.txt
+!LICENSE.md
 !UpdateInfo.update
 !RoadMap.txt
 !README.md
