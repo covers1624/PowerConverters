@@ -1,7 +1,7 @@
 package covers1624.powerconverters.tile.main;
 
-import covers1624.powerconverters.api.charge.IChargeHandler;
-import covers1624.powerconverters.api.registry.UniversalChargerRegistry;
+import covers1624.powerconverters.api.charge.IItemChargeHandler;
+import covers1624.powerconverters.registry.UniversalChargerRegistry;
 import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.init.PowerSystems;
 import covers1624.powerconverters.util.BlockPosition;
@@ -20,15 +20,9 @@ import net.minecraftforge.common.util.ForgeDirection;
 import java.util.List;
 
 public class TileEntityCharger extends TileEntityEnergyProducer<IInventory> implements IAdvancedLogTile, ISidedInventory {
-	// private static List<IChargeHandler> chargeHandlers = new ArrayList<IChargeHandler>();
 	// Array of all IInventory devices touching the block, indexed with ForgeDirection.
 	private TileEntity[] sideCache = new TileEntity[6];
 	private ItemStack[] slots;
-
-	// public static void registerChargeHandler(IChargeHandler handler) {
-	// LogHelper.trace(String.format("Registered Charge Handler %s.", handler.name()));
-	// chargeHandlers.add(handler);
-	// }
 
 	public TileEntityCharger() {
 		super(PowerSystems.powerSystemRedstoneFlux, 0, IInventory.class);
@@ -59,7 +53,7 @@ public class TileEntityCharger extends TileEntityEnergyProducer<IInventory> impl
 			if (stack == null) {
 				continue;
 			}
-			for (IChargeHandler handler : UniversalChargerRegistry.getChargeHandlers()) {
+			for (IItemChargeHandler handler : UniversalChargerRegistry.getChargeHandlers()) {
 				if (handler.canHandle(stack)) {
 					energyRemaining = handler.charge(stack, energyRemaining);
 					if (energyRemaining == 0) {
@@ -91,7 +85,7 @@ public class TileEntityCharger extends TileEntityEnergyProducer<IInventory> impl
 	private void validateSlots() {
 		for (int i = 0; i < 16; i++) {
 			if (slots[i] != null) {
-				for (IChargeHandler handler : UniversalChargerRegistry.getChargeHandlers()) {
+				for (IItemChargeHandler handler : UniversalChargerRegistry.getChargeHandlers()) {
 					if (handler.canHandle(slots[i])) {
 						if (handler.isItemCharged(slots[i])) {
 							for (int j = 16; j < 32; j++) {
@@ -107,8 +101,6 @@ public class TileEntityCharger extends TileEntityEnergyProducer<IInventory> impl
 			}
 		}
 	}
-
-	// Watch this Explode... Or not....
 	public double powerTiles(double energyRemaining) {
 		for (TileEntity tileEntity : sideCache) {
 			if (tileEntity != null) {
@@ -116,7 +108,7 @@ public class TileEntityCharger extends TileEntityEnergyProducer<IInventory> impl
 				for (int i = 0; i < iInventory.getSizeInventory(); i++) {
 					ItemStack itemStack = iInventory.getStackInSlot(i);
 					if (itemStack != null) {
-						for (IChargeHandler handler : UniversalChargerRegistry.getChargeHandlers()) {
+						for (IItemChargeHandler handler : UniversalChargerRegistry.getChargeHandlers()) {
 							if (handler.canHandle(itemStack)) {
 								energyRemaining = handler.charge(itemStack, energyRemaining);
 								if (energyRemaining == 0) {
@@ -252,7 +244,7 @@ public class TileEntityCharger extends TileEntityEnergyProducer<IInventory> impl
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
 		if (slot < 16) {
-			for (IChargeHandler chargeHandler : UniversalChargerRegistry.getChargeHandlers()) {
+			for (IItemChargeHandler chargeHandler : UniversalChargerRegistry.getChargeHandlers()) {
 				if (chargeHandler.canHandle(stack)) {
 					return true;
 				}

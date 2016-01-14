@@ -16,8 +16,8 @@ public class Reference {
 	public static final String TOOLTIP_ERROR = "TOOLTIP ERROR!";
 
 	// Other
-	public static final String CLIENT_PROXY = "covers1624.powerconverters.proxy.ProxyClient";
-	public static final String SERVER_PROXY = "covers1624.powerconverters.proxy.ProxyServer";
+	public static final String CLIENT_PROXY = "covers1624.powerconverters.proxy.ClientProxy";
+	public static final String SERVER_PROXY = "covers1624.powerconverters.proxy.ServerProxy";
 	public static final String GUI_FACTORY = "covers1624.powerconverters.gui.PCGuiFactory";
 
 	// Config

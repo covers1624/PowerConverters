@@ -21,7 +21,6 @@ public class NEIInfoHandlerConfig implements IConfigureNEI {
 		LogHelper.info("NEI Has called us to init.");
 		// API.registerRecipeHandler(new InfoHandler());
 		API.registerUsageHandler(new InfoHandler());
-
 	}
 
 	@Override
@@ -60,5 +59,4 @@ public class NEIInfoHandlerConfig implements IConfigureNEI {
 			}
 		}
 	}
-
 }

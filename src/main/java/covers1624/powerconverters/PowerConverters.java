@@ -6,11 +6,9 @@ import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.handler.PCEventHandler;
 import covers1624.powerconverters.handler.PCGUIHandler;
 import covers1624.powerconverters.init.*;
-import covers1624.powerconverters.network.packets.ConnectionMaskStateChangePacket;
-import covers1624.powerconverters.network.packets.EnergyBridgeSyncPacket;
 import covers1624.powerconverters.network.PacketPipeline;
+import covers1624.powerconverters.network.packets.EnergyBridgeSyncPacket;
 import covers1624.powerconverters.network.packets.RecipeSyncPacket;
-import covers1624.powerconverters.network.packets.WailaSyncPacket;
 import covers1624.powerconverters.proxy.IPCProxy;
 import covers1624.powerconverters.reference.Reference;
 import covers1624.powerconverters.updatechecker.UpdateManager;
@@ -45,11 +43,10 @@ public class PowerConverters {
 	@Instance("Power Converters")
 	public static PowerConverters instance;
 
-	private static ConfigurationHandler configHandler;
-
 	public static final PCCreativeTab creativeTab = new PCCreativeTab();
 
 	public static int steamId = -1;
+
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -62,7 +59,7 @@ public class PowerConverters {
 		RFHelper.init();
 
 		LogHelper.trace("Initializing Configuration File");
-		configHandler = new ConfigurationHandler(event.getSuggestedConfigurationFile());
+		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 
 		LogHelper.trace("Registering Update Manager");
 		UpdateManager updateManager = new UpdateManager();
@@ -91,11 +88,9 @@ public class PowerConverters {
 		PacketPipeline.instance().initalise();
 		PacketPipeline.instance().registerPacket(RecipeSyncPacket.class);
 		PacketPipeline.instance().registerPacket(EnergyBridgeSyncPacket.class);
-		PacketPipeline.instance().registerPacket(WailaSyncPacket.class);
-		PacketPipeline.instance().registerPacket(ConnectionMaskStateChangePacket.class);
 
-		MinecraftForge.EVENT_BUS.register(GridTickHandler.energy);
-		FMLCommonHandler.instance().bus().register(GridTickHandler.energy);
+		//MinecraftForge.EVENT_BUS.register(GridTickHandler.energy);
+		//FMLCommonHandler.instance().bus().register(GridTickHandler.energy);
 
 		LogHelper.trace("Registering Gui Handler.");
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new PCGUIHandler());
@@ -113,9 +108,9 @@ public class PowerConverters {
 		proxy.initRendering();
 
 		if (ConfigurationHandler.useTechRebornRecipes) {
-
+			//TODO
 		} else if (ConfigurationHandler.useThermalExpansionRecipes) {
-
+			//TODO
 		} else {
 			LogHelper.trace("Registering Default Recipes.");
 			Recipes.initDefaults();

@@ -1,10 +1,10 @@
 package covers1624.powerconverters.init;
 
-import covers1624.powerconverters.api.registry.PowerSystemRegistry;
-import covers1624.powerconverters.api.registry.PowerSystemRegistry.PowerSystem;
-import covers1624.powerconverters.api.registry.UniversalChargerRegistry;
-import covers1624.powerconverters.charge.ChargeHandlerIndustrialCraft;
-import covers1624.powerconverters.charge.ChargeHandlerRedstoneFlux;
+import covers1624.powerconverters.registry.PowerSystemRegistry;
+import covers1624.powerconverters.registry.PowerSystemRegistry.PowerSystem;
+import covers1624.powerconverters.registry.UniversalChargerRegistry;
+import covers1624.powerconverters.charge.ItemChargeHandlerIndustrialCraft;
+import covers1624.powerconverters.charge.ItemChargeHandlerRedstoneFlux;
 import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.util.RFHelper;
 
@@ -37,10 +37,10 @@ public class PowerSystems {
 
 	public static void initChargeHandlers() {
 		if (RFHelper.iEnergyContainerItemExists) {
-			UniversalChargerRegistry.registerChargeHandler(new ChargeHandlerRedstoneFlux());
+			UniversalChargerRegistry.registerChargeHandler(new ItemChargeHandlerRedstoneFlux());
 		}
 		if (Recipes.industrialCraftFound) {
-			UniversalChargerRegistry.registerChargeHandler(new ChargeHandlerIndustrialCraft());
+			UniversalChargerRegistry.registerChargeHandler(new ItemChargeHandlerIndustrialCraft());
 		}
 	}
 }

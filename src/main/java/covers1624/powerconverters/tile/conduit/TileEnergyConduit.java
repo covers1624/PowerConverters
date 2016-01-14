@@ -3,9 +3,7 @@ package covers1624.powerconverters.tile.conduit;
 import cofh.api.energy.*;
 import covers1624.powerconverters.grid.GridTickHandler;
 import covers1624.powerconverters.grid.INode;
-import covers1624.powerconverters.pipe.ConnectionMask;
 import covers1624.powerconverters.pipe.EnergyNetwork;
-import covers1624.powerconverters.pipe.IConnectionMask;
 import covers1624.powerconverters.util.BlockPosition;
 import covers1624.powerconverters.util.IAdvancedLogTile;
 import covers1624.powerconverters.util.IUpdateTileWithCords;
@@ -18,11 +16,10 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.List;
 
-public class TileEnergyConduit extends TileEntity implements INode, IEnergyHandler, IUpdateTileWithCords, IAdvancedLogTile, IConnectionMask {
+public class TileEnergyConduit extends TileEntity implements INode, IEnergyHandler, IUpdateTileWithCords, IAdvancedLogTile {
 
 	private IEnergyReceiver[] receiverCache = null;
 	private IEnergyProvider[] providerCache = null;
-	private ConnectionMask[] connectionMask = new ConnectionMask[6];// 6 sides.
 
 	private boolean readFromNBT = false;// Seems to be what is used to check if it has been initialized.
 	private boolean deadCache = false; // Used to re-check the adjacent Tiles.
@@ -337,37 +334,7 @@ public class TileEnergyConduit extends TileEntity implements INode, IEnergyHandl
 		this.energyForGrid = energyForGrid;
 	}
 
-	public boolean isNode(){
+	public boolean isNode() {
 		return isNode;
-	}
-
-	@Override
-	public int getConnectionMaskSize() {
-		return connectionMask.length;
-	}
-
-	@Override
-	public ConnectionMask getConnectionMaskAt(int i) {
-		return connectionMask[i];
-	}
-
-	@Override
-	public ConnectionMask[] getConnectonMaksArray() {
-		return connectionMask;
-	}
-
-	@Override
-	public boolean setConnectionMaskAt(int i, ConnectionMask mask) {
-		if (i > getConnectionMaskSize()){
-			return false;
-		}
-		connectionMask[i] = mask;
-		return true;
-	}
-
-	@Override
-	public boolean setConnectionMaskArray(ConnectionMask[] connectionMasks) {
-		connectionMask = connectionMasks;
-		return true;
 	}
 }

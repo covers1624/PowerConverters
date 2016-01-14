@@ -7,18 +7,12 @@ import java.io.File;
 
 public class ConfigurationHandler {
 
-	public Configuration configuration;
+	public static Configuration configuration;
 	public static ConfigurationHandler INSTANCE;
 
 	public static boolean logDebug;
 
 	public static int bridgeBufferSize;
-
-	// Throttles
-	// public static int throttleIC2LVProducer;
-	// public static int throttleIC2MVProducer;
-	// public static int throttleIC2HVProducer;
-	// public static int throttleIC2EVProducer;
 
 	// Recipes
 	public static boolean useThermalExpansionRecipes;
@@ -45,18 +39,17 @@ public class ConfigurationHandler {
 	public static boolean dissableUniversalCharger;
 	public static boolean dissableUniversalUnCharger;
 
-	public ConfigurationHandler(File config) {
-		INSTANCE = this;
+	public static void init(File config){
 		if (configuration == null) {
 			configuration = new Configuration(config);
 		}
 		loadConfiguration();
 	}
 
-	public void loadConfiguration() {
+	public static void loadConfiguration() {
 		bridgeBufferSize = configuration.get(Reference.BASIC_CATEGORY, "BridgeBufferSize", 160000000).getInt();
 
-		logDebug = configuration.get(Reference.BASIC_CATEGORY, "Log Debug Messages", false, "Set this to true to see all debug messages.").getBoolean();
+		logDebug = configuration.get(Reference.BASIC_CATEGORY, "Log Debug Messages", false, "Set this to true to see all debug messages in the console.").getBoolean();
 
 		doUpdateCheck = configuration.get(Reference.BASIC_CATEGORY, "Do Update Check", true, "Set to false and PowerConverters will not check for an update").getBoolean();
 		sendRecipesToClient = configuration.get(Reference.BASIC_CATEGORY, "Send Recipes To Client", true, "Setting this to false will dissable recipe syncing with the server").getBoolean();

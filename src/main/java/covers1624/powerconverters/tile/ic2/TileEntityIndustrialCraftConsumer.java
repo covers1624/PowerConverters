@@ -11,7 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityIndustrialCraftConsumer extends TileEntityEnergyConsumer<IEnergyEmitter> implements IEnergySink {
+public class TileEntityIndustrialCraftConsumer extends TileEntityEnergyConsumer<IEnergySink> implements IEnergySink {
 	private boolean _isAddedToEnergyNet;
 	private boolean _didFirstAddToNet;
 	private double euLastTick;
@@ -22,7 +22,7 @@ public class TileEntityIndustrialCraftConsumer extends TileEntityEnergyConsumer<
 	}
 
 	public TileEntityIndustrialCraftConsumer(int voltageIndex) {
-		super(PowerSystems.powerSystemIndustrialCraft, voltageIndex, IEnergyEmitter.class);
+		super(PowerSystems.powerSystemIndustrialCraft, voltageIndex, IEnergySink.class);
 	}
 
 	@Override
@@ -37,6 +37,11 @@ public class TileEntityIndustrialCraftConsumer extends TileEntityEnergyConsumer<
 		if (worldObj.getWorldTime() - lastTickInjected > 2) {
 			euLastTick = 0;
 		}
+	}
+	
+	@Override
+	public void onChunkUnload() {
+		MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
 	}
 
 	@Override

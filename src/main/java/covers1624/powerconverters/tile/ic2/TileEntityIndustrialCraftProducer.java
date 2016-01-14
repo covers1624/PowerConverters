@@ -8,11 +8,10 @@ import ic2.api.energy.event.EnergyTileUnloadEvent;
 import ic2.api.energy.tile.IEnergyAcceptor;
 import ic2.api.energy.tile.IEnergySource;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityIndustrialCraftProducer extends TileEntityEnergyProducer<IEnergyAcceptor> implements IEnergySource {
+public class TileEntityIndustrialCraftProducer extends TileEntityEnergyProducer<IEnergySource> implements IEnergySource {
 	private boolean isAddedToEnergyNet;
 	private boolean didFirstAddToNet;
 
@@ -23,7 +22,7 @@ public class TileEntityIndustrialCraftProducer extends TileEntityEnergyProducer<
 	}
 
 	public TileEntityIndustrialCraftProducer(int voltageIndex) {
-		super(PowerSystems.powerSystemIndustrialCraft, voltageIndex, IEnergyAcceptor.class);
+		super(PowerSystems.powerSystemIndustrialCraft, voltageIndex, IEnergySource.class);
 	}
 
 	@Override
@@ -35,6 +34,11 @@ public class TileEntityIndustrialCraftProducer extends TileEntityEnergyProducer<
 			isAddedToEnergyNet = true;
 		}
 		super.updateEntity();
+	}
+
+	@Override
+	public void onChunkUnload() {
+		MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
 	}
 
 	@Override

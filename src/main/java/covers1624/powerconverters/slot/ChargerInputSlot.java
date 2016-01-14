@@ -1,7 +1,7 @@
 package covers1624.powerconverters.slot;
 
-import covers1624.powerconverters.api.charge.IChargeHandler;
-import covers1624.powerconverters.api.registry.UniversalChargerRegistry;
+import covers1624.powerconverters.api.charge.IItemChargeHandler;
+import covers1624.powerconverters.registry.UniversalChargerRegistry;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -14,7 +14,7 @@ public class ChargerInputSlot extends Slot {
 
 	@Override
 	public boolean isItemValid(ItemStack stack) {
-		for (IChargeHandler handler : UniversalChargerRegistry.getChargeHandlers()) {
+		for (IItemChargeHandler handler : UniversalChargerRegistry.getChargeHandlers()) {
 			if (handler.canHandle(stack)) {
 				return true;
 			}

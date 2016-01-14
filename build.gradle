@@ -23,14 +23,14 @@ group= "covers1624.powerconverters"
 archivesBaseName = "PowerConverters"
 
 minecraft {
-    version = "1.7.10-10.13.4.1558-1.7.10"
+    version = "1.7.10-10.13.4.1448-1.7.10"
     runDir = "eclipse"
 }
 
 String buildNo = "unknown"
 if(System.getenv("BUILD_NUMBER") != null){
 	buildNo = System.getenv("BUILD_NUMBER")
-	version = version + "-#${buildNo}"
+	version = version + "-${buildNo}"
 }
 
 
@@ -70,7 +70,7 @@ repositories {
 dependencies {
 	compile "codechicken:CodeChickenLib:1.7.10-1.1.3.140:dev"
 	compile "codechicken:CodeChickenCore:1.7.10-1.0.7.47:dev"
-	compile "codechicken:NotEnoughItems:1.7.10-1.0.5.118:dev"
+	compile "codechicken:NotEnoughItems:1.7.10-1.0.5.120:dev"
 	compile "mcp.mobius.waila:Waila:1.5.11-RC1_1.7.10"// Waila
     compile name: "buildcraft", version: "7.1.8", classifier: "dev"// Buildcraft
 	compile 'net.industrial-craft:industrialcraft-2:2.2.504-experimental:dev' //IC2

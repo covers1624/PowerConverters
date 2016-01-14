@@ -1,5 +1,6 @@
 package covers1624.powerconverters.asm;
 
+import covers1624.powerconverters.randomdebugshit.CoFHDevEnvHacks;
 import covers1624.powerconverters.util.LogHelper;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.MCVersion;
@@ -25,7 +26,7 @@ public class ASMHandler implements IFMLLoadingPlugin {
 
 	@Override
 	public String[] getASMTransformerClass() {
-		return null;
+		return new String[] {CoFHDevEnvHacks.class.getName()};
 	}
 
 	@Override
