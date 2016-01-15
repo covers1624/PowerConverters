@@ -3,6 +3,8 @@ package covers1624.powerconverters.tile.ic2;
 import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.init.PowerSystems;
 import covers1624.powerconverters.tile.main.TileEntityEnergyProducer;
+import covers1624.powerconverters.util.BlockPosition;
+import covers1624.powerconverters.util.LogHelper;
 import ic2.api.energy.event.EnergyTileLoadEvent;
 import ic2.api.energy.event.EnergyTileUnloadEvent;
 import ic2.api.energy.tile.IEnergyAcceptor;
@@ -74,7 +76,10 @@ public class TileEntityIndustrialCraftProducer extends TileEntityEnergyProducer<
 	}
 
 	public double getMaxEnergyOutput() {
-
+		if (getVoltageIndex() - 1 == -1){
+			LogHelper.error("Tile IC2Producer at %s needs to be replaced!", new BlockPosition(xCoord,yCoord,zCoord).toString());
+			return  getPowerSystem().getVoltageValues()[0];
+		}
 		return getPowerSystem().getVoltageValues()[getVoltageIndex() - 1];
 	}
 
