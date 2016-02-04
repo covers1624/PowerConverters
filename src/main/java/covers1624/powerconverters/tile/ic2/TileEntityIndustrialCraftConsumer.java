@@ -5,21 +5,16 @@ import covers1624.powerconverters.init.PowerSystems;
 import covers1624.powerconverters.tile.main.TileEntityEnergyConsumer;
 import ic2.api.energy.event.EnergyTileLoadEvent;
 import ic2.api.energy.event.EnergyTileUnloadEvent;
-import ic2.api.energy.tile.IEnergyEmitter;
 import ic2.api.energy.tile.IEnergySink;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityIndustrialCraftConsumer extends TileEntityEnergyConsumer<IEnergySink> implements IEnergySink {
-	private boolean _isAddedToEnergyNet;
-	private boolean _didFirstAddToNet;
+	private boolean isAddedToEnergyNet;
+	private boolean didFirstAddToNet;
 	private double euLastTick;
 	private long lastTickInjected;
-
-	public TileEntityIndustrialCraftConsumer() {
-		this(0);
-	}
 
 	public TileEntityIndustrialCraftConsumer(int voltageIndex) {
 		super(PowerSystems.powerSystemIndustrialCraft, voltageIndex, IEnergySink.class);
@@ -28,17 +23,17 @@ public class TileEntityIndustrialCraftConsumer extends TileEntityEnergyConsumer<
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
-		if (!_didFirstAddToNet && !worldObj.isRemote) {
+		if (!didFirstAddToNet && !worldObj.isRemote) {
 			MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
-			_didFirstAddToNet = true;
-			_isAddedToEnergyNet = true;
+			didFirstAddToNet = true;
+			isAddedToEnergyNet = true;
 		}
 
 		if (worldObj.getWorldTime() - lastTickInjected > 2) {
 			euLastTick = 0;
 		}
 	}
-	
+
 	@Override
 	public void onChunkUnload() {
 		MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
@@ -47,18 +42,18 @@ public class TileEntityIndustrialCraftConsumer extends TileEntityEnergyConsumer<
 	@Override
 	public void validate() {
 		super.validate();
-		if (!_isAddedToEnergyNet) {
-			_didFirstAddToNet = false;
+		if (!isAddedToEnergyNet) {
+			didFirstAddToNet = false;
 		}
 	}
 
 	@Override
 	public void invalidate() {
-		if (_isAddedToEnergyNet) {
+		if (isAddedToEnergyNet) {
 			if (!worldObj.isRemote) {
 				MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
 			}
-			_isAddedToEnergyNet = false;
+			isAddedToEnergyNet = false;
 		}
 		super.invalidate();
 	}
@@ -102,7 +97,7 @@ public class TileEntityIndustrialCraftConsumer extends TileEntityEnergyConsumer<
 
 	@Override
 	public int getSinkTier() {
-		return getVoltageIndex();
+		return getVoltageIndex() + 1;
 	}
 
 	@Override

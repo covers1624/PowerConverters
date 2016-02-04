@@ -1,11 +1,16 @@
 package covers1624.powerconverters;
 
-import covers1624.powerconverters.grid.GridTickHandler;
+import covers1624.lib.api.recipe.VanillaShapedRecipeNBTLogic;
+import covers1624.lib.api.recipe.VanillaShapelessRecipeNBTLogic;
+import covers1624.lib.discovery.RecipeNBTLogicDiscovery;
+import covers1624.powerconverters.api.recipe.AbstractRecipeModule;
 import covers1624.powerconverters.gui.PCCreativeTab;
 import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.handler.PCEventHandler;
 import covers1624.powerconverters.handler.PCGUIHandler;
 import covers1624.powerconverters.init.*;
+import covers1624.powerconverters.init.recipes.RecipeModuleDiscoverer;
+import covers1624.powerconverters.manager.RecipeStateManager;
 import covers1624.powerconverters.network.PacketPipeline;
 import covers1624.powerconverters.network.packets.EnergyBridgeSyncPacket;
 import covers1624.powerconverters.network.packets.RecipeSyncPacket;
@@ -34,7 +39,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 
 import java.util.Set;
 
-@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = "after:BuildCraft|Energy;after:factorization;after:IC2;after:Railcraft;after:ThermalExpansion", guiFactory = Reference.GUI_FACTORY)
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = "required-after:Covers1624Lib;after:BuildCraft|Core;after:factorization;after:IC2;after:Railcraft;after:ThermalExpansion", guiFactory = Reference.GUI_FACTORY)
 public class PowerConverters {
 
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY, serverSide = Reference.SERVER_PROXY)
@@ -47,9 +52,18 @@ public class PowerConverters {
 
 	public static int steamId = -1;
 
+	public PowerConverters() {
+		long start = System.currentTimeMillis();
+		LogHelper.info("Attempting to find PowerConverters Recipe Modules...");
+		RecipeModuleDiscoverer.findModules();
+		LogHelper.info("Finished search in %s Ms.", (System.currentTimeMillis() - start));
+	}
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		//Load the static Loader.isModLoaded calls once all mods have been discovered.
+		AbstractRecipeModule.init();
+		RecipeModuleDiscoverer.sortRecipeModules();
 		checkClassLoader();
 		instance = this;
 
@@ -61,6 +75,7 @@ public class PowerConverters {
 		LogHelper.trace("Initializing Configuration File");
 		ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 
+		//TODO, Make betterer
 		LogHelper.trace("Registering Update Manager");
 		UpdateManager updateManager = new UpdateManager();
 		FMLCommonHandler.instance().bus().register(updateManager);
@@ -69,6 +84,7 @@ public class PowerConverters {
 		PCEventHandler eventHandler = new PCEventHandler();
 		MinecraftForge.EVENT_BUS.register(eventHandler);
 		FMLCommonHandler.instance().bus().register(eventHandler);
+		FMLCommonHandler.instance().bus().register(RecipeStateManager.instance());
 
 		LogHelper.trace("Initializing PowerSystems");
 		PowerSystems.init();
@@ -106,19 +122,13 @@ public class PowerConverters {
 
 		LogHelper.trace("Registering Client Rendering.");
 		proxy.initRendering();
-
-		if (ConfigurationHandler.useTechRebornRecipes) {
-			//TODO
-		} else if (ConfigurationHandler.useThermalExpansionRecipes) {
-			//TODO
-		} else {
-			LogHelper.trace("Registering Default Recipes.");
-			Recipes.initDefaults();
-		}
-		Recipes.setDefaultRecipes(Recipes.getCurrentRecipes());
+		LogHelper.trace("Registering Default Recipes.");
+		RecipeNBTLogicDiscovery.registerLogic(new VanillaShapelessRecipeNBTLogic());
+		RecipeNBTLogicDiscovery.registerLogic(new VanillaShapedRecipeNBTLogic());
+		Recipes.init();
 
 		if (Loader.isModLoaded("Waila")) {
-			LogHelper.trace("Regestering Waila Module.");
+			LogHelper.trace("Registering Waila Module.");
 			FMLInterModComms.sendMessage("Waila", "register", "covers1624.powerconverters.waila.WailaModule.callBackRegister");
 		}
 		LogHelper.info("PowerConverters Core Initialization Finished.");
@@ -127,7 +137,6 @@ public class PowerConverters {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		LogHelper.info("PowerConverters PostInitialization Started.");
-
 		LogHelper.trace("PostInitializing PacketPipeline. ALL PACKETS SHOULD BE REGISTERED BY NOW!");
 		PacketPipeline.instance().postInitialise();
 

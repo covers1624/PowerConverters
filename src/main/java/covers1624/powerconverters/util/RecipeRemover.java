@@ -5,6 +5,8 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -49,4 +51,30 @@ public class RecipeRemover {
 			}
 		}
 	}
+
+	public static void removeAllRecipes(IRecipe... recipes) {
+		for (IRecipe recipe : recipes) {
+			removeRecipe(recipe);
+		}
+	}
+
+	public static void removeAllRecipes(List<IRecipe> recipes) {
+		for (IRecipe recipe : recipes) {
+			removeRecipe(recipe);
+		}
+	}
+
+	public static void removeRecipe(IRecipe toRemove) {
+		ArrayList<IRecipe> recipeList = new ArrayList<IRecipe>();
+		Collections.copy(recipeList, CraftingManager.getInstance().getRecipeList());
+		//Yeah i could just call the method but this is safer.
+		for (IRecipe recipe : recipeList) {
+			if (recipe.equals(toRemove)) {
+				CraftingManager.getInstance().getRecipeList().remove(recipe);
+				break;
+			}
+		}
+
+	}
+
 }

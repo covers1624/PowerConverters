@@ -1,24 +1,19 @@
 package covers1624.powerconverters.network.packets;
 
+import covers1624.lib.util.RecipeNBTHelper;
 import covers1624.powerconverters.handler.ConfigurationHandler;
-import covers1624.powerconverters.init.Recipes;
-import covers1624.powerconverters.nei.NEIInfoHandlerConfig;
+import covers1624.powerconverters.manager.RecipeStateManager;
 import covers1624.powerconverters.network.AbstractPacket;
-import covers1624.powerconverters.util.IRecipeHandler;
 import covers1624.powerconverters.util.LogHelper;
-import covers1624.powerconverters.util.RecipeRemover;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.ChatComponentText;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeSyncPacket extends AbstractPacket {
@@ -26,11 +21,19 @@ public class RecipeSyncPacket extends AbstractPacket {
 	private NBTTagCompound tagCompound;
 
 	public RecipeSyncPacket() {
-		// TODO Auto-generated constructor stub
+
 	}
 
-	public RecipeSyncPacket(NBTTagCompound tag) {
-		tagCompound = tag;
+	public RecipeSyncPacket(List<IRecipe> recipes) {
+		tagCompound = new NBTTagCompound();
+		NBTTagList recipesList = new NBTTagList();
+		for (IRecipe recipe : recipes) {
+			NBTTagCompound recipeTag = RecipeNBTHelper.writeIRecipeToTag(recipe);
+			if (recipeTag != null) {
+				recipesList.appendTag(recipeTag);
+			}
+		}
+		tagCompound.setTag("Recipes", recipesList);
 	}
 
 	@Override
@@ -45,36 +48,27 @@ public class RecipeSyncPacket extends AbstractPacket {
 
 	@Override
 	public void handleClientSide(EntityPlayer player) {
-		// LogHelper.info("packet arrived");
+		LogHelper.info("Received Recipe sync packet from server. Attempting to parse packet...");
+
 		if (ConfigurationHandler.ignoreRecipesFromServer) {
-			LogHelper.trace("Ignoring recipe packet from server.");
+			LogHelper.warn("Ignoring recipe sync packet from the server! This may cause recipe syncing issues!");
+			player.addChatMessage(new ChatComponentText("[PC3] [WARN] Ignoring recipe sync packet from the server! This may cause issues with crafting! \n For recipes to work correctly you may have to set the recipe type locally."));
 			return;
 		}
-		NBTTagList tagList = tagCompound.getTagList("Recipes", 10);
-		List<IRecipe> recipes = new ArrayList<IRecipe>();
-		for (int i = 0; i < tagList.tagCount(); i++) {
-			IRecipe recipe = IRecipeHandler.readIRecipeFromTag(tagList.getCompoundTagAt(i));
-			if (recipe != null) {
-				recipes.add(recipe);
-			}
-		}
-		List<ItemStack> currentOutputs = new ArrayList<ItemStack>();
-		for (IRecipe recipe : Recipes.getCurrentRecipes()) {
-			ItemStack stack = recipe.getRecipeOutput();
-			currentOutputs.add(stack);
-		}
-		RecipeRemover.removeAnyRecipes(currentOutputs);
-		for (IRecipe recipe : recipes) {
-			CraftingManager.getInstance().getRecipeList().add(recipe);
-		}
-		if (Loader.isModLoaded("NotEnoughItems")) {
-			NEIInfoHandlerConfig.addRecipesToNEI();
+
+		try {
+			RecipeStateManager.instance().readRecipes(tagCompound);
+			LogHelper.info("Successfully parsed Recipe sync packet from server!");
+		} catch (Throwable throwable) {
+			throwable.printStackTrace();
+			LogHelper.error("Unable to parse recipe sync packet! Restoring defaults...");
+			RecipeStateManager.instance().loadDefaults();
 		}
 	}
 
 	@Override
 	public void handleServerSide(EntityPlayer player) {
-
+		throw new RuntimeException("THIS PACKET CANNOT BE SENT TO THE SERVER!");
 	}
 
 }

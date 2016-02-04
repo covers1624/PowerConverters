@@ -23,7 +23,7 @@ group= "covers1624.powerconverters"
 archivesBaseName = "PowerConverters"
 
 minecraft {
-    version = "1.7.10-10.13.4.1448-1.7.10"
+    version = "1.7.10-10.13.4.1614-1.7.10"
     runDir = "eclipse"
 }
 
@@ -65,16 +65,52 @@ repositories {
 		name ="Covers1624 Repo"
 		url = "http://adel.podgeweb.com:1616/maven/"
 	}
+	
+    ivy {
+        name "CoFHCore"
+        artifactPattern 'http://addons-origin.cursecdn.com/files/2277/479/[module]-[revision].[ext]'
+    }
+    ivy {
+        name "RedstoneArsenal"
+        artifactPattern "http://addons-origin.cursecdn.com/files/2277/491/[module]-[revision].[ext]"
+    }
+    ivy {
+        name "ThermalExpansion"
+        artifactPattern "http://addons-origin.cursecdn.com/files/2277/517/[module]-[revision].[ext]"
+    }
+    ivy {
+        name "ThermalFoundation"
+        artifactPattern "http://addons-origin.cursecdn.com/files/2277/481/[module]-[revision].[ext]"
+    }
+    ivy {
+        name "ThermalDynamics"
+        artifactPattern "http://addons-origin.cursecdn.com/files/2246/951/[module]-[revision].[ext]"
+    }
+	 ivy {
+        name "Railcraft"
+        artifactPattern "http://addons-origin.cursecdn.com/files/2263/415/[module]_[revision].[ext]"
+    }
 }
 
 dependencies {
-	compile "codechicken:CodeChickenLib:1.7.10-1.1.3.140:dev"
-	compile "codechicken:CodeChickenCore:1.7.10-1.0.7.47:dev"
-	compile "codechicken:NotEnoughItems:1.7.10-1.0.5.120:dev"
+
+	compile "covers1624:Covers1624Lib:1.7.10-1.0-29:deobf" //Covers1624Lib
+	compile "codechicken:CodeChickenLib:1.7.10-1.1.3.140:dev" //CCL
+	compile "codechicken:CodeChickenCore:1.7.10-1.0.7.47:dev" //CCC
+	compile "codechicken:NotEnoughItems:1.7.10-1.0.5.120:dev" //NEI
 	compile "mcp.mobius.waila:Waila:1.5.11-RC1_1.7.10"// Waila
-    compile name: "buildcraft", version: "7.1.8", classifier: "dev"// Buildcraft
-	compile 'net.industrial-craft:industrialcraft-2:2.2.504-experimental:dev' //IC2
-	compile "pneumaticCraft:PneumaticCraft-1.7.10:1.9.10-98:userdev"
+	compile name: "buildcraft", version: "7.1.8", classifier: "dev"// Buildcraft
+	compile 'net.industrial-craft:industrialcraft-2:2.2.811-experimental:dev' //IC2
+	compile "pneumaticCraft:PneumaticCraft-1.7.10:1.9.10-98:userdev" //PneumaticCraft
+	
+	//COFH Stuff
+    compile group: 'cofh', name: 'CoFHCore', version: '[1.7.10]3.1.0-323-dev', ext: 'jar'
+    compile group: 'cofh', name: 'RedstoneArsenal', version: '[1.7.10]1.1.2-92-dev', ext: 'jar'
+    compile group: 'cofh', name: 'ThermalExpansion', version: '[1.7.10]4.1.1-237-dev', ext: 'jar'
+    compile group: 'cofh', name: 'ThermalFoundation', version: '[1.7.10]1.2.2-111-dev', ext: 'jar'
+    compile group: 'cofh', name: 'ThermalDynamics', version: '[1.7.10]1.1.0-161-dev', ext: 'jar'
+	compile group: 'railcraft', name: 'Railcraft', version: '1.7.10-9.8.0.0', ext: 'jar'
+	
 }
 
 jar {

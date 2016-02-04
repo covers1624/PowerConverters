@@ -11,8 +11,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 import java.util.Map.Entry;
 
 public class TileEntityPowerConverterFactorizationProducer extends TileEntityEnergyProducer<IChargeConductor> implements IChargeConductor {
-	private Charge _charge = new Charge(this);
-	private static final double _maxCG = 2000;
+	private Charge charge = new Charge(this);
+	private static final double maxCG = 2000;
 
 	public TileEntityPowerConverterFactorizationProducer() {
 		super(PowerSystems.powerSystemFactorization, 0, IChargeConductor.class);
@@ -25,11 +25,11 @@ public class TileEntityPowerConverterFactorizationProducer extends TileEntityEne
 		}
 		double CG = energy / PowerSystems.powerSystemFactorization.getScaleAmmount();
 		for (Entry<ForgeDirection, IChargeConductor> output : this.getTiles().entrySet()) {
-			IChargeConductor o = output.getValue();
-			if (o != null) {
-				if (o.getCharge().getValue() < _maxCG) {
-					double store = Math.min(_maxCG - o.getCharge().getValue(), CG);
-					o.getCharge().addValue((int) store);
+			IChargeConductor chargeCond = output.getValue();
+			if (chargeCond != null) {
+				if (chargeCond.getCharge().getValue() < maxCG) {
+					double store = Math.min(maxCG - chargeCond.getCharge().getValue(), CG);
+					chargeCond.getCharge().addValue((int) store);
 					CG -= store;
 					if (CG <= 0) {
 						break;
@@ -42,7 +42,7 @@ public class TileEntityPowerConverterFactorizationProducer extends TileEntityEne
 
 	@Override
 	public Charge getCharge() {
-		return this._charge;
+		return this.charge;
 	}
 
 	@Override

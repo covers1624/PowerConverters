@@ -2,11 +2,11 @@ package covers1624.powerconverters.init;
 
 import covers1624.powerconverters.block.*;
 import covers1624.powerconverters.item.*;
+import covers1624.powerconverters.tile.conduit.TileEnergyConduit;
 import covers1624.powerconverters.tile.factorization.TileEntityPowerConverterFactorizationConsumer;
 import covers1624.powerconverters.tile.factorization.TileEntityPowerConverterFactorizationProducer;
 import covers1624.powerconverters.tile.ic2.TileEntityIndustrialCraftConsumer;
 import covers1624.powerconverters.tile.ic2.TileEntityIndustrialCraftProducer;
-import covers1624.powerconverters.tile.conduit.TileEnergyConduit;
 import covers1624.powerconverters.tile.main.TileEntityCharger;
 import covers1624.powerconverters.tile.main.TileEntityEnergyBridge;
 import covers1624.powerconverters.tile.redstoneflux.TileEntityRedstoneFluxConsumer;

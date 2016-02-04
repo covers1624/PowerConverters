@@ -4,7 +4,7 @@ import cofh.api.energy.EnergyStorage;
 import covers1624.powerconverters.grid.GridTickHandler;
 import covers1624.powerconverters.grid.IGrid;
 import covers1624.powerconverters.tile.conduit.TileEnergyConduit;
-import covers1624.powerconverters.util.BlockPosition;
+import covers1624.lib.util.BlockPosition;
 import covers1624.repack.cofh.lib.util.ArrayHashList;
 import covers1624.repack.cofh.lib.util.LinkedHashList;
 import net.minecraft.tileentity.TileEntity;

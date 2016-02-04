@@ -1,5 +1,6 @@
 package covers1624.powerconverters.handler;
 
+import covers1624.powerconverters.init.recipes.RecipeModuleDiscoverer;
 import covers1624.powerconverters.reference.Reference;
 import net.minecraftforge.common.config.Configuration;
 
@@ -8,14 +9,19 @@ import java.io.File;
 public class ConfigurationHandler {
 
 	public static Configuration configuration;
+	@Deprecated
 	public static ConfigurationHandler INSTANCE;
+
+	public static String recipeState;
 
 	public static boolean logDebug;
 
 	public static int bridgeBufferSize;
 
 	// Recipes
+	@Deprecated
 	public static boolean useThermalExpansionRecipes;
+	@Deprecated
 	public static boolean useTechRebornRecipes;
 
 	// Features
@@ -39,7 +45,7 @@ public class ConfigurationHandler {
 	public static boolean dissableUniversalCharger;
 	public static boolean dissableUniversalUnCharger;
 
-	public static void init(File config){
+	public static void init(File config) {
 		if (configuration == null) {
 			configuration = new Configuration(config);
 		}
@@ -54,9 +60,7 @@ public class ConfigurationHandler {
 		doUpdateCheck = configuration.get(Reference.BASIC_CATEGORY, "Do Update Check", true, "Set to false and PowerConverters will not check for an update").getBoolean();
 		sendRecipesToClient = configuration.get(Reference.BASIC_CATEGORY, "Send Recipes To Client", true, "Setting this to false will dissable recipe syncing with the server").getBoolean();
 		ignoreRecipesFromServer = configuration.get(Reference.BASIC_CATEGORY, "Ignore Server Recipes", false, "Setting this to true will dissable the client using the server recipes.").getBoolean();
-
-		useThermalExpansionRecipes = configuration.get(Reference.RECIPES_CATEGORY, "Thermal Expansion", false, "Thermal Expansion Recipes").getBoolean();
-		useTechRebornRecipes = configuration.get(Reference.RECIPES_CATEGORY, "Tech Reborn", false, "Tech Reborn Recipes").getBoolean();
+		recipeState = configuration.getString("Recipe Type", Reference.RECIPES_CATEGORY, "Default", "Different recipe types will show up here, They can also be changed in-game with a command or via the mod config menu.", RecipeModuleDiscoverer.loadedModules.toArray(new String[RecipeModuleDiscoverer.loadedModules.size()]));
 
 		// throttleIC2LVProducer = configuration.get(Reference.THROTTLES_CATEGORY, "IC2.Consumer.LV", 1, "Packets/t").getInt();
 		// throttleIC2MVProducer = configuration.get(Reference.THROTTLES_CATEGORY, "IC2.Consumer.MV", 1, "Packets/t").getInt();

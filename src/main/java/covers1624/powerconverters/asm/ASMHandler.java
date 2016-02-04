@@ -26,7 +26,7 @@ public class ASMHandler implements IFMLLoadingPlugin {
 
 	@Override
 	public String[] getASMTransformerClass() {
-		return new String[] {CoFHDevEnvHacks.class.getName()};
+		return new String[] { CoFHDevEnvHacks.class.getName() };
 	}
 
 	@Override

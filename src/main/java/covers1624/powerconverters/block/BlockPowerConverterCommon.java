@@ -1,7 +1,6 @@
 package covers1624.powerconverters.block;
 
 import covers1624.powerconverters.PowerConverters;
-import covers1624.powerconverters.gui.PCCreativeTab;
 import covers1624.powerconverters.item.DebugItem;
 import covers1624.powerconverters.reference.Reference;
 import covers1624.powerconverters.tile.main.TileEntityBridgeComponent;
@@ -23,9 +22,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockPowerConverterCommon extends BlockContainer {
-	private IIcon _iconBridge;
-	private IIcon _iconChargerOn;
-	private IIcon _iconChargerOff;
+	private IIcon bridgeIcon;
+	private IIcon chargerOnIcon;
+	private IIcon chargerOffIcon;
 
 	public BlockPowerConverterCommon() {
 		super(Material.iron);
@@ -37,17 +36,17 @@ public class BlockPowerConverterCommon extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister ir) {
-		_iconBridge = ir.registerIcon(Reference.MOD_PREFIX + getUnlocalizedName() + ".bridge");
-		_iconChargerOn = ir.registerIcon(Reference.MOD_PREFIX + getUnlocalizedName() + ".charger.on");
-		_iconChargerOff = ir.registerIcon(Reference.MOD_PREFIX + getUnlocalizedName() + ".charger.off");
+		bridgeIcon = ir.registerIcon(Reference.MOD_PREFIX + getUnlocalizedName() + ".bridge");
+		chargerOnIcon = ir.registerIcon(Reference.MOD_PREFIX + getUnlocalizedName() + ".charger.on");
+		chargerOffIcon = ir.registerIcon(Reference.MOD_PREFIX + getUnlocalizedName() + ".charger.off");
 	}
 
 	@Override
 	public IIcon getIcon(int side, int meta) {
 		if (meta == 0) {
-			return _iconBridge;
+			return bridgeIcon;
 		} else if (meta == 2) {
-			return _iconChargerOff;
+			return chargerOffIcon;
 		}
 
 		return null;
@@ -59,13 +58,13 @@ public class BlockPowerConverterCommon extends BlockContainer {
 		TileEntity te = world.getTileEntity(x, y, z);
 		if (te instanceof TileEntityBridgeComponent<?>) {
 			if (meta == 0) {
-				return _iconBridge;
+				return bridgeIcon;
 			} else if (meta == 2) {
 				boolean isConnected = ((TileEntityBridgeComponent<?>) te).isSideConnectedClient(side);
 				if (isConnected) {
-					return _iconChargerOn;
+					return chargerOnIcon;
 				} else {
-					return _iconChargerOff;
+					return chargerOffIcon;
 				}
 			}
 		}

@@ -11,14 +11,14 @@ public class RFHelper {
 			iEnergyHandlerExists = true;
 			LogHelper.trace("IEnergyHandler Exists!");
 		} catch (ClassNotFoundException e) {
-			LogHelper.trace("Failed To Find IEnergy Handler, Not Enableing RF Support.");
+			LogHelper.trace("Failed To Find IEnergy Handler, Not Enabling RF Support.");
 		}
 
 		try {
 			Class.forName("cofh.api.energy.IEnergyContainerItem");
 			iEnergyContainerItemExists = true;
 		} catch (ClassNotFoundException e) {
-			LogHelper.trace("Failed to find IEnergyContainerItem, Not registering Chargehandler for RF.");
+			LogHelper.trace("Failed to find IEnergyContainerItem, Not registering ChargeHandler for RF.");
 		}
 
 	}

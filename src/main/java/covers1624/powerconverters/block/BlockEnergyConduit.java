@@ -1,7 +1,6 @@
 package covers1624.powerconverters.block;
 
 import covers1624.powerconverters.PowerConverters;
-import covers1624.powerconverters.gui.PCCreativeTab;
 import covers1624.powerconverters.tile.conduit.TileEnergyConduit;
 import covers1624.powerconverters.util.IUpdateTileWithCords;
 import net.minecraft.block.BlockContainer;
@@ -38,7 +37,7 @@ public class BlockEnergyConduit extends BlockContainer {
 	public void onNeighborChange(IBlockAccess world, int x, int y, int z, int tileX, int tileY, int tileZ) {
 		TileEntity te = world instanceof World ? world.getTileEntity(x, y, z) : world.getTileEntity(x, y, z);
 		if (te instanceof IUpdateTileWithCords) {
-			((IUpdateTileWithCords) te).onNeighboorChanged(tileX, tileY, tileZ);
+			((IUpdateTileWithCords) te).onNeighborChanged(tileX, tileY, tileZ);
 		}
 	}
 

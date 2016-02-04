@@ -1,8 +1,8 @@
 package covers1624.powerconverters.tile.main;
 
+import covers1624.lib.util.BlockPosition;
 import covers1624.powerconverters.block.BlockPowerConverter;
 import covers1624.powerconverters.registry.PowerSystemRegistry.PowerSystem;
-import covers1624.powerconverters.util.BlockPosition;
 import covers1624.powerconverters.util.IAdvancedLogTile;
 import covers1624.powerconverters.util.INeighboorUpdateTile;
 import covers1624.powerconverters.waila.IWailaSync;

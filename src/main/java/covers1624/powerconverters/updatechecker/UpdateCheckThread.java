@@ -1,9 +1,7 @@
 package covers1624.powerconverters.updatechecker;
 
 import covers1624.powerconverters.reference.Reference;
-import covers1624.powerconverters.util.FMLLogHelper;
 import covers1624.powerconverters.util.LogHelper;
-import org.apache.logging.log4j.Level;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -39,7 +37,8 @@ public class UpdateCheckThread extends Thread {
 			}
 			checkComplete = true;
 		} catch (Exception e) {
-			FMLLogHelper.logException(Level.INFO, "It Broke!", e);
+			LogHelper.error("Unable to check for update!");
+			e.printStackTrace();
 		}
 	}
 

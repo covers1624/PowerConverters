@@ -6,7 +6,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.ServerTickEvent;
 
-import java.util.Iterator;
 import java.util.LinkedHashSet;
 
 public class GridTickHandler<G extends IGrid, N extends INode> {

@@ -1,14 +1,27 @@
 package covers1624.powerconverters.util;
 
-import covers1624.powerconverters.handler.ConfigurationHandler;
-import cpw.mods.fml.common.FMLLog;
+import covers1624.lib.handler.ConfigurationHandler;
+import covers1624.powerconverters.reference.Reference;
 import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+/**
+ * Created by covers1624 on 10/3/2015}.
+ * LogManager for all Covers1624's Mods.
+ */
 public class LogHelper {
 
+	private static Logger logger = LogManager.getLogger(Reference.MOD_NAME);
+
+	/**
+	 * Log with a supplied level.
+	 */
 	public static void log(Level logLevel, Object object) {
-		FMLLog.log("PowerConverters", logLevel, String.valueOf(object));
+		logger.log(logLevel, String.valueOf(object));
 	}
+
+	//Standard log entries.
 
 	public static void all(Object object) {
 		log(Level.ALL, object);
@@ -47,9 +60,8 @@ public class LogHelper {
 		log(Level.WARN, object);
 	}
 
-	/**
-	 * Formatable
-	 */
+	//log with format.
+
 	public static void all(String object, Object... format) {
 		log(Level.ALL, String.format(object, format));
 	}
@@ -87,6 +99,38 @@ public class LogHelper {
 		log(Level.WARN, String.format(object, format));
 	}
 
+	//Log with trace element.
+
+	public static void bigAll(String format, Object... data) {
+		StackTraceElement[] trace = Thread.currentThread().getStackTrace();
+		all("****************************************");
+		all("* " + format, data);
+		for (int i = 2; i < 8 && i < trace.length; i++) {
+			all("*  at %s%s", trace[i].toString(), i == 7 ? "..." : "");
+		}
+		all("****************************************");
+	}
+
+	public static void bigDebug(String format, Object... data) {
+		StackTraceElement[] trace = Thread.currentThread().getStackTrace();
+		debug("****************************************");
+		debug("* " + format, data);
+		for (int i = 2; i < 8 && i < trace.length; i++) {
+			debug("*  at %s%s", trace[i].toString(), i == 7 ? "..." : "");
+		}
+		debug("****************************************");
+	}
+
+	public static void bigError(String format, Object... data) {
+		StackTraceElement[] trace = Thread.currentThread().getStackTrace();
+		error("****************************************");
+		error("* " + format, data);
+		for (int i = 2; i < 8 && i < trace.length; i++) {
+			error("*  at %s%s", trace[i].toString(), i == 7 ? "..." : "");
+		}
+		error("****************************************");
+	}
+
 	public static void bigFatal(String format, Object... data) {
 		StackTraceElement[] trace = Thread.currentThread().getStackTrace();
 		fatal("****************************************");
@@ -97,4 +141,43 @@ public class LogHelper {
 		fatal("****************************************");
 	}
 
+	public static void bigInfo(String format, Object... data) {
+		StackTraceElement[] trace = Thread.currentThread().getStackTrace();
+		info("****************************************");
+		info("* " + format, data);
+		for (int i = 2; i < 8 && i < trace.length; i++) {
+			info("*  at %s%s", trace[i].toString(), i == 7 ? "..." : "");
+		}
+		info("****************************************");
+	}
+
+	public static void bigOff(String format, Object... data) {
+		StackTraceElement[] trace = Thread.currentThread().getStackTrace();
+		off("****************************************");
+		off("* " + format, data);
+		for (int i = 2; i < 8 && i < trace.length; i++) {
+			off("*  at %s%s", trace[i].toString(), i == 7 ? "..." : "");
+		}
+		off("****************************************");
+	}
+
+	public static void bigTrace(String format, Object... data) {
+		StackTraceElement[] trace = Thread.currentThread().getStackTrace();
+		trace("****************************************");
+		trace("* " + format, data);
+		for (int i = 2; i < 8 && i < trace.length; i++) {
+			trace("*  at %s%s", trace[i].toString(), i == 7 ? "..." : "");
+		}
+		trace("****************************************");
+	}
+
+	public static void bigWarn(String format, Object... data) {
+		StackTraceElement[] trace = Thread.currentThread().getStackTrace();
+		warn("****************************************");
+		warn("* " + format, data);
+		for (int i = 2; i < 8 && i < trace.length; i++) {
+			warn("*  at %s%s", trace[i].toString(), i == 7 ? "..." : "");
+		}
+		warn("****************************************");
+	}
 }

@@ -18,6 +18,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.ArrayList;
 
+//TODO clean this up a bit..
 public class DebugItem extends Item {
 
 	public DebugItem() {

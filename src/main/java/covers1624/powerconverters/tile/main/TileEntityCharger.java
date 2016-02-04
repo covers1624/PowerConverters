@@ -1,10 +1,10 @@
 package covers1624.powerconverters.tile.main;
 
+import covers1624.lib.util.BlockPosition;
 import covers1624.powerconverters.api.charge.IItemChargeHandler;
-import covers1624.powerconverters.registry.UniversalChargerRegistry;
 import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.init.PowerSystems;
-import covers1624.powerconverters.util.BlockPosition;
+import covers1624.powerconverters.registry.UniversalChargerRegistry;
 import covers1624.powerconverters.util.IAdvancedLogTile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -101,6 +101,7 @@ public class TileEntityCharger extends TileEntityEnergyProducer<IInventory> impl
 			}
 		}
 	}
+
 	public double powerTiles(double energyRemaining) {
 		for (TileEntity tileEntity : sideCache) {
 			if (tileEntity != null) {

@@ -9,9 +9,9 @@ import factorization.api.IChargeConductor;
 import net.minecraft.util.MathHelper;
 
 public class TileEntityPowerConverterFactorizationConsumer extends TileEntityEnergyConsumer<IChargeConductor> implements IChargeConductor {
-	private Charge _charge = new Charge(this);
-	private double _chargeLastTick = 0;
-	private static final int _maxCG = 2000;
+	private Charge charge = new Charge(this);
+	private double chargeLastTick = 0;
+	private static final int maxCG = 2000;
 
 	public TileEntityPowerConverterFactorizationConsumer() {
 		super(PowerSystems.powerSystemFactorization, 0, IChargeConductor.class);
@@ -28,27 +28,27 @@ public class TileEntityPowerConverterFactorizationConsumer extends TileEntityEne
 			return;
 		}
 
-		if (this._charge.getValue() < _maxCG) {
-			this._charge.update();
+		if (this.charge.getValue() < maxCG) {
+			this.charge.update();
 		}
 
-		if (this._charge.getValue() > 0) {
-			double used = _charge.tryTake(_charge.getValue());
-			_chargeLastTick = MathHelper.floor_double(used);
+		if (this.charge.getValue() > 0) {
+			double used = charge.tryTake(charge.getValue());
+			chargeLastTick = MathHelper.floor_double(used);
 			storeEnergy((int) (used * PowerSystems.powerSystemFactorization.getScaleAmmount()), false);
 		} else {
-			this._chargeLastTick = 0;
+			this.chargeLastTick = 0;
 		}
 	}
 
 	@Override
 	public double getInputRate() {
-		return this._chargeLastTick;
+		return this.chargeLastTick;
 	}
 
 	@Override
 	public Charge getCharge() {
-		return this._charge;
+		return this.charge;
 	}
 
 	@Override

@@ -20,21 +20,21 @@ public class BlockPowerConverterIndustrialCraft extends BlockPowerConverter {
 	@Override
 	public TileEntity createTileEntity(World world, int metadata) {
 		if (metadata == 0) {
-			return new TileEntityIndustrialCraftConsumer(1);
+			return new TileEntityIndustrialCraftConsumer(0);
 		} else if (metadata == 1) {
-			return new TileEntityIndustrialCraftProducer(1);
+			return new TileEntityIndustrialCraftProducer(0);
 		} else if (metadata == 2) {
-			return new TileEntityIndustrialCraftConsumer(2);
+			return new TileEntityIndustrialCraftConsumer(1);
 		} else if (metadata == 3) {
-			return new TileEntityIndustrialCraftProducer(2);
+			return new TileEntityIndustrialCraftProducer(1);
 		} else if (metadata == 4) {
-			return new TileEntityIndustrialCraftConsumer(3);
+			return new TileEntityIndustrialCraftConsumer(2);
 		} else if (metadata == 5) {
-			return new TileEntityIndustrialCraftProducer(3);
+			return new TileEntityIndustrialCraftProducer(2);
 		} else if (metadata == 6) {
-			return new TileEntityIndustrialCraftConsumer(4);
+			return new TileEntityIndustrialCraftConsumer(3);
 		} else if (metadata == 7) {
-			return new TileEntityIndustrialCraftProducer(4);
+			return new TileEntityIndustrialCraftProducer(3);
 		}
 
 		return null;

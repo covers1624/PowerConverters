@@ -1,9 +1,9 @@
 package covers1624.powerconverters.tile.main;
 
+import covers1624.lib.util.BlockPosition;
 import covers1624.powerconverters.api.bridge.BridgeSideData;
 import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.network.packets.EnergyBridgeSyncPacket;
-import covers1624.powerconverters.util.BlockPosition;
 import covers1624.powerconverters.util.INeighboorUpdateTile;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -17,43 +17,43 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class TileEntityEnergyBridge extends TileEntity implements INeighboorUpdateTile {
-	private double _energyStored;
-	private double _energyStoredMax = ConfigurationHandler.bridgeBufferSize;
-	private double _energyScaledClient;
+	private double energyStored;
+	private double energyStoredMax = ConfigurationHandler.bridgeBufferSize;
+	private double energyScaledClient;
 
-	private double _energyStoredLast;
-	private boolean _isInputLimited;
+	private double energyStoredLast;
+	private boolean isInputLimited;
 
-	private Map<ForgeDirection, TileEntityEnergyProducer<?>> _producerTiles;
+	private Map<ForgeDirection, TileEntityEnergyProducer<?>> producerTiles;
 	private Map<ForgeDirection, BridgeSideData> clientSideData;
-	private Map<ForgeDirection, Double> _producerOutputRates;
+	private Map<ForgeDirection, Double> producerOutputRates;
 
-	private boolean _initialized;
+	private boolean initialized;
 
 	public TileEntityEnergyBridge() {
-		_producerTiles = new HashMap<ForgeDirection, TileEntityEnergyProducer<?>>();
+		producerTiles = new HashMap<ForgeDirection, TileEntityEnergyProducer<?>>();
 		clientSideData = new HashMap<ForgeDirection, BridgeSideData>();
-		_producerOutputRates = new HashMap<ForgeDirection, Double>();
+		producerOutputRates = new HashMap<ForgeDirection, Double>();
 		for (ForgeDirection d : ForgeDirection.VALID_DIRECTIONS) {
 			clientSideData.put(d, new BridgeSideData());
-			_producerOutputRates.put(d, 0D);
+			producerOutputRates.put(d, 0D);
 		}
 	}
 
 	public double getEnergyStored() {
-		return _energyStored;
+		return energyStored;
 	}
 
 	public double getEnergyStoredMax() {
-		return _energyStoredMax;
+		return energyStoredMax;
 	}
 
 	public double storeEnergy(double energy, boolean simulate) {
-		double toStore = Math.min(energy, _energyStoredMax - _energyStored);
+		double toStore = Math.min(energy, energyStoredMax - energyStored);
 		if (simulate) {
 			return energy - toStore;
 		}
-		_energyStored += toStore;
+		energyStored += toStore;
 		return energy - toStore;
 	}
 
@@ -61,38 +61,38 @@ public class TileEntityEnergyBridge extends TileEntity implements INeighboorUpda
 	public void updateEntity() {
 		super.updateEntity();
 
-		if (!_initialized) {
+		if (!initialized) {
 			onNeighboorChanged();
-			_initialized = true;
+			initialized = true;
 		}
 
 		if (!worldObj.isRemote) {
-			double energyRemaining = Math.min(_energyStored, _energyStoredMax);
+			double energyRemaining = Math.min(energyStored, energyStoredMax);
 			double energyNotProduced = 0;
-			for (Entry<ForgeDirection, TileEntityEnergyProducer<?>> prod : _producerTiles.entrySet()) {
+			for (Entry<ForgeDirection, TileEntityEnergyProducer<?>> prod : producerTiles.entrySet()) {
 				if (!prod.getValue().isGettingRedstone()) {
 					if (energyRemaining > 0) {
 						energyNotProduced = prod.getValue().produceEnergy(energyRemaining);
 						if (energyNotProduced > energyRemaining) {
 							energyNotProduced = energyRemaining;
 						}
-						_producerOutputRates.put(prod.getKey(), (energyRemaining - energyNotProduced) / prod.getValue().getPowerSystem().getScaleAmmount());
+						producerOutputRates.put(prod.getKey(), (energyRemaining - energyNotProduced) / prod.getValue().getPowerSystem().getScaleAmmount());
 						energyRemaining = energyNotProduced;
 					} else {
 						prod.getValue().produceEnergy(0);
-						_producerOutputRates.put(prod.getKey(), 0D);
+						producerOutputRates.put(prod.getKey(), 0D);
 					}
 				}
 			}
-			_energyStored = Math.max(0, energyRemaining);
+			energyStored = Math.max(0, energyRemaining);
 
-			if ((_energyStored == _energyStoredLast && _energyStored == _energyStoredMax) || _energyStored > _energyStoredLast) {
-				_isInputLimited = false;
+			if ((energyStored == energyStoredLast && energyStored == energyStoredMax) || energyStored > energyStoredLast) {
+				isInputLimited = false;
 			} else {
-				_isInputLimited = true;
+				isInputLimited = true;
 			}
 
-			_energyStoredLast = _energyStored;
+			energyStoredLast = energyStored;
 		}
 	}
 
@@ -108,37 +108,37 @@ public class TileEntityEnergyBridge extends TileEntity implements INeighboorUpda
 				producerTiles.put(d, (TileEntityEnergyProducer<?>) te);
 			}
 		}
-		_producerTiles = producerTiles;
+		this.producerTiles = producerTiles;
 	}
 
 	public BridgeSideData getDataForSide(ForgeDirection dir) {
 		if (!worldObj.isRemote) {
-			BridgeSideData d = new BridgeSideData();
-			BlockPosition p = new BlockPosition(this);
-			p.orientation = dir;
-			p.moveForwards(1);
+			BridgeSideData data = new BridgeSideData();
+			BlockPosition pos = new BlockPosition(this);
+			pos.orientation = dir;
+			pos.moveForwards(1);
 
-			TileEntity te = worldObj.getTileEntity(p.x, p.y, p.z);
-			if (te != null && te instanceof TileEntityBridgeComponent) {
-				if (te instanceof TileEntityEnergyConsumer) {
-					d.isConsumer = true;
-					d.outputRate = ((TileEntityEnergyConsumer<?>) te).getInputRate();
+			TileEntity tile = worldObj.getTileEntity(pos.x, pos.y, pos.z);
+			if (tile != null && tile instanceof TileEntityBridgeComponent) {
+				if (tile instanceof TileEntityEnergyConsumer) {
+					data.isConsumer = true;
+					data.outputRate = ((TileEntityEnergyConsumer<?>) tile).getInputRate();
 				}
-				if (te instanceof TileEntityEnergyProducer) {
-					d.isProducer = true;
-					d.outputRate = _producerOutputRates.get(dir);
+				if (tile instanceof TileEntityEnergyProducer) {
+					data.isProducer = true;
+					data.outputRate = producerOutputRates.get(dir);
 				}
-				TileEntityBridgeComponent<?> c = (TileEntityBridgeComponent<?>) te;
-				d.powerSystem = c.getPowerSystem();
-				d.isConnected = c.isConnected();
-				d.side = dir;
-				d.voltageNameIndex = c.getVoltageIndex();
+				TileEntityBridgeComponent<?> component = (TileEntityBridgeComponent<?>) tile;
+				data.powerSystem = component.getPowerSystem();
+				data.isConnected = component.isConnected();
+				data.side = dir;
+				data.voltageNameIndex = component.getVoltageIndex();
 			}
 			// Block block = worldObj.getBlock(p.x, p.y, p.z);
 			// int meta = worldObj.getBlockMetadata(p.x, p.y, p.z);
 			// d.displayStack = new ItemStack(block, 1, meta);
 
-			return d;
+			return data;
 		} else {
 			return clientSideData.get(dir);
 		}
@@ -160,39 +160,39 @@ public class TileEntityEnergyBridge extends TileEntity implements INeighboorUpda
 	}
 
 	public boolean isInputLimited() {
-		return _isInputLimited;
+		return isInputLimited;
 	}
 
 	@SideOnly(Side.CLIENT)
 	public void setIsInputLimited(boolean isInputLimited) {
-		_isInputLimited = isInputLimited;
+		this.isInputLimited = isInputLimited;
 	}
 
 	public double getEnergyScaled() {
 		if (worldObj.isRemote) {
-			return _energyScaledClient;
+			return energyScaledClient;
 		} else {
-			return (120 * (_energyStored / _energyStoredMax));
+			return (120 * (energyStored / energyStoredMax));
 		}
 	}
 
 	public void setEnergyScaled(double scaled) {
-		_energyScaledClient = scaled;
+		energyScaledClient = scaled;
 	}
 
 	public void addWailaInfo(List<String> info) {
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
-		super.writeToNBT(par1nbtTagCompound);
-		par1nbtTagCompound.setDouble("energyStored", _energyStored);
+	public void writeToNBT(NBTTagCompound nbtTagCompound) {
+		super.writeToNBT(nbtTagCompound);
+		nbtTagCompound.setDouble("energyStored", energyStored);
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
-		super.readFromNBT(par1nbtTagCompound);
-		_energyStored = par1nbtTagCompound.getDouble("energyStored");
+	public void readFromNBT(NBTTagCompound nbtTagCompound) {
+		super.readFromNBT(nbtTagCompound);
+		energyStored = nbtTagCompound.getDouble("energyStored");
 	}
 
 	public EnergyBridgeSyncPacket getNetPacket() {

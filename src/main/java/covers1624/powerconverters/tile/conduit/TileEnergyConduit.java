@@ -1,10 +1,10 @@
 package covers1624.powerconverters.tile.conduit;
 
 import cofh.api.energy.*;
+import covers1624.lib.util.BlockPosition;
 import covers1624.powerconverters.grid.GridTickHandler;
 import covers1624.powerconverters.grid.INode;
 import covers1624.powerconverters.pipe.EnergyNetwork;
-import covers1624.powerconverters.util.BlockPosition;
 import covers1624.powerconverters.util.IAdvancedLogTile;
 import covers1624.powerconverters.util.IUpdateTileWithCords;
 import covers1624.powerconverters.util.LogHelper;
@@ -266,7 +266,7 @@ public class TileEnergyConduit extends TileEntity implements INode, IEnergyHandl
 	}
 
 	@Override
-	public void onNeighboorChanged(int x, int y, int z) {
+	public void onNeighborChanged(int x, int y, int z) {
 		if (worldObj.isRemote | deadCache) {
 			return;
 		}

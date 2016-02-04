@@ -1,10 +1,10 @@
 package covers1624.powerconverters.tile.steam;
 
+import covers1624.lib.util.BlockPosition;
 import covers1624.powerconverters.PowerConverters;
 import covers1624.powerconverters.handler.ConfigurationHandler;
 import covers1624.powerconverters.init.PowerSystems;
 import covers1624.powerconverters.tile.main.TileEntityEnergyProducer;
-import covers1624.powerconverters.util.BlockPosition;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.*;

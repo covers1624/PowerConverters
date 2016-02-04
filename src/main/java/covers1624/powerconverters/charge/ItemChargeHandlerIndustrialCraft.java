@@ -1,8 +1,8 @@
 package covers1624.powerconverters.charge;
 
 import covers1624.powerconverters.api.charge.IItemChargeHandler;
-import covers1624.powerconverters.registry.PowerSystemRegistry.PowerSystem;
 import covers1624.powerconverters.init.PowerSystems;
+import covers1624.powerconverters.registry.PowerSystemRegistry.PowerSystem;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
 import net.minecraft.item.ItemStack;

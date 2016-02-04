@@ -81,30 +81,33 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 	// In line decoding and handling of the packet
 	@Override
 	protected void decode(ChannelHandlerContext ctx, FMLProxyPacket msg, List<Object> out) throws Exception {
-		ByteBuf payload = msg.payload();
-		byte discriminator = payload.readByte();
-		Class<? extends AbstractPacket> clazz = this.packets.get(discriminator);
-		if (clazz == null) {
-			throw new NullPointerException("No packet registered for discriminator: " + discriminator);
-		}
+		try {
+			ByteBuf payload = msg.payload();
+			byte discriminator = payload.readByte();
+			Class<? extends AbstractPacket> clazz = this.packets.get(discriminator);
+			if (clazz == null) {
+				throw new NullPointerException("No packet registered for discriminator: " + discriminator);
+			}
+			AbstractPacket pkt = clazz.newInstance();
+			pkt.decodeInto(ctx, payload.slice());
 
-		AbstractPacket pkt = clazz.newInstance();
-		pkt.decodeInto(ctx, payload.slice());
+			EntityPlayer player;
+			switch (FMLCommonHandler.instance().getEffectiveSide()) {
+			case CLIENT:
+				player = this.getClientPlayer();
+				pkt.handleClientSide(player);
+				break;
 
-		EntityPlayer player;
-		switch (FMLCommonHandler.instance().getEffectiveSide()) {
-		case CLIENT:
-			player = this.getClientPlayer();
-			pkt.handleClientSide(player);
-			break;
+			case SERVER:
+				INetHandler netHandler = ctx.channel().attr(NetworkRegistry.NET_HANDLER).get();
+				player = ((NetHandlerPlayServer) netHandler).playerEntity;
+				pkt.handleServerSide(player);
+				break;
 
-		case SERVER:
-			INetHandler netHandler = ctx.channel().attr(NetworkRegistry.NET_HANDLER).get();
-			player = ((NetHandlerPlayServer) netHandler).playerEntity;
-			pkt.handleServerSide(player);
-			break;
-
-		default:
+			default:
+			}
+		} catch (InstantiationException e) {
+			LogHelper.fatal("Unable to read packet form network as it does not have a default constructor!");
 		}
 	}
 
@@ -207,7 +210,7 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 		this.channels.get(Side.CLIENT).writeAndFlush(message);
 	}
 
-	public static PacketPipeline instance(){
+	public static PacketPipeline instance() {
 		return INSTANCE;
 	}
 }

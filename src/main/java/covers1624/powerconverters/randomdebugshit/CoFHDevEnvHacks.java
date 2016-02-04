@@ -1,6 +1,6 @@
 package covers1624.powerconverters.randomdebugshit;
 
-import covers1624.powerconverters.util.ASMUtils;
+import covers1624.lib.asm.ASMUtils;
 import covers1624.powerconverters.util.LogHelper;
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.objectweb.asm.ClassReader;
@@ -17,7 +17,7 @@ public class CoFHDevEnvHacks implements IClassTransformer {
 	@Override
 	public byte[] transform(String name, String s1, byte[] bytes) {
 
-		if (!ASMUtils.isObfuscated()) {
+		if (!ASMUtils.obfuscated) {
 			try {
 				if (name.equals("net.minecraft.world.World")) {
 					LogHelper.info("Fixing CoFH Dev ENV Crash..");
