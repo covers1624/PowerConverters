@@ -7,23 +7,23 @@ import net.minecraft.item.ItemStack;
 
 public class PCCreativeTab extends CreativeTabs {
 
-	public PCCreativeTab() {
-		super("Power Converters");
-	}
+    public PCCreativeTab() {
+        super("Power Converters");
+    }
 
-	@Override
-	public ItemStack getIconItemStack() {
-		return new ItemStack(ModBlocks.converterBlockCommon, 1, 0);
-	}
+    @Override
+    public ItemStack getIconItemStack() {
+        return new ItemStack(ModBlocks.converterBlockCommon, 1, 0);
+    }
 
-	@Override
-	public String getTranslatedTabLabel() {
-		return this.getTabLabel();
-	}
+    @Override
+    public String getTranslatedTabLabel() {
+        return this.getTabLabel();
+    }
 
-	@Override
-	public Item getTabIconItem() {
-		return null;
-	}
+    @Override
+    public Item getTabIconItem() {
+        return null;
+    }
 
 }

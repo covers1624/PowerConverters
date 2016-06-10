@@ -1,52 +1,39 @@
 package covers1624.powerconverters.asm;
 
 import covers1624.powerconverters.randomdebugshit.CoFHDevEnvHacks;
-import covers1624.powerconverters.util.LogHelper;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.MCVersion;
-import net.minecraft.launchwrapper.Launch;
+import cpw.mods.fml.relauncher.IFMLLoadingPlugin.TransformerExclusions;
 
 import java.util.Map;
 
 @MCVersion("1.7.10")
+@TransformerExclusions("covers1624.powerconverters.")
 public class ASMHandler implements IFMLLoadingPlugin {
 
-	static {
-		// Yes i know what you are thinking, "WHY THE FUCK IS HE NOT ALLOWING US TO ASM HIS CODE".
-		// Simple Answer, "No!".
-		// If you have a problem with the way i run my mod.
-		// TELL ME. Don't just ASM the fuck out of it.
+    @Override
+    public String[] getASMTransformerClass() {
+        return new String[] { CoFHDevEnvHacks.class.getName() };
+    }
 
-		// Most of the stuff in here can be turned off with configs.
-		// If you still feel that you need to turn something off.
-		// Go ahead and turn it off in the config.
-		LogHelper.info("Adding PowerConverters to Transformer Exclusions list.");
-		Launch.classLoader.addTransformerExclusion("covers1624.powerconverters.");
-	}
+    @Override
+    public String getModContainerClass() {
+        return null;
+    }
 
-	@Override
-	public String[] getASMTransformerClass() {
-		return new String[] { CoFHDevEnvHacks.class.getName() };
-	}
+    @Override
+    public String getSetupClass() {
+        return null;
+    }
 
-	@Override
-	public String getModContainerClass() {
-		return null;
-	}
+    @Override
+    public void injectData(Map<String, Object> data) {
 
-	@Override
-	public String getSetupClass() {
-		return null;
-	}
+    }
 
-	@Override
-	public void injectData(Map<String, Object> data) {
-
-	}
-
-	@Override
-	public String getAccessTransformerClass() {
-		return null;
-	}
+    @Override
+    public String getAccessTransformerClass() {
+        return null;
+    }
 
 }

@@ -9,56 +9,56 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityRedstoneFluxConsumer extends TileEntityEnergyConsumer<IEnergyReceiver> implements IEnergyReceiver {
 
-	private double lastReceivedRF;
+    private double lastReceivedRF;
 
-	public TileEntityRedstoneFluxConsumer() {
-		super(PowerSystems.powerSystemRedstoneFlux, 0, IEnergyReceiver.class);
-	}
+    public TileEntityRedstoneFluxConsumer() {
+        super(PowerSystems.powerSystemRedstoneFlux, 0, IEnergyReceiver.class);
+    }
 
-	@Override
-	public void updateEntity() {
-		super.updateEntity();
-	}
+    @Override
+    public void updateEntity() {
+        super.updateEntity();
+    }
 
-	@Override
-	public double getInputRate() {
-		double last = lastReceivedRF;
-		lastReceivedRF = 0;
-		return last;
-	}
+    @Override
+    public double getInputRate() {
+        double last = lastReceivedRF;
+        lastReceivedRF = 0;
+        return last;
+    }
 
-	@Override
-	public boolean canConnectEnergy(ForgeDirection arg0) {
-		return !ConfigurationHandler.dissableRFConsumer;
-	}
+    @Override
+    public boolean canConnectEnergy(ForgeDirection arg0) {
+        return !ConfigurationHandler.disableRFConsumer;
+    }
 
-	@Override
-	public int getEnergyStored(ForgeDirection arg0) {
-		TileEntityEnergyBridge bridge = getFirstBridge();
-		if (bridge == null) {
-			return 0;
-		}
-		return (int) (bridge.getEnergyStored() / getPowerSystem().getScaleAmmount());
-	}
+    @Override
+    public int getEnergyStored(ForgeDirection arg0) {
+        TileEntityEnergyBridge bridge = getFirstBridge();
+        if (bridge == null) {
+            return 0;
+        }
+        return (int) (bridge.getEnergyStored() / getPowerSystem().getScaleAmmount());
+    }
 
-	@Override
-	public int getMaxEnergyStored(ForgeDirection arg0) {
-		TileEntityEnergyBridge bridge = getFirstBridge();
-		if (bridge == null) {
-			return 0;
-		}
-		return (int) (bridge.getEnergyStoredMax() / getPowerSystem().getScaleAmmount());
-	}
+    @Override
+    public int getMaxEnergyStored(ForgeDirection arg0) {
+        TileEntityEnergyBridge bridge = getFirstBridge();
+        if (bridge == null) {
+            return 0;
+        }
+        return (int) (bridge.getEnergyStoredMax() / getPowerSystem().getScaleAmmount());
+    }
 
-	@Override
-	public int receiveEnergy(ForgeDirection from, int receiveMax, boolean simulate) {
-		if (getFirstBridge() == null) {
-			return 0;
-		}
+    @Override
+    public int receiveEnergy(ForgeDirection from, int receiveMax, boolean simulate) {
+        if (getFirstBridge() == null) {
+            return 0;
+        }
 
-		int actualRF = getPowerSystem().getScaleAmmount() * receiveMax;
-		int rfNotStored = (int) (actualRF - storeEnergy(actualRF, simulate));
-		return rfNotStored / getPowerSystem().getScaleAmmount();
-	}
+        int actualRF = getPowerSystem().getScaleAmmount() * receiveMax;
+        int rfNotStored = (int) (actualRF - storeEnergy(actualRF, simulate));
+        return rfNotStored / getPowerSystem().getScaleAmmount();
+    }
 
 }

@@ -24,7 +24,7 @@ archivesBaseName = "PowerConverters"
 
 minecraft {
     version = "1.7.10-10.13.4.1614-1.7.10"
-    runDir = "eclipse"
+    runDir = "run"
 }
 
 String buildNo = "unknown"
@@ -99,8 +99,8 @@ dependencies {
 	compile "codechicken:CodeChickenCore:1.7.10-1.0.7.47:dev" //CCC
 	compile "codechicken:NotEnoughItems:1.7.10-1.0.5.120:dev" //NEI
 	compile "mcp.mobius.waila:Waila:1.5.11-RC1_1.7.10"// Waila
-	compile name: "buildcraft", version: "7.1.8", classifier: "dev"// Buildcraft
-	compile 'net.industrial-craft:industrialcraft-2:2.2.811-experimental:dev' //IC2
+	compile name: "buildcraft", version: "7.2.7", classifier: "dev"// Buildcraft
+	compile 'net.industrial-craft:industrialcraft-2:2.2.822-experimental:dev' //IC2
 	compile "pneumaticCraft:PneumaticCraft-1.7.10:1.9.10-98:userdev" //PneumaticCraft
 	
 	//COFH Stuff

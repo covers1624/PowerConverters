@@ -6,20 +6,20 @@ import covers1624.powerconverters.util.LogHelper;
 
 public class NEIInfoHandlerConfig implements IConfigureNEI {
 
-	@Override
-	public void loadConfig() {
-		LogHelper.info("NEI Has called us to init.");
-		// API.registerRecipeHandler(new InfoHandler());
-		API.registerUsageHandler(new InfoHandler());
-	}
+    @Override
+    public void loadConfig() {
+        LogHelper.info("NEI Has called us to init.");
+        // API.registerRecipeHandler(new InfoHandler());
+        API.registerUsageHandler(new InfoHandler());
+    }
 
-	@Override
-	public String getName() {
-		return "PowerConverters: Nei Integration";
-	}
+    @Override
+    public String getName() {
+        return "PowerConverters: Nei Integration";
+    }
 
-	@Override
-	public String getVersion() {
-		return "1";
-	}
+    @Override
+    public String getVersion() {
+        return "1";
+    }
 }

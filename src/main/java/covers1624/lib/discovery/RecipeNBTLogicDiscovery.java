@@ -13,16 +13,16 @@ import java.util.HashMap;
 @Deprecated
 public class RecipeNBTLogicDiscovery {
 
-	public static HashMap<String, IRecipeNBTLogic> handlerClassMap = new HashMap<String, IRecipeNBTLogic>();
-	public static HashMap<String, IRecipeNBTLogic> nbtNameClassMap = new HashMap<String, IRecipeNBTLogic>();
+    public static HashMap<String, IRecipeNBTLogic> handlerClassMap = new HashMap<String, IRecipeNBTLogic>();
+    public static HashMap<String, IRecipeNBTLogic> nbtNameClassMap = new HashMap<String, IRecipeNBTLogic>();
 
-	public static void registerLogic(IRecipeNBTLogic logic) {
-		if (handlerClassMap.containsKey(logic.getClassToHandle()) || nbtNameClassMap.containsKey(logic.getNBTName())) {
-			LogHelper.error("Unable to register IRecipeNBTLogic class {%s}! It seems it has already been registered...", logic.getClass().getName());
-		}
-		handlerClassMap.put(logic.getClassToHandle(), logic);
-		nbtNameClassMap.put(logic.getNBTName(), logic);
-		LogHelper.trace("Registered IRecipeNBTLogic {%s}, Active mod container : %s", logic.getClass().getName(), Loader.instance().activeModContainer().toString());
-	}
+    public static void registerLogic(IRecipeNBTLogic logic) {
+        if (handlerClassMap.containsKey(logic.getClassToHandle()) || nbtNameClassMap.containsKey(logic.getNBTName())) {
+            LogHelper.error("Unable to register IRecipeNBTLogic class {%s}! It seems it has already been registered...", logic.getClass().getName());
+        }
+        handlerClassMap.put(logic.getClassToHandle(), logic);
+        nbtNameClassMap.put(logic.getNBTName(), logic);
+        LogHelper.trace("Registered IRecipeNBTLogic {%s}, Active mod container : %s", logic.getClass().getName(), Loader.instance().activeModContainer().toString());
+    }
 
 }

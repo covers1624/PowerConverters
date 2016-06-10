@@ -9,33 +9,33 @@ import net.minecraft.nbt.NBTTagCompound;
  */
 public interface IRecipeNBTLogic<T extends IRecipe> {
 
-	/**
-	 * Gets the class that the IRecipeNBTLogic can handle.
-	 *
-	 * @return class.getName().
-	 */
-	String getClassToHandle();
+    /**
+     * Gets the class that the IRecipeNBTLogic can handle.
+     *
+     * @return class.getName().
+     */
+    String getClassToHandle();
 
-	/**
-	 * The name to use as a header in NBT.
-	 *
-	 * @return the name to use.
-	 */
-	String getNBTName();
+    /**
+     * The name to use as a header in NBT.
+     *
+     * @return the name to use.
+     */
+    String getNBTName();
 
-	/**
-	 * Converts an IRecipe object to NBT.
-	 *
-	 * @param recipe      The recipe object to convert.
-	 * @param tagCompound The tag to write to.
-	 */
-	void writeToNBT(T recipe, NBTTagCompound tagCompound);
+    /**
+     * Converts an IRecipe object to NBT.
+     *
+     * @param recipe      The recipe object to convert.
+     * @param tagCompound The tag to write to.
+     */
+    void writeToNBT(T recipe, NBTTagCompound tagCompound);
 
-	/**
-	 * Reads an IRecipe object from NBT.
-	 *
-	 * @param tagCompound The tag to read from.
-	 * @return a new IRecipe from NBT.
-	 */
-	T readFromNBT(NBTTagCompound tagCompound);
+    /**
+     * Reads an IRecipe object from NBT.
+     *
+     * @param tagCompound The tag to read from.
+     * @return a new IRecipe from NBT.
+     */
+    T readFromNBT(NBTTagCompound tagCompound);
 }

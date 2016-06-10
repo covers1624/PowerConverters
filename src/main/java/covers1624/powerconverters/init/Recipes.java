@@ -9,17 +9,17 @@ import covers1624.powerconverters.util.LogHelper;
 
 public class Recipes {
 
-	public static void init() {
-		String desiredState = ConfigurationHandler.recipeState;
-		AbstractRecipeModule module = RecipeModuleDiscoverer.getModule(desiredState);
-		if (module == null) {
-			LogHelper.fatal("Unable to find recipe state %s! Using default recipes...");
-			module = new DefaultRecipeModule();
-		}
+    public static void init() {
+        String desiredState = ConfigurationHandler.recipeState;
+        AbstractRecipeModule module = RecipeModuleDiscoverer.getModule(desiredState);
+        if (module == null) {
+            LogHelper.fatal("Unable to find recipe state %s! Using default recipes...");
+            module = new DefaultRecipeModule();
+        }
 
-		module.preLoad();
-		module.loadRecipes(RecipeStateManager.instance());
-		RecipeStateManager.instance().buildDefaults();
-	}
+        module.preLoad();
+        module.loadRecipes(RecipeStateManager.instance());
+        RecipeStateManager.instance().buildDefaults();
+    }
 
 }

@@ -8,8 +8,8 @@ import net.minecraftforge.common.config.ConfigElement;
 
 public class PCConfigGui extends GuiConfig {
 
-	public PCConfigGui(GuiScreen parent) {
-		super(parent, new ConfigElement(ConfigurationHandler.configuration.getCategory(Reference.BASIC_CATEGORY)).getChildElements(), Reference.MOD_ID, false, true, GuiConfig.getAbridgedConfigPath(ConfigurationHandler.configuration.toString()));
-	}
+    public PCConfigGui(GuiScreen parent) {
+        super(parent, new ConfigElement(ConfigurationHandler.configuration.getCategory(Reference.BASIC_CATEGORY)).getChildElements(), Reference.MOD_ID, false, true, GuiConfig.getAbridgedConfigPath(ConfigurationHandler.configuration.toString()));
+    }
 
 }

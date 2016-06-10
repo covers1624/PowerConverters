@@ -6,13 +6,13 @@ import net.minecraft.item.Item;
 
 public class ModItems {
 
-	public static Item debugItem;
+    public static Item debugItem;
 
-	public static void init() {
-		debugItem = new DebugItem();
+    public static void init() {
+        debugItem = new DebugItem();
 
-		GameRegistry.registerItem(debugItem, "debugItem");
+        GameRegistry.registerItem(debugItem, "debugItem");
 
-	}
+    }
 
 }

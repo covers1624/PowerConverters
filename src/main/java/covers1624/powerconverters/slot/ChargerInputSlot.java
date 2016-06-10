@@ -8,18 +8,18 @@ import net.minecraft.item.ItemStack;
 
 public class ChargerInputSlot extends Slot {
 
-	public ChargerInputSlot(IInventory inventory, int slot, int xPos, int yPos) {
-		super(inventory, slot, xPos, yPos);
-	}
+    public ChargerInputSlot(IInventory inventory, int slot, int xPos, int yPos) {
+        super(inventory, slot, xPos, yPos);
+    }
 
-	@Override
-	public boolean isItemValid(ItemStack stack) {
-		for (IItemChargeHandler handler : UniversalChargerRegistry.getChargeHandlers()) {
-			if (handler.canHandle(stack)) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean isItemValid(ItemStack stack) {
+        for (IItemChargeHandler handler : UniversalChargerRegistry.getChargeHandlers()) {
+            if (handler.canHandle(stack)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

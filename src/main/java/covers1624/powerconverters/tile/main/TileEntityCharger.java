@@ -20,252 +20,252 @@ import net.minecraftforge.common.util.ForgeDirection;
 import java.util.List;
 
 public class TileEntityCharger extends TileEntityEnergyProducer<IInventory> implements IAdvancedLogTile, ISidedInventory {
-	// Array of all IInventory devices touching the block, indexed with ForgeDirection.
-	private TileEntity[] sideCache = new TileEntity[6];
-	private ItemStack[] slots;
+    // Array of all IInventory devices touching the block, indexed with ForgeDirection.
+    private TileEntity[] sideCache = new TileEntity[6];
+    private ItemStack[] slots;
 
-	public TileEntityCharger() {
-		super(PowerSystems.powerSystemRedstoneFlux, 0, IInventory.class);
-		slots = new ItemStack[32];
-	}
+    public TileEntityCharger() {
+        super(PowerSystems.powerSystemRedstoneFlux, 0, IInventory.class);
+        slots = new ItemStack[32];
+    }
 
-	@Override
-	public void updateEntity() {
-		super.updateEntity();
-		// Update our cache on every tick.
-		searchForTiles();
-		// Make sure that the only thing in the left slots is non charged items.
-		validateSlots();
-	}
+    @Override
+    public void updateEntity() {
+        super.updateEntity();
+        // Update our cache on every tick.
+        searchForTiles();
+        // Make sure that the only thing in the left slots is non charged items.
+        validateSlots();
+    }
 
-	@Override
-	public double produceEnergy(double energy) {
-		if (energy == 0) {
-			return 0;
-		}
-		if (ConfigurationHandler.dissableUniversalCharger) {
-			return energy;
-		}
-		double energyRemaining = energy;
-		// Iterate over the main part of the inventory.
-		for (int i = 0; i < 16; i++) {
-			ItemStack stack = slots[i];
-			if (stack == null) {
-				continue;
-			}
-			for (IItemChargeHandler handler : UniversalChargerRegistry.getChargeHandlers()) {
-				if (handler.canHandle(stack)) {
-					energyRemaining = handler.charge(stack, energyRemaining);
-					if (energyRemaining == 0) {
-						return 0;
-					}
-				}
-			}
-		}
-		energyRemaining = powerTiles(energyRemaining);
-		return energyRemaining;
-	}
+    @Override
+    public double produceEnergy(double energy) {
+        if (energy == 0) {
+            return 0;
+        }
+        if (ConfigurationHandler.disableUniversalCharger) {
+            return energy;
+        }
+        double energyRemaining = energy;
+        // Iterate over the main part of the inventory.
+        for (int i = 0; i < 16; i++) {
+            ItemStack stack = slots[i];
+            if (stack == null) {
+                continue;
+            }
+            for (IItemChargeHandler handler : UniversalChargerRegistry.getChargeHandlers()) {
+                if (handler.canHandle(stack)) {
+                    energyRemaining = handler.charge(stack, energyRemaining);
+                    if (energyRemaining == 0) {
+                        return 0;
+                    }
+                }
+            }
+        }
+        energyRemaining = powerTiles(energyRemaining);
+        return energyRemaining;
+    }
 
-	private void searchForTiles() {
-		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-			TileEntity tileEntity = BlockPosition.getAdjacentTileEntity(this, dir);
-			// Add new Tiles to our cache.
-			if (tileEntity != null && tileEntity instanceof IInventory) {
-				sideCache[dir.ordinal()] = tileEntity;
-			}
+    private void searchForTiles() {
+        for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+            TileEntity tileEntity = BlockPosition.getAdjacentTileEntity(this, dir);
+            // Add new Tiles to our cache.
+            if (tileEntity != null && tileEntity instanceof IInventory) {
+                sideCache[dir.ordinal()] = tileEntity;
+            }
 
-			// Validate our cache.
-			if (tileEntity == null) {
-				sideCache[dir.ordinal()] = null;
-			}
-		}
-	}
+            // Validate our cache.
+            if (tileEntity == null) {
+                sideCache[dir.ordinal()] = null;
+            }
+        }
+    }
 
-	// Validates that the input slots don't have charged items in it. I.E. Moves all charged items to the Right hand inventory.
-	private void validateSlots() {
-		for (int i = 0; i < 16; i++) {
-			if (slots[i] != null) {
-				for (IItemChargeHandler handler : UniversalChargerRegistry.getChargeHandlers()) {
-					if (handler.canHandle(slots[i])) {
-						if (handler.isItemCharged(slots[i])) {
-							for (int j = 16; j < 32; j++) {
-								if (slots[j] == null) {
-									slots[j] = slots[i];
-									slots[i] = null;
-									break;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+    // Validates that the input slots don't have charged items in it. I.E. Moves all charged items to the Right hand inventory.
+    private void validateSlots() {
+        for (int i = 0; i < 16; i++) {
+            if (slots[i] != null) {
+                for (IItemChargeHandler handler : UniversalChargerRegistry.getChargeHandlers()) {
+                    if (handler.canHandle(slots[i])) {
+                        if (handler.isItemCharged(slots[i])) {
+                            for (int j = 16; j < 32; j++) {
+                                if (slots[j] == null) {
+                                    slots[j] = slots[i];
+                                    slots[i] = null;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-	public double powerTiles(double energyRemaining) {
-		for (TileEntity tileEntity : sideCache) {
-			if (tileEntity != null) {
-				IInventory iInventory = (IInventory) tileEntity;
-				for (int i = 0; i < iInventory.getSizeInventory(); i++) {
-					ItemStack itemStack = iInventory.getStackInSlot(i);
-					if (itemStack != null) {
-						for (IItemChargeHandler handler : UniversalChargerRegistry.getChargeHandlers()) {
-							if (handler.canHandle(itemStack)) {
-								energyRemaining = handler.charge(itemStack, energyRemaining);
-								if (energyRemaining == 0) {
-									return 0;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		return energyRemaining;
-	}
+    public double powerTiles(double energyRemaining) {
+        for (TileEntity tileEntity : sideCache) {
+            if (tileEntity != null) {
+                IInventory iInventory = (IInventory) tileEntity;
+                for (int i = 0; i < iInventory.getSizeInventory(); i++) {
+                    ItemStack itemStack = iInventory.getStackInSlot(i);
+                    if (itemStack != null) {
+                        for (IItemChargeHandler handler : UniversalChargerRegistry.getChargeHandlers()) {
+                            if (handler.canHandle(itemStack)) {
+                                energyRemaining = handler.charge(itemStack, energyRemaining);
+                                if (energyRemaining == 0) {
+                                    return 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return energyRemaining;
+    }
 
-	@Override
-	public void getTileInfo(List<IChatComponent> info, ForgeDirection side, EntityPlayer player, boolean debug) {
-		info.add(text("-SideCache-"));
-		for (int i = 0; i < sideCache.length; i++) {
-			String data = sideCache[i] != null ? sideCache[i].getClass().getName() : "Null";
-			info.add(text(String.format("Side: %s, Data: %s", ForgeDirection.VALID_DIRECTIONS[i], data)));
-		}
-	}
+    @Override
+    public void getTileInfo(List<IChatComponent> info, ForgeDirection side, EntityPlayer player, boolean debug) {
+        info.add(text("-SideCache-"));
+        for (int i = 0; i < sideCache.length; i++) {
+            String data = sideCache[i] != null ? sideCache[i].getClass().getName() : "Null";
+            info.add(text(String.format("Side: %s, Data: %s", ForgeDirection.VALID_DIRECTIONS[i], data)));
+        }
+    }
 
-	private ChatComponentText text(String string) {
-		return new ChatComponentText(string);
-	}
+    private ChatComponentText text(String string) {
+        return new ChatComponentText(string);
+    }
 
-	@Override
-	public void writeToNBT(NBTTagCompound tagCompound) {
-		super.writeToNBT(tagCompound);
-		NBTTagList nbttaglist = new NBTTagList();
+    @Override
+    public void writeToNBT(NBTTagCompound tagCompound) {
+        super.writeToNBT(tagCompound);
+        NBTTagList nbttaglist = new NBTTagList();
 
-		for (int i = 0; i < slots.length; i++) {
-			if (slots[i] != null) {
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setInteger("Slot", i);
-				slots[i].writeToNBT(nbttagcompound1);
-				nbttaglist.appendTag(nbttagcompound1);
-			}
-		}
+        for (int i = 0; i < slots.length; i++) {
+            if (slots[i] != null) {
+                NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+                nbttagcompound1.setInteger("Slot", i);
+                slots[i].writeToNBT(nbttagcompound1);
+                nbttaglist.appendTag(nbttagcompound1);
+            }
+        }
 
-		tagCompound.setTag("Items", nbttaglist);
-	}
+        tagCompound.setTag("Items", nbttaglist);
+    }
 
-	@Override
-	public void readFromNBT(NBTTagCompound tagCompound) {
-		super.readFromNBT(tagCompound);
+    @Override
+    public void readFromNBT(NBTTagCompound tagCompound) {
+        super.readFromNBT(tagCompound);
 
-		NBTTagList nbttaglist = tagCompound.getTagList("Items", 10);
-		slots = new ItemStack[getSizeInventory()];
+        NBTTagList nbttaglist = tagCompound.getTagList("Items", 10);
+        slots = new ItemStack[getSizeInventory()];
 
-		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-			int j = nbttagcompound1.getInteger("Slot");
+        for (int i = 0; i < nbttaglist.tagCount(); i++) {
+            NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+            int j = nbttagcompound1.getInteger("Slot");
 
-			if (j >= 0 && j < slots.length) {
-				slots[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-			}
-		}
-	}
+            if (j >= 0 && j < slots.length) {
+                slots[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+            }
+        }
+    }
 
-	@Override
-	public int getSizeInventory() {
-		return slots.length;
-	}
+    @Override
+    public int getSizeInventory() {
+        return slots.length;
+    }
 
-	@Override
-	public ItemStack getStackInSlot(int slot) {
-		return slots[slot];
-	}
+    @Override
+    public ItemStack getStackInSlot(int slot) {
+        return slots[slot];
+    }
 
-	@Override
-	public ItemStack decrStackSize(int slot, int ammount) {
-		if (slots[slot] != null) {
-			if (slots[slot].stackSize <= ammount) {
-				ItemStack itemStack = slots[slot];
-				slots[slot] = null;
-				return itemStack;
-			}
-			ItemStack itemStack = slots[slot].splitStack(ammount);
-			if (slots[slot].stackSize == 0) {
-				slots[slot] = null;
-			}
-			return itemStack;
-		}
-		return null;
-	}
+    @Override
+    public ItemStack decrStackSize(int slot, int ammount) {
+        if (slots[slot] != null) {
+            if (slots[slot].stackSize <= ammount) {
+                ItemStack itemStack = slots[slot];
+                slots[slot] = null;
+                return itemStack;
+            }
+            ItemStack itemStack = slots[slot].splitStack(ammount);
+            if (slots[slot].stackSize == 0) {
+                slots[slot] = null;
+            }
+            return itemStack;
+        }
+        return null;
+    }
 
-	@Override
-	public ItemStack getStackInSlotOnClosing(int slot) {
-		return slots[slot];
-	}
+    @Override
+    public ItemStack getStackInSlotOnClosing(int slot) {
+        return slots[slot];
+    }
 
-	@Override
-	public void setInventorySlotContents(int slot, ItemStack stack) {
-		slots[slot] = stack;
+    @Override
+    public void setInventorySlotContents(int slot, ItemStack stack) {
+        slots[slot] = stack;
 
-		if (stack != null && stack.stackSize > this.getInventoryStackLimit()) {
-			stack.stackSize = this.getInventoryStackLimit();
-		}
-	}
+        if (stack != null && stack.stackSize > this.getInventoryStackLimit()) {
+            stack.stackSize = this.getInventoryStackLimit();
+        }
+    }
 
-	@Override
-	public String getInventoryName() {
-		return "Universal Charger";
-	}
+    @Override
+    public String getInventoryName() {
+        return "Universal Charger";
+    }
 
-	@Override
-	public boolean hasCustomInventoryName() {
-		return true;
-	}
+    @Override
+    public boolean hasCustomInventoryName() {
+        return true;
+    }
 
-	@Override
-	public int getInventoryStackLimit() {
-		return 64;
-	}
+    @Override
+    public int getInventoryStackLimit() {
+        return 64;
+    }
 
-	@Override
-	public boolean isUseableByPlayer(EntityPlayer p_70300_1_) {
-		return true;
-	}
+    @Override
+    public boolean isUseableByPlayer(EntityPlayer p_70300_1_) {
+        return true;
+    }
 
-	@Override
-	public void openInventory() {
+    @Override
+    public void openInventory() {
 
-	}
+    }
 
-	@Override
-	public void closeInventory() {
+    @Override
+    public void closeInventory() {
 
-	}
+    }
 
-	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack stack) {
-		if (slot < 16) {
-			for (IItemChargeHandler chargeHandler : UniversalChargerRegistry.getChargeHandlers()) {
-				if (chargeHandler.canHandle(stack)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean isItemValidForSlot(int slot, ItemStack stack) {
+        if (slot < 16) {
+            for (IItemChargeHandler chargeHandler : UniversalChargerRegistry.getChargeHandlers()) {
+                if (chargeHandler.canHandle(stack)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public int[] getAccessibleSlotsFromSide(int side) {
-		return new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
-	}
+    @Override
+    public int[] getAccessibleSlotsFromSide(int side) {
+        return new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+    }
 
-	@Override
-	public boolean canInsertItem(int slot, ItemStack stack, int side) {
-		return isItemValidForSlot(slot, stack);
-	}
+    @Override
+    public boolean canInsertItem(int slot, ItemStack stack, int side) {
+        return isItemValidForSlot(slot, stack);
+    }
 
-	@Override
-	public boolean canExtractItem(int slot, ItemStack stack, int side) {
-		return slot > 16;
-	}
+    @Override
+    public boolean canExtractItem(int slot, ItemStack stack, int side) {
+        return slot > 16;
+    }
 }

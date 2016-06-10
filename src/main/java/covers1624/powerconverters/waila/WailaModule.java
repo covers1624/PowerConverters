@@ -6,9 +6,9 @@ import mcp.mobius.waila.api.IWailaRegistrar;
 
 public class WailaModule {
 
-	public static void callBackRegister(IWailaRegistrar registrar) {
-		registrar.registerBodyProvider(new WailaComponentProvider(), TileEntityBridgeComponent.class);
-		registrar.registerBodyProvider(new WailaBridgeProvider(), TileEntityEnergyBridge.class);
-	}
+    public static void callBackRegister(IWailaRegistrar registrar) {
+        registrar.registerBodyProvider(new WailaComponentProvider(), TileEntityBridgeComponent.class);
+        registrar.registerBodyProvider(new WailaBridgeProvider(), TileEntityEnergyBridge.class);
+    }
 
 }

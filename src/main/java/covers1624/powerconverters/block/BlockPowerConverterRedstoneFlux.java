@@ -12,31 +12,31 @@ import net.minecraft.world.World;
 
 public class BlockPowerConverterRedstoneFlux extends BlockPowerConverter {
 
-	public BlockPowerConverterRedstoneFlux() {
-		super(2);
-		setBlockName("powerconverters.rf");
-		setCreativeTab(PowerConverters.creativeTab);
-	}
+    public BlockPowerConverterRedstoneFlux() {
+        super(2);
+        setBlockName("powerconverters.rf");
+        setCreativeTab(PowerConverters.creativeTab);
+    }
 
-	@Override
-	public TileEntity createTileEntity(World world, int meta) {
+    @Override
+    public TileEntity createTileEntity(World world, int meta) {
 
-		if (meta == 0) {
-			return new TileEntityRedstoneFluxConsumer();
-		} else if (meta == 1) {
-			return new TileEntityRedstoneFluxProducer();
-		}
-		return null;
-	}
+        if (meta == 0) {
+            return new TileEntityRedstoneFluxConsumer();
+        } else if (meta == 1) {
+            return new TileEntityRedstoneFluxProducer();
+        }
+        return null;
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister ir) {
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerBlockIcons(IIconRegister ir) {
 
-		icons[0] = ir.registerIcon(Reference.MOD_PREFIX + "tile.powerconverters.rf.consumer.off");
-		icons[1] = ir.registerIcon(Reference.MOD_PREFIX + "tile.powerconverters.rf.consumer.on");
-		icons[2] = ir.registerIcon(Reference.MOD_PREFIX + "tile.powerconverters.rf.producer.off");
-		icons[3] = ir.registerIcon(Reference.MOD_PREFIX + "tile.powerconverters.rf.producer.on");
-	}
+        icons[0] = ir.registerIcon(Reference.MOD_PREFIX + "tile.powerconverters.rf.consumer.off");
+        icons[1] = ir.registerIcon(Reference.MOD_PREFIX + "tile.powerconverters.rf.consumer.on");
+        icons[2] = ir.registerIcon(Reference.MOD_PREFIX + "tile.powerconverters.rf.producer.off");
+        icons[3] = ir.registerIcon(Reference.MOD_PREFIX + "tile.powerconverters.rf.producer.on");
+    }
 
 }
