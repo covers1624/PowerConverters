@@ -19,7 +19,6 @@ import covers1624.powerconverters.network.packets.EnergyBridgeSyncPacket;
 import covers1624.powerconverters.network.packets.RecipeSyncPacket;
 import covers1624.powerconverters.proxy.CommonProxy;
 import covers1624.powerconverters.reference.Reference;
-import covers1624.powerconverters.test.NBTBulshitery;
 import covers1624.powerconverters.updatechecker.UpdateManager;
 import covers1624.powerconverters.util.LogHelper;
 import covers1624.powerconverters.util.RFHelper;
@@ -66,7 +65,7 @@ public class PowerConverters {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        NBTBulshitery.init();
+        //NBTBulshitery.init();
         //Load the static Loader.isModLoaded calls once all mods have been discovered.
         AbstractRecipeModule.init();
         RecipeModuleDiscoverer.sortRecipeModules();
