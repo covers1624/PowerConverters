@@ -33,15 +33,10 @@ import cpw.mods.fml.common.event.FMLMissingMappingsEvent.MissingMapping;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.GameRegistry.Type;
-import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.launchwrapper.Launch;
-import net.minecraft.launchwrapper.LaunchClassLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
-
-import java.util.Set;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = "required-after:Covers1624Lib;after:BuildCraft|Core;after:factorization;after:IC2;after:Railcraft;after:ThermalExpansion", guiFactory = Reference.GUI_FACTORY)
 public class PowerConverters {
@@ -65,23 +60,20 @@ public class PowerConverters {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        //NBTBulshitery.init();
-        //Load the static Loader.isModLoaded calls once all mods have been discovered.
-        AbstractRecipeModule.init();
-        RecipeModuleDiscoverer.sortRecipeModules();
-        checkClassLoader();
-        instance = this;
-
         LogHelper.info("PowerConverters PreInitialization Started.");
+
+        AbstractRecipeModule.init();//Load the static Loader.isModLoaded calls once all mods have been discovered.
+        RecipeModuleDiscoverer.sortRecipeModules();//Sort recipe modules, I.E: Validate all mods are loaded for a module.
+        instance = this;
 
         LogHelper.trace("Checking For RF API...");
         RFHelper.init();
 
-        LogHelper.trace("Initializing Configuration File");
+        LogHelper.trace("Initializing Configuration File.");
         ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 
-        //TODO, Make betterer
-        LogHelper.trace("Registering Update Manager");
+        //TODO, Make beterer
+        LogHelper.trace("Registering Update Manager.");
         UpdateManager updateManager = new UpdateManager();
         FMLCommonHandler.instance().bus().register(updateManager);
 
@@ -91,10 +83,10 @@ public class PowerConverters {
         FMLCommonHandler.instance().bus().register(eventHandler);
         FMLCommonHandler.instance().bus().register(RecipeStateManager.instance());
 
-        LogHelper.trace("Initializing PowerSystems");
+        LogHelper.trace("Initializing PowerSystems.");
         PowerSystems.init();
 
-        LogHelper.trace("Initializing ChargeHandlers");
+        LogHelper.trace("Initializing ChargeHandlers.");
         PowerSystems.initChargeHandlers();
 
         LogHelper.info("PowerConverters PreInitialization Finished.");
@@ -105,13 +97,10 @@ public class PowerConverters {
     public void init(FMLInitializationEvent event) {
         LogHelper.info("PowerConverters Core Initialization Started.");
 
-        LogHelper.trace("Initializing PacketPipeline");
+        LogHelper.trace("Initializing PacketPipeline.");
         PacketPipeline.instance().initalise();
         PacketPipeline.instance().registerPacket(RecipeSyncPacket.class);
         PacketPipeline.instance().registerPacket(EnergyBridgeSyncPacket.class);
-
-        //MinecraftForge.EVENT_BUS.register(GridTickHandler.energy);
-        //FMLCommonHandler.instance().bus().register(GridTickHandler.energy);
 
         LogHelper.trace("Registering Gui Handler.");
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new PCGUIHandler());
@@ -139,7 +128,7 @@ public class PowerConverters {
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         LogHelper.info("PowerConverters PostInitialization Started.");
-        LogHelper.trace("PostInitializing PacketPipeline. ALL PACKETS SHOULD BE REGISTERED BY NOW!");
+        LogHelper.trace("PostInitializing PacketPipeline.");
         PacketPipeline.instance().postInitialise();
 
         // Pull steam ID
@@ -148,11 +137,6 @@ public class PowerConverters {
         }
 
         LogHelper.trace("PowerConverters PostInitialization Finished.");
-
-        // LogHelper.info("Dumping Blackboard...");
-        // for (Entry<String, Object> entry : Launch.blackboard.entrySet()) {
-        // LogHelper.info(entry.getKey() + " " + entry.getValue());
-        // }
     }
 
     // This re-maps the old id's to the new ones as our modid changed.
@@ -217,13 +201,6 @@ public class PowerConverters {
                     mapping.remap(Item.getItemFromBlock(ModBlocks.converterBlockCommon));
                 }
             }
-        }
-    }
-
-    private static void checkClassLoader() {
-        Set<String> transformerExceptions = ReflectionHelper.getPrivateValue(LaunchClassLoader.class, Launch.classLoader, "transformerExceptions");
-        if (!transformerExceptions.contains("covers1624.powerconverters.")) {
-            LogHelper.fatal("PowerConverters has detected that it has been removed from the transformerExceptions list, this could cause unknown issues. I Will provide no support for PowerConverters in this state.");
         }
     }
 }

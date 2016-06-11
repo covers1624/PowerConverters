@@ -124,9 +124,9 @@ public class TileEntityBridgeComponent<T> extends TileEntity implements INeighbo
         info.add("Type: " + type);
         info.add("PowerSystem: " + powerSystem.getName());
         if (type.equals("Consumer")) {
-            info.add("Consumer Disabled: " + powerSystem.consumerDissabled());
+            info.add("Consumer Disabled: " + powerSystem.consumerDisabled());
         } else if (type.equals("Producer")) {
-            info.add("Producer Disabled: " + powerSystem.producerDissabled());
+            info.add("Producer Disabled: " + powerSystem.producerDisabled());
         }
     }
 
