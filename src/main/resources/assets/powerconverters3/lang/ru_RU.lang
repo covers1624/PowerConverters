@@ -1,0 +1,23 @@
+powerconverters.common.bridge.name=Энергитический мост
+powerconverters.common.charger.name=Универсальный зарядник
+
+powerconverters.bc.consumer.name=BC Потребитель
+powerconverters.bc.producer.name=BC Производитель
+
+powerconverters.ic2.lv.consumer.name=IC2 LV Потребитель
+powerconverters.ic2.lv.producer.name=IC2 LV Производитель
+powerconverters.ic2.mv.consumer.name=IC2 MV Потребитель
+powerconverters.ic2.mv.producer.name=IC2 MV Производитель
+powerconverters.ic2.hv.consumer.name=IC2 HV Потребитель
+powerconverters.ic2.hv.producer.name=IC2 HV Производитель
+powerconverters.ic2.ev.consumer.name=IC2 EV Потребитель
+powerconverters.ic2.ev.producer.name=IC2 EV Производитель
+
+powerconverters.rf.consumer.name=RF Потребитель
+powerconverters.rf.producer.name=RF Производитель
+
+powerconverters.steam.consumer.name=Потребитель пара
+powerconverters.steam.producer.name=Производитель пара
+
+powerconverters.fz.consumer.name=Factorization Потребитель
+powerconverters.fz.producer.name=Factorization Производитель
