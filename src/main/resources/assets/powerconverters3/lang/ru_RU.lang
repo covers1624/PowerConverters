@@ -1,0 +1,51 @@
+#Common Blocks
+powerconverters.common.bridge.name=Энергитический мост
+powerconverters.common.charger.name=Универсальный зарядник
+
+#Bc Blocks Dead. Kept for no reason at all
+#powerconverters.bc.consumer.name=BC Потребитель
+#powerconverters.bc.producer.name=BC Производитель
+
+#IC2
+powerconverters.ic2.lv.consumer.name=IC2 LV Потребитель
+powerconverters.ic2.lv.producer.name=IC2 LV Производитель
+powerconverters.ic2.mv.consumer.name=IC2 MV Потребитель
+powerconverters.ic2.mv.producer.name=IC2 MV Производитель
+powerconverters.ic2.hv.consumer.name=IC2 HV Потребитель
+powerconverters.ic2.hv.producer.name=IC2 HV Производитель
+powerconverters.ic2.ev.consumer.name=IC2 EV Потребитель
+powerconverters.ic2.ev.producer.name=IC2 EV Производитель
+
+#RF
+powerconverters.rf.consumer.name=RF Потребитель
+powerconverters.rf.producer.name=RF Производитель
+
+#Steam
+powerconverters.steam.consumer.name=Потребитель пара
+powerconverters.steam.producer.name=Производитель пара
+
+#Factorization
+powerconverters.fz.consumer.name=Factorization Потребитель
+powerconverters.fz.producer.name=Factorization Производитель
+
+#Items
+item.pcdebugitem.name=Power Converters отладчик
+
+#Documentation, see powercrystals.powerconverters.nei.InfoHandler,
+item.pcdebugitem.documentation=Этот предмет покажет вам текущую энергию в процентах, которая хранится в энергитическом мосте. Просто щелкните правой кнопкой мыши по потребителю, производителю или энергитическом мосте. Он также покажет вам дополнтельную информацию о статусе энергетической сети.
+powerconverters.common.bridge.documentation=Это основной блок для PowerConverters, когда вы установите потребитель рядом с ним, потребитель будет передавать энергию, полученную в энергетический мост, когда производитель находится рядом с этим блоком он будет конвертировать энергию сохранят её в буфере энергомоста.
+powerconverters.common.charger.documentation=Этот блок, при размещении его рядом с энергомостом, будет заряжать любые предметы, которые работают на IC2 или RF енергии. Элементы могут быть размещены в самом зарядном устройстве или в сундуке клетке рядом с ним. Обратите внимание: если у вас есть какие-либо проблемы с Tps сервера с этим, пожалуйста, отправьте сообщение об ошибке.
+powerconverters.steam.consumer.documentation=Этот блок, при размещении его рядом с энергомостом, будет принимать пар, и превращать его в энергию, которая будет храниться в энергомосте.
+powerconverters.steam.producer.documentation=Этот блок, при размещении его рядом с энергомостом, предоставит пар для смежных блоков и труб с использованием энергии, запасенной в энергомосте.
+powerconverters.rf.consumer.documentation=Этот блок, при размещении его рядом с энергомостом, примет Redstone Flux Energy (RF) на бесконечной скорости и превратит её в энергию, которая будет храниться в энергомосте.
+powerconverters.rf.producer.documentation=Этот блок, при размещении его рядом с энергомостом, предоставит Redstone Flux Energy (RF) на бесконечной скорости смежным блокам и трубопроводам, которые поддерживают RF, используя энергию, запасенную в энергомосте.
+powerconverters.fz.consumer.documentation=Этот блок, при размещении его рядом с энергомостом, примет Factorization GC и превратит его в энергию, которая будет храниться в энергомосте.
+powerconverters.fz.producer.documentation=Этот блок, при размещении его рядом с энергомостом, предоставит Factorization GC to adjacent blocks and Lead Cables using the energy stored in the энергомосте.
+powerconverters.ic2.lv.consumer.documentation=Этот блок, при размещении его рядом с энергомостом, примет EU (максимум 32 EU/t (Энергохранилище)) и превратит его в энергию, которая будет храниться в энергомосте.
+powerconverters.ic2.lv.producer.documentation=Этот блок, при размещении его рядом с энергомостом, предоставит EU (максимум EU/t (Энергохранилище)) её смежным блокам и кабелям, используя энергию, запасенную в энергомосте.
+powerconverters.ic2.mv.consumer.documentation=Этот блок, при размещении его рядом с энергомостом, примет EU (максимум 128 EU/t (МЭХ)) и превратит его в энергию, которая будет храниться в энергомосте.
+powerconverters.ic2.mv.producer.documentation=Этот блок, при размещении его рядом с энергомостом, предоставит EU (максимум 128 EU/t (МЭХ)) её смежным блокам и кабелям, используя энергию, запасенную в энергомосте.
+powerconverters.ic2.hv.consumer.documentation=Этот блок, при размещении его рядом с энергомостом, примет EU (максимум 512 EU/t (МФЭ)) и превратит его в энергию, которая будет храниться в энергомосте.
+powerconverters.ic2.hv.producer.documentation=Этот блок, при размещении его рядом с энергомостом, предоставит EU (максимум 512 EU/t (МФЭ)) её смежным блокам и кабелям, используя энергию, запасенную в энергомосте.
+powerconverters.ic2.ev.consumer.documentation=Этот блок, при размещении его рядом с энергомостом, примет EU (максимум 2048 EU/t (МФЭХ)) и превратит его в энергию, которая будет храниться в энергомосте.
+powerconverters.ic2.ev.producer.documentation=Этот блок, при размещении его рядом с энергомостом, предоставит EU (максимум 2048 EU/t (МФЭХ)) её смежным блокам и кабелям, используя энергию, запасенную в энергомосте.
