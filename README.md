@@ -11,7 +11,7 @@ Feel free to drop by and say hi, i dont bite i prommise.
 
 Setup:
 ```
-gradlew serupDecompWorkspace <idea or eclipse>
+gradlew setupDecompWorkspace <idea or eclipse>
 ```
 Compile:
 ```

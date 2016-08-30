@@ -1,0 +1,51 @@
+#Common Blocks
+powerconverters.common.bridge.name=Energiebrücke
+powerconverters.common.charger.name=Universelle Ladestation
+
+#Bc Blocks Dead. Kept for no reason at all
+#powerconverters.bc.consumer.name=BC-Verbraucher
+#powerconverters.bc.producer.name=BC-Erzeuger
+
+#IC2
+powerconverters.ic2.lv.consumer.name=IC2 LV-Verbraucher
+powerconverters.ic2.lv.producer.name=IC2 LV-Erzeuger
+powerconverters.ic2.mv.consumer.name=IC2 MV-Verbraucher
+powerconverters.ic2.mv.producer.name=IC2 MV-Erzeuger
+powerconverters.ic2.hv.consumer.name=IC2 HV-Verbraucher
+powerconverters.ic2.hv.producer.name=IC2 HV-Erzeuger
+powerconverters.ic2.ev.consumer.name=IC2 EV-Verbraucher
+powerconverters.ic2.ev.producer.name=IC2 EV-Erzeuger
+
+#RF
+powerconverters.rf.consumer.name=RF-Verbraucher
+powerconverters.rf.producer.name=RF-Erzeuger
+
+#Steam
+powerconverters.steam.consumer.name=Dampf-Verbraucher
+powerconverters.steam.producer.name=Dampf-Erzeuger
+
+#Factorization
+powerconverters.fz.consumer.name=Factorization-Verbraucher
+powerconverters.fz.producer.name=Factorization-Erzeuger
+
+#Items
+item.pcdebugitem.name=Power Converters Debugwerkzeug
+
+#Documentation, see powercrystals.powerconverters.nei.InfoHandler,
+item.pcdebugitem.documentation=Dieses Item verrät dir, wie viel Energie derzeit in der Energiebrücke gespeichert sind, führe dazu einen Rechtsklick auf einen beliebigen Verbraucher-, Erzeuger- oder Energiebrückenblock aus. Es wird dich auch mit mehr Informationen über das Stromnetzwerk versorgen!
+powerconverters.common.bridge.documentation=Der wichtigste Block aus diesem Mod! Platzierst du einen beliebigen Verbaucher neben diesem Block, wird die vom Verbaucher aufgenommene Energie der Energiebrücke zugeführt. Wird ein Erzeuger neben der Energiebrücke platziert, kann die in dieser gespeicherte Energie in anderen Energieformen abgegeben werden!
+powerconverters.common.charger.documentation=Wird dieser Block neben der Energiebrücke platziert, kann er mit Hilfe der in ihr gespeicherten Energie Items im Inventar der Ladestation (oder in einer daneben platzierten Kiste) aufladen.
+powerconverters.steam.consumer.documentation=Wird dieser Block neben einer Energiebrücke platziert, nimmt er Steam auf und wandelt ihn in Energie um, welche in der Energiebrücke gespeichert wird.
+powerconverters.steam.producer.documentation=Wird dieser Block neben einer Energiebrücke platziert, gibt er Steam an nebenstehende Blöcke ab, die ihn aufnehmen können.
+powerconverters.rf.consumer.documentation=Wird dieser Block neben einer Energiebrücke platziert, nimmt er Redstone Flux Energy (RF) auf und wandelt ihn in Energie um, welche in der Energiebrücke gespeichert wird.
+powerconverters.rf.producer.documentation=Wird dieser Block neben einer Energiebrücke platziert, gibt er Redstone Flux Energy (RF) an nebenstehende Blöcke ab, die ihn aufnehmen können
+powerconverters.fz.consumer.documentation=Wird dieser Block neben einer Energiebrücke platziert, nimmt er Factorization GC auf und wandelt ihn in Energie um, welche in der Energiebrücke gespeichert wird.
+powerconverters.fz.producer.documentation=Wird dieser Block neben einer Energiebrücke platziert, gibt er Factorization GC an nebenstehende Blöcke ab, die ihn aufnehmen können
+powerconverters.ic2.lv.consumer.documentation=Wird dieser Block neben einer Energiebrücke platziert, nimmt er EU mit maximal 32 EU/t (BatBox) auf und wandelt ihn in Energie um, welche in der Energiebrücke gespeichert wird.
+powerconverters.ic2.lv.producer.documentation=Wird dieser Block neben einer Energiebrücke platziert, gibt er EU mit maximal 32 EU/t (BatBox) an nebenstehende Blöcke ab, die ihn aufnehmen können
+powerconverters.ic2.mv.consumer.documentation=Wird dieser Block neben einer Energiebrücke platziert, nimmt er EU mit maximal 128 EU/t (CESU) auf und wandelt ihn in Energie um, welche in der Energiebrücke gespeichert wird.
+powerconverters.ic2.mv.producer.documentation=Wird dieser Block neben einer Energiebrücke platziert, gibt er EU mit maximal 128 EU/t (CESU) an nebenstehende Blöcke ab, die ihn aufnehmen können
+powerconverters.ic2.hv.consumer.documentation=Wird dieser Block neben einer Energiebrücke platziert, nimmt er EU mit maximal of 512 EU/t (MFE) auf und wandelt ihn in Energie um, welche in der Energiebrücke gespeichert wird.
+powerconverters.ic2.hv.producer.documentation=Wird dieser Block neben einer Energiebrücke platziert, gibt er EU mit maximal of 512 EU/t (MFE) an nebenstehende Blöcke ab, die ihn aufnehmen können
+powerconverters.ic2.ev.consumer.documentation=Wird dieser Block neben einer Energiebrücke platziert, nimmt er EU mit maximal 2048 EU/t (MFSU) auf und wandelt ihn in Energie um, welche in der Energiebrücke gespeichert wird.
+powerconverters.ic2.ev.producer.documentation=Wird dieser Block neben einer Energiebrücke platziert, gibt er EU mit maximal 2048 EU/t (MFSU) an nebenstehende Blöcke ab, die ihn aufnehmen können
